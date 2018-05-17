@@ -124,6 +124,19 @@ var configuration=[
         ]
       },
       {
+        "type":"tcustomerbtargetgroup","name":"目标组","popWidth":800,
+        "unbindableNode":[
+          {
+            "targetType":"tcustomerbtargetgroup",
+            "message":"目标组节点不能与目标组节点连接"
+          },
+          {
+            "targetType":"tcustomerbrespondgroup",
+            "message":"目标组节点不能与响应组节点连接"
+          }
+        ]
+      },
+      {
         "type":"tcustomerdtargetgroup","name":"目标组","popWidth":800,
         "unbindableNode":[
           {

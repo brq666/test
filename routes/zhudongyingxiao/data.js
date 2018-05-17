@@ -589,6 +589,11 @@ module.exports = {
         "type": "tcustomertargetgroup",
         "viewable": true
       }, {
+        "id": 117,
+        "name": "b目标组",
+        "type": "tcustomerbtargetgroup",
+        "viewable": true
+      }, {
         "id": 151,
         "name": "dcl目标组",
         "type": "tcustomerdtargetgroup",

@@ -1,0 +1,79 @@
+<div ng-controller="btcustomertargetgroupCtrl">
+  <div class="commWrapFour commNodeMarkRelative">
+    <div ng-form="" name="waitnode">
+      <div class="bannerCommStyle areaHeight26" ng-show="targetgroupObj.targetnode.tips">
+        {{targetgroupObj.targetnode.tips}}
+        <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+      </div>
+      <div class="contentNodeWrap">
+        <table>
+          <tbody>
+          <tr>
+            <th class="tr" width="18%"><label class="node_name_label">节点名称：</label></th>
+            <td>
+              <div class="pr">
+                <input type="text" class="borderHighlight node_name_input fl" ng-model="targetgroupObj.targetnode.name" maxlength="20" ng-noderequire="" />
+                <span nodetip=""></span>
+              </div>
+            </td>
+            <td><label class="code mr40 fr"> 节点代码：{{targetgroupObj.targetnode.id}}</label></td>
+          </tr>
+          <tr>
+            <th class="tr"><label>控制组人数：</label> </th>
+            <td>
+              <input class="commRadio ml9" type="radio" name="time" value="1" ng-model="targetgroupObj.targetnode.controlType" />百分比
+              <input ng-change="numcheck(this)" onafterpaste="if(isNaN(value))execCommand('undo')" type="text" ng-model="targetgroupObj.targetnode.percent" name="waitDay" ng-disabled="targetgroupObj.targetnode.controlType!=1" class="borderHighlight width135 mr5" min="1" max="100" /> %
+              <label class="error ml5" ng-show="targetgroupObj.percentShow">百分比不能为零</label>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td>
+              <input class="commRadio ml9" type="radio" name="time" value="2" ng-model="targetgroupObj.targetnode.controlType" />人数
+              <input type="text" ng-num="" ng-model="targetgroupObj.targetnode.peopleCount" min="0" max="99999999" ng-disabled="targetgroupObj.targetnode.controlType==1" name="waitHour" ng-pattern="/\d+/" class="borderHighlight width135 ml22 mr5" /> 人
+              <label class="error ml5" ng-show="targetgroupObj.peopleCountShow">人数不能为零</label>
+            </td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="queryDataListView clearfix">
+    <div class="commWrapThree">
+      <div class="bannerCommStyle">
+        默认只显示前100条数据，更多数据点击下载，下载文件只保留15天，15天后，将不再提供下载。如需保留数据，请及时下载文件保存。
+      </div>
+      <div class="clearfix mb10">
+        <a class="formdownLoad fr downloadBtn" ng-show="targetgroupObj.reportDownLoadFlag && existFile === 'true'" title="下载" href="/node/v1/web/node/target/download/{{targetgroupObj.subjobId}}/?id={{targetgroupObj.targetnode.id}}" target="_blank" charset="utf-8" download="客户数据{{targetgroupObj.subjobId}}-{{targetgroupObj.targetnode.id}}">下载</a>
+        <span class="formdownLoad fr downloadBtn" 
+            style="width: auto;color: #8a8a8a;background: none;" 
+            ng-show="existFile === 'false'">
+            客户数据文件生成中
+          </span>
+      </div>
+      <div class="dataInfoList">
+        <div class="unTableLayoutData">
+          <ul class="unTableTitleUl clearfix">
+            <li class="fl" style="width:{{autoWidth}}" ng-repeat="title in targetDataListsTitle track by $index"><span title="{{title}}">{{title}}</span></li>
+          </ul>
+          <div class="dataInfoListScrollWrap">
+            <ul class="clearfix" ng-repeat=" vals in targetDataListsVal track by $index">
+              <li class="fl" style="width:{{autoWidth}}"  ng-repeat="val in vals track by $index"><span title="{{disponseTargetResultData(val)}}" >{{disponseTargetResultData(val)}}</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ling_di clearfix mt10"></div>
+  <div class="commBottom clearfix analysisNode">
+    <a href="javascript:void(0);" title="客户数据查看" ng-click="showDataPop()" class="reportButton mt5" ng-show="targetgroupObj.viewTargetData && targetgroupObj.showTargetDate"><span class="reportIcon"></span>客户数据查看</a>
+    <div class="mb">
+      <button ng-click="targetgroupObj.saveTargetMssage()" id="marketSure" class="btn btnBlue">确定</button>
+      <button ng-close-window="" id="marketCancel" class="btn">取消</button>
+    </div>
+  </div>
+</div>
