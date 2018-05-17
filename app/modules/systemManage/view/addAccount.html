@@ -1,0 +1,136 @@
+<div ng-cloak>
+  <form id="accountForm" novalidate="novalidate">
+    <h2 class="heading">{{accountObj.accountTitle}}</h2>
+      <div class="bg">
+        <ul class="ticketsInfoBox">
+          <li>
+            <label><font color="red">*</font>&nbsp;账号：</label>
+            <input class="borderHighlight" maxlength="50" ng-disabled="accountObj.nameFlag" type="text" autocomplete="off" required name="accounNumber" ng-model="accountObj.loginName" />
+          </li>
+
+          <li>
+            <label><font color="red">*</font>&nbsp;姓名：</label>
+            <input class="borderHighlight" maxlength="50" type="text" name="accounName" autocomplete="off" required ng-model="accountObj.realName" />
+          </li>
+          <li>
+            <label><font color="red">*</font>&nbsp;账号角色：</label>
+            <span class="relativeBox">
+              <input type="text" class="borderHighlight required" readonly="readonly" ng-disabled="accountObj.isAdmin" name="investigator" ng-click="accountObj.getRoles()"  ids="{{accountObj.RoleIds}}" title="{{accountObj.RoleValsView}}" value="{{accountObj.RoleValsView}}">
+              <a class="optionModule2 location1" ng-click="accountObj.getRoles()" href="javascript:void(0);"></a>
+             </span>
+          </li>
+
+          <li ng-show="departmentItemIsShow">
+            <label><font color="red">*</font>&nbsp;所属部门：</label>
+            <input class="borderHighlight ng-pristine ng-valid" required type="text" ng-disabled="accountObj.isAdmin" valueid={{accountObj.departmentId}} ng-clone-select="accountObj.getSection()" value="{{accountObj.departmentName}}" readonly="readonly" name="accountSection">
+          </li>
+          <li ng-show="dataPermissionItemIsShow">
+            <label><font color="red">*</font>&nbsp;查看权限：</label>
+            <label style="width: 57px;">
+              <input type="radio" name="role" value="0" ng-disabled="accountObj.isAdmin" ng-model="accountObj.dataRight" ng-radio-role class="radio ng-valid ng-dirty">本部门
+            </label>
+            <label style="width: 77px;">
+              <input type="radio" name="role" value="1"ng-disabled="accountObj.isAdmin"  ng-model="accountObj.dataRight" ng-radio-role class="radio ng-valid ng-dirty">全部
+            </label>
+            <label style="width: 87px;">
+              <input type="radio" name="role" value="2" ng-disabled="accountObj.isAdmin" ng-model="accountObj.dataRight" ng-radio-role class="radio ng-valid ng-dirty">仅本人
+            </label>
+            <label style="width: 87px;">
+              <input type="radio" name="role" value="3" ng-disabled="accountObj.isAdmin" ng-model="accountObj.dataRight" ng-radio-role class="radio ng-valid ng-dirty">自定义
+            </label>
+            <span class="relativeBox">
+              <input type="text" class="borderHighlight required" readonly="readonly" ng-disabled="accountObj.disabledFalg || accountObj.isAdmin" name="configRight" ng-click="accountObj.getConfigDataRight()"  ids="{{accountObj.configDataRightIds}}" title="{{accountObj.configDataRight}}" value="{{accountObj.configDataRight}}">
+              <a class="optionModule2 location1" ng-click="accountObj.getConfigDataRight()" href="javascript:void(0);"></a>
+            </span>
+          </li>
+          <li>
+            <label>&nbsp;手机号码：</label>
+            <input class="borderHighlight" name="contactPhone" maxlength="11" type="text" phone="true" ng-model="accountObj.contactPhone" />
+            <label class="error initError">请正确填写您的手机号码</label>
+          </li>
+
+          <li>
+            <label>&nbsp;Email：</label>
+            <input class="borderHighlight email" maxlength="50" type="text" ng-model="accountObj.contactEmail" />
+            <label class="error initError">请输入正确格式电子邮件</label>
+          </li>
+          <li>
+            <label><font color="red">*</font>&nbsp;登录密码：</label>
+            <input id="createSystemPassword" class="borderHighlight" maxlength="40" password-status type="password" name="loginPassword" ng-model="accountObj.loginPassword" />
+          </li>
+          <li>
+            <label><font color="red">*</font>&nbsp;确认密码：</label>
+            <input class="borderHighlight" maxlength="40" type="password" password-status equalTo='#createSystemPassword' name="confirmPassword" ng-model="accountObj.confirmPassword" />
+          </li>
+          <li>
+            <label>&nbsp;状态：</label>
+            <label style="width: 47px;">
+              <input type="radio" name="enabledRadio" value="0" class="radio" ng-model="accountObj.enabledVal">启用
+            </label>
+            <label style="width: 87px;">
+              <input type="radio" name="enabledRadio" value="1" class="radio" ng-model="accountObj.enabledVal">禁用
+            </label>
+          </li>
+          <li>
+              <label>备注：</label>
+              <textarea class="markMessage borderHighlight" name="remark" maxlength="200" ng-model="accountObj.remark">{{accountObj.remark}}</textarea>
+          </li>
+        </ul>
+      </div>
+      <div class="mb" style="padding:15px 0 0 130px;">
+        <button class="btn btnBlue" type="submit">确定</button>
+        <span class="btn" ng-click="accountObj.cancelBtnMethod()">取消</span>
+      </div>
+    </form>
+</div>
+<div class="accountRolePop">
+    <div class="listsBox">
+      <ul class="unitLists clearfix">
+        <li ng-repeat="list in accountObj.accountRoleLists" class={{list.classVal}} ng-chose-unit>
+          <a id={{list.id}} title={{list.name}} href="javascript:void(0)">{{list.name}}</a>
+          <span class="trianger"></span>
+          <span class="gg"></span>
+        </li>
+      </ul>
+    </div>
+    <div class="listsButton">
+        <button class="btn btnBlue" ng-click="accountObj.sureAddRole()">确定</button>
+        <button class="btn" ng-close-window>取消</button>
+    </div>
+</div>
+<div class="configDataRight">
+    <div class="zTreeBoxStyle ztree zTreeBoxStyleAuto"></div>
+    <div class="listsButton">
+      <button class="btn btnBlue btnSmall" ng-click="accountObj.sureconfigDataRight()">确定</button>
+      <button class="btn btnSmall" ng-close-window>取消</button>
+    </div>
+</div>
+<script type="text/javascript">
+  /*验证提交 start*/
+  angular.element("#accountForm").validate({
+    rules:{
+      loginPassword:{
+          checkpasswd:true
+      }
+    },
+    messages: {
+      accounNumber: "请输入账号",
+      accounName: "请输入姓名",
+      investigator: "请选择账号角色",
+      accountSection: "请选择所属部门",
+      loginPassword: {
+          checkpasswd:"密码至少8位，并包括大小写字母及数字"
+      },
+      confirmPassword: {
+          required: "请输入确认密码",
+          equalTo: "两次输入密码的不一致"
+      },
+      configRight: "请选择自定义数据权限"
+    },
+    submitHandler: function() {
+      var submitScope = angular.element(".maincontainerB").scope();
+      submitScope.accountObj.sure_btn();
+    }
+  });
+  /*验证提交 end*/
+</script>

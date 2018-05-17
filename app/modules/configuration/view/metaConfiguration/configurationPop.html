@@ -1,0 +1,64 @@
+<div class="attrConfigBox" ng-controller="AttrConfigCtrl">
+  <div class="configContentBox">
+    <form id="configContent">
+      <div class="clearfix">
+        <p class="fl mr30">
+          <label class="commLabelWidth75">
+            <span class="red">*</span> 属性名称：
+          </label>
+          <input id="categoryName" ng-model="categoryName" class="borderHighlight" type="text" name="categoryName" />
+        </p>
+        <p class="fl">
+          <label class="commLabelWidth75">查询类型：</label>
+          <select class="commSelect width130" ng-change="configCenter.change_type(configCenter.currentType,configCenter.querytype_list)" ng-model="configCenter.currentType">
+            <option ng-repeat="type in configCenter.querytype_list" id="{{type.id}}">{{type.queryTypeName}}</option>
+          </select>
+        </p>
+      </div>
+      <!--<div class="dataConfigModule" ng-include src="configuration.dataConifgSrc"></div>
+                 <div class="paramsConfigModule" ng-include src="configuration.paramsConifgSrc"></div>-->
+      <div class="dataConfigModule">
+        <div class="dataConfigStyle">
+          <dl>
+            <dt class="mb10">
+              <label class="commLabelWidth75">数据配置：</label>
+              <span class="commLabelWidth80">数据表：</span>
+              <select class="commSelect width302" ng-model="configData.tableName" ng-change="configData.changeTable(configData.tableName)">
+                <option ng-repeat="table in configData.tables">{{table.registerTableName}}</option>
+              </select>
+            </dt>
+            <ul class="commPaddingLeft75">
+              <li>
+                <div>
+                  <span class="commLabelWidth80">&nbsp;</span>
+                  <select class="commSelect width130" ng-model="configData.columnName">
+                    <option ng-repeat="cloumn in configData.tableColumns">{{cloumn.columnName}}</option>
+                  </select>
+                </div>
+              </li>
+            </ul>
+          </dl>
+        </div>
+      </div>
+      <div class="paramsConfigModule">
+        <h4>参数配置：</h4>
+        <ul class="">
+          <li ng-repeat="parame in configParams.currentParame">
+            <p class="mb10 fl">
+              <label class="commLabelWidth80">{{parame.configParamName}}：</label>
+            </p>
+            <div class="slice" ng-show-config-params="{{parame}}" ng-model="parame_"></div>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+  <div class="ling_di"></div>
+  <div class="commBottom">
+    <div class="mb">
+      <button ng-click="configCenter.saveConfigData()" class="btn btnBlue">确定</button>
+      <button ng-close-window="" class="btn">取消</button>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="controller/queryConfigurationPop.js"></script>

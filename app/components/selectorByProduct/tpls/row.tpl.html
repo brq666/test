@@ -1,0 +1,29 @@
+<!--行模板-->
+<tr ng-repeat="entity in $ctrl.opts.data track by $index"
+    aria-init="{{
+    	_$pctrl = $ctrl.$scope.$parent.$ctrl;
+    	_$bindings = $ctrl.$scope.$parent.$ctrl.bindings;
+    	$selected = _$pctrl.isEntitySelected(entity);
+    }}"
+    ng-show="_$bindings.onlySelected ? _$bindings.selectedAll || $selected : true"
+    ng-class="{'row-selected': _$bindings.selectedAll || $selected}"
+    ng-click="$selected=!$selected; _$pctrl.switchSelectItem($selected, entity.num_iid)"
+    cc-dynamic-attr="{'ng-click': !_$pctrl.opts.disable}">
+    <!-- TODO 选择全部功能下的代码 -->
+    <!-- cc-dynamic-attr="{'ng-click': !_$bindings.selectedAll}"> -->
+
+	<td class="checkbox" aria-init="{{$selected = _$pctrl.isEntitySelected(entity.num_iid)}}">
+		<input type="checkbox" ng-checked="_$bindings.selectedAll || $selected" ng-disabled="_$pctrl.opts.disable || _$bindings.selectedAll">
+	</td>
+
+	<!--默认的表格行元素模板-->
+	<td ng-repeat="column in $ctrl.opts.columnsDef track by $index"
+	    ng-style="{width:column.width}">
+		<cc-grid-cell
+			ng-class="column.align"
+			base-scope="$ctrl.$scope.$parent"
+			column="column"
+			entity="entity"
+		><span>dasdasds</span></cc-grid-cell>
+	</td>
+</tr>

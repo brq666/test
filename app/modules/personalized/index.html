@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="personalizedPackage">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>数据赢家-用数据驱动营销变革</title>
+    <script type="text/javascript">
+        var root = '';
+        var rootStatic="/";
+    </script>
+  <link href="/app/lib/dx/css/dx.common.css" rel="stylesheet" charset="utf-8" />
+  <link href="/app/lib/dx/css/dx.light.css" rel="stylesheet" charset="utf-8" />
+
+  <link class="usemin" type="text/css" rel="stylesheet" href="/app/dist/css/shuyun.lib.css" />
+
+  <link class="usemin" type="text/css" rel="stylesheet" href="/app/dist/css/personalized/personalized.css" />
+
+  <!-- build:js /app/dist/js/shuyun.ie8.js -->
+  <script type="text/javascript" src="/app/lib/es5-shim/es5-shim.js"></script>
+  <script type="text/javascript" src="/app/lib/es5-shim/es5-sham.js"></script>
+  <script type="text/javascript" src="/app/lib/html5shiv/dist/html5shiv.js"></script>
+  <script type="text/javascript" src="/app/lib/respond-minmax/dest/respond.min.js"></script>
+  <!-- /build -->
+
+  <!-- build:js /app/dist/js/personalized/personalized.lib.js -->
+  <script type="text/javascript" src="/app/lib/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="/app/lib/ccms_pop/yunat_pop.js"></script>
+  <script type="text/javascript" src="/app/lib/angular-1.2.19/angular.min.js"></script>
+  <script type="text/javascript" src="/app/lib/angular-1.2.19/angular-ui-router.min.js"></script>
+  <script type="text/javascript" src="/app/lib/angular-1.2.19/angular.js"></script>
+  <script type="text/javascript" src="/app/lib/angular-1.2.19/angular-sanitize.min.js"></script>
+  <script type="text/javascript" src="/app/lib/angular-1.2.19/http-auth-interceptor.js"></script>
+  <script type="text/javascript" src="/app/js/globalMethod.js"></script>
+  <script type="text/javascript" src="/app/lib/dx/js/globalize.min.js"></script>
+  <script type="text/javascript" src="/app/lib/dx/js/dx.all.js"></script>
+  <script type="text/javascript" src="/app/components/moment/moment.min.js"></script>
+  <!-- /build -->
+
+  <!-- build:js /app/dist/js/personalized/personalized.js -->
+  <script type="text/javascript" src="/app/modules/personalized/controller/app.js"></script>
+  <script type="text/javascript" src="/app/modules/header/service.js"></script>
+  <script type="text/javascript" src="/app/modules/header/notices.js"></script>
+  <script type="text/javascript" src="/app/modules/personalized/filter/filter.js"></script>
+  <script type="text/javascript" src="/app/modules/personalized/directive/directive.js"></script>
+  <script type="text/javascript" src="/app/modules/personalized/controller/subIndex.js"></script>
+  <script type="text/javascript" src="/app/modules/personalized/controller/deploy.js"></script>
+  <script type="text/javascript" src="/app/modules/personalized/controller/statuses.js"></script>
+  <!--<script type="text/javascript" src="lib/dx/js/dx.webappjs.js"></script>-->
+  <!--<script type="text/javascript" src="lib/dx/js/localization/dx.all.cn.js"></script>-->
+  <!-- /build -->
+
+</head>
+<body ng-controller="mainCtrl">
+  <div class="commHeader" ng-include src="headerUrl"></div>
+  <div class="commNav" ng-include src="navUrl"></div>
+  <div class="maincontainerB">
+  <div ui-view="content" class="maincontainer"></div>
+</div>
+</body>
+</html>

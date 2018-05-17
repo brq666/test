@@ -1,0 +1,110 @@
+<div class="maincontainerB dataConfigureTable dataConfigureFilter" ng-controller="dataConfigureFilter">
+  <div class="maincontainer">
+    <div class="clearfix">
+      <h2 class="heading fl">定义过滤器</h2>
+    </div>
+    <div class="smalldarkerblueBtn newbuildBtn">
+      <a href="javascript:void(0)" ng-click="filterConfigObj.addFilter()">添加</a>
+    </div>
+    <div class="wrapConfigGrid">
+      <div class="filterConfigGrid"></div>
+    </div>
+  </div>
+  <div class="dataConfigure_mask editorFilterPop" ng-show="addFilterPopFlag">
+    <div class="dataConfigure_table">
+      <ul class="configureList">
+        <li>
+          <label class="commLabelWidth84">过滤器名称：</label>
+          <input class="borderHighlight " type="text" ng-model="filterConfigObj.filterName" />
+          <label class="commLabelWidth84">过滤器类型：</label>
+          <input type="text" class="borderHighlight required" readonly="readonly" name="filterType" comm-select-config="filterConfigObj.getMetaFilterType()" />
+        </li>
+        <li>
+          <label class="commLabelWidth84">选择字典维度：</label>
+          <input type="text" class="borderHighlight required" readonly="readonly" name="dicType" comm-select-config="filterConfigObj.getMetaDic()" />
+        </li>
+        <li>
+          <label class="commLabelWidth84">是否关联权限：</label>
+          <label class="mr25 ml10"><input class="commRadio" type="radio" name="quanxian" ng-model="filterConfigObj.relevance" value="true" />是</label>
+          <label><input class="commRadio" type="radio" name="quanxian" ng-model="filterConfigObj.relevance" value="false" />否</label>
+        </li>
+      </ul>
+      <div>
+        <p><label class="commLabelWidth84">关联主题：</label></p>
+        <dl class="themeBox">
+          <dd>
+            <table cellpadding="0" cellspacing="0" width="100%">
+              <tbody>
+              <tr>
+                <th align="left" class="indentNone">主题</th>
+                <th align="left">关联表</th>
+                <th align="left">主题字段</th>
+                <th align="left">过滤器字段</th>
+              </tr>
+              <tr ng-repeat="guanlianThemeList in filterConfigObj.guanlianThemeLists">
+                <td id="{{guanlianThemeList.subjectId}}">
+                  <span class="tdLayout">{{guanlianThemeList.subjectName}}</span>
+                </td>
+                <td>
+                  <select class="commSelect" ng-model="guanlianThemeList.tableValue" ng-options="tableList.registerTableName for tableList in guanlianThemeList.registerTables" ng-change="filterConfigObj.changeGuanlianDatas($index,guanlianThemeList.tableValue)">
+                    <option value="">--请选择--</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="commSelect" ng-disabled="!guanlianThemeList.tableValue" ng-model="guanlianThemeList.themeValue" ng-options="themeList.columnName for themeList in guanlianThemeList.registerThemes">
+                    <option value="">--请选择--</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="commSelect" ng-disabled="!guanlianThemeList.tableValue" ng-model="guanlianThemeList.filterValue" ng-options="themeList.columnName for themeList in guanlianThemeList.registerThemes">
+                    <option value="">--请选择--</option>
+                  </select>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </dd>
+        </dl>
+      </div>
+      <p class="bottom"> <button class="btn btnBlue SBox width65" ng-click="filterConfigObj.submitAddFilter()">确认</button> <button class="btn btnBlue SBox width65" ng-click="filterConfigObj.cancelAddFilter()">取消</button> </p>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  angular.element(".filterConfigGrid").flexigrid({
+    url: rootStatic + 'meta/filter/',
+    method: 'GET',
+    dataType: 'json',
+    colModel: [
+      {display: '过滤器名称',name: 'filterName',width: 2,sortable: true,align: 'center',dataindex: 'filterName'},
+      {display: '过滤器类型',name: 'filterType.filterTypeName',width: 2.5,sortable: true,align: 'left',dataindex: 'filterType.filterTypeName',renderer: function(v) {
+        return '<span style="color:#155a77;cursor:pointer">' + v + '</span>'
+      }},
+      {display: '对应字典维度',name: 'metaDic.dicName',width: 2,sortable: true,align: 'center',dataindex: 'metaDic.dicName'},
+      {display: '是否关联权限',name: 'associatePurview',width: 3.5,sortable: true,align: 'center',dataindex: 'associatePurview'},
+      {display: '操作',name: 'operation',width: 2,align: 'center',dataindex: 'campId',mapping: ['id', 'registerTableName', 'status'],
+        convert: function(v, mappVal) {
+          return '<a href="javascript:void(0);" class="edit_delete delete_icon" title="删除" delete-filter-list></a>'
+        }
+      }],
+    updateDefaultParam: true,
+    sortname: "id",
+    sortorder: "desc",
+    rp: 20,
+    usepager: true,
+    useRp: true,
+    showTableToggleBtn: true,
+    colAutoWidth: true,
+    rowDblClick: function() {},
+    onSuccess: function() {
+      var filterScopeCtrl=angular.element(".dataConfigureTable").scope();
+      filterScopeCtrl.filterConfigObj.recompile(filterScopeCtrl);
+    },
+    onError:function(response){
+      if (response.status == 401) {
+        location.pathname=root+'login.html';
+        return;
+      }
+    }
+  })
+</script>

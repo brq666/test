@@ -1,0 +1,38 @@
+<!-- build:css ../../css/dashboard/dashboard.css -->
+<link type="text/css" rel="stylesheet" href="../../../ccms/css/shuyun.lib.css" />
+<link type="text/css" rel="stylesheet" href="../../../ccms/css/dashboard/dashboard.css" />
+<!-- endbuild -->
+<!-- build:remove  -->
+<script src="../../../app/lib/angular-1.2.19/angular.min.js"></script>
+<script type="text/javascript" src="../../../app/lib/angular-1.2.19/angular-route.min.js"></script>
+<!-- endbuild -->
+<!-- build:js ../../js/dashboard/dashboard.js -->
+<script type="text/javascript" src="../../../app/lib/js-cookie.js"></script>
+<script type="text/javascript" src="../../../ccms/js/config.js"></script>
+<script type="text/javascript" src="../../../app/components/jquery.validate/jquery.validate.js"></script>
+<script type="text/javascript" src="../../../app/components/jquery.validate/messages_zh.js"></script>
+<script type="text/javascript" src="../../../app/lib/underscore.js"></script>
+<script type="text/javascript" src="../../../app/components/moment/moment.min.js"></script>
+<script type="text/javascript" src="../../../app/components/ccms_pop/js/yunat_pop.js"></script>
+<script type="text/javascript" src="../../../app/js/globalMethod.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/app.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/controller/controllers.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/controller/module_ctrl/balanceCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/controller/module_ctrl/channelMoniterController.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/controller/module_ctrl/crmKpi.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/controller/module_ctrl/fastEnterController.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/controller/module_ctrl/mainController.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/controller/module_ctrl/marketingKpiCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/controller/module_ctrl/newerHelpController.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/controller/module_ctrl/salePerformaceCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/controller/module_ctrl/shopViewCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/controller/module_ctrl/systemMessageController.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/controller/module_ctrl/topCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/directive/directives.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/filter/filters.js"></script>
+<script type="text/javascript" src="../../../app/modules/dashboard/script/service/services.js"></script>
+<!-- endbuild -->
+
+<div class="_campagin" ng-controller="dashboardMainCtrl">
+    <div onload="afterLoadCont();" src="pageUrl" ng-visible="tmlLoaded" ng-include=""></div>
+</div>

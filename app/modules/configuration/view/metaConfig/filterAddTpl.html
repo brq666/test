@@ -1,0 +1,50 @@
+<div class="con">
+  <div class="mb10">
+    <label class="label_style">过滤器名称：</label>
+    <input type="text" class="borderHighlight" ng-model="addTpl.filterName" />
+    <label class="label_style">过滤器类型：</label>
+    <select class="commSelect width130" ng-model="addTpl.filterType"> <option>字典多选</option> </select>
+  </div>
+  <div class="mb10">
+    <label class="label_style">选择字典维度：</label>
+    <select class="commSelect width130 ml9" ng-model="dicListModel" ng-options="c.dicName for c in dicList" refresh-options-model=""></select>
+  </div>
+  <div class="mb10">
+    <label class="label_style">是否关联权限：</label>
+    <input type="radio" class="ml9" ng-model="addTpl.isRelation" value="true" />是
+    <input type="radio" ng-model="addTpl.isRelation" value="false" />否
+  </div>
+  <div class="mb10">
+    <label class="label_style">关联主题：</label>
+    <div class="box">
+      <table>
+        <thead>
+        <tr>
+          <th>主题</th>
+          <th>属性集</th>
+          <th>属性</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in subjectList">
+          <td>{{item.subjectName}}</td>
+          <td>
+            <select class="commSelect width130" get-attribute-collection-data="" ng-model="item.attributeCollectionModel" ng-options="c.attributeCollectionName for c in item.metaAttributeCollection" set-select-model="">
+              <option value=""></option>
+            </select>
+          </td>
+          <td>
+            <select class="commSelect width130" get-attribute-data="" ng-model="item.attributeModel" ng-options="c.attributeName for c in item.metaAttributes">
+              <option value=""></option>
+            </select>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="mb mt30">
+    <button class="btn btnBlue" type="submit" ng-click="addTpl.save()">确定</button>
+    <span class="btn" ng-click="addTpl.close()">取消</span>
+  </div>
+</div>

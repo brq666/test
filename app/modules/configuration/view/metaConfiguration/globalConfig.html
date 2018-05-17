@@ -1,0 +1,27 @@
+<script type="text/javascript" src="controller/globalConfigCtrl.js"></script>
+<div class="globalLayout" ng-controller="GlobalParamCtrl" ng-cloak="">
+  <h2 class="heading">全局参数配置</h2>
+  <a href="javascript:void(0)" ng-click="globalParamObj.backList()" class="backClass">&lt; 返回</a>
+  <div class="ml25">
+    <p>
+      <label class="commLabelWidth75">选择主题：</label>
+      <select class="commSelect width200" ng-model="globalParamObj.curSubject" ng-options="subject.subjectName for subject in globalParamObj.subjectNameLists" ng-change="globalParamObj.changeSubject()">
+        <option value="">--请选择主题--</option>
+      </select>
+    </p>
+    <div class="clearfix" ng-show="globalParamObj.curSubject">
+      <label class="commLabelWidth75 fl">选择过滤器：</label>
+      <ul class="globalFilterLists">
+        <li ng-repeat="globalList in globalParamObj.globalLists">
+          <input class="inputLayout" type="checkbox" ng-model="globalList.checked" />
+          <span>{{globalList.filterName}}</span>
+          <a href="javascript:void(0);" style="visibility:{{globalParamObj.toggleKey($index)}}" class="addRank" ng-click="globalParamObj.addRank($index)"></a>
+          <a href="javascript:void(0);" class="lessRank" style="visibility:{{globalParamObj.toggleKey($index,'down')}}" ng-show="globalParamObj.globalLists.length&gt;1" ng-click="globalParamObj.lessRank($index)"></a>
+        </li>
+      </ul>
+    </div>
+    <div class="mt20">
+      <button class="btn btnBlue" type="button" ng-click="globalParamObj.submitGlobal()">确定</button>
+    </div>
+  </div>
+</div>

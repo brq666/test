@@ -1,0 +1,94 @@
+<div ng-controller="attrQueryContentCtrl">
+  <div style="overflow-y: auto;" ng-cloak>
+    <form id="queryConditionorm">
+      <div class="queryConditionormWrap clearfix" ng-class="{'attrTopNew':isNew}">
+        <div class="targetWrap">
+          <!-- 多条件关系 start -->
+          <div class="relation">
+                      <span ng-show="!isGroupApp">
+                        <label>多条件关系：</label>
+                        <label class="mr20">
+                            <input class="commRadio" type="radio" name="relation" value="AND"
+                                   ng-model="globalConditions.relation"/>并且
+                        </label>
+                        <label class="mr20">
+                            <input class="commRadio" type="radio" name="relation" value="OR"
+                                   ng-model="globalConditions.relation"/>或者
+                        </label>
+                        </span>
+            <div class="fr conditions_length" ng-show="!isGroupApp">当前已添加{{getConditionCount()}}条查询条件</div>
+          </div>
+          <!-- 多条件关系 end -->
+          <!-- 查询条件 start -->
+          <div class="query_content query_content_padding"
+               ng-class="{'moveToleft':isGroupApp&&!creatGroupObj.eNodeFlag}">
+            <div class="" attr-query-conditions>
+              <div class="addTips" ng-show="getConditionCount()==0" ng-cloak>请至少配置一种条件</div>
+            </div>
+          </div>
+          <!-- 查询条件 end -->
+        </div>
+        <div class="leftMenuWrap" ng-if="isGroupApp&&creatGroupObj.eNodeFlag||!isGroupApp">
+          <div class="search-attr">
+            <input type="text" maxlength="20" placeholder="搜索属性名称">
+          </div>
+          <div class="query_content">
+            <div ng-hide="globalConditions.leftTree.length > 0" class="left_tree_loading"></div>
+            <div class="attr_box" ng-repeat="list in globalConditions.leftTree">
+              <div class="title" ng-init="$$index = $index">
+                <span class="label" title="{{list.valueShow}}">{{list.valueShow}}</span>
+                <span class="selectInput" ng-class="'selectInput' + $index"
+                      ng-repeat="condition in list.conditionNewList">
+                  <input type="text"
+                         class="borderHighlight {{'level' + $index}}"
+                         ng-class="{error:list.groupConditions[$index].isNotSelected}"
+                         readonly="readonly"
+                         name="{{'level_select_'+ $$index + '_' + $index}}"
+                         ng-custom-select="globalConditions.getConfigure(list.conditionNewList[$index].conditionValueList, 'level_select_'+ $$index + '_' + $index, $$index, $index)"
+                         ng-init="list.groupConditions[$index].valueShow = list.groupConditions[$index].valueShow || '请选择'"
+                         ng-model="list.groupConditions[$index].valueShow"></span>
+                <new-tree-api
+                  model="catalogId"
+                  mapping="{valueField: 'id', displayField: 'name'}"
+                  id="tags-ztree-api"
+                  api-id="tags-ztree-api"
+                  ng-if="list.category_type_id === 5"
+                  class="dropdown-select-tree" 
+                  search-placeholder="请选择" 
+                  no-record-text="--没有查询到符合条件的数据--"
+                  is-search="true" 
+                  read-only="true"
+                  is-type="select">
+                  <div id="tags-ztree"
+                      class="ztree tree-directory"
+                      new-tree
+                      operation-call-back="selectCatalogId(treeId, treeNode, type)"
+                      children-key="childrenCatalogs"
+                      is-operate="false"
+                      is-expand="false"
+                      load-tree-data="loadTreeData()">
+                  </div>
+                </new-tree-api>
+                <i ng-click="globalConditions.toggleTree($event,$index)" class="hoverDown"
+                   ng-class="{open: $index === 0}"></i>
+              </div>
+              <ul class="attr_items clearfix" ng-class="{'show': $index === 0}" ng-if="list.category_type_id !== 5">
+                <li ng-repeat="item in list.queryItemRequestNewList"
+                    ng-click="globalConditions.itemAddQuery($event,list, item)">{{item.name}}
+                </li>
+              </ul>
+              <ul class="attr_items clearfix zidingyi" ng-if="list.category_type_id === 5">
+                <li ng-repeat="item in zidingyiqueryItemRequestNewList"
+                    ng-click="globalConditions.itemAddQuery($event,list, item)">{{item.name}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div ng-include src="commCustomTemplate" onload="showCustomerPop()">
+      <!--行为自定义模板入口-->
+    </div>
+  </div>
+</div>

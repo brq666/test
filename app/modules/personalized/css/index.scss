@@ -1,0 +1,237 @@
+body {
+  background-color: #fcfcfc;
+}
+
+body,button, input, select, textarea {
+  font: 12px/1.5 "microsoft yahei", tahoma, helvetica, arial, "\5b8b\4f53", sans-serif;
+  outline: none;
+  word-break: break-all;
+  /* 长英文字符换行 针对IE */
+}
+
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote,
+dl, dt, dd, ul, ol, li, pre,
+fieldset, lengend, button, input, textarea,
+th, td {
+  margin: 0;
+  padding: 0;
+}
+
+.maincontainerB {
+  bottom: 0;
+  min-width: 1024px;
+  overflow: auto;
+  position: absolute;
+  top: 56px;
+  width: 100%;
+}
+
+.maincontainer {
+  margin-left: 150px;
+  padding: 23px 20px;
+  color: #3d3d3d;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+}
+
+/*  end body *****************************************************/
+.hideNav .sbSmall, .hideNav .maincontainerB, .hideNav .otherPageListInner {
+  top: 0;
+}
+
+.hideNav .header {
+  display: none;
+}
+
+/*.sidebar {
+    width: 150px;
+    background: url(../../images/sidebarBg.png) no-repeat bottom #ededed;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    overflow: auto;
+    z-index: 1;
+    overflow-x: hidden;
+}*/
+
+.sideNav {
+  margin-bottom: 170px;
+}
+
+.sideNav a {
+  color: #3d3d3d;
+  font-size: 13px;
+  display: block;
+  padding: 8px 19px;
+  background: url(../../images/all.png) no-repeat -200px 33px;
+  position: relative;
+}
+
+.sideNav li a:hover {
+  color: #145681;
+  text-decoration: none;
+}
+
+.sideNav a.sbCurrent {
+  color: #fff;
+  background: linear-gradient(#656565, #474747);
+}
+
+.sideNav a.sbCurrent:hover {
+  color: #fff;
+}
+
+.sideNavArrow {
+  background: url("../../images/all.png") no-repeat scroll -340px -152px;
+  position: absolute;
+  right: 17px;
+  bottom: 12px;
+  width: 10px;
+  height: 10px;
+}
+
+.sideNavGray .sideNavArrow {
+  background-position: -162px -152px;
+}
+
+.sbCurrent .sideNavArrow {
+  background-position: 0 -152px;
+}
+
+.sideNav .sideNavGray {
+  background: linear-gradient(#e2e2e2, #dddddd);
+}
+
+.sideNav dl {
+  background-color: #fcfcfc;
+  padding: 8px 5px;
+  border-right: 1px solid #ededed;
+}
+
+.sideNav dl dd a {
+  font-size: 12px;
+  padding: 0 0 0 21px;
+  color: #145681;
+  width: 118px;
+  height: 23px;
+  line-height: 23px;
+  display: inline-block;
+  background: none;
+  /*文字溢出隐藏补...*/
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sideNav a.sbSmallCur {
+  color: #ffffff;
+  background-color: #54c1e9;
+}
+
+.sidebarFt {
+  margin: 35px 10px 35px 20px;
+  color: #c1c0c0;
+  position: absolute;
+  bottom: 0px;
+  z-index: -2;
+}
+/*三级餐单栏目--伸缩图片*/
+.sideNav .ContractImg {
+  background-image: url(../../images/add1.png);
+  background-repeat: no-repeat;
+  display: inline-block;
+  background-position: 8px 9px;
+}
+
+.sideNav .ExpandImg {
+  background-image: url(../../images/sub1.png);
+  background-repeat: no-repeat;
+  display: inline-block;
+  background-position: 8px 9px;
+}
+/*四级菜单*/
+.noHeightFour {
+  height: 0px;
+}
+
+.sideNav li dl dd div {
+  width: 142px;
+  left: 0px;
+  top: -4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sideNav li dl dd>a {
+  height: 26px;
+  line-height: 26px;
+  color: #474747;
+}
+
+.sideNav li dl dd div>dl {
+  padding: 5px 0px;
+}
+
+.sideNav li dl dd div dl dd {
+  overflow: hidden;
+  height: 26px;
+}
+
+.sideNav li dl dd div dl dd >a {
+  height: 26px;
+  line-height: 26px;
+  width: 118px;
+  color: #707070;
+  padding-left: 21px;
+}
+
+.sideNav li dl dd div dl dd >a.hoverClass {
+  background: #ededed;
+  color: #707070;
+}
+/*  end sidebar *****************************************************/
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+th {
+  text-align: center
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 20px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
+}

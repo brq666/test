@@ -1,0 +1,34 @@
+﻿<!--<script type="text/javascript" src="controller/customer/staticViewGroup.js"></script>-->
+<div class="customerGroupLayerView" ng-controller="StaticViewGroupCtrl" ng-cloak>
+  <div class="customerGroupView">
+    <!--ul class="clearfix staticGroupInfo">
+      <li class="fl mr40">
+        <label class="node_name_label">所属分类：</label>
+        <span>{{staticViewGroupObj.categoryName}}</span>
+      </li>
+      <li class="fl">
+        <label class="node_name_label">分组类型：</label><span>{{staticViewGroupObj.groupType}}</span>
+      </li>
+      </ul>
+      <!--div class="radioTitleWrap mt20">
+        <span class="fl">静态分组没有分组条件，请点击</span><a class="watchData margin10" ng-click="marketList.viewCustomerData()" title="客户数据查看" href="javascript:void(0)" ><img width="109" height="30" src="../../images/watchDataBtn.jpg"></a><span class="fl">查看分组内客户明细</span>
+      </div-->
+      <div class="staticViewTableData">
+        <div class="gridCommCursom clearfix">
+          <!--div class="commSearch">
+            <label class="default_color" ng-searcheffect>客户ID/电话/email</label>
+            <input class="commSearchVal" type="text" ng-model="hdValue" ng-searcheffect name="couponName">
+            <button class="commSearchBtn" ng-click="staticViewGroupObj.searchButtonClick(hdValue)"></button>
+          </div-->
+          </div>
+          <div class="commGridButtomLayout">
+            <span class="mr35">客人数：<em class="orange bold">{{staticViewGroupObj.sumNumber}}</em>人</span>
+            <span>最后刷新时间：{{staticViewGroupObj.updateTime}}</span>
+          </div>
+          <div class="customerDataTables gridCommLayout">
+            <div id="staticCustomerDataGrid"></div>
+          </div>
+          <div ng-include src="staticViewGroupObj.modelSrc"></div>
+      </div>
+  </div>
+</div>

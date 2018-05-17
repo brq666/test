@@ -1,0 +1,30 @@
+<div class="addTpl">
+  <h2 class="heading ng-binding">数据源配置</h2>
+  <form id="sourceData_form">
+    <div class="bg">
+      <div class="mt10">
+        <label>名称：</label>
+        <input type="text" class="borderHighlight" name="name" maxlength="20" ng-model="tpl.dataSourceName" />
+      </div>
+      <div class="mt10">
+        <label>url：</label>
+        <input type="text" class="borderHighlight" name="name" maxlength="20" ng-model="tpl.templateUrl" ng-readonly="true" />
+      </div>
+      <div class="mt10">
+        <label>类型：</label>
+        <select class="commSelect ml9" "="" ng-change="tpl.changeTemplateType(defaultTemplateName)" ng-model="defaultTemplateName" ng-options="temp.templateName for temp in templateList"> </select>
+      </div>
+      <br />
+      <div ng-repeat="template in templateList | filter:{templateName: defaultTemplateName.templateName}">
+        <span ng-repeat="connectionDefini in template.metaDataSourceConnectionDefinition">
+          <span>{{connectionDefini.connectionKey}}:</span>
+          <input type="text" maxlength="50" ng-model="connectionDefini.connectionValue" /> <br />
+        </span>
+      </div>
+    </div>
+    <div class="mb">
+      <button type="submit" ng-click="tpl.submit()" class="btn btnBlue">确定</button>
+      <span class="btn">取消</span>
+    </div>
+  </form>
+</div>

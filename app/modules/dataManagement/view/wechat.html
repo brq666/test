@@ -1,0 +1,191 @@
+<div class="maincontainerB dataConfigureTable" class="ng-cloak" ng-controller="wechatCtrl">
+  <!--页面主体 begin-->
+  <div class="maincontainer">
+    <div class="clearfix">
+      <h2 class="heading fl">微信用户信息</h2>
+    </div>
+    <div class="searchbox clearfix" ng-init="showMore=false">
+      <div class="mainDivBox">
+        <span id="shop">
+               <span ng-bind="SubjectController.titleName">:</span>
+        <select class="commSelect  ng-pristine ng-valid width130" ng-model="SearTools.Subject" ng-options="PublicN.offAcct as PublicN.offAcctName for PublicN in  SubjectController.PublicNumberSubject.data" ng-change="SubjectController.change_subject()" id="selectF"></select>
+        <!-- <span class="relativeBox">
+                            <input type="text" class="borderHighlight width130" readonly="readonly" name="investigator" ng-click="SearTools.getShops()"  ids="{{SearTools.ShopIds}}" title="{{SearTools.ShopValsView}}" value="{{SearTools.ShopValsView}}">
+                            <a class="optionModule2 location2" ng-click="SearTools.getShops()" href="javascript:void(0);"></a>
+                    </span> -->
+        </span>
+        <div class="smalldarkerblueBtn"><a href="javascript:void(0)" style="color: white;" ng-click="Pop.openPopBatch()">批量绑定</a>
+        </div>
+        <div class="targetDivBox" customer-conditions>
+          选择更多:
+        </div>
+      </div>
+      <div class="clearfix">
+        <div class="activeList couponListssBox commOverflowXAuto" style="bottom: 30px;top:120px">
+        </div>
+      </div>
+    </div>
+    <div class="viewMarkInfoBox" id="couponTip"></div>
+    <!--页面主体 end-->
+    <!-- 绑定平台账号-->
+    <div class="Pop" style="display: none">
+      <form novalidate="novalidate" class="configAttrBox" id="empower_form">
+        <ul>
+          <li>
+            <label class="commLabelWidth75">平台选择：</label>
+            <select ng-model="Pop.platId" ng-options="plat.id as plat.name for plat in Pop.plats" class="commSelect width210">
+              <option value="">--请选择平台--</option>
+            </select>
+            <label class="error" ng-show="Pop.platShow">请选择平台</label>
+          </li>
+          <li>
+            <label class="commLabelWidth75">平台账号：</label>
+            <input class="borderHighlight width200" style="margin-left:5px;" maxlength="50" type="text" ng-model="Pop.account" />
+            <label class="error" ng-show="Pop.accountShow">请输入平台账号</label>
+          </li>
+          <li>
+            <label class="commLabelWidth75"></label>
+            <button class="btn btnBlue" type="submit" ng-click="Pop.platSave()">确定</button>
+            <button class="btn" type="button" dm-close-window ng-click="groupShow=false">取消</button>
+          </li>
+        </ul>
+      </form>
+    </div>
+    <!-- 批量绑定-->
+    <div class="PopBatch" style="display: none">
+      <form novalidate="novalidate" class="configAttrBox" id="empower_form">
+        <table style="margin-bottom:50px;">
+          <tr>
+            <th class="label">
+              <label>平台选择：</label>
+            </th>
+            <td width="80%">
+              <select style="width:210px;" class="commSelect width209 wechatcommSelect" ng-model="Batch.curPlatformId" ng-options="platform.id as platform.name for platform in Batch.platformList">
+                <option value="">--请选择平台--</option>
+              </select>
+              <label class="error" ng-show="Batch.platShow">请选择平台</label>
+            </td>
+          </tr>
+          <tr>
+            <th class="label" style="padding-top:18px;">
+              <em class="red">*</em>
+              <label>选择本地文件：</label>
+            </th>
+            <td style="padding-top:12px;">
+              <span class="relativeBox">
+                  <input id="portUpLoadFile" name="portUpLoadFile" class="teximportupload" readonly="readonly" multiple="true" />
+                  <span class="ml10 mr10 gifLoading loadingPosition domNone"></span>
+              </span>
+              <!-- <span style="margin-left:10px" class="icon-help-circled icon-help-color" ng-title="仅支持不大于8MB的txt和csv文件导入"></span> -->
+              <span style="display:inline-block" ng-show="Batch.matchFileUploadFlag" class="icon-attention-circled icon-medium-size red">{{Batch.matchFileWarningText}}</span>
+            </td>
+          </tr>
+          <tr>
+            <th style="padding: 0px 5px;"></th>
+            <td style="padding:0px 7px;">&nbsp;<a class="blueColor" href="https://shuyun-static.b0.upaiyun.com/sample/datamanage/DataImportweixin.zip">导入文件样例</a></td>
+          </tr>
+          <tr>
+            <th class="label" style="padding-top:24px;">
+              <label>字段分隔符：</label>
+            </th>
+            <td style="padding-top:14px;">
+              <select style="width:210px;" class="commSelect width209" ng-model="Batch.splitSign" ng-change="Batch.viewSplitSign()">
+                <option value="0">,(逗号)</option>
+                <option value="1">;(分号)</option>
+                <option value="2">&nbsp;(空格)</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th></th>
+            <td>
+              <p class="mb10 ml5">
+                <label>
+                  <input class="commCheckbox" type="checkbox" ng-model="Batch.headFlag" ng-change="Batch.viewSplitSign()">第一行包含字段名
+                </label>
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+              <th class="tr"></th>
+              <td>
+                <p class="ml5">
+                <button class="btn margin0 commSmallBtn borderRadiusNone" ng-click="Batch.startMatchData()" type="button">开始匹配</button>
+                <span class="ml10 mr10 gifLoading" ng-show="Batch.matchFileFlag"></span>
+                <a class="blueColor ico_tips" href="javascript:void(0)" ng-title="文件行数超过一万条时,匹配需要较长时间.如果不想等待,请关闭窗口.继续其他操作" ng-show="Batch.matchFileFlag"></a>
+                <label class="error ml10" ng-show="Batch.matchButtonMark">{{Batch.matchStatusMark}}</label>
+                </p>
+              </td>
+          </tr>
+          <!-- <tr>
+            <th class="label"></th>
+            <td>
+              <button class="btn btnBlue" type="submit" ng-click="Pop.platSave()">确定</button>
+              <button class="btn" type="button" dm-close-window ng-click="groupShow=false">取消</button>
+            </td>
+          </tr> -->
+        </table>
+
+        <!-- 匹配名单 -->
+        <div class="uploadInfo" ng-show="Batch.matchImportNumber">
+          <p>导入文件总数{{Batch.matchImportNumber}}，排重后文件数{{Batch.matchDistinctNumber}}，与系统客户匹配数{{Batch.matchNumber}}（占比{{Batch.matchPoint}}%）</p>
+          <a class="blueColor" href="javascript:void(0)" title="查看导入数据" ng-click="Batch.showResponseData()">查看导入数据</a>
+        </div>
+
+        <!-- 确定取消 -->
+        <div class="commBottom clearfix tureOrFalse">
+          <div class="mb">
+            <button class="btn btnBlue" ng-click="Batch.postDiscountWechatData()">确定</button>
+            <button class="btn" dm-close-window ng-click="Batch.cancelDiscountWechatData()">取消</button>
+          </div>
+        </div>
+
+        <div class="commPositionData PreviewWeChat" ng-show="Batch.isRollListShow">
+          <dl>
+              <dt>名单预览</dt>
+              <dd>
+                  <ul class="previewBox previewBoxLe">
+                      <li  ng-repeat="rollP in Batch.rollList track by $index" title="{{rollP.pltCustNo}}">{{rollP.pltCustNo}}</li>
+                  </ul>
+                  <ul class="previewBox previewBoxRi">
+                      <li ng-repeat="rollO in Batch.rollList track by $index" title="{{rollO.openId}}">{{rollO.openId}}</li>
+                  </ul>
+              </dd>
+          </dl>
+          <span class="sanjiaoMark"></span>
+        </div>
+        <div class="matchDataListView domNone">
+          <div class="commWrapThree">
+            <div class="dataInfoList">
+              <table class="wechatViewPort">
+                  <thead>
+                      <tr>
+                          <th><span>平台账号</span></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat=" vals in targetDataListsVal track by $index">
+                            <td>{{vals.pltCustNo}}</td>
+                        </tr>
+                  </tbody>
+              </table>
+              <table class="wechatViewPort">
+                  <thead>
+                      <tr>
+                          <th><span>openid</span></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat=" vals in targetDataListsVal track by $index">
+                            <td>{{vals.openId}}</td>
+                        </tr>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>

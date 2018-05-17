@@ -1,0 +1,265 @@
+
+.searchbox {
+  width: 100%;
+  line-height: 30px;
+  padding: 0px 10px;
+}
+
+.searchbox a {
+  color: #33b5e5;
+  text-decoration: underline
+}
+
+.searchbox .condition-list {
+  background-color: white;
+  margin-top: 5px;
+  height: 31px;
+}
+
+.searchbox .condition-list div {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+
+.searchbox .condition-list label {
+  position: relative;
+  z-index: 100;
+  display: inline-block;
+  height: 24px;
+  max-width: 120px;
+  width: 120px;
+  overflow: hidden;
+  border: 1px solid #cecece;
+  line-height: 24px;
+  margin-left: 5px;
+  padding: 0px 5px;
+  margin-right: 15px;
+  background-color: white;
+}
+
+.searchbox .condition-list label.down em {
+  width: 0;
+  height: 0;
+  border: 4px solid transparent;
+  display: inline-block;
+  border-top-color: #000;
+  right: 10px;
+  position: relative;
+  float: right;
+  top: 10px;
+}
+
+.searchbox .condition-list label.up em {
+  width: 0;
+  height: 0;
+  border: 4px solid transparent;
+  display: inline-block;
+  border-bottom-color: #000;
+  right: 10px;
+  position: relative;
+  float: right;
+  top: 6px;
+}
+
+.searchbox .condition-list label.up {
+  border-bottom-color: white;
+}
+
+.searchbox .condition-list section {
+  background-color: white;
+  display: inline-block;
+  display: none;
+  border: 1px solid #cecece;
+  position: absolute;
+  top: 25px;
+  left: 5px;
+  z-index: 10;
+  width: 160px;
+  padding: 8px 10px;
+}
+
+.searchbox .condition-list section span {
+  display: block
+}
+
+.searchbox .condition-list section input,.searchbox section button {
+  margin-left: 0px;
+  margin-top: 10px;
+}
+
+.searchbox .condition-list .m {
+  position: relative;
+  top: 4px;
+  left: 2px;
+}
+
+.searchbox .condition-list section h3 {
+  font: 12px/1.5 "microsoft yahei",tahoma, helvetica, arial, "\5b8b\4f53", sans-serif;
+  outline: none;
+}
+
+.searchbox .condition-list .edit {
+  background-color: #d7ebff;
+  display: inline-block;
+  border: 1px solid #a9caeb;
+  height: 24px;
+  line-height: 24px;
+  position: relative;
+  padding: 0px 8px;
+  margin-right: 10px;
+}
+
+.searchbox .condition-list .edit span {
+  display: inline-block;
+  width: 90px;
+}
+
+.searchbox .condition-list .edit span em:last-child {
+  width: 15px;
+  height: 15px;
+  color: white;
+  background-color: #a9caeb;
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+  font-weight: bold;
+  line-height: 15px;
+  right: 1px;
+  top: 4px;
+}
+
+.searchbox .condition-list .edit span em:first-child {
+  width: 0;
+  height: 0;
+  border: 4px solid transparent;
+  display: inline-block;
+  border-top-color: #000;
+  position: absolute;
+  top: 10px;
+  right: 23px;
+}
+
+.searchbox .condition-list .edit span.up em:first-child {
+  width: 0;
+  height: 0;
+  border: 4px solid transparent;
+  display: inline-block;
+  border-bottom-color: #000;
+  position: relative;
+  margin: 0px 10px 0px 10px;
+  top: -1px;
+}
+
+.searchbox .condition-list .edit span {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.searchbox .condition-list .ico_tips {
+  margin: 0 0 0 3px;
+}
+
+.list {
+  margin-top: -60px;
+  position: relative;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+}
+
+.Pop input[type="radio"]:first-child {
+  margin-left: 7px;
+  vertical-align: middle;
+  margin-top: -4px;
+}
+
+.Pop input[type='radio']:not(:first-child) {
+  margin-left: 20px;
+  vertical-align: middle;
+  margin-top: -4px;
+}
+
+.Pop .customerno {
+  margin-left: 9px
+}
+
+.Pop .day_start {
+  margin-left: 200px;
+  position: absolute;
+  background: #FAF8F8;
+  border: 1px solid #dcdcdc;
+  padding: 7px 5px;
+  z-index: 10;
+  right: 5px;
+}
+
+.pop .smallbut {
+  width: 60px;
+  height: 20px;
+  line-height: 0;
+  border-radius: 0px;
+  font-size: 11px;
+}
+
+.Pop .day_start .dl {
+  line-height: 23px;
+}
+
+.Pop .day_start .dl dd div {
+  float: left;
+  width: 25px;
+  text-align: center;
+  margin-left: 10px;
+  border: 1px solid #F8F8F8;
+}
+
+.Pop .day_start .dl dd div.cur {
+  background: #DFF9FA;
+  border: 1px solid #93E4DA
+}
+
+.error {
+  margin-left: 0px
+}
+
+.hand {
+  cursor: pointer
+}
+
+.searchbox .condition-list .edit span  a {
+  display: inherit;
+  max-width: 90px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  position: relative;
+}
+
+.width145 {
+  width: 145px;
+}
+
+.grid-content {
+  width: 870px;
+  height: 480px;
+  margin: 15px;
+}
+
+.item-count {
+  display: inline-block;
+  margin-top: 11px;
+  margin-right: 22px;
+}
+
+.item-checkbox input {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.flexigrid div.bDiv td div .noborder {
+  margin-top: 6px;
+}

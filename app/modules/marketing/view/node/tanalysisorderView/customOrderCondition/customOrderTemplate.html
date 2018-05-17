@@ -1,0 +1,38 @@
+<div class="commCustomConfigBox" ng-controller="orderAnalysisConditionCtrl">
+	<div>
+    <form id="analysisConfigForm">
+      <div class="commWrapFive">
+        <div class="firstLayout">
+          <ul class="customHeadMark clearfix">
+            <li><span>满足订单条件</span></li>
+            <li class="lineSolid width90 mt10" ng-class="{width93:!isAnalysisToggleConditionsAreaShow}"></li>
+            <li ng-show="isAnalysisToggleConditionsAreaShow">
+              <a class="blueColor" href="javascript:void(0)" ng-click="toggleAnalysisConditions()">{{toggleFontName()}}<i ng-class="{downSanjiao:!flag,upSanjiao:flag}"></i></a>
+            </li>
+          </ul>
+          <div class="conditionLayoutBox clearfix" analysis-template-init>
+            <div class="conditionLayoutWidth45 fl">
+            </div>
+            <div class="conditionLayoutWidth30 fl">
+            </div>
+            <div class="conditionLayoutWidth25 fl">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="ling_di"></div>
+        <div class="commBottom">
+          <div class="mb">
+            <button class="btn" ng-class="{btnBlue:!analysisScopeObj.isEditorFlag}" type="submit" ng-click="analysisObj.submitCustomComfig()">确定</button>
+            <button class="btn" type="button" ng-close-child-window>取消</button>
+          </div>
+        </div>
+      </div>
+      <div ng-show="customerTemplateLoadingFlag" class="loading">
+          <i></i>加载中...
+      </div>
+    </form>
+	</div>
+</div>
+<!--<script type="text/javascript" src="controller/node/tanalysisorderJs/orderAnalysisConditions.js"></script>-->

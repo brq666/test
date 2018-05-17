@@ -1,0 +1,26 @@
+
+<div class="market-calendar-box" ng-controller="marketCalendarCtrl as $ctrl">
+  <div class="calendar-ctrl-box">
+    <i class="iconfont icon-rightarrow previous" ng-click="$ctrl.preMonth()"></i>
+    <span ng-if="$ctrl.mode==='month'" class="title">{{$ctrl.year + '-' + $ctrl.month}}</span>
+    <span ng-if="$ctrl.mode==='week'" class="title">{{$ctrl.queryParams.startTime + '-' + $ctrl.queryParams.endTime+'（第'+$ctrl.week+'周）'}}</span>
+    <i class="iconfont icon-rightarrow next" ng-click="$ctrl.nextMonth()"></i>
+
+    <div class="calendar-view-box">
+      <span ng-repeat="(key,value) in $ctrl.modeMap track by $index" ng-bind="value" ng-class="{'active':key===$ctrl.mode}" ng-click="$ctrl.onSwitch(key)">
+      </span>
+    </div>
+
+  </div>
+  <im-calendar
+    height="$ctrl.eventsBoxHeight"
+    events="$ctrl.events"
+    on-scroll="$ctrl.onScroll(type, event)"
+    on-header="$ctrl.onHeader(mode, column)"
+    columns="$ctrl.columns"
+    mode="$ctrl.mode"
+    week="$ctrl.week"
+    loading="$ctrl.loading"
+    year="$ctrl.year"
+    month="$ctrl.month"></im-calendar>
+</div>

@@ -1,0 +1,23 @@
+<div class="con">
+  <div class="mb10">
+     <label class="label_style">选择主题：</label>
+     <select class="commSelect width130 ml9" style="width:165px;" ng-model="subject.subjectListModel" ng-options="c.subjectName for c in subject.subjectData" ng-change="subject.changeSubject(subjectListModel.subjectId)"></select>
+  </div>
+  <div class="operation">
+     <label class="label_style fl">选择过滤器：</label>
+     <div class="box fl">
+        <ul class="globalFilterLists">
+           <li ng-repeat="item in subject.filterData">
+             <input type="checkbox"  class="inputLayout" ng-model="item.checked">
+             <span>{{item.filterName}}</span>
+             <a class="addRank"  href="javascript:void(0);" ng-click="subject.filterOpertion.upward($index)"></a>
+             <a class="lessRank" href="javascript:void(0);" ng-click="subject.filterOpertion.downward($index)"></a>
+            </li>
+        </ul>
+     </div>
+  </div>
+  <div class="mb mt15">
+        <button class="btn btnBlue" type="submit" ng-click="subject.save()">确定</button>
+        <span class="btn" ng-click="subject.close()">取消</span>
+   </div>
+</div>

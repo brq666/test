@@ -1,0 +1,73 @@
+<div class="selectFontsClass" ng-controller="selectFontsCtrl">
+  <div class="editorContent">
+    <p>
+      <span class="commLabelWidth80 mr10">关键字关系 ：</span>
+      <label class="commRadio mr5">
+        <input type="radio" name="filterRadio" ng-model="selectFontObj.filterGX" value="AND"  /> 并且
+      </label>
+      <label class="commRadio">
+        <input type="radio" name="filterRadio" ng-model="selectFontObj.filterGX" value="OR" /> 或者
+      </label>
+      <em class="ico_tips" dm-title="请选择：当输入多个关键字的时候，关键字之间是并且还是或者关系"></em>
+    </p>
+    <p>
+      <span class="commLabelWidth80 mr10">关键字 ：</span>
+      <input class="borderHighlight mr5" type="text" ng-model="selectFontObj.filterInputVal" />
+      <button class="commAddEventBtn" ng-click="selectFontObj.addFilterList()" type="button">添加</button>
+      <em class="emPOpError" ng-show="filterKeyWorldError">{{filterKeyWorldErrorText}}</em>
+    </p>
+    <ul class="keyWorldLists clearfix">
+      <li ng-repeat="filterList in selectFontObj.filterLists" title="{{filterList}}">
+        <span>{{filterList}}</span>
+        <a class="deleteImg" href="javascript:void(0)" title="删除" ng-click="selectFontObj.delFilterFont($index)"><img ng-src="/ccms/images/deletex.png" width="10" height="10" /></a>
+      </li>
+    </ul>
+    <p>
+      <button class="btn btnBlue selectFontsSureBtn" type="button" ng-close-child-window-data ng-click="selectFontObj.filterSure()">确定</button>
+      <button class="btn"  type="button" ng-close-child-window-data>取消</button>
+    </p>
+  </div>
+</div>
+<script type="text/javascript">
+  function selectFontsCtrl($scope){
+    $scope.disponseLabelObj.openPlugPop(1);
+    $scope.selectFontObj={
+      "filterGX":$scope.$parent.$parent.disponseLabelObj.fontRelation || "AND",
+      "filterLists":$scope.$parent.$parent.disponseLabelObj.fontLists ? $scope.$parent.$parent.disponseLabelObj.fontLists.slice() :  [],
+      "filterInputVal":"",
+      "addFilterList":function(){
+        var _this=this,hasFilterKeyWorldFlag=false;
+        angular.forEach(_this.filterLists,function(val,key){
+          if(_this.filterInputVal==val){
+            hasFilterKeyWorldFlag=true;
+          }
+        });
+        if(hasFilterKeyWorldFlag){
+          $scope.filterKeyWorldErrorText="关键字不可以重复";
+        }else if(_this.filterInputVal==""){
+          $scope.filterKeyWorldErrorText="请填写关键字";
+        }else if(_this.filterInputVal.length > 30){
+          $scope.filterKeyWorldErrorText="每个关键字最大30个字符";
+        }else if(/,|，/gi.test(_this.filterInputVal)){
+          $scope.filterKeyWorldErrorText="关键字不能包含逗号";
+        };
+        if(_this.filterInputVal=="" || hasFilterKeyWorldFlag || (_this.filterInputVal.length > 30 ||/,|，/gi.test(_this.filterInputVal))){
+          $scope.filterKeyWorldError=true
+          angular.element(".keyWorldPop .borderHighlight").addClass("isError");
+        }else{
+          angular.element(".keyWorldPop .borderHighlight").removeClass("isError");
+          _this.filterLists.push(_this.filterInputVal);
+          $scope.filterKeyWorldError=false;
+        }
+        _this.filterInputVal="";
+      },
+      "delFilterFont":function(i){//del keyWorld
+        this.filterLists.splice(i,1);
+      },
+      "filterSure":function(){
+        $scope.$parent.$parent.disponseLabelObj.fontLists = this.filterLists.slice();
+        $scope.$parent.$parent.disponseLabelObj.fontRelation = this.filterGX;
+      }
+    }
+  }
+</script>

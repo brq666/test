@@ -1,0 +1,94 @@
+<!--<link type="text/css" rel="stylesheet" href="css/addMarket.css"/>-->
+<div class="marketLayer">
+  <header class="pop-header">
+    <h2 class="pop-header-h">{{typeTitle}}活动</h2>
+    <a class="close" ng-click="marketLayer.conel_btn()"></a>
+  </header>
+  <form id="createMaketLayer" name="createMaketLayer" class="ng-pristine ng-valid">
+    <div class="bg">
+      <div class="mb16">
+        <label><span class="red">*</span>活动名称：</label>
+        <input type="text" class="borderHighlight required" input_activity_name="market" name="campName" maxlength="25" autocomplete="off" ng-model="marketLayer.campName" />
+      </div>
+      <div class="mb16">
+        <label><span class="red">*</span>创建方式：</label>
+        <label class="radioLabel">
+          <input class="moduleRadio blankRadio" type="radio" name="createMode" ng-disabled="marketLayer.createdTypeStatus" ng-model="marketLayer.createType" value="0" ng-click="marketLayer.clearTemplate()" ng-checkradio="" />新建空白活动
+        </label>
+        <label class="radioLabel">
+          <input class="moduleRadio" type="radio" name="createMode" ng-disabled="marketLayer.createdTypeStatus" ng-model="marketLayer.createType" value="1" ng-checkradio="" />从模板创建
+        </label>
+        <span class="moduleCreateBox">
+          <input type="text" ng-disabled="marketLayer.createType==0 || marketLayer.createdTypeStatus" class="borderHighlight moduleInput" readonly ng-model="marketLayer.TemplateName" name="moduleCreate" ng-click="marketLayer.showTemplates()" />
+          <a href="javascript:void(0);" class="optionModule" ng-click="marketLayer.showTemplates()"></a>
+        </span>
+      </div>
+      <div class="mb16">
+        <label>活动所属分类：</label>
+        <input type="text" class="borderHighlight" name="program" readonly ng-custom-select="marketLayer.program()" ng-model="marketLayer.progName" valueid="{{marketLayer.progNameId}}" />
+      </div>
+      <div class="mb16">
+        <label>活动类型：</label>
+        <input type="text" class="borderHighlight" readonly name="campType" ng-click="marketLayer.campType()" ng-model="marketLayer.campTypeName" />
+        <a href="javascript:void(0);" ng-click="marketLayer.campType($event)" class="optionModule2"></a>
+      </div>
+      <div class="mb16">
+        <label><span class="red">*</span>审批人：</label>
+        <input type="text" class="borderHighlight required" readonly name="investigator" ng-custom-select="marketLayer.investigator()" ng-model="marketLayer.investigatorName" valueid="{{marketLayer.investigatorId}}" />
+      </div>
+      <div class="mb16">
+        <label>活动备注：</label>
+        <textarea name="campDesc" ng-model="marketLayer.campDesc" maxlength="200"></textarea>
+      </div>
+    </div>
+    <div class="mb">
+      <button class="btn btnBlue" id="marketSureSubmit" type="submit">确定</button>
+      <span class="btn" id="marketCancel" ng-click="marketLayer.conel_btn()">取消</span>
+    </div>
+  </form>
+</div>
+<div class="marketLayerHdTypePop">
+  <div class="listsBox">
+    <ul class="creatHdTypeLists clearfix">
+      <li ng-repeat="list in creatHdTypeLists" class="{{list.classVal}}">
+        <a id="{{list.categoryId}}" title="{{list.categoryValue}}" href="javascript:void(0)" ng-click="marketLayer.choseThisType($index)">{{list.categoryValue}}</a>
+        <span class="trianger"></span><span class="gg"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="hdTypeButton">
+    <button class="btn btnBlue" ng-click="marketLayer.sure_hdType()">确定</button>
+    <button class="btn" ng-click="marketLayer.conel_hdType()">取消</button>
+  </div>
+</div>
+<div class="templatePop">
+  <div class="mt">
+    <div class="commSearch">
+      <input class="newCommSearchVal" type="text" name="couponName" ng-model="newhdValue" placeholder="模板名称/模板ID">
+      <button class="commSearchBtn" ng-click="templateMarketListObject.searchHdButton(newhdValue)"></button>
+    </div>
+  </div>
+  <div class="template">
+    <div class="campaignListCon chooseCampaignListConTemplate"></div>
+  </div>
+  <div class="hdTypeButton" style="text-align: right">
+    <button class="btn btnBlue" ng-click="marketLayer.sure_Template()">确定</button>
+    <button class="btn" ng-close-child-window ng-click="marketLayer.cancel_Template()">取消</button>
+  </div>
+</div>
+<!--<div class="viewMarkInfoBox" id="couponTip"></div>-->
+<script type="text/javascript">
+  /*验证提交 start*/
+  angular.element("#createMaketLayer").validate({
+    messages: {
+      campName: "请填写活动名称",
+      moduleCreate: "请选择模版",
+      investigator: "请选择审批人"
+    },
+    submitHandler: function () {
+      var submitScope = angular.element(".maincontainerB").scope();
+      submitScope.marketLayer.sure_btn()
+    }
+  });
+  /*验证提交 end*/
+</script>

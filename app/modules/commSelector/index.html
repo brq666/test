@@ -1,0 +1,24 @@
+<div class="commOverflowXAuto">
+<!--<link rel="stylesheet" href="../commSelector/commSelect.css" type="text/css" />-->
+  <div ng-controller="commSelectorCtr" style="width:900px;height:572px;">
+    <div class="ml5 searchbox clearfix">
+      <label>筛选条件:</label>
+      <div id="condition" class="condition-list" style="display:inline-block">
+        <button class="btn btnLine24 ng-binding ng-scope btnBlue" ng-click="commSelect.search($event)">搜索</button>
+      </div>
+    </div>
+    <div class="grid-content">
+      <div id="{{commSelect.gridId}}"></div>
+    </div>
+
+    <div>
+      <div class="ling_di"></div>
+      <div class="listsButton mr15 ml15 mt5">
+        <span class="item-count">已选择：{{commSelect.primary.length}}</span>
+        <span class="item-checkbox"><input id="showSelected" type="checkbox" ng-model="commSelect.filterF" ng-change="commSelect.filterChecked()">仅显示已选择项</span>
+        <button type="button" class="fr btn" ng-close-child-window>取消</button>
+        <button type="button" class="fr btn btnBlue" ng-click="commSelect.submit($event)" ng-close-child-window>确定</button>
+      </div>
+    </div>
+  </div>
+</div>

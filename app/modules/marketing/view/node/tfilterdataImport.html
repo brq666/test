@@ -1,0 +1,200 @@
+<!--<script type="text/javascript" src="controller/node/tfilterdataImportCtrl.js"></script>-->
+<div ng-controller="tfilterdataImportCtrl">
+  <div class="waitnode clearfix " waitnode="">
+    <div class="commWrapTwo commWrapFour">
+      <div ng-form="" name="waitnodeForm">
+        <div class="bannerCommStyle areaHeight26" ng-show="waitnode.tips">
+          {{waitnode.tips}}
+          <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+        </div>
+        <div class="contentNodeWrap" style="margin: 0px">
+          <table class="padding0">
+            <tbody>
+            <tr>
+              <th class="tl" width="9%"><label class="node_name_label">节点名称：</label></th>
+              <td>
+                <div class="pr">
+                  <input type="text" class="borderHighlight nameInput fl" style="margin-left: 0px" ng-model="viewModel.name" maxlength="20" ng-noderequire="" />
+                  <span nodetip=""></span>
+                </div>
+              </td>
+              <td><label class="code fr mr40">节点代码：{{viewModel.id}}</label></td>
+            </tr>
+            <tr>
+              <td colspan="3" style="padding: 0px">
+                <div class="clearfix" style="">
+                  <div style="float: left;width: 74px;">
+                    当前选择：
+                  </div>
+                  <div style="float: left;padding: 0px;margin: 0px;width: 75%;overflow-y: auto; max-height: 62px;" class="selectFontsClass">
+                    <ul class="clearfix" style="margin: 0;">
+                      <li ng-repeat="i in  viewModel.batch" title="" class="styleofgroup ng-scope">
+                        <span title="{{i.name}}">{{i.name}}</span>
+                        <a ng-click="deletLabel($index)" class="stateImg" href="javascript:void(0)" title="">
+                          <img ng-src="/ccms/images/deletex.png" width="10" height="10" var="1004" src="/ccms/images/deletex.png" title="删除" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <a href="javascript:void(0);" ng-click="deletAll()" ng-show="viewModel.batch.length&gt;0" style="float: right;width: 13%;cursor: pointer;color: #919191">清空</a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" style="padding: 5px 0px">
+                <div style="overflow: hidden;padding: 2px 0px">
+                  <div style="float: left;">
+                    <!--<label style="position: relative;top: 3px">平台选择：</label>-->
+                    <div class="mySelect" style="color: #0083ba">
+                      {{viewModel.subjectName}}
+                      <a></a>
+                      <select style="position: absolute;top: -3px; opacity: 0;left:0px" class="" ng-model="viewModel.subjectId" ng-change="changePlat($index)" ng-options="i.id as i.name for i in viewModel.subjects"> </select>
+                    </div>
+                  </div>
+                  <div style="float: right;margin-right: 7px">
+                    <div class="commSearch" style="margin: 2px 0 2px 12px;">
+                      <input class="commSearchVal ng-pristine ng-valid" type="text" placeholder="批次ID/批次名称" ng-model="grdiQuery" />
+                      <button class="commSearchBtn" ng-click="search(grdiQuery)"></button>
+                    </div>
+                    <div style="float: right;margin-top: 5px">
+                      <input style="vertical-align:middle;position: relative;top: -3px;" class="mt5 ng-pristine ng-valid" ng-model="gridModel.myBatchs" ng-change="myBatchs(gridModel.myBatchs)" type="checkbox" value="" />
+                      <label>只显示我导入的</label>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div>
+            <div class="flexigrid">
+              <div class="hDiv">
+                <div class="hDivBox" style="width: 100%;overflow: auto;padding: 0px;">
+                  <table cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                      <th class="nosortable" align="center">
+                        <div class="" style="text-align: center; width: 5%;"></div>
+                      </th>
+                      <th style="width: 15%;text-align: right;">
+                        <div class="">
+                          批次编号
+                        </div>
+                      </th>
+                      <th style="width: 20%;">
+                        <div class="">
+                          所属平台
+                        </div>
+                      </th>
+                      <th align="center" width="20%" class="">
+                        <div class="">
+                          批次名称
+                        </div>
+                      </th>
+                      <th align="center" width="20%">
+                        <div style="text-align: center; ">
+                          导入时间
+                        </div>
+                      </th>
+                      <th align="center" width="20%">
+                        <div style="text-align: left; ">
+                          导入人
+                        </div>
+                      </th>
+                    </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+              <div class="bDiv hidden_x" style="height: 342px">
+                <table cellpadding="0" cellspacing="0" border="0" class="ng-scope" style="display: table">
+                  <tbody>
+                  <tr ng-repeat="item in gridModel.data" ng-class="{erow:$index%2==0,trSelected:$index==trSelected }" ng-click="selectTr($index)">
+                    <td style="width: 5%">
+                      <div style="text-align: center;padding-left: 10px ">
+                        <input class="mt5" type="checkbox" ng-model="item.select" ng-change="setBatch(item.select ,$index)" value="{{item.id}}" />
+                      </div>
+                    </td>
+                    <td style="width: 15%;text-align: right;">
+                      <div style="padding-left: 10px">
+                        {{item.id}}
+                      </div>
+                    </td>
+                    <td style="width: 20%">
+                      <div style="padding-left: 15px;width: 86%" title="{{item.platName}}">
+                        {{item.platName}}
+                      </div>
+                    </td>
+                    <td style="width: 20%">
+                      <div style="padding-left: 18px;width: 120px" title="{{item.batchName}}">
+                        {{item.batchName}}
+                      </div>
+                    </td>
+                    <td style="width: 20%">
+                      <div style="text-align: center;width: 100%;padding-left: 10px" title="{{item.importTime}}">
+                        {{item.importTime}}
+                      </div>
+                    </td>
+                    <td style="width: 20%;position: relative">
+                      <div style="text-align: left;width: 120px;left: 18px;position: relative" title="{{item.operator}}">
+                        {{item.operator}}
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pDiv">
+                <div class="pDiv2">
+                  <div ng-click="gridfresh()" class="pReload pButton" ng-class="{true: 'loading', false: ''}[loading]">
+                    <span></span>
+                  </div>
+                  <div class="pGroup"></div>
+                  <div class="pGroup">
+                    <div class="pFirst pButton" ng-click="first()">
+                      <span></span>
+                    </div>
+                    <div class="pPrev pButton" ng-click="prev()">
+                      <span></span>
+                    </div>
+                  </div>
+                  <div class="pGroup">
+                    <span class="pcontrol">跳至 <input ng-keypress="keypress($event)" ng-model="gridModel.page" type="text" size="4" value="{{gridModel.page}}" /> 页</span>
+                  </div>
+                  <div class="pGroup">
+                    <div class="pNext pButton" ng-click="next()">
+                      <span></span>
+                    </div>
+                    <div class="pLast pButton" ng-click="last()">
+                      <span></span>
+                    </div>
+                    <div class="pGroup pagetotal">
+                      {{gridModel.realPage}}/{{gridModel.pageCounts}}
+                    </div>
+                  </div>
+                  <div class="pGroup">
+                    <select class="" ng-model="gridModel.pageSize" ng-change="gridModel.changePageSize()" ng-options="i.value as i.text for i in gridModel.pageSize1"></select>
+                  </div>
+                </div>
+                <div style="clear:both"></div>
+              </div>
+            </div>
+          </div>
+          <!--<div class="dataBatchWrap commOverflowXAuto">
+            <div class="couponListssBox gridCommLayout" style="top: 0px">
+               <div id="couponListsGrid"></div>
+            </div>
+          </div>-->
+        </div>
+      </div>
+    </div>
+    <!--<div class="ling_di clearfix mt10"></div>-->
+    <div class="commBottom clearfix">
+      <div class="mb">
+        <button class="btn " ng-class="{btnBlue:!isEditorFlag}" id="marketSure" ng-click="save($event)">确定</button>
+        <button class="btn" id="marketCancel" ng-close-window="">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<link type="text/css" rel="stylesheet" href="css/waitNode.css"/>-->

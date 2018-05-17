@@ -1,0 +1,588 @@
+<div ng-controller="smsCtrl" class="mesg_node sms_node" ng-model="items">
+<div class="bannerCommStyle areaHeight26 m10 mt10 mr10 mb10" ng-show="smsTips">
+    {{smsTips}}
+    <a href="javascript:void(0)" toggle-banner title="展开" class="downSanjiao sanjiaoPosition"></a>
+</div>
+<div class="mesg_node_tabs m10 mr10">
+    <div id="tab1" class="mesg_node_tab mesg_tab" ng-click="tap(1)">发送设置</div>
+    <!--<div id="tab2" class="mesg_node_tab" ng-click="tap(2)">动态抽样</div>-->
+    <!--<div id="tab3" class="mesg_node_tab" ng-click="tap(3)">发送报告</div>-->
+</div>
+
+<div class="contentNodeWrap clearfix commNodeMarkRelative">
+    <table>
+        <tr>
+            <th class="tr" width="15%">节点名称：</th>
+            <td>
+                <div class="pr"><input style="margin-left: 0px;" type="text" class="borderHighlight node_length fl"
+                                       ng-model="data.name" maxlength="20" ng-noderequire/><span nodetip></span></div>
+            </td>
+            <td><label class="fr mr40" ng-click='up()' ng-model="data.code">节点代码:{{data.code}}</label></td>
+        </tr>
+        <tr>
+            <th class="tr">短信通道：</th>
+            <td>
+              <select ng-change="change(data.modelVal)" title="{{data.modelVal}}" ng-model="data.modelVal" id="gateway"
+                        class="v2 borderHighlight" style="width: 200px; margin-left: 0px;"
+                        ng-options="gateway.gatewayName as gateway.gatewayName for gateway in gateways">
+                    <!-- <option ng-repeat="gateway in gateways" id="greet">{{gateway.gatewayName}}</option>-->
+                </select>
+                余量<span class="ye">{{quantity}}</span>条
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <th class="tr" valign="top">短信内容：</th>
+            <td colspan="2">
+                <div class="pr">
+                    <dl>
+                        <dd class="nomargin">
+                            <a ng-repeat="smsTag in smsTags"
+                               ng-click="tagClick(smsTag.attributeId,smsTag.name,smsTag.tag,smsTag.id)" href="javascript:;"
+                               class="smsVar" val="smsTag.name" orderval="smsTag.tag"
+                               tval="smsTag.tag">#{{smsTag.name}}</a>
+                            <!-- <a ng-repeat="smsLabel in smsLabels"
+                               ng-click="labelClick(smsLabel.id, smsLabel.name, smsLabel.sort)" href="javascript:;"
+                               class="smsVar" val="smsLabel.name" orderval="smsLabel.sort" tval="smsLabel.sort" title="{{judgeTitle(smsLabel.flag)}}">#{{smsLabel.name}}</a> -->
+                        </dd>
+                        <dd style="width: 536px;position:relative;">
+                            <div class="smsVarHFivePos">
+                                <a ng-repeat="smsLabel in smsLabels"
+                                   ng-click="labelClick(smsLabel.id, smsLabel.name, smsLabel.sort,smsLabel.tag,smsLabel.attributeId)" href="javascript:;"
+                                   class="smsVarHFive" val="smsLabel.name" orderval="smsLabel.sort" tval="smsLabel.sort" title="{{smsLabel.name}}"><img src="/ccms/images/{{smsLabel.imgName}}.png" title="{{smsLabel.name}}" /></a>
+                            </div>
+                            <div class="max_width">
+                                <textarea id="textEditor" name="kindEditor" ng-model="data.content"
+                                          onkeyup="if(isNaN(value))execCommand('undo')"
+                                          onafterpaste="if(isNaN(value))execCommand('undo')"></textarea>
+                            </div>
+                            <label class="ngplaceholder" ng-hide="editorHide" style="top: 4px;">输入短信内容····</label>
+
+                            <button class=" btn btnBlue smallbut " ng-disabled="previewStatus" id="Button2" ng-click="testhfive('preview')">预览</button>
+                            <div class="queryShopsPop">
+                                <!--<div class="title1">短信预览 <span class="sms_close" ng-click="smsClose()"></span></div>-->
+                                <div class="content" style="" ng-repeat="smsShowContent in smsShowContents track by $index">
+                                    <div style="white-space: pre-wrap;word-wrap:  break-word" class="sms_content"  ng-bind="smsShowContent">
+                                      <!--  {{smsShowContent}}-->
+                                    </div>
+
+                                </div>
+                                <div ng-show="sShow" style="width: 351px; margin-left: 26px;" ng-bind-html="sign">
+
+                                  <!--  <div ></div>-->
+                                </div>
+									<p ng-hide="sShow" ng-bind-html="sign"  style="padding: 0px 25px;"></p>
+									<span ng-show="error_sShow" style="padding: 9px 24px;float: left;">含有非法字符:<span
+                                            style="color: #E72626;">{{errorword}}</span></span>
+
+                                <div style="width: 20px; height: 20px"></div>
+                            </div>
+                            <label class="ngplaceholder_down" style="left: 370px;top:80px;">已输入 {{count}} 个字, {{varCount}} 个变量</label>
+                            <span class="m20" style="margin-left:90px;">添加签名</span>
+
+                            <div id="sign_show" class="sign_show" ng-show="signShow" ng-controller="signCtrl">
+                                <div class="arrows_week"></div>
+                                <div class="mm10">
+                                    <input id="sign_id" type="text" class="ac_type_input" add-activity-input
+                                           ng-class="{red_border: isInputEmpty}" ng-disable=true ng-model="itemName"
+                                           maxlength="20"
+                                           title="">
+                                    <a class="addBtn" style="margin-top: 1px;width: 32px;" ng-click="addItem()">添加 </a>
+                                    <span class="error" ng-show="isExisted">签名已存在</span>
+
+                                    <div class="ac_type_wrap">
+                                        <div class="ac_type_item grey_border" ng-repeat="item in items | actypeselect"
+                                             ng-class="{'true':'ac_type_disable','false':'ac_type_enable'}[item.disabled]"
+                                             ng-click="curClick($event)">
+												<span class="ac_type_span" ng-class="cur_color_start"
+                                                      var="{{item.name}}"
+                                                      varall="{{item.nameAll}}"
+                                                      title="{{item.nameAll}}">{{item.name}}</span>
+												<span class="ac_type_remove ac_type_icon" title="点击删除"
+                                                      ng-click="deleteItem(item, $event)"></span>
+                                            <!-- <span class="ac_type_text">你好</span>
+                            <span class="ac_type_disable ac_type_icon">D</span>
+                            <span class="ac_type_cancel ac_type_icon">X</span> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class=" btn btnBlue smallbut " id="Button1" ng-click="signClose()"
+                                        style="margin-left: 12px; margin-bottom: 8px;">确定
+                                </button>
+                            </div>
+                            <input type="text" ng-model="data.sign" ng-readonly="sign_true" ng-click="signClickShow()"
+                                   style="margin-left: -8px; width: 116px;  height: 16px;border:2px solid #d9d9d9"/>
+                            <span ng-click="signClickShow()" class="sign-click-pen"></span>
+                            <input style="margin-left: 12px;" ng-disabled="settlementFlag"
+                                   type="checkbox" class="v2" ng-model="data.unsubscribe">短信尾添加"退订回复TD"
+                        </dd>
+                    </dl>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="tr">名单控制：</th>
+            <td colspan="2">
+                <!--发送红名单:<input type="text" ng-disabled="ngRedAble" class="borderHighlight  ng-pristine ng-valid"
+                             readonly="readonly" name="redlist" ng-click="groupPop.openGroupPop('WHITE')"
+                             ng-model="redlistTip" title="{{redlistTip}}"/>
+                <a href="javascript:void(0);" ng-click="ngRedAble?false:groupPop.openGroupPop('WHITE')" class="optionModule2"
+                   style="left:-20px;" title="{{redlistTip}}"></a>-->
+                屏蔽黑名单:<input type="text" ng-disabled="ngBlackAble" class="borderHighlight  ng-pristine ng-valid"
+                             readonly="readonly" name="blacklist" ng-click="groupPop.openGroupPop('ALL')"
+                             ng-model="blacklistTip" title="{{blacklistTip}}"/>
+                <a href="javascript:void(0);" ng-click="ngBlackAble?false:groupPop.openGroupPop('ALL')" class="optionModule2"
+                   style="left:-20px;" title="{{blacklistTip}}"></a>
+            </td>
+        </tr>
+        <tr>
+            <th class="tr">测试手机号：</th>
+            <td colspan="2">
+                <div class="pr">
+                    <input style="width: 426px; margin-left: 0px; padding-left: 5px;" type="text" ng-model="data.testMobile"
+                           ng-placeholder="手机号码用，分开" ng-p-sms="" maxlength="239" class="borderHighlight"/>
+                    <span style="color: #FC0606;" class="ml30" ng-hide="numCheck">请按格式输入测试手机号码</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="tr">发送时间：</th>
+            <td colspan="2">
+                <input type="radio" ng-model="data.deliveryTimeSelection" value="0" ng-model="" class="v2"/>执行时发送
+                <span ng-if="data.deliveryTimeSelection != '0'">
+                  <input type="radio" ng-model="data.deliveryTimeSelection" ng-disabled="true" value="1" ng-model="" class="v2"/>延时发送
+                  <input id="endtime" ng-model="data.deliveryDate" ng-disabled="true" style="width: 147px;"
+                         class="datetimepicker borderHighlight text" type="text" readonly name="startTime"
+                         value="{{data.deliveryDate}}" date-time-picker />
+                  <input type="checkbox" ng-disabled="true" class="v2" ng-model="data.overAssignDelivery"
+                         ng-checked="data.overAssignDelivery==true" />超过预设时间实时发送
+                  <em class="ico_tips" ng-title="选择了延时发送，如果活动已经执行完成，那么即使中止活动，短信或者邮件还是会按设置时间发送。"></em>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th class="tr">输出控制：</th>
+            <td colspan="2">
+                <input type="radio" class="v2" ng-model="data.outputControl" value="0"/>仅发送成功客户
+                <input type="radio" ng-model="data.outputControl" value="1" class="v2"/>全体客户 <em class="ico_tips" ng-title="选择全体客户会将发送失败客户也向后方节点输出"></em>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="ling_di mt10 clearfix"></div>
+<div class="commBottom clearfix">
+    <a class="reportButton" ng-click="getReports()" href="javascript:void(0);" ng-show="showNodeReport">
+        <span class="reportIcon"></span>发送报告</a>
+    <div class="mb">
+        <button class="btn btnBlue"  ng-click="testhfive()" id="savesmsmessage" >确定</button>
+        <button class="btn" ng-close-window >取消</button>
+    </div>
+</div>
+<div class="groupList" style="display: none">
+    <!--红名单-->
+    <div class="groupContent WHITEGroupContent">
+        <input type="checkbox" ng-click="groupPop.change($event,'WHITE')" id="WHITE">全选
+        <div class="line"></div>
+        <ul class="clearfix WHITE">
+            <li ng-repeat="item in WhiteAndBlackList | filter: {groupType : 'WHITE'}" var="WHITE"
+                data-id="{{item.groupId}}" data-name="{{item.groupName}}">{{item.groupName}}
+            </li>
+        </ul>
+        <div class="mb">
+            <button class="btn  commSmallBtn btnBlue" ng-click="groupPop.save()">提交</button>
+            <button class="btn commSmallBtn" ng-close-child-window>取消</button>
+        </div>
+    </div>
+    <!--黑名单-->
+    <div class="groupContent ALLGroupContent">
+        <!-- 隐藏黑名单全选按钮 -->
+        <input type="checkbox" ng-click="groupPop.change($event,'ALL')" id="ALL">全选
+        <div class="line"></div>
+        <input type="checkbox" ng-click="groupPop.change($event,'BLACK')" id="BLACK">客户黑名单
+        <ul class="clearfix BLACK">
+            <li ng-repeat="item in WhiteAndBlackList | filter: {groupType : 'BLACK'}" var="BLACK"
+                data-id="{{item.groupId}}" data-name="{{item.groupName}}">{{item.groupName}}
+            </li>
+        </ul>
+        <input type="checkbox" ng-click="groupPop.change($event,'MOBILE')" id="MOBILE">手机黑名单
+        <ul class="clearfix MOBILE">
+            <li ng-repeat="item in WhiteAndBlackList | filter: {groupType : 'MOBILE'}" var="MOBILE"
+                data-id="{{item.groupId}}" data-name="{{item.groupName}}">{{item.groupName}}
+            </li>
+        </ul>
+        <div class="mb">
+            <button class="btn commSmallBtn btnBlue" ng-click="groupPop.save()">提交</button>
+            <button class="btn commSmallBtn " ng-close-child-window>取消</button>
+        </div>
+    </div>
+</div>
+
+<div class="ccmsPublicPop" id="shortChainOfShops" style="display:none">
+    <div class="cpp-wrapper cppmain">
+        <select ng-change="shopChange(shopId)" ng-model="shopId"
+            class="v2 borderHighlight" style="width: 198px; margin-left: 0px;height:24px"
+            ng-options="shop.idInPlat as shop.name for shop in shops">
+        </select>
+        <div class="commSearch">
+            <label class="default_color" ng-searcheffect>商品ID或商品名称</label>
+            <input class="commSearchVal" type="text" name="couponName" ng-model="hdQuery"  maxlength="50" ng-searcheffect >
+            <button class="commSearchBtn" ng-click="searchHdButton(hdQuery)"></button>
+        </div>
+        <br><br>
+        <table class="item-selector">
+            <tr class="item-table-header">
+                <th style="width: 3%"></th>
+                <th style="width: 21%">商品名称</th>
+                <th style="width: 33%">价格</th>
+                <th style="width: 24%">发布时间</th>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div ng-repeat="good in goods">
+                        <table>
+                        <tr class="tr-item-name">
+                            <td><input type="checkbox" name="checkGoods" ng-click="checkGood($event)" data-id="{{good.productId}}"value="{{good.productUrl}}" /></td>
+                            <td colspan="5">商品ID： <span class="color-gray">{{good.productId}}</span></td>
+                        </tr>
+                        <tr class="item-detail">
+                            <td style="width:3%"></td>
+                            <td style="width:21%">
+                                <a href="{{good.productUrl}}" target="_blank">
+                                    <img ng-src="{{good.imageUrl}}" class="image-ds" title="{{good.productUrl}}"/>
+                                </a>
+                                <p class="item-name" title="{{good.productUrl}}"><a href="{{good.productUrl}}" target="_blank">{{good.productName}}</a></p>
+                            </td>
+                            <td class="text-center" style="width:33%">
+                                <span class="currency-sign color-gray-a1">￥</span>
+                                <span class="item-price color-orange">{{good.price}}</span>
+                            </td>
+                            <td class="text-center item-date" style="width:24%">{{good.createdAt}}</td>
+                        </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="activityContentWrap" style="height:31px">
+        <div class="mb pagemain">
+            <div class="pDiv2">
+                <div class="pGroup">
+                    <div class="pFirst pButton" ng-click="pagination.firstPage()"><span></span>
+                    </div>
+                    <div class="pPrev pButton" ng-click="pagination.prevPage()"><span></span>
+                    </div>
+                </div>
+                <div class="pGroup">
+                    <span class="pcontrol">跳至
+                        <input class="activityInputPage" id="activNum" type="text" value="1" size="4" min="1" max="{{pagination.totalPage}}" ng-search-number="2" ng-model="pagination.currentPage"> 页
+                    </span>
+                    <div class="pageTips"></div>
+                </div>
+                <div class="pGroup">
+                    <div class="pNext pButton" ng-click="pagination.nextPage()"><span></span>
+                    </div>
+                    <div class="pLast pButton" ng-click="pagination.lastPage()"><span></span>
+                    </div>
+                </div>
+                <div class="pGroup pagetotal"><span class="currentPage">{{pagination.currentPage}}</span>/<span class="totalPage">{{pagination.totalPage}}</span>
+                </div>
+                <!--
+                <div class="pGroup">
+                    <select name="rp" ng-model="pagination.rp" ng-change="pagination.changeRp()">
+                        <option>10&nbsp;&nbsp;</option>
+                        <option value="15">15&nbsp;&nbsp;</option>
+                        <option value="20">20&nbsp;&nbsp;</option>
+                        <option value="30">30&nbsp;&nbsp;</option>
+                        <option value="50">50&nbsp;&nbsp;</option>
+                    </select>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="ling_di"></div>
+        <div class="commBottom">
+            <div class="mb">
+                <span class="bannerCommStyle areaHeight26 ng-binding" ng-show="createChainFlag">转换短链中，请等待...</span>
+                <button ng-click="insertShortChain($event)" type="button" class="btn btnBlue">确定</button>
+                <button ng-close-child-window class="btn" type="button">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- H5链接 -->
+<div class="ccmsPublicPop" id="ChainOfHfive" style="display:none">
+    <div class="hfive-wrapper hfivemain">
+        <!-- <select ng-change="shopChangeOfHFive(shopId)" ng-model="shopId"
+            class="v2 borderHighlight" style="width: 198px; margin-left: 0px;height:24px"
+            ng-options="shop.idInPlat as shop.name for shop in shops">
+        </select> -->
+        <!--<div id="hfive_dropDown" class="al_dropDown">
+            <span class="{{pltType}}" style="width: 98px;" ng-mouseover="hideSelect=false" >
+               <span  style="text-overflow: ellipsis;word-wrap: break-word;white-space: nowrap; padding-left: 0px;overflow: hidden;width: 80px;border: none">
+                   {{shopName}}
+               </span>
+                <a></a>
+            </span>
+            <ul ng-hide="hideSelect" style="width: 140px;" >
+                <li class="{{i.pltType}}" ng-repeat=" i in shops " ng-click="shopChangeOfHFive(i.shopId,i.pltType,i.shopName)">
+                    {{i.shopName}}</li>
+            </ul>
+        </div>-->
+        <div class="commSearch hfiveSearch" style="margin: 0 0 15px 0;" ng-click="HFiveFocus()">
+            <label class="default_color">H5页面名称/ID</label>
+            <input class="commSearchVal hfiveSearchIn" type="text" name="couponName" ng-model="hdQuery" ng-blur="HFiveBlur()">
+            <button class="commSearchBtn" ng-click="searchHFiveButton(hdQuery)"></button>
+        </div>
+        <!-- <div class="hfive_imgorlist">
+            <div class="hfive_img" ng-click="getImgMessage()" title="缩略图">
+                <img src="../../images/hfive-img.png" />
+            </div>
+            <div class="hfive_list" ng-click="getListMessage()" title="列表">
+                <img src="../../images/hfive-list.png" />
+            </div>
+        </div> -->
+        <table class="item-selector" style="margin-top: 14px;">
+            <tr class="hfive-table-header" style="height: 28px;">
+                <th style="width: 218px;padding-left: 34px;text-align:left;">H5页面名称</th>
+                <th style="width: 108px;text-align:left;"></th>
+                <th style="width: 157px;border-right: 1px solid #d9d9d9;text-align:left;">创建时间</th>
+            </tr>
+            <tr style="border-right:1px solid #d9d9d9; border-left: 1px solid #d9d9d9;">
+                <td colspan="4" id="HfiveColor">
+                    <div ng-repeat="message in HFive">
+                        <table>
+                        <tr class="item-detail itemdetailH">
+                            <td style="width:20px;text-align: left;padding-left: 14px;"><input type="radio" name="checkGoods" ng-click="checkHFive($event)" data-id="{{message.cid}}" value="{{message.url}}" data-title="{{message.title}}" /></td>
+                            <td style="width:218px;">
+                                <p class="item-name" title="{{message.title}}">{{message.title}}</p>
+                                <p class="item-name" title="{{message.cid}}">ID: {{message.cid}}</p>
+                            </td>
+                            <td style="width:70px;">
+                                <!-- <p class="item-name" title="{{message.creator}}">{{message.creator}}</p> -->
+                            </td>
+                            <td style="width:194px;">
+                                <span class="item-date">{{message.time}}</span>
+                                <a class="hfive-table-a" href="{{message.url}}" target="_blank">预览</a>
+                            </td>
+                        </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <!-- <ul class="hfive_ul" style="display: none">
+            <li ng-repeat="message in HFive">
+                <div class="hfive_messageimg" ng-mouseenter="hfiveShow($index)" ng-mouseleave="hfiveHidden($index)">
+                    <img src="../../images/hfive_linshi.jpg"  title="{{message.title}}"/>
+                    <div class="hfive_imgmessage">
+                        <p title="{{message.cid}}">页面ID：{{message.cid}}</p>
+                        <p title="{{message.creator}}">创建人：{{message.creator}}</p>
+                        <p>创建时间：{{message.time}} </p>
+                    </div>
+                </div>
+                <p title="{{message.title}}">{{message.title}}</p>
+            </li>
+        </ul> -->
+    </div>
+    <div class="activityContentWrap" style="height:31px">
+        <div class="mb pagemain" style="padding: 0 17px;">
+            <div class="pDiv2">
+                <div class="pGroup">
+                    <div class="pFirst pButton" ng-click="pagination.firstPage()"><span></span>
+                    </div>
+                    <div class="pPrev pButton" ng-click="pagination.prevPage()"><span></span>
+                    </div>
+                </div>
+                <div class="pGroup">
+                    <span class="pcontrol">跳至
+                        <input class="activityInputPage" id="activNum" type="text" value="1" size="4" min="1" max="{{pagination.totalPage}}" ng-search-number="2" ng-model="pagination.currentPage" ng-keyup="pagination.enterPage($event)" style="text-align: center;" > 页
+                    </span>
+                    <div class="pageTips"></div>
+                </div>
+                <div class="pGroup">
+                    <div class="pNext pButton" ng-click="pagination.nextPage()"><span></span>
+                    </div>
+                    <div class="pLast pButton" ng-click="pagination.lastPage()"><span></span>
+                    </div>
+                </div>
+                <div class="pGroup pagetotal"><span class="currentPage">{{pagination.currentPage1}}</span>/<span class="totalPage">{{pagination.totalPage}}</span>
+                </div>
+                <!--
+                <div class="pGroup">
+                    <select name="rp" ng-model="pagination.rp" ng-change="pagination.changeRp()">
+                        <option>10&nbsp;&nbsp;</option>
+                        <option value="15">15&nbsp;&nbsp;</option>
+                        <option value="20">20&nbsp;&nbsp;</option>
+                        <option value="30">30&nbsp;&nbsp;</option>
+                        <option value="50">50&nbsp;&nbsp;</option>
+                    </select>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="ling_di"></div>
+        <div class="commBottom">
+            <div class="mb">
+                <span class="bannerCommStyle areaHeight26 ng-binding" ng-show="createChainFlag">转换短链中，请等待...</span>
+                <button ng-click="insertHFiveChain($event)" type="button" class="btn btnBlue">确定</button>
+                <button ng-close-child-window class="btn" type="button">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="ccmsPublicPop contentNodeWrap" id="shortChainOfCustom" style="display:none;padding:0px">
+    <table>
+        <tr>
+            <th class="tr" width="15%">短链服务：</th>
+            <td>
+                <select ng-change="chainChange(shortChainType)" ng-model="shortChainType"
+                    class="v2 borderHighlight" style="width: 98px; margin-left: 0px;height:24px"
+                    ng-options="chainType.id as chainType.name for chainType in chainTypes">
+                </select>
+                <span style="margin-left:10px">{{shortChainTip}}</span>
+            </td>
+        </tr>
+        <tr ng-show="shortChainType===2" class="ng-hide">
+            <th class="tr" width="15%">短链类型：</th>
+            <td>
+              <select ng-change="subChaninTypeChange(subChainType)" ng-model="subChainType" style="width:98px; margin-left:0px;height:24px"
+                ng-options="subChainType.id as subChainType.name for subChainType in subChainTypes">
+              </select>
+            </td>
+        </tr>
+        <tr ng-show="shortChainType===2" class="ng-hide">
+            <th class="tr" width="15%">选择店铺：</th>
+            <td>
+              <select ng-change="shopChange(shopId)" ng-model="shopId"
+                  class="v2 short-link-line borderHighlight" ng-options="shop.idInPlat as shop.name for shop in shops">
+              </select>
+            </td>
+        </tr>
+        <tr ng-show="shortChainType===2" class="ng-hide">
+            <th class="tr" width="15%"><em class="red">*</em>短链名称：</th>
+            <td>
+              <input type="text" class="short-link-line borderHighlight" ng-model="shortLinkName" ng-class="shortNameClass" maxlength="16">
+              <span ng-show="shortLinkWarning" class="icon-attention-circled icon-medium-size red ng-binding">短链名称不可为空</span>
+            </td>
+        </tr>
+        <tr ng-show="shortChainType===2 && subChainType===3" class="ng-hide">
+            <th class="tr" style="padding-bottom:78px"  width="15%">页面地址：</th>
+            <td>
+                <textarea id="activityAddress" placeholder="仅支持taobao.com、tmall.com、jaeapp.com域名下的URL"  maxlength="500" ng-model="customChain"></textarea>
+            </td>
+        </tr>
+        <tr ng-show="shortChainType!==2" class="ng-hide">
+            <th class="tr" style="padding-bottom:78px" width="15%">输入链接：</th>
+            <td>
+                <textarea id="chainOfCustom" maxlength="500" ng-model="customChain"></textarea>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <div class="ling_di"></div>
+        <div class="commBottom" style="padding-left:10px">
+            <div class="mb">
+                <span class="bannerCommStyle areaHeight26 ng-binding" ng-show="createChainFlag">转换短链中，请等待...</span>
+                <button ng-click="insertCustomChain($event)" type="button" class="btn btnBlue">确定</button>
+                <button ng-close-child-window class="btn" type="button">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ccmsPublicPop contentNodeWrap" id="currentIntegral" style="display:none;padding:0px">
+    <div class="listsBox marketLayerHdTypePop" style="margin-top:0;">
+      <ul class="creatHdTypeLists clearfix">
+        <li ng-repeat="list in cardList" class={{list.classVal}}>
+          <a id={{list.ctyId}} title={{list.ctyTitleName}} href="javascript:void(0)" ng-click="chooseCardList($index)">{{list.ctyName}}</a><span class="trianger"></span><span class="gg"></span></li>
+      </ul>
+    </div>
+    <div>
+        <div class="ling_di"></div>
+        <div class="commBottom" style="padding-left:10px">
+            <div class="mb">
+                <button ng-click="insertCurrentIntegral($event)" type="button" class="btn btnBlue">确定</button>
+                <button ng-close-child-window class="btn" type="button">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="discountEcDataView">
+    <div class="commWrapThree">
+        <div class="clearfix mb10"></div>
+        <div class="dataSummarySMS">
+            <table style="margin: 5px auto;height: 50px; border: 0px;cellspacing: 14px">
+                <tr>
+                    <td class="dataSummarySMS_td1 dataSummary_border_fir">{{submitNumTotal}}</td>
+                    <td class="dataSummarySMS_td1 dataSummary_border_fir">{{receiveNumTotal}}</td>
+                    <td style="font-size:16px;color: orange;text-align: center">{{replyMoNumTotal}}</td>
+                </tr>
+                <tr>
+                    <td class="dataSummarySMS_td2 dataSummary_border_sec">提交数</td>
+                    <td class="dataSummarySMS_td2 dataSummary_border_sec">接收数</td>
+                    <td style="font-size:12px;color: #8E8E8E;;text-align: center">短信回复数</td>
+                </tr>
+            </table>
+        </div>
+        <div class="dataInfoList">
+        </div>
+    </div>
+</div>
+
+<div class="confirmSavePop">
+  <div class="contentP">
+    <div class="text">
+      <div class="textDiv">
+        <div class="sms_content" ng-repeat="item in confirmMessages" ng-bind="item"></div>
+        <div ng-bind-html="confirmSaveMark"></div>
+        <p class="p2">
+          <button class="sure btn btnBlue" href="javascript:void(0);" ng-click="ConfirmMessagesCounts()">确定</button>
+          <button class="cancel btn" href="javascript:void(0);" ng-close-child-window>取消</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="testSavePop" style="display: none">
+  <div class="contentP">
+    <div class="text">
+      <div class="textDiv">
+        <div>短信内容中包含H5页面链接，如果想跟踪H5页面点击情况，请使用编辑器下方H5页面插入功能插入H5变量</div>
+        <p class="p2" style="margin-top:16px;">
+          <button class="sure btn btnBlue" href="javascript:void(0);" ng-click="smsClickShow()" ng-close-child-window>继续</button>
+          <button class="cancel btn" href="javascript:void(0);" ng-close-child-window>返回编辑</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="testSaveHfive" style="display: none">
+  <div class="contentP">
+    <div class="text">
+      <div class="textDiv">
+        <div>短信内容中包含H5页面链接，如果想跟踪H5页面点击情况，请使用编辑器下方H5页面插入功能插入H5变量</div>
+        <p class="p2" style="margin-top:16px;">
+          <button class="sure btn btnBlue" href="javascript:void(0);" ng-click="saveSmsMessageCheck()" ng-close-child-window>继续</button>
+          <button class="cancel btn" href="javascript:void(0);" ng-click="backedit()" ng-close-child-window>返回编辑</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+

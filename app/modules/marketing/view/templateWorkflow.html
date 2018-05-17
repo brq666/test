@@ -1,0 +1,87 @@
+<!--<script type="text/javascript" src="controller/workFlow/nodeConfiguration.js"></script>
+<script type="text/javascript" src="controller/workFlow/templateOperatePalette.js"></script>
+<script type="text/javascript" src="controller/workFlow/templateToolbar.js"></script>
+<script type="text/javascript" src="controller/workFlow/addCells.js"></script>-->
+<div ng-controller="templateWorkflow" id="workflow">
+  <div class="mt10">
+    <!--活动列表-->
+    <div></div>
+    <!--短信活动-->
+    <div>
+    <!--title-->
+    <!--操作审批-->
+      <div class="action_buttons" style="display:none;" >
+        <span class="canvas_about fl">
+          <a class="icon_amplification" href="javascript:void(0);"></a>
+          <a class="icon_narrow" href="javascript:void(0);"></a>
+          <a class="icon_reduction" href="javascript:void(0);"></a>
+          <a class="icon_full_screen" href="javascript:void(0);"></a>
+        </span>
+        <span class="fl mt2 ml25">
+          <a class="start_test_execution" href="javascript:void(0);"><i></i>测试执行</a>
+          <a class="but_agreed ml25" href="javascript:void(0);"><i></i>审批通过</a>
+          <a class="but_refuse ml5" href="javascript:void(0);"><i></i>审批拒绝</a>
+        </span>
+        <span class="fr mt5">
+          <a class="icon_information" href="javascript:void(0);"></a>
+          <a class="icon_drag_window ml25" href="javascript:void(0);"></a>
+        </span>
+      </div>
+     <!--操作设计-->
+      <div class="action_buttons">
+        <span class="fl"><!--<a class="but_save" id="but_save_template" href="javascript:void(0);" title="保存模板流程"   ><i></i></a>--></span>
+        <!-- <span class="canvas_about_short fl ml25"><a class="icon_back" href="javascript:void(0);" title="撤销" onclick="mxGraphCells.editor('undo')"></a><a class="icon_into" href="javascript:void(0);" title="恢复" onclick="mxGraphCells.editor('redo')"></a></span>-->
+        <span class="fl ml5">
+          <a class="but_del" href="javascript:void(0);"  title="删除" onclick="mxGraphCells.editor('delete')"><i></i></a>
+        </span>
+        <span class="canvas_about fl ml25">
+          <a class="icon_amplification" href="javascript:void(0);" title="放大" onclick="mxGraphCells.editor('zoomIn')"></a>
+          <a class="icon_narrow" href="javascript:void(0);"   title="缩小" onclick="mxGraphCells.editor('zoomOut')"></a>
+          <a class="icon_reduction" href="javascript:void(0);"  title="实际大小"  onclick="mxGraphCells.editor('actualSize')"></a>
+        </span>
+        <span class="fr mt5">
+          <!--<a class="icon_information" href="javascript:void(0);"></a>-->
+          <a id="screen" class="icon_drag_window ml10 fullScree" title="全屏编辑" href="javascript:void(0);" ng-click="screen.init()"></a>
+        </span>
+      </div>
+    <!--content-->
+      <div class="operating_area" id="operating_area"></div>
+    </div>
+  </div>
+  <div class="node_flow_area" id="node_flow_area"></div>
+  <!--工具栏-->
+  <div class="toolbar" style="top:130px;left:20px;position:fixed;z-index:999;overflow:hidden;display:none;">
+    <!--title-->
+    <div class="toolbar_title ">工具栏 <span class="draw_down" id="draw"></span><span class="draw_small" id="draw_big"></span></div>
+    <div class="toolbar_content" ></div>
+    <!--常用-->
+    <!--<dl ng-repeat="s in toolbarList">
+     <dt class="show_this_tool">{{s.text}}<a class="arrow_show fr" href="javascript:void(0);"></a></dt>
+     <dd class="padlr"  id="{{s.name}}_bar">
+       <a class="tool_icon" href="javascript:void(0);" ng-repeat="n in s.node" id="{{n.id}}">
+             <span class="{{n.name}}"></span></br> {{n.title}}
+       </a>
+     </dd>
+    </dl>-->
+  </div>
+  <div id="nodeContent" ng-include src='nodeSrc'></div>
+  <!--查看报告-->
+  <div ng-include src="viewReportSrc"></div>
+</div>
+<div id="rejectApproval_remarks">
+  <div class="main">
+    <div class="mb20">
+      <label>拒绝理由：</label>
+      <textarea placeholder="最多输入100个字符" onKeyDown='if (this.value.length>=100){this.value = this.value.slice(0, 100);}'></textarea>
+    </div>
+    <div class="commBottom">
+      <div class="mb">
+        <button class="btn btnBlue">确定</button>
+        <button class="btn">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<script type="text/javascript" src="controller/workFlow/templateFlowCtr.js"></script>-->

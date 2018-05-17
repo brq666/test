@@ -1,0 +1,19 @@
+
+<div class="maincontainerB dataConfigureTable" ng-controller="attributeCollectionCtrl">
+  <div class="maincontainer attributeCollectionBox">
+    <div class="clearfix">
+      <h2 class="heading fl">属性集配置</h2>
+    </div>
+      <div class="mt clearfix">
+        <div class="fl">
+          数据源：<select class="commSelect width130" ng-model="sourceModel" ng-options="c.dataSourceName for c in dataSouece" ng-change="changeSource(sourceModel)"></select>
+        </div>
+        <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360" style="margin-left:35px;"><a href="javascript:void(0)" ng-click="tpl.add()">新增属性集</a></div>
+      </div>
+      <div class="configContent">
+        <div class="flexgridList"></div>
+      </div>
+      <!--属性集配置弹框-->
+      <div class="attributeCollection_AddTpl" ng-include src="tpl.src" style="display:none;" onload="showAddTpl()"></div>
+    </div>
+</div>

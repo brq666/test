@@ -1,0 +1,204 @@
+<div ng-controller="edmNodeCtrl">
+  <div class="commWrapFour commNodeMarkRelative">
+    <div class="reviewEmailPop" style="display:none;" ng-model="$scope.uploadFileHtml">
+      <textarea id="emailReview" name="kindEditor" ng-model="uploadFileHtml">{{uploadFileHtml}}</textarea>
+      <div class="mb">
+        <button class="btn btnBlue" id="marketSure" ng-click="reviewToModify()">编辑{{mailTitle}}</button>
+        <button class="btn" type="button" ng-click="closeEditorPop('closeReview')">取消</button>
+      </div>
+    </div>
+    <div class="bannerCommStyle areaHeight26" ng-show="EDMnode.tips">
+      {{EDMnode.tips}}
+      <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+    </div>
+    <div class="EDMnode">
+      <form name="edmForm">
+        <table>
+          <tbody>
+          <tr>
+            <th class="tr" width="15%"><label>节点名称：</label></th>
+            <td>
+              <div class="pr">
+                <input type="text" class="borderHighlight nameInput fl" ng-model="EDMnode.name" maxlength="20" ng-noderequire="" />
+                <span nodetip=""></span>
+              </div> </td>
+            <td><label style="width:200px;">节点代码：{{EDMnode.id}}</label></td>
+          </tr>
+          <tr>
+            <th class="tr"><label>EDM通道：</label></th>
+            <td><select class="v2 borderHighlight" ng-model="CurEDMGateway" ng-change="initUp()" ng-options="EDMGateway.gatewayName for EDMGateway in EDMGateways" title="{{CurEDMGateway.gatewayName}}" style="width:210px"></select> <span>余量<em style="color:#ff8a00">{{CurEDMGateway.quantity}}</em>条</span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="tr"><label>发件人名称：</label></th>
+            <td>
+              <div class="pr">
+                <input type="text" class="borderHighlight nameInput" maxlength="20" ng-model="EDMnode.sender" ng-noderequire="" />
+              </div> </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="tr"><label>发件人邮箱：</label></th>
+            <td>
+              <div class="pr">
+                <input type="text" class="borderHighlight nameInput" ng-disabled="EDMnode.useEnterpriseEmail" maxlength="200" ng-model="EDMnode.senderEmail" ng-noderequire="" />
+                <span class="rightxt"><input type="checkbox" ng-model="EDMnode.useEnterpriseEmail" ng-change="useEnterpriseEmail()" ng-checked="EDMnode.useEnterpriseEmail" />使用系统提供的企业邮箱</span>
+              </div> </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="tr"><label>Email主题：</label></th>
+            <td>
+              <div class="pr">
+                <input type="text" class="borderHighlight subjectInput" ng-model="EDMnode.subject" maxlength="50" ng-noderequire="" />
+              </div> </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="tr" valign="top"><label>Email文件：</label></th>
+            <td class="un-padding">
+              <div class="pr ml9">
+                <label class="auto-width"><input type="radio" value="1" ng-model="EDMnode.emailType" />上传文件</label>
+                <em class="ico_tips mr5" ng-title="仅支持Zip文件和Html文件上传，请参考下方文件样例"></em>
+                <!--label class="auto-width"><input type="radio" value="2" ng-model="EDMnode.emailType" />使用自定义邮件</label-->
+                <div id="queue"></div>
+                <div ng-hide="EDMnode.emailType!=1" class="modifyTemplates" style="margin-left:0px;">
+                  <div id="file_upload" class="uploadify-button" enctype="multipart/form-data" style="height: 22px;line-height: 22px;width: 68px;margin-bottom: 12px;" >
+                   上传文件
+                  </div>
+                  <div class="newEDMupload">
+                    <div class="newuploadmessage">
+                      <div class="newuploadify-progress">
+                        <div class="newuploadify-progress-bar"></div>
+                      </div>
+                      <span> - 0%</span>
+                      <a id="cancelemail" href="javascript:;">取消</a>
+                    </div>
+                    <p style="float:left;">正在同步到云服务器</p>
+                  </div>
+                </div>
+                <p style="height:18px;text-align:left;overflow:hidden;width:100%" ng-hide="EDMnode.emailType!=1">下载邮件文件样例: <a target="_blank" href="http://yunat-base.b0.upaiyun.com/sample/edmNode/%E9%82%AE%E4%BB%B6%E6%A8%A1%E6%9D%BF%E6%A0%B7%E4%BE%8BZIP.zip">ZIP格式</a>&nbsp; <a target="_blank" href="http://yunat-base.b0.upaiyun.com/sample/edmNode/%E9%82%AE%E4%BB%B6%E6%A8%A1%E6%9D%BF%E6%A0%B7%E4%BE%8BHTML.zip">HTML格式</a>&nbsp;&nbsp; <a href="http://yunat-base.b0.upaiyun.com/description/edm-gallery/%E6%95%B0%E4%BA%91%E9%82%AE%E4%BB%B6%E5%88%B6%E4%BD%9C%E6%89%8B%E5%86%8C.zip" target="_blank">数云邮件制作手册</a> </p>
+                <div ng-show="EDMnode.emailType!=1">
+                  <a class="btn" href="javascript:;" style="color:white;" ng-class="{btnBlue:!isEditorFlag}" title="选择邮件" ng-click="EDMnode.selectEmail()">选择邮件</a>
+                  <span ng-show="EDMnode.customerEamilDataSelected.name &amp;&amp; EDMnode.customerEamilDataSelected.status == 200">已选择邮件：<span ng-bind="EDMnode.customerEamilDataSelected.name"></span></span>
+                  <!-- <a
+                    href="{{EDMnode.designerDomain}}?from=1&pagename=designer&shopid={{EDMnode.customerEamilDataSelected.shopId}}&emailid={{EDMnode.customerEamilDataSelected.id}}" target="_blank" ng-show="EDMnode.customerEamilDataSelected.name &amp;&amp; EDMnode.customerEamilDataSelected.status == 200">查看邮件</a> -->
+                    <a href="{{EDMnode.designerDomain}}#/email/editor/{{EDMnode.customerEamilDataSelected.id}}" target="_blank" ng-show="EDMnode.customerEamilDataSelected.name && EDMnode.customerEamilDataSelected.status == 200">查看邮件</a>
+                  <span class="red" ng-show="EDMnode.customerEamilDataSelected.status == 500" ng-bind="EDMnode.customerEamilDataSelected.errorMsg"></span>
+                </div>
+              </div> </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="tr"><label>名单控制：</label></th>
+            <td colspan="2">
+              <div class="pr ml9">
+                <!--发送红名单:
+                <input type="text" ng-disabled="ngRedAble" class="borderHighlight  ng-pristine ng-valid" readonly="readonly" name="redlist" ng-click="groupPop.openGroupPop('WHITE')" ng-model="EDMnode.redlistTip" title="{{EDMnode.redlistTip}}" />
+                <a href="javascript:void(0);" ng-click="ngRedAble?false:groupPop.openGroupPop('WHITE')" class="optionModule2" style="left:-20px;" title="{{EDMnode.redlistTip}}"></a> -->屏蔽黑名单:
+                <input type="text" ng-disabled="ngBlackAble" class="borderHighlight  ng-pristine ng-valid" readonly name="blacklist" ng-click="groupPop.openGroupPop('ALL')" ng-model="EDMnode.blacklistTip" title="{{EDMnode.blacklistTip}}" />
+                <a href="javascript:void(0);" ng-click="ngBlackAble?false:groupPop.openGroupPop('ALL')" class="optionModule2" style="left:-20px;" title="{{EDMnode.blacklistTip}}"></a>
+              </div> </td>
+          </tr>
+          <tr>
+            <th class="tr"><label>测试邮箱：</label></th>
+            <td colspan="2">
+              <div class="pr">
+                <input class="borderHighlight subjectInput" ng-model="EDMnode.testEmail" ng-placeholder="多个email用','隔开。" />
+              </div> </td>
+          </tr>
+          <tr>
+            <th class="tr"><label>发送时间：</label></th>
+            <td colspan="2">
+              <div class="pr ml9">
+                <input type="radio" class="commRadio v1 ng-pristine ng-valid" value="0" ng-model="EDMnode.deliveryTimeSelection" />执行时发送
+                <span ng-if="EDMnode.deliveryTimeSelection == '1'" ng-cloak=""> <input type="radio" class="commRadio v1 ng-pristine ng-valid" value="1" ng-model="EDMnode.deliveryTimeSelection" ng-disabled="true" />延时发送 <input type="text" ng-model="EDMnode.deliveryDate" date-time-picker="" class="borderHighlight node_waitdate_input datetimepicker" ng-disabled="true" /> <input type="checkbox" ng-model="EDMnode.overAssignDelivery " ng-checked="EDMnode.overAssignDelivery " ng-disabled="true" />超过预设时间实时发送 <em class="ico_tips" ng-title="选择了延时发送，如果活动已经执行完成，那么即使中止活动，短信或者邮件还是会按设置时间发送。"></em> </span>
+              </div> </td>
+          </tr>
+          <tr>
+            <th class="tr"><label>输出控制：</label></th>
+            <td colspan="2">
+              <div class="pr ml9">
+                <input type="radio" class="commRadio v1 ng-pristine ng-valid" value="0" ng-model="EDMnode.outputControl" />仅发送成功用户
+                <input type="radio" class="commRadio v1 ng-pristine ng-valid" value="1" ng-model="EDMnode.outputControl" />全体客户
+                <em class="ico_tips" ng-title="选择全体客户会将发送失败客户也向后方节点输出"></em>
+              </div> </td>
+          </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+    <div class="groupList" style="display: none">
+      <!--红名单-->
+      <div class="groupContent WHITEGroupContent">
+        <input type="checkbox" ng-click="groupPop.change($event,'WHITE')" id="WHITE" />全选
+        <div class="line"></div>
+        <ul class="clearfix WHITE">
+          <li ng-repeat="item in WhiteAndBlackList | filter: {groupType : 'WHITE'}" var="WHITE" data-id="{{item.groupId}}" data-name="{{item.groupName}}">{{item.groupName}} </li>
+        </ul>
+        <div class="mb">
+          <button class="btn btnBlue" ng-click="groupPop.save()">提交</button>
+          <button class="btn" ng-close-child-window>取消</button>
+        </div>
+      </div>
+      <!--黑名单-->
+      <div class="groupContent ALLGroupContent">
+        <input type="checkbox" ng-click="groupPop.change($event,'ALL')" id="ALL" />全选
+        <div class="line"></div>
+        <input type="checkbox" ng-click="groupPop.change($event,'BLACK')" id="BLACK" />客户黑名单
+        <ul class="clearfix BLACK">
+          <li ng-repeat="item in WhiteAndBlackList | filter: {groupType : 'BLACK'}" var="BLACK" data-id="{{item.groupId}}" data-name="{{item.groupName}}">{{item.groupName}} </li>
+        </ul>
+        <input type="checkbox" ng-click="groupPop.change($event,'EMAIL')" id="EMAIL" />邮箱黑名单
+        <ul class="clearfix EMAIL">
+          <li ng-repeat="item in WhiteAndBlackList | filter: {groupType : 'EMAIL'}" var="EMAIL" data-id="{{item.groupId}}" data-name="{{item.groupName}}">{{item.groupName}} </li>
+        </ul>
+        <div class="mb">
+          <button class="btn btnBlue" ng-click="groupPop.save()">提交</button>
+          <button class="btn" ng-close-child-window>取消</button>
+        </div>
+      </div>
+    </div>
+    <div class="discountEcDataView">
+      <div class="commWrapThree">
+        <div class="clearfix mb10"></div>
+        <div class="dataSummaryEDM">
+          <table style="margin: 5px auto;height: 50px; border: 0px">
+            <tbody>
+            <tr style="border:0px">
+              <td width="14%" class="dataSummaryEDM_td1 dataSummary_border_fir">{{submitNumTotal}}</td>
+              <td width="14%"class="dataSummaryEDM_td1 dataSummary_border_fir">{{receiveNumTotal}}</td>
+              <td width="14%" class="dataSummaryEDM_td1 dataSummary_border_fir">{{successNumTotal}}</td>
+              <td width="14%" class="dataSummaryEDM_td1 dataSummary_border_fir">{{errorNumTotal}}</td>
+              <td width="14%" class="dataSummaryEDM_td1 dataSummary_border_fir">{{bounceNumTotal}}</td>
+              <td width="14%" class="dataSummaryEDM_td1 dataSummary_border_fir">{{openNumTotal}}</td>
+              <td width="14%" style="font-size:16px;color: orange;text-align: center">{{clickNumTotal}}</td>
+            </tr>
+            <tr>
+              <td class="dataSummaryEDM_td2 dataSummary_border_sec">提交数</td>
+              <td class="dataSummaryEDM_td2 dataSummary_border_sec">接受数</td>
+              <td class="dataSummaryEDM_td2 dataSummary_border_sec">发送数</td>
+              <td class="dataSummaryEDM_td2 dataSummary_border_sec">邮件地址错误数</td>
+              <td class="dataSummaryEDM_td2 dataSummary_border_sec">邮件退回数</td>
+              <td class="dataSummaryEDM_td2 dataSummary_border_sec">打开数</td>
+              <td style="font-size:12px;color: #8E8E8E;text-align: center">点击数</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="dataInfoList commOverflowXAuto">
+          <div class="dataInfoGrid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ling_di"></div>
+  <div class="commBottom">
+    <a class="reportButton" ng-click="getReports()" href="javascript:void(0);" ng-show="showNodeReport"> <span class="reportIcon"></span>发送报告</a>
+    <div class="mb">
+      <button class="btn" id="marketSure" ng-click="checkEDMnode()" ng-class="{btnBlue:!isEditorFlag}">确定</button>
+      <button class="btn" id="marketCancel" ng-close-window="">取消</button>
+    </div>
+  </div>
+  <div class="customer-email-wrap" ng-include="" src="EDMnode.emailSelectorUrl" onload="EDMnode.showEmailPop()"></div>
+</div>

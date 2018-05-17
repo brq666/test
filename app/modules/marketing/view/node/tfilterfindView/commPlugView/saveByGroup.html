@@ -1,0 +1,18 @@
+<div class="groupSaveByQuery">
+  <ul class="groupUlBox">
+    <li class="mb10">
+      <label>分组名称：</label>
+      <input class="borderHighlight ml9 width200" type="text" name="createGroupNameByQuery" ng-model="tfilterFindObj.queryCreatGroupName" maxlength="45"/>
+      <label class="error ml5" ng-show="createGroupNameByQueryFlag">请填写分组名称</label>
+    </li>
+    <li>
+      <label>分组目录：</label>
+      <input type="text" class="borderHighlight width200" readonly="readonly" name="createGroupCludeGroup" ng-model="tfilterFindObj.queryCreatIncludeGroupName" ng-custom-select="tfilterFindObj.getDefaultGroup()" />
+      <label class="error ml5" ng-show="createGroupCludeGroupFlag" >请选择分组分类</label>
+    </li>
+  </ul>
+  <div class="listsButton">
+    <button type="button" class="btn btnBlue" ng-click="tfilterFindObj.saveCreateGroupByQuery()">确定</button>
+    <button type="button" class="btn" ng-close-child-window>取消</button>
+  </div>
+</div>

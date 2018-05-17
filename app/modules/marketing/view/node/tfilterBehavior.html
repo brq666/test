@@ -1,0 +1,182 @@
+<div ng-controller="tfilterBehaviorCtrl">
+    <div class="waitnode clearfix " waitNode>
+        <div class="commWrapTwo commWrapFour">
+            <div ng-form name="waitnodeForm">
+                <div class="bannerCommStyle areaHeight26" ng-show="waitnode.tips">
+                    {{waitnode.tips}}
+                    <a href="javascript:void(0)" toggle-banner title="展开" class="downSanjiao sanjiaoPosition"></a>
+                </div>
+                <div class="contentNodeWrap" style="margin: 0px">
+                    <table style="margin: auto">
+                        <tr>
+                            <th class="tl" width="14%"><label class="node_name_label">节点名称：</label></th>
+                            <td style="width: 260px">
+                                <div class="pr"><input type="text" class="borderHighlight nameInput fl" style="margin-left: 0px"
+                                                       ng-model="model.name" maxlength="20" ng-noderequire/><span
+                                        nodetip></span></div>
+                            </td>
+                            <td><label class="code fr mr40">节点代码：{{model.id}}</label></td>
+                        </tr>
+                        <tr>
+                            <td class="tr paddingright0" width="10%" style="text-align: left"><label>店铺选择：</label></td>
+                            <td class="paddingleft0" >
+                        	<span class="relativeBox">
+                            	<input class="borderHighlight width130" type="text" value="{{shopSelect.shopName}}"  title="{{shopSelect.shopName}}" ids="{{shopSelect.shopId}}" ng-click="openShopList()" name="investigator" readonly="readonly" ng-class={error:shopSelectErr}>
+                            	<a class="optionModule2 location2" href="javascript:void(0);" ng-click="openShopList()"></a>
+                            </span>
+                            </td>
+                            <td>
+
+                              <!-- <div  custom-time-type0>-->
+                                <div style="height: 33px;line-height: 33px">
+                                    <label >时间：</label>
+                                    <div style="display: inline-block" ng-show="model.version == 10010">
+                                        <label> 前7天 ~ 前1天 </label>
+                                    </div>
+                                    <div style="display: inline-block" ng-show="model.version != 10010">
+                                        <input style="width: 164px" class="borderHighlight width130" type="text" ng-class="{error:totleTimeValueErr}" autocomplete="off"  readonly="true" ng-model="totleTimeValue" ng-click="editorTimeConditions()">
+                                    </div>
+
+                                    <!--时间选择start-->
+                                    <div class="conditionLayoutBox">
+                                        <div class="singleTemplate">
+                                            <div class="timeSetBox">
+                                                <div class="timeStyleBox">
+                                                 <p>
+                                                    <select class="commSelect width130 mr0" name="customTimeName{{data.id}}" ng-options="timeTypeList.value for timeTypeList in timeTypeLists" ng-model="curTimeList"></select><a class="ml5 blueColor" ng-click="clearSettingData()" href="javascript:void(0)">重置</a>
+                                                </p>
+
+                                                    <div class="inputWrap20" ng-show="curTimeList.type ==1"><p class="commPenEditor">
+                                                        <input type="text" autocomplete="off" ng-class="{error:errorInput1}"  class="absoluteInputClass borderHighlight w220 mr0 datetimepicker customTimeBg" name="d{{data.id}}" ng-model="model.dateInput1" date-absolute-picker readonly="true">
+                                                    </p>
+
+                                                        <p class="m inputWrap5">至</p>
+
+                                                        <p class="markSpan">
+                                                            <span class="commPenEditor"><input type="text" autocomplete="off" ng-class="{error:errorInput2}"  class="absoluteInputClass borderHighlight w220  mr0 datetimepicker customTimeBg" name="e{{data.id}}" ng-model="model.dateInput2" date-absolute-picker readonly="true"></span></span>
+                                                        </p></div>
+                                                    <div class="timeSpanLayout inputWrap20" ng-show="curTimeList.type== 2">
+                                                        <p>
+                                                            <span>前</span>
+                                                            <span class="commPenEditor"><input type="text" autocomplete="off" class="borderHighlight width34 mr5" ng-class="{error:errorInput3}"  ng-model="model.dateInput3" max-integer="20}"></span>
+                                                            <span>天</span>
+                                                        </p>
+                                                        <p class="m inputWrap5">至</p>
+
+                                                        <p>
+                                                            <span>前</span>
+                                                            <span class="commPenEditor"><input type="text" autocomplete="off" class="borderHighlight width34 mr5" ng-class="{error:errorInput4}"  ng-model="model.dateInput4" ></span>
+                                                            <span>天</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="listsButton ml15"><label class="domBlock error" ng-show="errorFlagOne || errorFlagTwo">{{errorMessage}}</label>
+                                                    <button class="btn btnBlue btnSmall" type="button" ng-click="sureTimeTypeValue($event)">确定</button>
+                                                    <button class="btn btnSmall" type="button" ng-close-child-window>取消</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--时间选择end-->
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+                    <!--店铺选择框 start-->
+                    <div class="queryShopsPop shopsChecked analysisShopPop">
+                      <div class="shopMenu clearfix">
+                        <p class="fr" ng-show="unusedShops.length>0">
+                          <a href="javascript:void(0)" title="可选店铺" ng-click="toggleStatusShop=false">可选店铺</a>
+                          <span class="fontLine">|</span>
+                          <a class="shixiao" href="javascript:void(0)" title="已失效店铺"  ng-click="toggleStatusShop=true">已失效店铺</a>
+                        </p>
+                      </div>
+                      <div class="shopUsed" ng-show="!toggleStatusShop" >
+                          <div class="listsBox topNormal">
+                              <ul class="unitLists editorShops clearfix">
+                                  <li  ng-repeat="list in shopLists" ng-class="list.class"  ng-chose-unit="Radio"><a id={{list.idInPlat}} title={{list.name}} href="javascript:void(0)" >{{list.name}}</a><span class="trianger"></span><span class="gg"></span></li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class="shopUnused" ng-show="toggleStatusShop">
+                        <div class="listsBox topNormal">
+                          <ul class="unitLists clearfix">
+                            <li ng-repeat="list in unusedShops" class="uneditor"><a id={{list.idInPlat}} title={{list.name}} href="javascript:void(0)" >{{list.name}}</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div>
+                          <div class="ling_di"></div>
+                          <div class="listsButton fr mr15 mt5">
+                              <button type="button" class="btn btnBlue" ng-click="sureAddShop()" ng-close-child-window>确定</button>
+                              <button type="button" class="btn" ng-click="cancelAddShop()" ng-close-child-window>取消</button>
+                          </div>
+                      </div>
+                    </div>
+                    <!--店铺选择框 end-->
+                </div>
+            </div>
+            <div class="contentDown">
+                <div class="tn1">
+                    <ul class="tt1" style="margin-left: 36px">
+                        <li style="margin-right: 20px"><input ng-model="model.pc" id="p1" type="checkbox"><label for="p1"><span class="pg1"></span>pc端浏览</label></li>
+                        <li class="mr20"><input ng-model="model.wireless" id="p2" type="checkbox"><label for="p2"><span class="pg2"></span>无线端浏览</label></li>
+                        <li class="mr20"><span class="inputico" ng-click="changeGoods()" ng-class="{inputico0:goods.goodsNone,inputico1:goods.goodsHalf,inputico2:goods.goodsAll}"></span><label for="p3"><span class="pg3"></span>收藏商品</label></li>
+                        <li style="text-align: right"><input ng-model="model.favoriteShops" id="p4" type="checkbox"><label for="p4"><span class="pg4"></span>收藏店铺</label></li>
+                    </ul>
+                </div>
+                <div style="width: 545px;margin: auto">
+                    <div style=" border-top: 1px solid #eaeaea; border-bottom:1px solid #eaeaea ">
+                        <ul >
+                            <li  ng-repeat="list in goodsList" class="shop_list_detail">
+                                <ul class="clearfix shoplist_ul " style="height: 100%">
+                                    <li style="width: 33px;height: 100%;text-align: right"><input ng-change="getSnapshots(list.value,$index)" ng-model="list.value" style="position: relative;top: 12px" type="checkbox"></li>
+                                    <li style="width: 60px; height: 100%">
+                                        <img style="width:40px;height: 40px;margin: auto;display: block;position: relative;top: 13px" ng-src="{{list.picurl}}">
+                                    </li>
+                                    <li class="inblock" style="height: 100%;width: 82%">
+                                        <div style="position: relative; top: 9px;">
+                                            <div style="margin-bottom: 10px" class="clearfix">
+                                                <span class="shoptop fl">top{{$index+1}}</span>
+                                                <a style="width: 87%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;color: #1384b8; text-decoration:none" target="_blank" class="fl" ng-href="{{list.detailurl}}">{{list.title}}</a>
+                                            </div>
+                                            <div class="clearfix">
+                                                <span class="fl w3" title="商品ID：{{list.id}}">商品ID：{{list.id}}</span>
+                                                <span style="text-align:  right" class="fl w3">7天内销售{{list.num}}件    </span>
+                                                <span style="text-align: right" class="fl w3">￥{{list.price}} </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li  class="shop_list_detail" style="height: 55px">
+                                <ul class="clearfix shoplist_ul " style="height: 100%">
+                                    <li style="width: 33px;height: 100%;text-align: right"><input  ng-change="getSnapshots()"  ng-model="shopsnap6" style="position: relative;top: 20px" type="checkbox"></li>
+                                    <li style="width: 60px; height: 55px;line-height: 55px;margin-left: 20px">
+                                       <span style="display: inline-block">其他商品</span>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="commBottom clearfix">
+            <div class="mb">
+                <button class="btn " ng-class="{btnBlue:!isEditorFlag}"  id="marketSure" ng-click="save($event)">确定</button>
+                <button class="btn" id="marketCancel" ng-close-window>取消</button>
+            </div>
+        </div>
+
+    </div>
+</div>

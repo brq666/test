@@ -1,0 +1,48 @@
+<!--<link get-root type="text/css" rel="stylesheet" _href="components/ztree/css/zTreeStyle/zTree.css" />-->
+<div class="maincontainerB" ng-controller="Market">
+  <div class="maincontainer">
+    <div class="hdZtreeType" ng-include src="hdZtreeType"></div>
+    <div style="">
+      <!-- 页头 -->
+      <div class="clearfix">
+        <h2 class="heading-second fl">营销活动</h2>
+        <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360">
+          <a class="" ng-click="marketLayer.add()">
+            <span>新建活动</span>
+          </a>
+        </div>
+        <!-- 活动类型管理，记得删除 -->
+        <div class="acTypeMana">
+          <a ng-click="marketLayer.add2()">活动类型管理</a>
+        </div>
+      </div>
+      <!-- 页头 end -->
+
+      <!-- tab title -->
+      <ul class="clearfix Tab_title" id="tabpenel_list">
+        <li ng-click="tabpanel_campaign.backList()" class="hover">活动列表</li>
+        <li ng-repeat="tab in tabpanel_campaign.tabList" title="{{tab.name}}" id="{{tab.id}}" ng-click="tabpanel_campaign.click_tabTitle($index+1)">
+          {{tab.name}}
+          <a class="TabClose" href="javascript:void(0);" ng-click="tabpanel_campaign.click_tabClose($index+1)"></a>
+        </li>
+      </ul>
+      <!-- tab title end -->
+
+      <!-- tab content -->
+      <div class="tabContentArea">
+        <div class="activeList configMarketingList" ng-include src="marketList.tpl_src" ng-show="tabpanel_campaign.flag"></div>
+        <div class="activityFlow" ng-include src="flowTpl_src" ng-hide="tabpanel_campaign.flag"></div>
+      </div>
+      <!-- tab content end -->
+
+      <!-- 新建活动 -->
+      <div id="marketLayer" ng-include src="marketLayer.tpl_src" ng-show="marketLayer.show_flog"></div>
+      <!-- 新建活动 end -->
+
+
+      <!--div id="marketLayer"  ng-include src="marketLayer.tpl_src1" ng-show="marketLayer.show_flog" ></div>
+      <!-- <div  ng-include="'view/acTypeMana.html'" ></div> -->
+    </div>
+  </div>
+</div>
+<div class="viewMarkInfoBox" id="couponTip"></div>

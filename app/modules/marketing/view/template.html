@@ -1,0 +1,22 @@
+
+<!--新增模板-->
+<div class="marketLayer creatTemplateZindex">
+  <h2 class="heading-second ng-binding">{{tpl.title}}</h2>
+  <form id="ump_form" class="ng-pristine ng-valid">
+    <div class="bg">
+      <div class="mb10">
+        <label class="label"><span class="red">*</span>模板名称</label>
+        <input  class="borderHighlight required" input_activity_name  maxlength="20" type="text" ng-model="tpl.Template.name"/>
+      </div>
+      <div class="mb10">
+        <label class="label">模板备注</label>
+        <textarea class="commTextarea" name="remark" maxlength="200" ng-model="tpl.Template.remark"></textarea>
+      </div>
+      <div class="mb10">
+        <label class="label"></label>
+        <button class="btn btnBlue" type="submit" ng-click="tpl.submit()" style="margin-left: 9px" ng-disabled="tpl.submitDisF">确定</button>
+        <button class="btn" type="button" ng-click="tpl.closeTpl()">取消</button>
+      </div>
+    </div>
+  </form>
+</div>

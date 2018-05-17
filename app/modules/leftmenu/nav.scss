@@ -1,0 +1,92 @@
+.sidebar {
+  width: 150px;
+  background: url(../../images/sidebarBg.png) no-repeat bottom #ededed;
+  bottom: 0;
+  overflow: auto;
+  position: absolute;
+  top: 56px;
+  width: 150px;
+  z-index: 1;
+}
+
+.sideNav {
+  margin-bottom: 170px;
+}
+
+.sideNav a {
+  color: #3d3d3d;
+  font-size: 13px;
+  display: block;
+  padding: 8px 19px;
+  background: url(../../images/all.png) no-repeat -200px 33px;
+  position: relative;
+}
+
+.sideNav li a:hover {
+  color: #145681;
+  text-decoration: none;
+}
+
+.sideNav a.sbCurrent {
+  color: #fff;
+  background: linear-gradient(#656565,#474747);
+}
+
+.sideNav a.sbCurrent:hover {
+  color: #fff;
+}
+
+.sideNavArrow {
+  background: url("../../images/all.png") no-repeat scroll -340px -152px;
+  position: absolute;
+  right: 17px;
+  bottom: 12px;
+  width: 10px;
+  height: 10px;
+}
+
+.sideNavGray .sideNavArrow {
+  background-position: -162px -152px;
+}
+
+.sbCurrent .sideNavArrow {
+  background-position: 0 -152px;
+}
+
+.sideNav .sideNavGray {
+  background: linear-gradient(#e2e2e2,#dddddd);
+}
+
+.sideNav dl {
+  background-color: #fcfcfc;
+  padding: 8px 5px;
+  border-right: 1px solid #ededed;
+}
+
+.sideNav dl dd a {
+  font-size: 12px;
+  padding: 0 0 0 21px;
+  color: #145681;
+  width: 118px;
+  height: 23px;
+  line-height: 23px;
+  display: inline-block;
+  background: none;
+}
+
+.sideNav dl dd a:hover {
+  color: #0083ba;
+}
+
+.sideNav a.sbSmallCur {
+  color: #3d3d3d;
+  background-color: #ededed;
+}
+
+.sidebarFt {
+  margin: 35px 10px 35px 20px;
+  color: #c1c0c0;
+  position: absolute;
+  bottom: 0px;
+  z-index: -2;
+}

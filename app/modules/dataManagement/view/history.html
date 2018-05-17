@@ -1,0 +1,92 @@
+<div class="maincontainerB dataConfigureTable" ng-controller="historyCtrl">
+  <div class="maincontainer history">
+    <div class="clearfix">
+      <h2 class="heading-second fl">历史数据导入</h2>
+      <span id="ccms_tips" class="ccms_tips" ng->
+        <span class="ccms_tipsContent" style="display: none;"><b></b>淘宝目前仅支持软件自动抓取最近90天的店铺订单数据，店铺开店到90天前的历史订单数据需要通过淘宝后台下载历史订单文件并导入到数据赢家系统中。</span>
+      </span>
+    </div>
+    <div class="shopinfo" id="shopinfo">
+      <b>店铺选择 :</b>
+      <span class="relativeBox">
+        <input type="text" class="borderHighlight width130" readonly="readonly" name="investigator" ng-click="history.getShops()" ids="{{history.ShopIds}}" title="{{history.ShopValsView}}" value="{{history.ShopValsView}}" />
+        <a class="optionModule2 location2" ng-click="history.getShops()" href="javascript:void(0);"></a>
+      </span>
+      <a href="http://help.datawinner.cn/ccms6/?p=2976" target="_blank" style="line-height:24px;" class="ml10">使用说明</a>
+      <a href="http://tradearchive.taobao.com/trade/itemlist/listExportOrder.htm" target="_blank" style="line-height:24px;" class="ml10" dm-title="仅需下载3个月前的订单，最近3个月的订单已经同步到了您的数据赢家CRM，无需下载。下载后的订单文件无需任何修改和编辑。" ng-title-max="250">马上去下载历史数据</a>
+      <span class="red ml5">最近3个月的数据会自动导入，为避免数据重复，请勿导入最近3个月的数据</span>
+    </div>
+    <div class="history-box">
+      <a href="javascript:void(0);" id="show_uploadify" class="history-uploadify-button" ng-click="history.addFile()">+ 添加上传文件</a>
+      <a href="javascript:void(0);" class="ml10 btn_disabled" id="import_batch_system">批量导入系统</a>
+      <span id="upload_error_tip" class="red ml5">从淘宝后台下载历史订单文件后，请只修改文件名称后上传，切勿打开文件和保存文件（文件编码变更会导致导入失败）</span>
+      <span id="upload_select_error" class="red ml5"></span>
+    </div>
+    <div class="order_reportList comm_list upload_list" id="upload_wrap">
+      <table>
+        <thead>
+          <tr>
+            <th width="20"><span id="checkAll" class="cloneCheckbox"></span></th>
+            <th>订单报表文件（ExportOrderList）<span ng-title-max="270" dm-title="从淘宝后台下载的订单报表：以ExportOrderList开头的，带有修改后的XXXX-XX-XX日期信息的csv文件。（如：ExportOrderList2012-11-11.csv）
+  " class="ico_tips"></span></th>
+            <th>宝贝报表文件（ExportItemList）<span ng-title-max="270" dm-title="从淘宝后台下载的宝贝报表：以ExportItemlList/ExportItemList/ExportOrderDetailList开头的，带有修改后的XXXX-XX-XX日期信息的csv文件。（如：ExportItemlList2012-11-11.csv）" class="ico_tips"></span></th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="upload_list"></tbody>
+        <tbody id="uploadify_loaded"></tbody>
+      </table>
+    </div>
+
+    <div id="uploadify_dialog" style="display:none;">
+      <div class="contentP">
+        <div class="text">
+          <p>请确定您要上传<span class="red">{{history.ShopValsView}}</span>的历史数据！</p>
+          <p>若不是，请点击“取消”并重新选择店铺。</p>
+        </div>
+        <p class="p2">
+          <span class="history-save-btn">
+            <input class="historybtn btnBlue" id="file_upload" name="file_upload" type="button" value="确定" />
+            <span ng-bind-html-unsafe="swfUnloadTip" class="swfInitMsg"></span>
+          </span>
+          <button type="button" class="btn" href="javascript:void(0);" dm-close-window>取消</button>
+        </p>
+      </div>
+    </div>
+
+    <div id="historyLog" class="order_reportList comm_list historyLog" style="display:none;">
+      <table>
+        <thead>
+          <tr>
+            <th>类型</th>
+            <th>文件名</th>
+            <th>文件记录数</th>
+            <th>导入成功记录数</th>
+            <th>导入失败记录数</th>
+            <th>失败清单</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <!--店铺选择框 start-->
+  <div class="customerShopsPop queryShopsPop shopsChecked">
+    <div class="listsBox">
+      <ul class="unitLists clearfix">
+        <li ng-repeat="shop in history.shops track by $index" ng-click="history.choiceShops($index)" ng-class="shop.isSelected ? 'cur' : ''" required="true">
+          <a id="{{shop.idInPlat}}" title="{{shop.name}}" href="javascript:void(0)">{{shop.name}}</a>
+          <span class="trianger"></span><span class="gg"></span>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div class="ling_di"></div>
+      <div class="listsButton fr mr15 mt5">
+        <button type="button" class="btn btnBlue" ng-click="history.sureAddShop()" dm-close-window>确定</button>
+        <button type="button" class="btn" ng-click="history.cancelAddShop()" dm-close-window>取消</button>
+      </div>
+    </div>
+  </div>
+  <!--店铺选择框 end-->
+</div>

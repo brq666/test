@@ -1,0 +1,149 @@
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_46173_52bvy2pkm83bx1or.css">
+   <div class="ng-cloak" ng-init="initPage()">
+    <!--客户详情 start-->  
+    <div class="leftPopPanel" style="overflow-x:hidden">
+      <div class="detailMain" style="margin:20px auto 40px;">
+        <div class="clearfix" >
+          <h2 class="heading fl">General</h2>
+        </div>
+        <hr/>
+        <!-- <a href="javascript:history.go(-1);" class="close" ></a> -->
+        <div class="tableContainer baseInfo">
+          <div class="col-md-4">
+            <table>
+              <tr>
+                <td>Contact ID</td><td>{{customerInfo.contact_id}}</td>
+                <td>First Name</td><td>{{customerInfo.firstname}}</td>
+                <td>Last Name</td><td>{{customerInfo.lastname}}</td>
+              </tr>
+              <tr>
+                <td>Gender</td><td>{{customerInfo.gender}}</td>
+                <td>Civility</td><td>{{customerInfo.civility}}</td>
+                <td>Birthdate</td><td>{{customerInfo.birthdate}}</td>
+              </tr>
+              <tr>
+                <td>City</td><td>{{customerInfo.city}}</td>
+                <td>Province</td><td>{{customerInfo.province}}</td>
+                <td>Home Country</td><td>{{customerInfo.home_country}}</td>
+              </tr>
+              <tr>
+                <td>Address</td><td colspan="5" style="width:87%">{{customerInfo.address}}</td>
+              </tr>
+              <tr>
+                  <td>Email</td><td>{{customerInfo.email}}</td>
+                  <td>Mobile</td><td>{{customerInfo.mobile}}</td>
+                  <td>Wechat ID</td><td>{{customerInfo.wechat_id}}</td>
+                </tr>
+                <tr>
+                  <td>Usual Store ID</td><td>{{customerInfo.usual_store_id}}</td>
+                  <td>Usual Store Number</td><td>{{customerInfo.usual_store_number}}</td>
+                  <td>Usual Store Country</td><td>{{customerInfo.usual_store_country}}</td>
+                </tr>
+                <tr>
+                  <td>Usual Store Name</td><td colspan="5" style="width:87%">{{customerInfo.usual_store_name}}</td>
+                </tr>
+                <tr>
+                  <td>In Seed List</td><td>{{customerInfo.in_seed_list}}</td>
+                  <td>Opt In</td><td>{{customerInfo.optin}}</td>
+                  <td>In White Zone</td><td>{{customerInfo.in_white_zone}}</td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="detailMain">
+        <div class="clearfix" >
+          <h2 class="heading fl">Loyalty</h2>
+        </div>
+          <hr/>        
+        <div class="tableContainer loyalty">
+          <div class="col-md-4">
+            <table>
+              <tr>
+                <td>Loyalty Card Number</td><td>{{customerInfo.loyalty_card_number}}</td>
+              </tr>
+              <tr>
+                <td>Loyalty Card Type</td><td>{{customerInfo.loyalty_card_type}}</td>
+              </tr>
+              <tr>
+                <td>Point Balance</td><td>{{customerInfo.point_balance}}</td>
+              </tr>
+              <tr>
+                <td>Loyalty Status</td><td>{{customerInfo.loyalty_status}}</td>
+              </tr>
+              <tr>
+                <td>Loyalty Status Update Data</td><td>{{customerInfo.loyalty_status_update_date}}</td>
+              </tr>
+              <tr>
+                <td>Subscription Method</td><td>{{customerInfo.subscription_method}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="detailMain">
+        <div class="clearfix" >
+          <h2 class="heading fl">Activities</h2>
+          <span class="tips">近90天（不含查询当天）该客户的营销沟通记录</span>
+        </div>
+          <hr/>        
+        <div class="tableContainer" style="padding-left:0;">
+          <div class="actiTable " style="margin: 0 10px 0 0;">
+            <div class="actiLeft">
+              <a class="mainNum" href="javascript:void(0)" ng-click="searchList('all')">{{totalActivity.totalcount}}</a>
+              <span class="dspan">Total sending times</span>
+            </div>
+            <div class="actiRight">
+              <div class="actiR">
+                <span>SMS sending times</span>
+                <a class="num" href="javascript:void(0)" ng-click="searchList('1')">{{totalActivity.smscount}}</a>
+              </div>
+              <div class="actiR">
+                <span>EDM sending times</span>
+                <a class="num" href="javascript:void(0)" ng-click="searchList('3')">{{totalActivity.edmcount}}</a>
+              </div>
+              <div class="actiR">
+                <span>Wechat sending times</span>
+                <a class="num" href="javascript:void(0)" ng-click="searchList('2')">{{totalActivity.wxcount}}</a>
+              </div>
+            </div>
+          </div>
+          <div class="actiTable " style=" margin: 0 0 0 10px;">
+            <div class="actiLeft">
+              <a class="mainNum" href="javascript:void(0)" ng-click="searchList('all',1)">{{totalActivity.totalsuccesscount}}</a>
+              <span class="dspan">Total successful sending times</span>
+            </div>
+            <div class="actiRight">
+              <div class="actiR">
+                <span>SMS successful sending times</span>
+                <i class="iconfont icon-bangzhu" dm-title="成功发送以实际提交到通道商的数据为准。"></i>
+                <a class="num" href="javascript:void(0)" ng-click="searchList('1',1)">{{totalActivity.smssuccessmcount}}</a>
+              </div>
+              <div class="actiR">
+                <span>EDM successful sending times</span>
+                <a class="num" href="javascript:void(0)" ng-click="searchList('3',1)">{{totalActivity.edsuccessmcount}}</a>
+              </div>
+              <div class="actiR">
+                <span>Wechat successful sending times</span>
+                <i class="iconfont icon-bangzhu" dm-title="成功发送以实际提交到通道商的数据为准。"></i>
+                <a class="num" href="javascript:void(0)" ng-click="searchList('2',1)">{{totalActivity.wxsuccessmcount}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix " style="margin-top: 15px;padding: 12px 0;background: #F1F1F1;margin-bottom: -2px">
+          <div  class="grid" >
+            <div class="commSearch" style="float: left">
+              <input class="commSearchVal" ng-model="hdValue" style="width: 310px;" type="text" placeholder="Campaign ID/Campaign Name/Node ID/Node Name" ng-keyup="enterSearch($event)"/>
+              <button class="commSearchBtn" style="top: 5px;right: 5px" ng-click="searchList()"></button>              
+            </div>          
+          </div>
+        </div>
+        <div class="clearfix " style="margin-top: 0px;">
+          <div id="attrListsGrid" class=" activeList " style="bottom: 30px;height: 400px;position: relative;">
+          </div>
+        </div>
+      </div>      
+    </div>
+    <!--客户详情 end-->
+  </div>

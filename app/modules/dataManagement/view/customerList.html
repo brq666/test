@@ -1,0 +1,120 @@
+<!--<link rel="stylesheet" type="text/css" href="css/customerListNew.css">-->
+<!--<script type="text/javascript" src="controller/customerListNew.js"></script>-->
+<!--<script type="text/javascript" src="script/controller/queryTemplatesConfig.js"></script>-->
+<div class="ng-cloak">
+  <!--页面主体 begin-->
+  <div class="maincontainer" style="overflow-x:hidden;" ng-controller="customerListNewCtrl">
+    <div class="clearfix">
+      <h2 class="heading fl">客户信息管理</h2>
+    </div>
+    <div class="searchbox clearfix customerList" ng-init="showMore=false">
+      <div class="mainDivBox">
+        <span>选择主题:</span>
+        <select class="commSelect  ng-pristine ng-valid width130" ng-model="SearTools.Subject" ng-options="CustomerSubject.subjectId for CustomerSubject in SubjectController.MetasSubject" ng-change="SubjectController.change_subject()"> </select>
+      <!--span id="shop" class="ml20">
+        <span ng-bind="mustQueryItems.name">:</span>
+        <span class="relativeBox">
+          <input type="text" class="borderHighlight width130" readonly="readonly" name="investigator" ng-click="SearTools.getShops()" ids="{{SearTools.ShopIds}}" title="{{SearTools.ShopValsView}}" value="{{SearTools.ShopValsView}}" />
+          <a class="optionModule2 location2" style="top:5px;" ng-click="SearTools.getShops()" href="javascript:void(0);"></a>
+        </span>
+        <label class="error ml5" ng-show="showShopValsViewError">请选择店铺</label>
+      </span-->
+      </div>
+      <div class="targetDivBox">
+          <p class="title">选择更多:</p>
+          <div class="content-conditions" customer-conditions=""></div>
+      </div>
+    </div>
+    <div class="clearfix wrap-grid-lits">
+      <div class="activeList couponListssBox couponListssBoxMain commOverflowXAuto">
+      </div>
+    </div>
+    <!--店铺选择框 start-->
+    <div class="customerShopsPop queryShopsPop shopsChecked">
+      <div class="listsBox">
+        <ul class="unitLists clearfix">
+          <li ng-repeat="list in mustQueryItems.configs" ng-data-chose-unit="Radio" required="true">
+            <a id="{{list.idInPlat}}" title="{{list.name}}" href="javascript:void(0)">{{list.name}}</a>
+            <span class="trianger"></span><span class="gg"></span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="ling_di"></div>
+        <div class="listsButton fr mr15 mt5">
+          <button type="button" class="btn btnBlue" ng-click="SearTools.sureAddShop()">确定</button>
+          <button type="button" class="btn">取消</button>
+        </div>
+      </div>
+    </div>
+    <!--店铺选择框 end-->
+    <div class="viewMarkInfoBox" id="couponTip"></div>
+    <!--编辑用户基本信息 begin-->
+    <div class="Pop" style="display: none">
+      <form novalidate="novalidate" class="configAttrBox" id="empower_form">
+        <ul>
+          <li>
+            <label class="commLabelWidth75">客户ID:</label>
+            <label class="customerno">{{Pop.Customer.customerno}}</label>
+          </li>
+          <li>
+            <label class="commLabelWidth75">姓名:</label>
+            <input class="borderHighlight width145" style="width:131px;" maxlength="50" type="text" ng-model="Pop.Customer.username" />
+          </li>
+          <li>
+            <label class="commLabelWidth75">性别:</label>
+            <input type="radio" name="sex" ng-model="Pop.Customer.sex" value="m" class="ng-valid ng-dirty" />男
+            <input type="radio" name="sex" ng-model="Pop.Customer.sex" value="f" class="ng-pristine ng-valid" />女
+          </li>
+          <li>
+            <label class="commLabelWidth75">生日:</label>
+            <span class="ngplaceholder_wrapper">
+            <input type="text" ng-data-customer="" style="background-position:119px;width:131px;" class="width145 datetimepicker borderHighlight text" name="startTime" readonly="readonly" ng-model="Pop.birthday" />
+            <span class="plugDel" title="清空" ng-click="Pop.resetValue()"></span>
+          </span>
+            <div class="day_start" style="display: none">
+              <div id="monthDay" class="monthDay">
+                <span class="ng-scope"></span>
+                <dl class="ng-scope dl">
+                  <dd>
+                    <div ng-repeat="i in Pop.days" ng-class="{'cur':Pop.Customer.day==i}">
+                      {{i}}
+                    </div>
+                  </dd>
+                  <center class="mb fr" style="width:100%">
+                    <button class="btn btnBlue commSmallBtn" id="Button2" ng-click="Pop.chooseDay()">确定 </button>
+                    <button class="btn commSmallBtn" id="Button3" ng-click="Pop.HideDay()">取消 </button>
+                  </center>
+                </dl>
+              </div>
+            </div> </li>
+          <li>
+            <label class="commLabelWidth75" style="margin-right: 9px;">年龄:</label>
+            <input id="cycleDay" type="text" style="margin-left:0" ng-data-number="empty" ng-model="Pop.Customer.age" class="num borderHighlight ng-pristine ng-valid" value="1" min="1" max="200" />
+            <label></label>
+          </li>
+          <li>
+            <label class="commLabelWidth75">手机号:</label>
+            <input class="borderHighlight width145" style="width:131px;" maxlength="50" type="text" name="phone" ng-model="Pop.Customer.mobile" />
+            <label class="error" ng-show="mobileShow">手机号格式不正确</label>
+          </li>
+          <li>
+            <label class="commLabelWidth75">Email:</label>
+            <input class="borderHighlight width145" style="width:131px;" maxlength="50" type="text" name="email" ng-model="Pop.Customer.email" />
+            <label class="error" ng-show="emailShow">邮箱格式不正确</label>
+          </li>
+          <li>
+            <label class="commLabelWidth75"></label>
+            <button class="btn btnBlue" type="submit" ng-click="Pop.Sure()">确定</button>
+            <button class="btn" type="button" dm-close-window="">取消</button>
+          </li>
+        </ul>
+      </form>
+    </div>
+    <div ng-include="" src="gridObj.modelSrc"></div>
+  </div>
+
+  <!--页面主体 end-->
+
+
+</div>

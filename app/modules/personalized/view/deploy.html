@@ -1,0 +1,175 @@
+<div>
+    <div class="clearfix">
+        <h2 class="heading fl">方案配置</h2>
+        <div class="shopinfo" id="shopinfo">
+            <b>店铺选择 :</b>
+            <select class="comm-select" ng-model="$parent.currentShopId" ng-options="item.idInPlat as item.name for item in $parent.shops"
+                    ng-change="getPlansInit($parent.currentShopId)">
+            </select>
+        </div>
+    </div>
+    <!--方案名-->
+    <div class="schemeList">
+        <ul class="clearfix">
+            <li ng-repeat="plan in plans" ng-class="getPlanCss($index)" ng-click="showRules($index)">
+                <input type="text" ng-model="plan.name" ng-show="plan.editPlanName" ng-blur="checkPlanName($event)"/>
+                <a class="viewListVal" id="{{plan.id}}" title="{{plan.name}}" ng-hide="plan.editPlanName">{{plan.name}}</a>
+                <a class="xgListName" active="{{plan.active}}" title="{{plan.active?'方案已开启,不可编辑':'编辑方案名称'}}" ng-click="editPlanName()"></a>
+            </li>
+        </ul>
+    </div>
+    <!--方案名end-->
+    <!--方案规则-->
+    <div class="schemeBox">
+        <div class='scheme' id='{{rule.id}}' ng-repeat="rule in currentPlan.rules">
+            <div class='schemeHeader clearfix'>
+                <div class='fl'>
+                    <span class='editor'>
+                        <input class='inputName' type='text' ng-model="rule.name" ng-blur="checkRuleName($event,rule)" ng-disabled="!rule.allowdEditRuleName" maxlength="20"/>
+                        <a class='schemeEditor' title='编辑规则名称' ng-click="editRuleName(rule)" ng-hide="currentPlan.active">[编辑]</a>
+                    </span>
+                    <span class='priority'>优先级：<b>{{rule.position}}</b></span>
+                </div>
+                <div class='fr' ng-hide="currentPlan.active">
+                    <a class='topRank' title='最高优先级'ng-if="!$first" ng-click="changePosition($index,'max',rules)"></a>
+                    <a class='addRank' title='提高优先级'ng-if="!$first" ng-click="changePosition($index,'++',rules)"></a>
+                    <a class='lessRank' title='降低优先级'ng-if="!$last" ng-click="changePosition($index,'--',rules)" ></a>
+                    <a class='lowestRank' title='最低优先级'ng-if="!$last" ng-click="changePosition($index,'min',rules)"></a>
+                    <a class='delRank' title='删除' ng-click="changePosition($index,'del',rules)"></a>
+                </div>
+            </div>
+            <div class='term'>
+                <table cellpadding='0' cellspacing='0' width='100%'>
+                    <tr>
+                        <th width='50%' class='borderright'>
+                            <span class='spanOne'>条件</span>
+                        </th>
+                        <th>
+                            <span>订单备注内容</span>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <div class='termEditorBox'>
+                <table cellpadding='0' cellspacing='0' width='100%'>
+                    <tr>
+                        <td class='borderTd' width='50%'>
+                            <div class='conditionBox'>
+                                <div class="termListBox {{$index != 0 ? 'cur':''}}" id='{{condition.id}}' ng-repeat="condition in rule.conditions" >
+                                    <div class='termContent clearfix' ng-if="$index == 0">
+                                        <p class='fl'>
+                                            <span class='othSpan' title='{{condition.name}}'>{{condition.name}}</span>
+                                        </p>
+                                        <p class='fr'>
+                                            <a class='addTermContent'  title='增加' ng-click="addRuleCondition($parent.$parent.$index)" ng-hide="currentPlan.active"></a>
+                                            <a class='modifyTermContent' title='修改' ng-click="editRuleCondition($parent.$parent.$index,$index)" ng-hide="currentPlan.active"></a>
+                                        </p>
+                                    </div>
+                                    <div class='termContent clearfix' ng-if="$index != 0">
+                                        <p class='fl'>
+                                            <select ng-model="condition.relation">
+                                                <option value="AND">并且</option>
+                                                <option value="OR">或者</option>
+                                            </select>
+                                            <em>|</em>
+                                            <span class='curSpan' title='{{condition.name}}'>{{condition.name}}</span>
+                                        </p>
+                                        <p class='fr'>
+                                            <a class='addTermContent' title='增加' ng-click="addRuleCondition($parent.$parent.$index)" ng-hide="currentPlan.active"></a>
+                                            <a class='modifyTermContent' title='修改' ng-click="editRuleCondition($parent.$parent.$index,$index)" ng-hide="currentPlan.active"></a>
+                                            <a class='delTermContent' title='删除' ng-click="delRuleCondition($parent.$parent.$index,$index)" ng-hide="currentPlan.active"></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class='undefined  clearfix' ng-if="rule.conditions.length == 0">
+                                    <p class='fl'>未定义</p>
+                                    <a class='termEditor fr' title='定义' ng-click="addRuleCondition($parent.$index)"></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td class='backgroundTd'>
+                            <p class='pTextArea'>
+                                <textarea ng-style="{'height':(rule.conditions.length?rule.conditions.length*17:17)}" ng-model="rule.actionDetail" ng-disabled="currentPlan.active"></textarea>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!--方案规则end-->
+        <div class="buttonBox" ng-show="plans.length > 0">
+            <a class="button-sure"  title="保存" ng-click="savePlan()" ng-show="!plans[planIndex].active">保存</a>
+            <a class="button-add marlef20"  title="添加规则" ng-click="addRule()" ng-show="!plans[planIndex].active">添加规则</a>
+        </div>
+        <div class="schemeAlert" ng-show="plans.length == 0">当前店铺没有部署方案，请先部署方案！</div>
+    </div>
+    <div dx-popup="{bindingOptions:editorPopOption}">
+        <!--弹框-->
+        <div class="editorPop">
+            <ul>
+                <li>
+                    <label>条件名称：</label>
+                    <input class="editorName" type="text" ng-model="condition.name" ng-disabled="condition.useDefaultName"/>
+                    <input class="checkBox" type="checkbox" ng-model="condition.useDefaultName" ng-checked="setDefaultConditionName()"/>默认名称
+                </li>
+                <li class="popType">
+                    <label>指标类型：</label>
+                    <select ng-model="condition.indicatorGroupId" ng-options="type.id as type.name for type in typeList" ng-change="getPropertyList(condition)">
+                    </select>
+                </li>
+                <li class="popChoseList">
+                    <label>指标选择：</label>
+                    <select ng-model="condition.indicatorId" ng-options="property.id as property.name for property in propertyList" ng-change="getSupportOpListAndProvidedValues(condition,false)">
+                    </select>
+                </li>
+                <li class="popTermContent">
+                    <label>满足条件：</label>
+                    <select class="termSelectOne" ng-model="condition.conditionOpName" ng-options="supportOp.name as supportOp.label for supportOp in supportOps">
+                    </select>
+                    <input class="termEditor" type="text" ng-model="condition.productViewName" ng-disabled="condition.indicatorId == 608" ng-show="!condition.hasProvidedValues" maxlength="9"/>
+                    <a class="productMark" title="选择商品" ng-click="proSel()" ng-show="!condition.hasProvidedValues && condition.indicatorId == 608"></a>
+                    <select ng-model="condition.SelectTwoVal" class="termSelectTwo"  ng-options="provideValue.name as provideValue.name for provideValue in providedValues" ng-show="condition.hasProvidedValues" ng-change="getCityList(condition)">
+                    </select>
+                    <select class="cityList" ng-model="condition.cityValue" ng-options="city.value as city.name for city in cityList" ng-show="condition.hasProvidedValues && condition.indicatorId == 605">
+                        <option value="">不限</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="deployBtnBox">
+                <a class="button-sure" ng-click="editorPopConfirm()">确定</a>
+                <a class="button-cancel" ng-click="editorPopCancel()">取消</a>
+            </div>
+        </div>
+        <!--弹框end-->
+    </div>
+
+    <div dx-popup="{bindingOptions:productPopOption}">
+        <div>
+            <label>关键字:</label>
+            <input type="text" class="form-control productKey" ng-model="searchKeyName" placeholder="请至少输入两个字">
+            <a class="button-sure" ng-click="searchProductByKey()">搜索</a>
+        </div>
+        <div class="productcontent">
+            <div class="productgridleft">
+                <div id="productA"  dx-data-grid="productGridConfig">
+                </div>
+            </div>
+            <div class="productgridright">
+                <div dx-list="selectedProductListConfig">
+                    <div data-options="dxTemplate: { name: 'item' }" class="productgridcontent">
+                        <div class="fl">
+                            <img width="45px" height="45px" ng-src='{{picUrl}}' />
+                        </div>
+                        <div class='goodsinfo fl'>
+                            <p class='goodsName'>{{title}}</p>
+                            <p><span class='goodsId'>商品ID：<span>{{numIid}}</span></span><span class='goodsPrice'>¥{{price}}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="deployBtnBox">
+            <a class="button-sure" ng-click="productPop_Confirm()">确定</a>
+            <a class="button-cancel" ng-click="productPop_Cancel()">取消</a>
+        </div>
+    </div>

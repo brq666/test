@@ -1,0 +1,139 @@
+<div class="marketLayer">
+  <div ng-if="$ctrl.curCreateCampName">
+      <div class="bannerCommStyle areaHeight26" style="color:#999;text-indent: 7px;">
+        此活动将在『主动营销』中创建。活动执行时，将根据分组规则实时查询目标客户。
+      </div>
+  </div>
+  <form id="createMaketLayer" name="$ctrl.createMaketLayer" class="ng-pristine ng-valid" tooltip-placement="top-left">
+    <div>
+      <div class="mb16" ng-if="$ctrl.curCreateCampName">
+          <label class="itemLabel">客户分组名称：</label><span ng-bind="$ctrl.curCreateCampName"></span>
+      </div>
+      <!--div class="mb16" ng-if="$ctrl.curCreateCampName">
+          <label class="itemLabel">分组人数：</label>
+          <span ng-hide="$ctrl.peopleShow" ng-bind="$ctrl.curCreateCampCount"></span>
+          <span style="color:#999" ng-hide="$ctrl.peopleShow">人</span>
+          <span ng-show="$ctrl.peopleShow">等待更新中……</span>
+      </div-->
+      <div ng-repeat="item in $ctrl.marketArrary track by $index" on-finish-render-filters>
+        <!--默认名称-->
+        <div class="mb16" ng-if="item.dataType=== 1">
+          <label class="itemLabel"><span class="red" ng-if="item.isRequired">*</span>{{item.fieldName}}</label><input type="text" ng-if="item.code === 'campName'" class="borderHighlight" ng-disabled="item.isDisabled"
+            input_activity_name="market" name="campName" ng-required="item.isRequired && !item.isDisabled" required-msg="{{item.reqMsg}}" maxlength="{{item.rule.maxLength}}"
+            cc-validator autocomplete="off" ng-model="$ctrl[item.code]" /><input type="text" ng-if="item.code !== 'campName'" class="borderHighlight" ng-disabled="item.isDisabled"
+            name="campName" ng-required="item.isRequired && !item.isDisabled" required-msg="{{item.reqMsg}}" maxlength="{{item.rule.maxLength}}"
+            cc-validator autocomplete="off" ng-model="$ctrl[item.code]" />
+            <i class="iconfont icon-question-mark question-tips" ng-if="item.notice" cc-tooltip="item.notice"></i>
+        </div>
+        <!--默认目录-->
+        <div class="mb16 custom-select" ng-if="item.dataType === 10">
+          <label class="itemLabel">
+            <span class="red" ng-if="item.isRequired">*</span>{{item.fieldName}}</label>
+          <div class="customer-validate">
+            <input type="text" class="borderHighlight" ng-class="{'error-minor-tooltip-attached': $ctrl.attrIsInvalid(item.code, 1, item)}"
+              ng-disabled="item.isDisabled" name="program" readonly ng-custom-select="$ctrl.program(item.code)" isNew="true"
+              ng-model="$ctrl[item.code]" valueid="{{$ctrl.progNameId}}" />
+            <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 1, item)">{{item.reqMsg}}</p>
+          </div>
+          <i class="iconfont icon-question-mark question-tips" ng-if="item.notice" cc-tooltip="item.notice"></i>
+        </div>
+        <!--默认审批人-->
+        <div class="mb16" ng-if="item.dataType === 11">
+          <label class="itemLabel">
+            <span class="red" ng-if="item.isRequired">*</span>{{item.fieldName}}</label>
+          <div class="customer-validate hasSearch">
+            <cc-dropdown-select model="$ctrl[item.code]" searchable="true" mapping="$ctrl.investigatorMapping" datalist="$ctrl.investigators"
+              ng-class="{'error-minor-tooltip-attached': $ctrl.attrIsInvalid(item.code, 1, item)}"></cc-dropdown-select>
+            <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 1, item)">{{item.reqMsg}}</p>
+            <p class="disabled-mask" ng-if="item.isDisabled"></p>
+          </div>
+          <i class="iconfont icon-question-mark question-tips" ng-if="item.notice" cc-tooltip="item.notice"></i>
+        </div>
+        <!--默认备注-->
+        <div class="mb16" ng-if="item.dataType === 12">
+          <label class="itemLabel"><span class="red" ng-if="item.isRequired">*</span>{{item.fieldName}}</label><textarea name="campDesc" ng-model="$ctrl[item.code]" maxlength="{{item.rule.maxLength}}"
+            ng-required="item.isRequired" required-msg="{{item.reqMsg}}" cc-validator></textarea>
+          <i class="iconfont icon-question-mark question-tips" ng-if="item.notice" cc-tooltip="item.notice"></i>
+        </div>
+        <!--字符类型-->
+        <div class="mb16" ng-if="item.dataType === 3">
+          <label class="itemLabel">
+            <span class="red" ng-if="item.isRequired">*</span>{{item.fieldName}}</label>
+          <div class="customer-validate" ng-if="item.rule.operator === '单选'">
+            <cc-dropdown-select model="$ctrl[item.code]" datalist="item.list"
+              ng-class="{'error-minor-tooltip-attached': $ctrl.attrIsInvalid(item.code, 1, item)}"></cc-dropdown-select>
+            <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 1, item)">{{item.reqMsg}}</p>
+            <p class="disabled-mask" ng-if="item.isDisabled"></p>
+          </div>
+          <div class="customer-validate" ng-if="item.rule.operator === '多选'">
+            <cc-dropdown-multiselect model="$ctrl[item.code]" datalist="item.list"
+              ng-class="{'error-minor-tooltip-attached': $ctrl.attrIsInvalid(item.code, 1, item)}"></cc-dropdown-multiselect>
+            <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 1, item)">{{item.reqMsg}}</p>
+            <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 0, item)">最多选择{{item.rule.max}}个数据</p>
+            <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 2, item)">最少选择{{item.rule.min}}个数据</p>  
+            <p class="disabled-mask" ng-if="item.isDisabled"></p>
+          </div>
+          <i class="iconfont icon-question-mark question-tips" ng-if="item.notice" cc-tooltip="item.notice"></i>
+        </div>
+        <!--组织类型-->
+        <div class="mb16" ng-if="item.dataType === 7">
+          <label class="itemLabel" ng-class="{customer: $ctrl.exec($event)}">
+            <span class="red" ng-if="item.isRequired">*</span>{{item.fieldName}}</label>
+          <div class="customer-validate" ng-if="item.rule.operator === '单选' && item.list">
+            <cc-dropdown-select model="$ctrl[item.code]" mapping="{
+                  valueField: 'id',
+                  displayField: 'name'
+              }"  datalist="item.list"
+              ng-class="{'error-minor-tooltip-attached': $ctrl.attrIsInvalid(item.code, 1, item)}"></cc-dropdown-select>
+            <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 1, item)">{{item.reqMsg}}</p>
+            <p class="disabled-mask" ng-if="item.isDisabled"></p>
+          </div>
+          <div class="customer-validate" ng-if="item.rule.operator === '多选' && item.list">
+            <cc-dropdown-multiselect model="$ctrl[item.code]" mapping="{
+                  valueField: 'id',
+                  displayField: 'name'
+              }" datalist="item.list"
+              ng-class="{'error-minor-tooltip-attached': $ctrl.attrIsInvalid(item.code, 1, item)}"></cc-dropdown-multiselect>
+            <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 1, item)">{{item.reqMsg}}</p>
+            <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 0, item)">最多选择{{item.rule.max}}个数据</p>
+            <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 2, item)">最少选择{{item.rule.min}}个数据</p>  
+            <p class="disabled-mask" ng-if="item.isDisabled"></p>
+          </div>
+          <i class="iconfont icon-question-mark question-tips" ng-if="item.notice" cc-tooltip="item.notice"></i>
+        </div>
+        <!--日期时间-->
+        <div class="mb16" ng-if="item.dataType=== 8">
+          <label class="itemLabel"><span class="red" ng-if="item.isRequired">*</span>{{item.fieldName}}</label>
+          <div class="customer-validate">
+            <cc-date-picker
+              ng-model="$ctrl[item.code]"
+              min-date="item.minTime"
+              max-date="item.maxTime"
+              ng-class="{'error-minor-tooltip-attached': $ctrl.attrIsInvalid(item.code, 1, item)}"
+            ></cc-date-picker>
+            <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 1, item)">{{item.reqMsg}}</p>
+            <p class="disabled-mask" ng-if="item.isDisabled"></p>
+          </div>
+          <i class="iconfont icon-question-mark question-tips" ng-if="item.notice" cc-tooltip="item.notice"></i>
+        </div>
+        <!--商品选择-->
+        <div class="mb16" ng-if="item.dataType === 9">
+          <label class="itemLabel">
+            <span class="red" ng-if="item.isRequired">*</span>{{item.fieldName}}</label>
+            <div class="customer-validate">
+              <span class="commPenEditor">
+                  <input type="text" class="borderHighlight"
+                    readonly ng-class="{'error-minor-tooltip-attached': $ctrl.attrIsInvalid(item.code, 1, item)}"
+                    autocomplete="off" ng-model="$ctrl[item.code]" ng-click="$ctrl.editorProducts(item)" />
+                  <a href="javascript:void(0)" class="bigGlass" ng-click="$ctrl.editorProducts(item)"></a>
+              </span>
+              <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 1, item)">{{item.reqMsg}}</p>
+              <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 0, item)">最多选择{{item.rule.max}}个数据</p>
+              <p class="error-minor-tooltip top-left condition-error" ng-if="$ctrl.attrIsInvalid(item.code, 2, item)">最少选择{{item.rule.min}}个数据</p>  
+            </div>
+            <i class="iconfont icon-question-mark question-tips" ng-if="item.notice" cc-tooltip="item.notice"></i>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

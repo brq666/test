@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="ccmsApp" ng-controller="mainCtrl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>数据赢家-用数据驱动营销变革</title>
+
+    <script type="text/javascript">
+        /*
+         * create method addTag为生成css和js增加root变量,root变量目的是解决后端与前端文件夹结构不一样
+         */
+        var root = '';
+        var rootStatic = "/";
+        var rootModule = (location.pathname.indexOf('app/modules') != -1) ? '/app' : '/ccms';
+    </script>
+
+  <!-- build:css ../../css/shuyun.lib.css -->
+  <link class="usemin" type="text/css" rel="stylesheet" href="../../../ccms/css/shuyun.lib.css" />
+  <!-- endbuild -->
+
+  <!-- build:css ../../css/microMarketing/microMarketing.css -->
+  <link class="usemin" type="text/css" rel="stylesheet" href="../../../ccms/css/microMarketing/microMarketing.css" />
+  <!-- endbuild -->
+
+</head>
+
+<body>
+  <div class="commHeader" ng-include src="headerUrl"></div>
+  <div class="commNav" ng-include src="navUrl" ng-hide="true"></div>
+  <div ng-show="!tmlLoaded" class="loading"><i></i>加载中...</div>
+  <div onload="afterLoadCont();" src="pageUrl" ng-visible="tmlLoaded" ng-include></div>
+
+  <!-- build:js ../../js/shuyun.ie8.js -->
+  <script type="text/javascript" src="../../../app/lib/es5-shim/es5-shim.js"></script>
+  <script type="text/javascript" src="../../../app/lib/es5-shim/es5-sham.js"></script>
+  <script type="text/javascript" src="../../../app/lib/html5shiv/dist/html5shiv.js"></script>
+  <script type="text/javascript" src="../../../app/lib/respond-minmax/dest/respond.min.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js ../../js/microMarketing/microMarketing.lib.js -->
+  <script type="text/javascript" src="../../../app/lib/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="../../../app/components/ccms_pop/js/yunat_pop.js"></script>
+  <script type="text/javascript" src="../../../app/js/globalMethod.js"></script>
+  <script type="text/javascript" src="../../../app/lib/angular-1.2.19/angular.min.js"></script>
+  <script type="text/javascript" src="../../../app/lib/angular-1.2.19/angular-route.min.js"></script>
+  <script type="text/javascript" src="../../../app/lib/angular-1.2.19/angular-sanitize.min.js"></script>
+  <script type="text/javascript" src="../../../app/lib/angular-1.2.19/http-auth-interceptor.js"></script>
+  <script type="text/javascript" src="../../../app/components/moment/moment.min.js"></script>
+  <!-- /build -->
+
+  <!-- build:js ../../js/microMarketing/microMarketing.js -->
+  <script type="text/javascript" src="../../../app/modules/microMarketing/controller/mainCtrl.js"></script>
+  <script type="text/javascript" src="../../../app/modules/header/service.js"></script>
+  <script type="text/javascript" src="../../../app/modules/header/notices.js"></script>
+  <script type="text/javascript" src="../../../app/modules/leftmenu/nav.js"></script>
+  <script type="text/javascript" src="../../../app/js/directives.js"></script>
+  <!-- endbuild -->
+
+</body>
+<!-- taobao 孔明锁js -->
+<script type="text/javascript" src="http://g.tbcdn.cn/sj/securesdk/0.0.3/securesdk_v2.js" id="J_secure_sdk_v2" data-appkey="12283535"></script>
+<!-- end -->
+</html>

@@ -1,0 +1,16 @@
+<div class="paginator page-center">
+  <a href="javascript:;" class="arrow" ng-click="go('previous')">
+    <i class="iconfont icon-rightarrow icon-leftarrow"></i>
+  </a>
+  <ul>
+    <li ng-repeat="number in pageNumbers track by $index">
+      <a href="javascript:;" ng-bind="number.value" ng-class="{current: number.isCurrent == true, dot: number.isDot == true}" ng-click="go(number.value)"></a>
+    </li>
+  </ul>
+  <a href="javascript:;" class="arrow" ng-click="go('next')">
+    <i class="iconfont icon-rightarrow"></i>
+  </a>
+  <span>第</span>
+  <input type="del" input-number-pager>
+  <span>页</span>
+</div>

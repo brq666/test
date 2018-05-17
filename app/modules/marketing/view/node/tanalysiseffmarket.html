@@ -1,0 +1,130 @@
+<div id="marketeffect" ng-controller="marketEffect">
+  <div class="commWrapFour">
+    <div class="bannerCommStyle areaHeight26" ng-show="marketEffectObj.tips">
+      {{marketEffectObj.tips}}
+      <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+    </div>
+  </div>
+  <form class="content-wrap form-horizontal" name="formOne" novalidate="" ng-submit="marketEffectObj.submit($event)">
+    <div class="commNodeMarkRelative">
+      <div class="control-group">
+        <label class="control-label" for="">节点名称：</label>
+        <div class="controls">
+          <input class="borderHighlight nameInput width200 fl" type="text" maxlength="20" name="nodename" ng-model="marketEffectObj.name" required="" />
+          <span nodetip=""></span>
+          <input type="hidden" name="id" value="{{marketEffectObj.id}}" />
+          <span style="display:inline-block" class="control-attention icon-attention-circled icon-medium-size red" ng-show="marketEffectObj.init &amp;&amp; formOne.nodename.$invalid">请输入节点名称</span>
+          <span class="code mr40 fr">节点ID: {{marketEffectObj.id}}</span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for=""><em class="red">*</em>店铺选择：</label>
+        <div class="controls">
+          <input class="borderHighlight width200" type="text" value="{{marketEffectObj.checkedShop.name}}" ng-click="marketEffectObj.selecShops()" />
+          <input type="hidden" name="shop_id" value="{{marketEffectObj.checkedShop.idInPlat}}" ng-model="marketEffectObj.checkedShop.idInPlat" required="" />
+          <a class="optionModule2 location2" href="javascript:void(0);" style="left:-19px"></a>
+          <span style="display:inline-block;left:-13px" class="control-attention icon-attention-circled icon-medium-size red" ng-show="marketEffectObj.init &amp;&amp; formOne.shop_id.$invalid">请选择店铺</span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="">分析类型：</label>
+        <div class="controls">
+          <select class="commSelect width210" ng-model="marketEffectObj.analysisType" ng-options="type.id as type.analysis_type_value for type in marketEffectObj.anaTypeList" name="analysisType"></select>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="">分析时间：</label>
+        <div class="controls">
+          <div class="control-radio">
+            <input class="commCheckbox" type="radio" value="1" ng-model="marketEffectObj.analyTimeType" ng-change="marketEffectObj.changeTimeType()" name="analysisTimeType" />执行后立即分析
+          </div>
+          <div class="control-radio" style="top:6px">
+            <input class="commCheckbox" value="2" type="radio" ng-model="marketEffectObj.analyTimeType" ng-change="marketEffectObj.changeTimeType()" name="analysisTimeType" />指定时间分析
+            <input class="borderHighlight datetimepicker" type="text" name="specialDay" placeholder="请选择分析日期" ng-model="marketEffectObj.specialDay" ng-disabled="marketEffectObj.specialTag" picker4="" readonly="readonly" style="margin-left:40px;width:150px" />
+          </div>
+          <div class="control-radio">
+            <input class="commCheckbox" value="3" type="radio" ng-model="marketEffectObj.analyTimeType" ng-change="marketEffectObj.changeTimeType()" name="analysisTimeType" />延后时间分析
+            <span class="ml40">执行后第 <input class="num borderHighlight vm" value="{{marketEffectObj.delayNum}}" ng-model="marketEffectObj.delayNum" ng-disabled="marketEffectObj.delayTag" ng-number="" min="1" max="10" type="text" /> 天进行分析</span>
+          </div>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for=""><em class="red">*</em>分析名称：</label>
+        <div class="controls">
+          <input class="width283 borderHighlight" type="text" maxlength="20" ng-model="marketEffectObj.analysisName" name="analysisName" required="" />
+          <span class="control-attention icon-attention-circled icon-medium-size red" ng-show="marketEffectObj.init &amp;&amp; formOne.analysisName.$invalid">请填写分析名称</span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="">分析内容：</label>
+        <div class="controls control-textarea">
+          <textarea id="" name="analysisCont" class="borderHighlight" maxlength="100" cols="10" rows="15" ng-model="marketEffectObj.analysisCont"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="">效果查看：</label>
+      <div class="controls">
+        <a href="http://yushanfang.com/" target="_blank" class="blueColor control-link">效果查看链接</a>
+        <span class="control-link icon-help-circled icon-help-color" ng-title="如果没有订购御膳房数据服务，请点击链接订购"> </span>
+      </div>
+    </div>
+    <div class="ling_di mt10 clearfix"></div>
+    <div class="commBottom">
+      <a class="reportButton" ng-click="marketEffectObj.showReport()" href="javascript:void(0);" ng-show="marketEffectObj.reportFlag"> <span class="reportIcon"></span>发送报告</a>
+      <div class="mb removeunderline">
+        <button class="btn" ng-class="{btnBlue:!marketEffectObj.isEditorFlag}" type="submit">确定</button>
+        <a class="btn " href="###" ng-close-window="">取消</a>
+      </div>
+    </div>
+  </form>
+  <!--店铺选择框 start-->
+  <div id="queryShopsPop" class="queryShopsPop shopsChecked">
+    <div class="shopMenu clearfix">
+      <p class="fr" ng-show="marketEffectObj.ShopUnusedAry.length&gt;0">
+        <a href="javascript:void(0)" title="可选店铺" ng-click="marketEffectObj.toggleStatusShop=false">可选店铺</a>
+        <span class="fontLine">|</span>
+        <a class="shixiao" href="javascript:void(0)" title="已失效店铺" ng-click="marketEffectObj.toggleStatusShop=true">已失效店铺</a>
+      </p>
+    </div>
+    <div class="shopUnused" ng-show="marketEffectObj.toggleStatusShop">
+      <div class="listsBox topNormal">
+        <ul class="unitLists clearfix">
+          <li ng-repeat="list in marketEffectObj.ShopUnusedAry" class="uneditor">
+            <a id="{{list.idInPlat}}" title="{{list.name}}" href="javascript:void(0)">{{list.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="shopUsed" ng-show="!marketEffectObj.toggleStatusShop">
+      <div class="listsBox topNormal">
+        <ul class="unitLists editorShops clearfix">
+          <li ng-repeat="shop in marketEffectObj.shopList" ng-class="shop.checked" ng-click="marketEffectObj.checkShop(shop)">
+            <a id="{{shop.idInPlat}}" title="{{shop.name}}" href="javascript:void(0)">{{shop.name}}</a>
+            <span class="trianger"></span>
+            <span class="gg"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="ling_di"></div>
+      <div class="listsButton fr mr15 mt5">
+        <button type="button" class="btn btnBlue" ng-click="marketEffectObj.sureAddShop()" ng-close-child-window>确定</button>
+        <button type="button" class="btn" ng-click="marketEffectObj.cancelShop()" ng-close-child-window>取消</button>
+      </div>
+    </div>
+  </div>
+  <!--店铺选择框 end-->
+  <div class="data-report" style="display:none">
+    <div class="bannerCommStyle marginbt10" ng-show="marketEffectObj.tips">
+      下载文件保留15天，15天后将不再提供下载
+    </div>
+    <div class="commWrapThree">
+      <div class="clearfix mb10"></div>
+      <div class="dataInfoList">
+      </div>
+    </div>
+  </div>
+</div>
+<!--<script type="text/javascript" src="controller/node/tanalysiseffmarket.js"></script>-->

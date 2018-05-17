@@ -1,0 +1,51 @@
+<div ng-controller="excludeCtrl" class="mesg_node">
+  <div class="discountEc">
+    <div class="commWrapFour clearfix commNodeMarkRelative">
+      <div class="bannerCommStyle areaHeight26" ng-show="excludeScopeObj.tips">
+        {{excludeScopeObj.tips}}
+        <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+      </div>
+      <div class="contentNodeWrap">
+        <table>
+          <tbody>
+          <tr>
+            <th class="tr" width="18%"><label>节点名称：</label></th>
+            <td>
+              <div class="pr">
+                <input type="text" class="borderHighlight nameInput ml5 fl" ng-model="excludeScopeObj.name" maxlength="20" ng-noderequire="" />
+                <span nodetip=""></span>
+              </div></td>
+            <td><label class="code mr40 fr">节点代码：{{excludeScopeObj.id}}</label></td>
+          </tr>
+          <tr>
+            <th class="tr"><label>从</label></th>
+            <td>
+              <select class="commSelect" ng-model="excludeScopeObj.beforeNodeId" ng-options="connectNode.id as connectNode.name for connectNode in excludeScopeObj.connectNodes">
+                <option value="">-请选择-</option>
+              </select>
+              <label class="mr10 ml10">排除</label>
+              <select class="commSelect" ng-model="excludeScopeObj.afterNodeId" ng-options="connectNode.id as connectNode.name for connectNode in excludeScopeObj.connectNodes">
+                <option value="">-请选择-</option>
+              </select>
+              <label class="error ml5" ng-show="formIdToIdFlag">{{excludeScopeObj.errorValues}}</label>
+            </td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--活动选择器测试-->
+      <!--p>活动选择器<input type="text" ng-click="excludeScopeObj.addHdSelector()" /></p-->
+    </div>
+    <div class="ling_di mt10 clearfix"></div>
+    <div class="commBottom clearfix">
+      <div class="mb">
+        <button class="btn btnBlue" ng-click="excludeScopeObj.postDiscountEcData($event)">确定</button>
+        <button class="btn" ng-close-window="">取消</button>
+      </div>
+    </div>
+  </div>
+  <!--活动选择器测试 后期删除-->
+  <div ng-include="" src="excludeScopeObj.hdSrc" onload="openActivityPop()"></div>
+</div>
+<!--<script type="text/javascript" src="controller/node/tfilterexclude.js"></script>-->

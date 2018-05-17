@@ -1,0 +1,28 @@
+<!--<script type="text/javascript" src="controller/marketList.js"></script>-->
+<div class="marketingCampGraph" ng-controller="gridController">
+  <div class="wrapCampaignListCon">
+    <div class="mt">
+      <label>
+        <input class="checkBox" type="checkbox" name="show_activity" ng-model="myActivity" ng-click="searchObj.changeActivity(myActivity)"
+        />只显示我的活动
+      </label>
+      <em>|</em>
+      <div ac-type-selector class="selectBox tingeBlue" style="display:inline-block"></div>
+      <!--  <select class="selectBox tingeBlue" name="campState" ng-model="statusValue" ng-change="searchObj.hdCurStatus(statusValue)">
+      <option value="">不限</option>
+      <option value="A1">设计中</option>
+      <option value="B1">测试执行中</option>
+      <option value="B3">正式执行中</option>
+      <option value="A4">执行中止</option>
+      <option value="A5">执行完成</option>
+      <option value="A6">执行错误</option>
+      </select> -->
+      <div class="commSearch">
+        <label class="default_color" ng-searcheffect>活动名称/活动ID</label>
+        <input class="commSearchVal" type="text" name="couponName" ng-model="hdValue" maxlength="50" ng-searcheffect>
+        <button class="commSearchBtn" ng-click="searchObj.searchHdButton(hdValue)"></button>
+      </div>
+    </div>
+    <div class="campaignListCon campaignListConSingle couponListssBox"></div>
+  </div>
+</div>

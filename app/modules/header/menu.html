@@ -1,0 +1,185 @@
+<div ng-controller="menuCtrl" ng-cloak>
+  <div class="moreMessagePop" style="display: none">
+    <div class="pad15">
+      <table class="tableCommA" width="830">
+        <thead>
+          <tr>
+            <th width="40">
+              <input style="position: relative;top: 2px;left: -9px" type="checkbox" ng-model="selectAll" ng-change="noticeObj.setSelectAll(selectAll)">
+            </th>
+            <th class="al">
+              <span>主题</span>
+            </th>
+            <th width="160" class="ac">
+              <span>时间</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="mess in popMesses" ng-class-even="'even'" ng-class="{bold:mess.isRead, bold:!mess.isRead}">
+            <td style="cursor: default" width="40" class="al">
+              <input type="checkbox" ng-change="noticeObj.selectNoticeId(mess.noticeId, mess.select)" ng-model="mess.select">
+            </td>
+            <td ng-click="noticeObj.readClick($index)" class="gray5e">{{mess.title}}</td>
+            <td style="cursor: default" class="ac gray3d">{{mess.created}}</td>
+          </tr>
+          <tr>
+            <td colspan="3" class="pages">
+              <div class="fr">
+                <a class="prevPage" href="javascript:void(0);" ng-show="isFirstPage" ng-click="noticeObj.getPrePage()" title="上一页"></a>
+                &nbsp;
+                <span>{{page}}/{{total}}</span>
+                &nbsp;
+                <a class="nextPage" href="javascript:void(0);" ng-show="isLastPage" ng-click="noticeObj.getNextPage()" title="下一页"></a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <button ng-click="noticeObj.deleteNotice()" ng-class="{btnBlue:deleteButton}" class="btn ">删除选中</button>
+        <button ng-click="noticeObj.clearNotice()" class="btn btnBlue">删除已读</button>
+      </div>
+    </div>
+  </div>
+  <div style="display: none" class="isShowMessContent" id="isShowMessContent">
+    <div id="mask2"></div>
+    <div id="popBack2">
+      <!--通知&消息&公告类弹层-->
+      <div class="contentPop" class="absolute-center">
+        <div class="popbg">
+          <div class="noticePopComm absolute-center">
+            <!--title-->
+            <div class="noticeTitle">
+              <span class="noticeType">
+                  <img src="../../images/dashboard/noticeTitle.png" width="55" height="58"/>
+                </span>
+              <div class="noticeTitleFont">
+                <h3 class="elli-text f16 white">{{contitle}}</h3>
+                <p class="blueA f11">
+                  <span>来源：数据赢家</span>
+                  <span class="padl25">{{condate}}</span>
+                </p>
+              </div>
+              <a class="noticeClose" href="javascript:void(0);" ng-click="noticeObj.hideContentDialog()"></a>
+            </div>
+            <!--content-->
+            <div class="noticeContent">
+              <!--   <p parseContent>{{content}}</p>-->
+              <p ng-bind-html="content"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header clearfix">
+    <h1 class="fl"><a class="logo" href="#">数据赢家</a></h1>
+    <nav class="fl">
+      <ul class="nav fl">
+        <li ng-repeat="nav in user.nav" class="hvr-sweep-to-top"><a ng-href="{{disponseTitleALink(nav.url)}}" class={{nav.curClass}} ng-class="nav.name === '联合营销' ? 'lhxx': ''"ng-click="insertCompileLocation(nav.url)">{{nav.name}}</a><i ng-if="nav.name === '联合营销' && unionMarketingNumberShow" class="icon-tipNumber">{{unionMarketingNumber}}</i>
+        </li>
+      </ul>
+      <div class="more fl comboboxParent" style="display:none;">
+        <a href="javascript:void(0)">更多<i class="helloarrow"></i></a>
+        <ul class="combobox">
+          <li ng-repeat="nav in user.nav"><a ng-href="{{disponseTitleALink(nav.url)}}" ng-click="insertCompileLocation(nav.url)">{{nav.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="headerAside">
+      <span class="hello fr comboboxParent">
+          <b>
+              <a href="javascript:void(0)">{{user.name}}<i class="helloarrow"></i></a>
+              <ul class="combobox">
+                  <!--<li><a href="{{userDoUrl}}" target="_blank">账户管理</a></li>-->
+                 <!-- <li><a href="javascript:void(0)" ng-click="changePassword()">修改密码</a></li>-->
+                  <li><a href="javascript:void(0)" ng-click="logout()">退&nbsp;&nbsp;出</a></li>
+              </ul>
+          </b>
+      </span>
+      <span title="联系我们" class="contactus comboboxParent othSpan">
+          <b>
+              <a href="javascript:void(0)"></a>
+              <ul class="combobox" style="width:160px">
+                  <li><a target="_blank" href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&key=XzgwMDAxNjE3N18yNDMzNjRfODAwMDE2MTc3XzJf">QQ客服</a></li>
+                  <li><a target="_blank" href="http://www.taobao.com/webww/ww.php?ver=3&amp;touid=%E6%95%B0%E6%8D%AE%E8%B5%A2%E5%AE%B6&amp;siteid=cntaobao&amp;status=1&amp;charset=utf-8">旺旺客服</a></li>
+                  <li><a href="javascript:void(0)">客服电话：4000270163</a></li>
+                  <li><a href="javascript:void(0)">投诉专线：4000270163-3</a></li>
+              </ul>
+          </b>
+      </span>
+      <span title="账户管理" class="seeContact">
+          <b>
+              <a href="{{accountLink}}" target="_blank"></a>
+          </b>
+      </span>
+      <span title="系统消息" class="sysInfo">
+          <b>
+              <a  href="javascript:void(0)" ng-click="showMoreMessageDialog()"><div id="newsTrue" ng-show="newsTrue"></div></a>
+          </b>
+      </span>
+      <span title="帮助" class="help comboboxParent othSpan" ng-show="!SSOlinkyes">
+          <b>
+              <a href="javascript:void(0)"></a>
+              <ul class="combobox">
+                  <li><a style="cursor: pointer" ng-click="getHelpLink()" target="_blank">帮助网站</a></li>
+                  <li><a href="http://elearning.shuyun.com" target="_blank">在线培训</a></li>
+              </ul>
+          </b>
+      </span>
+      <span title="帮助" class="help comboboxParent  othSpan" ng-show="SSOlinkyes">
+          <b>
+              <a href="javascript:void(0)"></a>
+              <ul class="combobox">
+                  <li><a style="cursor: pointer" ng-click="getHelpLink()" target="_blank">帮助网站</a></li>
+                  <li><a href="http://elearning.shuyun.com" target="_blank">在线培训</a></li>
+                  <li><a href="{{SSOlink}}" target="_blank">登陆老版本</a></li>
+              </ul>
+          </b>
+      </span>
+    </div>
+  </div>
+  <!-- begin 添加联系人信息-->
+  <div class="addPerInfoMark" ng-show="addPerInfoFlag">
+    <a class="cancleAddInfo" href="javascript:void(0)" title="关闭" ng-click="cancelAddInfo()">ⅹ</a>
+    <p>您还没有添加联系人信息，<a class="viewAddPerPop" href="javascript:void(0)" title="立即添加" ng-click="viewAddPerPop()">立即添加</a>
+    </p>
+  </div>
+  <div>
+    <label class="collectPerInfoPop">
+      <dl class="collectInfoBox">
+        <dt>填写联系人信息的作用是在店铺数据出现异常或系统功能出现升级时第一时间告知店铺掌柜</dt>
+        <dd>
+          <label>联系人姓名 ：</label>
+          <input class="borderHighlight {{error}}" maxlength="20" ng-model="contactName" type="text" ng-click="removeBorderColor('flag')" />
+          <!-- 标准版中不做必填验证<i class="red">*</i>-->
+          <label>QQ ：</label>
+          <input class="borderHighlight" ng-model="contactQQ" type="text" />
+        </dd>
+        <dd>
+          <label>手机号码 ：</label>
+          <input class="borderHighlight {{errorPhone}}" maxlength="11" ng-model="contactPhone" type="text" ng-click="removeBorderColor()" />
+          <!-- 标准版中不做必填验证<i class="red">*</i>-->
+          <label>旺旺 ：</label>
+          <input class="borderHighlight" ng-model="contactWW" type="text" />
+        </dd>
+        <dd>
+          <label>邮件地址 ：</label>
+          <input class="borderHighlight" ng-model="contactEmail" type="text" />
+          <label>新浪微博 ：</label>
+          <input class="borderHighlight" ng-model="contactWeibo" type="text" />
+        </dd>
+        <dd>
+          <button class="btn btnBlue submitPerData" ng-click="perInfoSave()" ng-disabled="disableFlag" type="button" style="visibility: visible;">确定</button>
+          <button class="btn" ng-click="cancelPerInfoPop()" type="button">取消</button>
+        </dd>
+      </dl>
+    </label>
+  </div>
+  <!--end 添加联系人信息-->
+  <!--修改密码-->
+  <div ng-include src="passwordPage" onload="popPassword()">21212</div>
+  <script type="text/javascript" src="http://g.tbcdn.cn/sj/securesdk/0.0.3/securesdk_v2.js" id="J_secure_sdk_v2" data-appkey="12283535"></script>
+</div>

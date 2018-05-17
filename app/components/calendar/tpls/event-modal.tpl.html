@@ -1,0 +1,44 @@
+<div class="im-event-detail-box" ng-style="pos">
+  <div class="angle" ng-style="anglePos"></div>
+  <div class="event-detail-box" ng-cloak>
+    <header class="title">
+      <span ng-if="event.status!=='A1'">
+        <span ng-bind="event.startTime|imDate"></span> ~ <span ng-bind="event.endTime|imDate"></span>
+      </span>
+      <span ng-if="event.status==='A1'">尚未开始执行</span>
+    </header>
+    <section class="body">
+      <div class="name">
+        <i ng-if="event.status==='A6'" class="iconfont icon-warning1"></i>
+        <i ng-if="event.isCycle" class="iconfont icon-shijian" tooltip-placement="top" cc-tooltip="'周期性活动'"></i>
+        <span class="name-text" ng-bind="event.campName"></span>
+        <span class="status-bar" ng-class="statusMap[event.status].className" ng-bind="statusMap[event.status].showMark"></span>
+        <i class="iconfont icon-edit" ng-if="statusMap[event.status].isEdit" ng-click="onEdit($event,event)"></i>
+      </div>
+      <div class="remark" ng-bind="event.remark"></div>
+      <div class="group pt10">
+        活动ID：
+        <span ng-bind="event.campId"></span>
+      </div>
+      <div class="group">
+        创建人：
+        <span ng-bind="event.creater"></span>
+      </div>
+      <div class="group pb10">
+        审批人：
+        <span ng-bind="event.approver"></span>
+      </div>
+    </section>
+    <footer class="footer">
+      <span class="create-date">
+        创建时间：
+        <span ng-bind="event.startTime |date:'yyyy-MM-dd'"></span>
+      </span>
+      <div class="handle-box">
+        <span ng-if="statusMap[event.status].isDesign" ng-click="onForce($event)" ui-sref="campaign.market.details({id:event.campId,workflowId:event.workflowId})">设计</span>
+        <span ng-if="statusMap[event.status].isView" ng-click="onEdit($event,event,'view')">查看</span>
+        <span ng-if="statusMap[event.status].isDel" ng-click="onDel()">删除</span>
+      </div>
+    </footer>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="maincontainerB" ng-controller="partitionCtrl">
+  <div class="maincontainer " style="overflow-x: hidden;overflow-y: auto;">
+    <!-- <div class="hdZtreeType" ng-include src="hdZtreeType"></div>-->
+    <div ng-hide="partitionLayer.show_flog">
+      <div class="clearfix">
+        <h2 class="heading-second">客户分组</h2>
+        <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360 middledarkerblueBtn" ng-click="partitionLayer.add()">
+          <a href="javascript:void(0)">新建客户分组</a>
+        </div>
+      </div>
+      <div ng-include src="partitionLayer.card_src"></div>
+    </div>
+    <div id="partitionLayer"  ng-include src="partitionLayer.tpl_src" ng-show="partitionLayer.show_flog" ></div>
+  </div>
+</div>
+
+
+
+
+

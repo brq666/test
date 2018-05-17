@@ -1,0 +1,113 @@
+<div class="singleTemplate" ng-class="{linedotted:data.posY==6||data.posY==11,pt10:data.posY==6||data.posY==11}"
+     ng-show="flag || data.posY<=5" custom-time-type>
+  <label class="commLabelWidth126">
+    <em class="ico_tips"
+        ng-show="data.tips"
+        ng-title="{{data.tips}}"></em><span
+    title="{{data.name}}">{{data.name}}：</span>
+  </label>
+  <input type="text" autocomplete="off"
+         class="borderHighlight w220 mr0" name="timeWrap{{data.id}}"
+         readonly="true" ng-model="totleTimeValue"
+         title="{{totleTimeValue}}"
+         ng-click="editorTimeConditions()"/>
+  <div class="timeSetBox">
+    <div class="timeStyleBox">
+      <p>
+        <select class="commSelect width130 mr0" name="customTimeName{{data.id}}"
+                ng-options="timeTypeList.value for timeTypeList in timeTypeLists"
+                ng-model="curTimeList"></select>
+        <a class="ml5 blueColor"
+           ng-click="clearSettingData()"
+           href="javascript:void(0)">重置</a>
+      </p>
+      <div class="inputWrap20" ng-show="curTimeList.type == \'absolutely\'">
+        <p class="commPenEditor">
+          <input type="text"
+                 autocomplete="off"
+                 class="absoluteInputClass borderHighlight w220 mr0 datetimepicker customTimeBg"
+                 name="d{{data.id}}"
+                 ng-model="dateInput1"
+                 date-absolute-picker
+                 readonly="true">
+        </p>
+        <p class="m inputWrap5">至</p>
+        <p class="markSpan">
+          <span class="commPenEditor">
+            <input type="text" autocomplete="off"
+                   class="absoluteInputClass borderHighlight w220  mr0 datetimepicker customTimeBg"
+                   name="e{{data.id}}" ng-model="dateInput2"
+                   date-time-picker readonly="true">
+          </span>
+        </p>
+      </div>
+      <div class="timeSpanLayout inputWrap20" ng-show="curTimeList.type== \'relatively\'">
+        <p>
+          <select name="gg" ng-model="configType">
+            <option value="0">前</option>
+            <option value="1">后</option>
+          </select>
+          <span class="commPenEditor"><input type="text" autocomplete="off" class="borderHighlight width34 mr5"
+                                             ng-class="{error:errorInput1}" name="f{{data.id}}"
+                                             ng-model="monthOrDayOrSecondInput1"
+                                             max-integer="{{numcount}}"></span>
+          <select class="ml5" name="gg"
+                  ng-model="subType">
+            <option value="0">月</option>
+            <option value="1">天</option>
+            <option value="2">分</option>
+          </select>
+          <span ng-show="subType==\'0\' || subType==\'1\' ">
+            <span ng-show="subType==\'0\'">
+              <span
+                class="commPenEditor ml5"><input type="text" autocomplete="off" class="borderHighlight width34 mr5"
+                                                 ng-class="{error:errorInput2}" name="h{{data.id}}" ng-model="dayInput1"
+                                                 date-select readonly="readonly"></span> 号</span>
+            <span
+              class="commPenEditor ml5"><input type="text" autocomplete="off" class="borderHighlight width34 mr5"
+                                               ng-class="{error:errorInput3}" name="hh{{data.id}}" ng-model="timeInput1"
+                                               timepicker readonly="true"></span>
+          </span>
+        </p>
+        <p class="m inputWrap5">至</p>
+        <p>
+          <select name="gg" ng-model="configType">
+            <option value="0">前</option>
+            <option value="1">后</option>
+          </select>
+          <span class="commPenEditor"><input type="text" autocomplete="off" class="borderHighlight width34 mr5"
+                                             ng-class="{error:errorInput4}" name="j{{data.id}}"
+                                             ng-model="monthOrDayOrSecondInput2"
+                                             max-integer="{{numcount}}"></span>
+          <select name="k" name=""
+                  class="ml5"
+                  ng-model="subType">
+            <option value="0">月</option>
+            <option value="1">天</option>
+            <option value="2">分</option>
+          </select>
+          <span ng-show="subType==\'0\' || subType==\'1\' ">
+            <span ng-show="subType==\'0\'">
+              <span class="commPenEditor ml5">
+                <input type="text" autocomplete="off"
+                       class="borderHighlight width34 mr5"
+                       ng-class="{error:errorInput5}" name="g{{data.id}}" ng-model="dayInput2"
+                       date-select readonly="readonly">
+              </span> 号 </span>
+            <span class="commPenEditor ml5">
+              <input type="text" autocomplete="off"
+                     class="borderHighlight width34 mr5"
+                     ng-class="{error:errorInput6}" name="i{{data.id}}" ng-model="timeInput2"
+                     timepicker readonly="true"></span>
+          </span>
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="listsButton ml15"><label class="domBlock error"
+                                         ng-show="errorFlagOne || errorFlagTwo">{{errorMessage}}</label>
+      <button class="btn btnBlue btnSmall" type="button" ng-click="sureTimeTypeValue($event)">确定</button>
+      <button class="btn btnSmall" type="button" ng-close-child-window>取消</button>
+    </div>
+  </div>
+</div>

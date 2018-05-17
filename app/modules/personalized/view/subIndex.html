@@ -1,0 +1,64 @@
+<div>
+  <div class="clearfix">
+    <h2 class="heading fl">方案部署</h2>
+    <div class="shopinfo" id="shopinfo">
+      <b>店铺选择 :</b>
+      <select class="comm-select" ng-model="$parent.currentShopId" ng-options="item.idInPlat as item.name for item in $parent.shops" ng-change="getPlansInit($parent.currentShopId)"></select>
+    </div>
+  </div>
+  <div>
+    <!--main-->
+    <div class="fl deploymentmain">
+      <div id="mobileSolution">
+        <div class="fl marginrig24" ng-repeat="plan in plans" ng-if="plans.length &gt; 0" ui-sref="peizhi({planIndex:$index})">
+          <div class="solution_off relative" ng-if="plan.rules.length &gt; 0">
+            <ul class="solutiondetail pad15">
+              <li class="blue_pa font14"><a>{{plan.name}}</a></li>
+              <li class="gray_66 font12">
+                <p>最后配置时间：{{plan.lastConfigTime |date : 'yyyy/MM/dd hh:mm:ss'}}<br />规则数：<em class="ruleLen">{{plan.rules.length}}</em> </p>
+              </li>
+              <li class="font12 blue_pb" ng-bind-html="plan.formatDiffString"></li>
+            </ul>
+            <p class="absolute {{plan.active? 'de_solutiontitle':'de_title'}} padlef10 font14">
+              方案{{$index + 1}} <a class="{{plan.active? 'buttonon':'buttonoff'}}" active="{{plan.active}}" ng-click="updatePlanStatus(plan,$event)"></a>
+            </p>
+            <p class="absolute lasttime gray_66 font11 right">最后开启时间:{{plan.startTime|date : 'yyyy/MM/dd hh:mm:ss'}}</p>
+          </div>
+          <div class="solution_off relative" ng-if="plan.rules.length == 0">
+            <a id="skipWeb" class="deploymentlist"> <i class="add_deploy"></i><br /><span class="font14 blue_pb">配置方案</span> </a>
+            <p class="absolute de_title padlef10 font14">方案{{$index + 1}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="clear gray_66 padtop60">
+        <div class="fl lineheight27">
+          默认备注签名：
+        </div>
+        <div class="fl">
+          <input class="gray_66" type="text" ng-model="firstSign" ng-disabled="banModify" ng-blur="checkFirstSign($event)" />
+          <i class="middle markEleI icon_editblue relative right35" ng-click="banModify = false" title="点击修改签名"></i>
+          <span class="bluenote relative right35" title="1. 个性化包裹系统所打的备注会接在原备注的后面。请点击“预览”查看效果"></span>
+        </div>
+        <div class="inline-block marlef20" id="showPreview">
+          <a class="button-mini-gray" ng-click="previewFirstSign()" >预览</a>
+            <div ng-show="showPreviewFirstSign">
+                <div class="tipbg" ng-click="previewFirstSign()"></div>
+                <p class="poptipAbg relative"><span class="poptipA inline-block font14 gray_53">{{signContent}}</span></p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!--right-->
+    <div class="fr deploymenttip">
+      <h3 class="font13 gray_3d">使用提示</h3>
+      <p class="lineheight20 gray_78 padtop5">
+        1.个性化包裹（V1.0）仅对已付款未发货的（包括已确认的货到付款类型的）订单打备注，仅对方案开启后符合条件的订单打备注。<br />
+        2.个性化包裹（V1.0）可支持三个方案并行，您也可以选择只开启1或2个方案。<br />
+        3.每个方案根据内部规则优先级，只产生一条订单备注内容。<br />
+        4.多个方案产生多条备注。排在前面的方案备注在前，后面的方案备注在后，中间用中文“；”隔开，组合后形成完整的个性化备注。<br />
+        5.备注签名加在所有备注的最后面，有方案开启后，仍可以修改签名。<br />
+        6. 个性化包裹系统所打的备注和签名会接在原备注的后。
+      </p>
+    </div>
+  </div>
+</div>

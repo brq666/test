@@ -1,0 +1,42 @@
+<div>
+  <div class="gridCommCursom clearfix" ng-controller="responseReportCtrl">
+    <div class="loading" ng-show="!hideDateLoading">
+      <i></i>加载中...
+    </div>
+    <div class="mt5">
+      <label class="commLabelWidth30">查看周期:</label>
+      <select class="commSelect width140" ng-model="curcampJob" ng-options="campJob.plantime for campJob in campJobList | filter: getOKStatus" ng-change="updateResponseReport(curcampJob)"></select>
+    </div>
+    <div ng-repeat="report in responeReportList" ng-model="responeReportList" class="viewTable">
+      <br />
+      <h4>{{report.targetNodeName}}:{{report.targetNodeId}}</h4>
+      <br />
+      <table class="multiTitleTable">
+        <thead>
+        <tr>
+          <th rowspan="2" class="singleTitleTh">目标客户</th>
+          <th colspan="2" class="multiTitleThUp">目标客户人数</th>
+          <th colspan="2" class="multiTitleThUp">有效沟通人数</th>
+          <th rowspan="2" class="singleTitleTh">沟通渠道</th>
+        </tr>
+        <tr>
+          <th class="multiTitleThDownLeft">发送组</th>
+          <th class="multiTitleThDown">控制组</th>
+          <th class="multiTitleThDownLeft">发送组</th>
+          <th class="multiTitleThDown">控制组</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="resultRow in report.data" ng-model="report.data">
+          <td class="multiLineTd"> <span>{{resultRow.targetNodeName}}</span> <span class="multiLineTrDown">{{resultRow.targetNodeId}}</span> </td>
+          <td class="textCenter">{{resultRow.targetCustomerSenderGroupNum}}</td>
+          <td class="textCenter">{{resultRow.targetCustomerControlGroupNum}}</td>
+          <td class="textCenter">{{resultRow.communicationSenderGroupNum}}</td>
+          <td class="textCenter">{{resultRow.communicationControlGroupNum}}</td>
+          <td class="multiLineTd"> <span>{{resultRow.communicationNodeName}}</span> <span class="multiLineTrDown">{{resultRow.communicationNodeId}}</span> </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

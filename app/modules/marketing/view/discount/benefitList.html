@@ -1,0 +1,22 @@
+<div ng-controller="benefitListController">
+  <div class="choose-radius clearfix">
+    <div class="choose-shop">
+      <label>您的店铺：</label>
+      <input type="text" class="borderHighlight ml9" onfocus="this.blur();" readonly="readonly" name="benefitShop" valueId="{{benefitObject.currentListShop.idInPlat}}" ng-model="benefitObject.currentListShop.name" comm-select-config="benefitObject.selectShops('benefitShop')" />
+    </div>
+    <div class="choose-activity">
+      <div class="activity-search mt5">
+        <input type="text" class="activity-search-val" ng-model="benefitObject.benefitValue" placeholder="权益名称" ng-click="promptHide()" ng-blur="promptShow()" />
+        <button class="activity-search-btn" ng-click="benefitObject.updateGrid()"></button>
+      </div>
+      <div class="choose-shop fr">
+        <label>权益类型：</label>
+        <input type="text" class="borderHighlight ml9" readonly="readonly" name="benefitType" valueId="{{benefitObject.currentBenefitType.beneiftType}}" ng-model="benefitObject.currentBenefitType.benefitTypeName" comm-select-config="benefitObject.benefitTypeSelector(true)" />
+      </div>
+  </div>
+  <div class="benefit-activity">
+    <div class="discountCommGridstyle">
+      <div class="benifit-flexgrid"></div>
+    </div>
+  </div>
+</div>

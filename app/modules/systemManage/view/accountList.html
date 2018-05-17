@@ -1,0 +1,21 @@
+<div>
+  <div class="list accountListStyle" ng-controller="AccountListCtrl" style="bottom: 0;left: 23px;position: absolute;right: 15px;top: 25px;margin-top: 0;">
+    <div class="clearfix">
+      <h2 class="heading fl">系统账号</h2>
+      <div class="smalldarkerblueBtn newbuildBtn" ng-show="accountObj.canAddAccount">
+        <a href="javascript:void(0)" ng-click="accountObj.addSysAccount('add')">新建系统账号</a>
+      </div>
+      <!-- <span class="ccms_tips"><span class="ccms_tipsContent"><b></b>需要店铺订购淘宝官方的"店铺优惠券"应用，点击 <a target="_blank" href="http://fuwu.taobao.com/ser/detail.htm?spm=0.0.0.118.ZjwjUl&amp;service_code=SERV_DPYHQ" title="立即订购">立即订购</a></span></span>-->
+    </div>
+    <!--div class="listHeader">
+            <ul class="listTab clearfix">
+                <li class="listSelected"><a href="javascript:;" title="系统账号列表">账号列表</a></li>
+            </ul>
+        </div-->
+    <div class="couponListssBox listContainer noTopBorder">
+      <div style="position:absolute;top:5px;bottom:0;right:0;left:0">
+        <div id="couponListsGrid"></div>
+      </div>
+    </div>
+  </div>
+</div>

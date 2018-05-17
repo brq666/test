@@ -1,0 +1,19 @@
+<div class="maincontainerB">
+  <div class="maincontainer">
+    <div ng-controller="selectShop">
+      <div class="clearfix">
+        <h2 class="mmTitle">请选择店铺</h2>
+      </div>
+      <div class="shopWrapper">
+        <div class="paddingDiv">
+          <table border="0">
+            <tr ng-repeat="shop in shopsList">
+              <td>{{shop.name}}</td>
+              <td class="btnTd"><button ng-model="shop.idInPlat" class="btn btnBlue" ng-click="toRealUrl(shop.idInPlat)">进入店铺</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

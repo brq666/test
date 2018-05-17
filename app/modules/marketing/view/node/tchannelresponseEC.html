@@ -1,0 +1,45 @@
+<div ng-controller="tchannelresponseECCtrl">
+  <div class="commWrapFour commNodeMarkRelative">
+    <div class="bannerCommStyle areaHeight26" ng-show="responseEC.tips">
+      {{responseEC.tips}}
+      <a href="javascript:void(0)" toggle-banner title="展开" class="downSanjiao sanjiaoPosition"></a>
+    </div>
+    <div class="commWrapFour clearfix">
+      <div class="vipNode">
+        <table>
+          <tr>
+            <th class="tl" width="10%"><label>节点名称：</label></th>
+            <td><div class="pr"><input type="text" class="borderHighlight nameInput fl" ng-model="responseEC.name" maxlength="20" ng-noderequire /><span nodetip></span></div></td>
+            <td><label class="code fr mr40">节点代码：{{responseEC.id}}</label></td>
+          </tr>
+          <tr>
+            <th class="tl"  colspan="3">优惠券响应类型</th>
+          </tr>
+          <tr>
+            <td class="tl" colspan="3">
+              <p>
+                <input class="v1 commRadio" type="radio" value="0" ng-model="responseEC.outputType" />优惠券是否发送成功
+                <em class="ico_tips" ng-title="选择此类型需要优惠券响应节点之前的优惠券节点的输出类型选择为“全部客户”，否则无法查询出发送失败客户"></em>
+              </p>
+            </td>
+          </tr>
+          <tr ng-if="responseEC.outputType * 1">
+            <td class="tl" colspan="3">
+              <p>
+                <input class="v1 commRadio" type="radio" value="1" ng-model="responseEC.outputType" />优惠券是否使用
+                <em class="ico_tips" ng-title="优惠券使用指的是优惠券状态为：已使用和使用中。"></em>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="ling_di mt10 clearfix"></div>
+    <div class="commBottom clearfix">
+    <div class="mb">
+      <button class="btn btnBlue" id="marketSure" ng-click="saveResponseEC()">确定</button>
+      <button class="btn" id="marketCancel" ng-close-window>取消</button>
+    </div>
+  </div>
+</div>

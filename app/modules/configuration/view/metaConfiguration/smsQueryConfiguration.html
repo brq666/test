@@ -1,0 +1,140 @@
+<script type="text/javascript" src="http://localhost:3000/app/Selector/service/SelectorService.js"></script>
+<div class="maincontainerB">
+  <div class="maincontainer" ng-controller="CmsConfigQueryCtrl">
+    <div>
+      <div class="clearfix">
+        <h2 class="heading fl"> 短信节点配置 </h2>
+        <div class="smalldarkerblueBtn newbuildBtn">
+          <a href="javascript:void(0)" ng-click="showsmsQueryConfigurationPop()"> 新建主题 </a>
+        </div>
+      </div>
+      <div class="list">
+        <ul class="CmsConfigQueryitem" ng-repeat="SmSSubject in SmSSubjectsList" ng-click="">
+          <li>
+            <lable>
+              主题:
+            </lable> {{SmSSubject.subjectName}}
+          </li>
+          <li>
+            <lable>
+              手机号属性:
+            </lable>
+            <!-- {{SmSSubject.mobileAttributeId}}--> 手机号
+          </li>
+          <li>
+            <lable>
+              已配置动态变量数量:
+            </lable> {{SmSSubject.attributes.length}}
+          </li>
+          <li>
+            <lable>
+              所属分组元模型:
+            </lable> {{SmSSubject.modelName}}
+          </li>
+          <li>
+            <a href="javascript:void(0);" class="edit_delete edit_icon" title="修改" ng-click="showsmsQueryConfigurationPop(SmSSubject.id)"></a>
+            <a href="javascript:void(0);" ng-click="deleteSmsAttributeCon(SmSSubject.id)" class="edit_delete delete_icon" title="删除"></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="productSelected" ng-include="" src="productSelect" onload="popupProSel()"></div>
+    <!--添加短信节点配置 begin-->
+    <div class="addPop" style="display: none">
+      <div class="title">
+        短信节点配置
+        <a href="javascript:void(0);" class="close" ng-click="addPop=false"> </a>
+      </div>
+      <div class="ccmsPublicPopMain">
+        <div class="configAttrBox">
+          <ul>
+            <li>
+              <label class="commLabelWidth100"> 选择分组元模型： </label>
+              <select ng-model="modelId" ng-options="metaSegment.modelId as metaSegment.modelName for metaSegment in MetaSegmentList" class="commSelect width210">
+                <option value=""> --请选择分组元模型-- </option>
+              </select>
+              <label class="error" ng-show="metaSegmentShow"> 必选 </label>
+            </li>
+            <li>
+              <label class="commLabelWidth100"> 选择主题： </label>
+              <select ng-model="subjectId" ng-options="metaSubject.subjectId as metaSubject.subjectName for metaSubject in MetaSubjectList" class="commSelect width210">
+                <option value=""> --请选择主题-- </option>
+              </select>
+              <label class="error" ng-show="metaSubjectShow"> 必选 </label>
+            </li>
+            <li>
+              <label class="commLabelWidth100"> 选择手机号： </label>
+              <select class="commSelect width210" ng-model="mobileAttributeId">
+                <option value=""> --选择手机号-- </option>
+              </select>
+              <label class="error" ng-show="customerGroupIdShow"> 必选 </label>
+            </li>
+            <li>
+              <label class="commLabelWidth100"> 添加动态变量 </label> </li>
+            <div class="conditionLayoutBox">
+              <li ng-repeat="attribute in attributeCommit" class="a:$index!=0">
+                <label class="commLabelWidth100" ng-visibility="$index!=0" style="visibility: inherit;">选择属性：</label>
+                <span class="relativeBox">
+                  <input type="text" ng-model="attribute.attributeName" class="borderHighlight width200 attributeInput ng-pristine ng-valid" readonly="" name="f1" ng-click="showAttrPop($index)" />
+                  <a class="optionModule2 location2" ng-click="showAttrPop($index)" href="javascript:void(0);" style="margin-left: 70px;"></a>
+                </span>
+                <span>
+                  <a class="edit_delete delete_icon customButtonLayout" title="删除" ng-visibility="$index==0" ng-click="removeIndicator($index)" href="javascript:void(0);" style="display:inline-block"></a>
+                  <a class="edit_add_icon customButtonLayout" title="增加" ng-click="addIndicator($index)" href="javascript:void(0);"></a>
+                </span>
+                <label class="error attrerror" style="display: none;">必选</label>
+              </li>
+            </div>
+            <li>
+              <label class="commLabelWidth100"> </label>
+              <button class="btn btnBlue" type="submit" ng-click="addPopSave()"> 确定 </button>
+              <button class="btn" type="button" ng-close-window="" ng-click="addPop=false"> 取消 </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--添加短信节点配置 end-->
+    <!--属性选择 begin-->
+    <div class="attrPop" style="display: none" ng-show="AttrPopShow">
+      <div class="title">
+        属性选择
+        <a href="javascript:void(0);" class="close" ng-click="AttrPopShow=false"> </a>
+      </div>
+      <div class="ccmsPublicPopMain">
+        <div class="configAttrBox">
+          <ul>
+            <li>
+              <label class="commLabelWidth100">
+                <input type="radio" name="enabledRadio" value="0" ng-click="change_state(0)" ng-model="status" /> 简单属性
+              </label>
+              <label class="commLabelWidth100">
+                <input type="radio" name="enabledRadio" value="1" ng-click="change_state(1)" ng-model="status" /> 复杂属性
+              </label>
+            </li>
+            <li>
+              <label class="commLabelWidth75"> 选择属性集： </label>
+              <select id="attributeCollectionSelect" ng-model="attributeCollectionId" ng-options="attributeCollection.attributeCollectionId as attributeCollection.attributeCollectionName for attributeCollection in MetaAttributeCollectionList" class="commSelect width210" ng-change="change_select()">
+                <option value=""> --请选择属性集-- </option>
+              </select>
+              <label class="error" ng-show="attributeCollectionIdShow"> 必选 </label>
+            </li>
+            <li>
+              <label class="commLabelWidth75"> 选择属性： </label>
+              <select id="attributeSelect" ng-model="metaAttribute" ng-options="metaAttribute.attributeName for metaAttribute in MetaAttributeList" class="commSelect width210">
+                <option value=""> --请选择属性-- </option>
+              </select>
+              <label class="error" ng-show="attributeIdShow"> 必选 </label>
+            </li>
+            <li>
+              <label class="commLabelWidth75"> </label>
+              <button class="btn btnBlue" type="submit" ng-click="AttrPopSave()"> 确定 </button>
+              <button class="btn" type="button" ng-close-window="" ng-click="AttrPopShow=false"> 取消 </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--属性选择 end-->
+  </div>
+</div>

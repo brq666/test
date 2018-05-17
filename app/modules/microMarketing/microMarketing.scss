@@ -1,0 +1,49 @@
+@import "../../components/flexigrid/css/flexigrid.scss";
+
+.maincontainer {
+  position: static;
+  padding: 10px 26px;
+  margin: 50px 150px;
+  border: 3px solid #d8e9f7;
+  background-color: #f7fbff;
+  border-radius: 15px;
+}
+
+.mmTitle {
+  font-size: 14px;
+  color: #7b7b7b;
+  height: 40px;
+  line-height: 40px;
+}
+
+.shopWrapper {
+  background-color: #fff;
+  margin-bottom: 16px;
+}
+
+.shopWrapper .paddingDiv {
+  padding: 0px 15px 10px 15px;
+}
+
+.shopWrapper table tr {
+  border-bottom: 1px dashed #d7d7d7;
+  color: #797979;
+  font-size: 14px;
+}
+
+.shopWrapper table tr:hover {
+  background-color: #eff8fd;
+  color: #1a1a1a;
+}
+
+.shopWrapper tr td {
+  height: 72px;
+  line-height: 72px;
+  padding-left: 26px;
+}
+
+.shopWrapper tr td.btnTd {
+  width: 200px;
+  text-align: center;
+}
+

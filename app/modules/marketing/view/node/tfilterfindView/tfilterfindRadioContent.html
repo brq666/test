@@ -1,0 +1,97 @@
+<div class="configCondition " ng-class="{queryConditionormWrapOpen:theZtreeLayOutFlag}" ng-controller="queryConditionsCtrl" ng-cloak="">
+  <form id="queryConditionorm">
+    <div class="queryConditionormWrap">
+      <a class="ztreeMenuBtn" title="{{theZtreeLayOutFlag ? '收起' : '展开'}}" ng-click="theZtreeLayOutFlag=!theZtreeLayOutFlag"></a>
+      <div class="ztreeMenuWrap">
+        <!--div class="market_tree_input_wrapper">
+                      <input type="text" name="queryTreeInput" class="market_tree_search_input system_search" ng-placeholder="查询条件" ng-model="searchValue" tree-node-search-input>
+                  </div-->
+        <div class="market_tree_wrapper queryZtreeWrap">
+          <div class="loading queryLoading" ng-show="queryZtreeLoadingFlag">
+            <i></i>加载中...
+          </div>
+          <div class="ztree defaultWrapztree dot" query-tree="" out-root-tree="" id="bbb" style="min-height:200px;"></div>
+        </div>
+      </div>
+      <div class="targetWrap mt5">
+        <div class="targetTitle clearfix">
+          <!--全局参数-->
+          <div class="fl mr20" ng-repeat="queryGloballist in globalConditions.queryGloballists" ng-switch="" on="queryGloballist.type">
+            <p ng-switch-when="字典多选">
+              <label class="commLabelWidth75">{{queryGloballist.name}}：</label>
+              <span class="relativeBox">
+                <input type="text" class="borderHighlight width130" ng-class="{error:globalConditions.isUnShops}" readonly="readonly" name="investigator" ng-click="globalConditions.getShops()" ids="{{globalConditions.ShopIds}}" title="{{globalConditions.ShopValsView}}" value="{{globalConditions.ShopValsView}}" />
+                <a class="optionModule2 location2" ng-click="globalConditions.getShops()" href="javascript:void(0);"></a>
+              </span>
+            </p>
+          </div>
+          <!--全局参数end-->
+          <p class="fl">
+            <label class="commLabelWidth75">多条件关系：</label>
+            <select name="relationship" class="commSelect width130 ng-pristine ng-valid valid" ng-model="globalConditions.curRelation">
+              <option value="AND">并且</option>
+              <option value="OR">或者</option>
+            </select>
+          </p>
+          <p class="fl">
+            <label class="commLabelWidth125 mt4">
+              <input class="commCheckbox" type="checkbox" name="conditionIsExcept" ng-model="globalConditions.exceptFlag" ng-true-value="'true'" ng-flase-value="'false'" />不满足如下条件
+            </label>
+          </p>
+        </div>
+        <div class="targetDivBox" query-conditions="">
+          <div class="dragReminder" ng-show="dragReminderFlag">
+            把左边的查询属性拖拉至此区域
+          </div>
+        </div>
+      </div>
+      <div ng-include="" src="commCustomTemplate" onload="showCustomerPop()">
+        <!--行为自定义模板入口-->
+      </div>
+      <!--店铺选择框 start-->
+      <div class="queryShopsPop shopsChecked">
+        <div class="shopMenu clearfix">
+          <p class="fl" ng-show="!globalConditions.toggleStatusShop">
+            <label>
+              <input class="mr5 verticalAlign2" type="checkbox" name="shopAllChecked" ng-model="toggleStatuVal" ng-click="globalConditions.toggleAllShops(toggleStatuVal)" />全选
+            </label>
+          </p>
+          <p class="fr" ng-show="globalConditions.ShopUnusedAry.length > 0">
+            <a href="javascript:void(0)" title="可选店铺" ng-click="globalConditions.toggleStatusShop=false">可选店铺</a>
+            <span class="fontLine">|</span>
+            <a class="shixiao" href="javascript:void(0)" title="已失效店铺" ng-click="globalConditions.toggleStatusShop=true">已失效店铺</a>
+          </p>
+        </div>
+        <div class="shopUnused" ng-show="globalConditions.toggleStatusShop">
+          <div class="listsBox topNormal">
+            <ul class="unitLists clearfix">
+              <li ng-repeat="list in globalConditions.ShopUnusedAry" class="uneditor">
+                <a id="{{list.idInPlat}}" title="{{list.name}}" href="javascript:void(0)">{{list.name}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="shopUsed" ng-show="!globalConditions.toggleStatusShop">
+          <div class="listsBox topNormal">
+            <ul class="unitLists editorShops clearfix">
+              <li ng-repeat="list in globalConditions.shopLists" class="{{list.classVal}}" ng-chose-unit="">
+                <a id="{{list.idInPlat}}" title="{{list.name}}" href="javascript:void(0)">{{list.name}}</a>
+                <span class="trianger"></span>
+                <span class="gg"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="ling_di"></div>
+          <div class="listsButton fr mr15 mt5">
+            <button type="button" class="btn btnBlue" ng-click="globalConditions.sureAddShop()" ng-close-child-window>确定</button>
+            <button type="button" class="btn" ng-close-child-window>取消</button>
+          </div>
+        </div>
+      </div>
+      <!--店铺选择框 end-->
+    </div>
+  </form>
+</div>
+<!--<script type="text/javascript" src="controller/node/tfilterfindJs/queryConditionsCtrl.js"></script>-->

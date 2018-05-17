@@ -1,0 +1,18 @@
+<div class="maincontainerB" ng-controller="workbenchCtrl" ng-cloak>
+  <div class="maincontainer">
+    <div class="clearfix">
+      <h2 class="heading fl">客服工作台数据配置</h2>
+    </div>
+    <div class="ml15">
+      <h3 class="bold mb10">选择需要生成查询条件的主题</h3>
+      <ul class="attributesSettingsList ml5">
+        <li class="mb5" ng-repeat="subject in subjects">
+          <input class="commCheckbox" type="radio" value="{{subject.id}}" name="workbenchRadioSubject" ng-model="workbenchDefaultSubject" />{{subject.name}}
+        </li>
+      </ul>
+      <p>
+        <button class="btn btnBlue commSmallBtn" type="button" ng-click="saveWorkbenchSettings()">保存</button>
+      </p>
+    </div>
+  </div>
+</div>

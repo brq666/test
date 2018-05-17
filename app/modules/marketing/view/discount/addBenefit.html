@@ -1,0 +1,113 @@
+<div class="addTpl">
+  <h2 class="heading ng-binding">{{benefitObject.title}}</h2>
+  <!-- <a href="" class="back-btn back-active-list arr" ng-click="benefitObject.backBenefitActiveList()">返回</a> -->
+  <form id="benefit-form">
+    <div class="bg">
+      <div class="mb10" style="margin-bottom:13px">
+        <label class="label">活动ID：</label>
+        <div class="width200 benefit-relation" ng-bind="benefitObject.relationId"></div>
+      </div>
+      <div class="mb10">
+        <label class="label" ><span class="red">*</span>活动名称：</label>
+        <input type="text" class="borderHighlight width200 left2" ng-model="benefitObject.activityName" name="name" maxlength="20"
+             input_activity_name/>
+      </div>
+      <div class="mb10">
+        <label class="label"><span class="red">*</span>店铺选择：</label>
+        <input style="margin-left:7px" id="stl" onfocus="this.blur();" type="text" class="borderHighlight ml9 required width200" readonly="readonly" name="modifyActiveShop" valueId="{{benefitObject.modifyActiveShop.id}}" ng-model="benefitObject.modifyActiveShop.name" comm-select-config="benefitObject.selectShops('modifyActiveShop')" ng-disabled="benefitObject.editExclusive">
+      </div>
+      <div class="mb10">
+        <label class="label"><span class="red">*</span>活动开始时间：</label>
+        <input ng-hide="benefitObject.status=!0 && benefitObject.status" alt="{{benefitObject.status}}" startTime="{{benefitObject.startTime}}"
+             type="text" picker6 class=" width180 datetimepicker  borderHighlight text left2"
+             ng-model="benefitObject.startTime" name="startTime" readonly="readonly">
+        <!-- <em class="ico_tips" ng-title="活动开始时间提交后只可以向后延迟，不可以提前"></em> -->
+      </div>
+      <div class="mb10">
+        <label class="label"><span class="red">*</span>活动结束时间：</label>
+        <input ng-hide="benefitObject.status=!0 && benefitObject.status" alt="{{benefitObject.status}}" endTime="{{benefitObject.endTime}}" type="text"
+             picker6 class="width180 datetimepicker  borderHighlight text left2" ng-model="benefitObject.endTime"
+             name="endTime" readonly="readonly">
+        <!-- <em class="ico_tips" ng-title="活动结束时间提交后只可以向前提前，不可以延后"></em> -->
+      </div>
+      <div class="mb10">
+        <label class="label"><span class="red">*</span>备注：</label>
+        <textarea class="left2" ng-model="benefitObject.remark" name="remark"
+              onkeydown="if (this.value.length>=100){return false;}"   input_remark placeholder="最多输入100个字" ng-maxlength="100" maxlength="100" ></textarea>
+      </div>
+      <div>
+        <label class="label label-link"><span class="red">*</span>关联权益：</label>
+        <ul class="wrap-link-benefit" name="benefitId">
+          <li ng-repeat="m in benefitObject.enableBenefit track by $index" class="link-benefit link-height-auto">
+            <div class="link-text">权益ID &nbsp&nbsp：{{ m.benefitId }}</div>
+            <div class="link-text clear-float">
+              <div class="link-test-floatL">权益名称：</div>
+              <div class="link-test-floatR" >{{ m.benefitName }}</div>
+            </div>
+            <div class="link-text">开始时间：{{ m.startTime }}</div>
+            <div class="link-text">结束时间：{{ m.endTime }}</div>
+            <div class="link-btn" ng-click="benefitObject.removeBenefit($index)"><a class="link-btn-del"></a></div>
+          </li>
+          <li class="link-benefit link-benefit-add" ng-show="benefitObject.enableBenefit.length < 1" >
+            <div class="link-click-scope" ng-click="benefitObject.addBenefitList()"></div>
+            <div class="link-add-text">添加权益</div>
+            <div class="link-btn-add" ></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="mb">
+      <button type="submit" class="btn btnBlue" ng-disabled="benefitObject.oBtn" ng-click="benefitObject.submit()">确定</button>
+      <span class="btn" ng-click="benefitObject.backBenefitActiveList()" >取消</span>
+    </div>
+  </form>
+</div>
+<div class="benefit-selector">
+  <div class="benefit-chose-wrap">
+    <p class="benefitActivetip">一个权益只能关联一个活动</p>
+    <div class="benefit-select-area">
+      <div class="benefit-select-search">
+        <input type="text" class="benefit-select-val" ng-model="benefitObject.queryValue" placeholder="权益名称" ng-click="promptHide()" ng-blur="promptShow()" />
+        <button class="benefit-select-btn" ng-click="benefitObject.getBenefitData(true)"></button>
+      </div>
+      <div class="fr">
+        <div benefit-type-selector="" default-type="benefitObject.defaultBenefitType" benefit-type-data="benefitObject.benefitTypeData" change-status="benefitObject.getBenefitData(value)" class="selectBox tingeBlue" style="display:inline-block"></div>
+      </div>
+    </div>
+    <div class="loading" ng-show="benefitObject.loading"><i></i>加载中...</div>
+    <ul class="benefit-list" style="width:710px;">
+      <li class="benefit-li" ng-class="{cur:list.selected}" ng-repeat="list in benefitObject.benefitLists" ng-click="benefitObject.benefitToggleClass($index)">
+        <p style="line-height:14px;">权益名称：{{list.benefitName}}</p>
+        <div class="benefit-li-txt">
+          <span>权益ID：{{list.benefitId}}</span>
+          <span>权益类型：{{list.benefitTypeName}}</span>
+          <span class="no-margin10">时间：{{list.startTime}} - {{list.endTime}}</span>
+        </div>
+        <span class="greens"></span>
+      </li>
+    </ul>
+    <div class="commpageMb">
+      <div class="pDiv2">
+        <div class="pGroup">
+          <div ng-click="benefitObject.setPage('first')" class="pFirst pButton"><span></span></div>
+          <div ng-click="benefitObject.noPrevious() ? angular.noop : benefitObject.setPage('prev')" class="pPrev pButton"><span></span></div>
+        </div>
+        <div class="pGroup"><span class="pcontrol">跳至 <input class="width40 ac" type="text" ng-model="benefitObject.pager.currentPage" ng-keyup="benefitObject.queryPage($event)" /> 页</span><div class="pageTips"></div></div>
+        <div class="pGroup">
+          <div ng-click="benefitObject.noNext() ? angular.noop : benefitObject.setPage('next')" class="pNext pButton"><span></span></div>
+          <div ng-click="benefitObject.setPage('last')" class="pLast pButton"><span></span></div>
+        </div>
+        <div class="pGroup pagetotal"><span class="currentPage" ng-bind="benefitObject.pager.currentPage"></span>/<span class="totalPage" ng-bind="benefitObject.pager.totalPages"></span></div>
+        <div class="pGroup">
+          <select name="rp" ng-model="benefitObject.pager.pagesize" ng-options="number for number in benefitObject.sizeList"></select>
+        </div>
+      </div>
+    </div>
+    <div class="benefit-btn-area">
+	    <div class="btnDiv">
+        <button type="submit" class="btn btnBlue" ng-click="benefitObject.selectedBenefit()" >确定</button>
+        <span class="btn" ng-close-window>取消</span>
+	    </div>
+    </div>
+  </div>
+</div>

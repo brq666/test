@@ -1,0 +1,187 @@
+<div class="partitionLayer" ng-controller="AddPartitionCtrl" ng-cloak="">
+  <h2 class="heading">
+    <a ng-click="partitionLayer.returnList()" href="" class="returnList">客户分组</a>
+    <span class="slideLine">/</span>
+    <span class="headName">{{creatGroupObj.titleType}}</span>
+  </h2>
+  <div class="customerGroupAdd partitionAdd">
+    <ul class="clearfix customerGroupAddOptions" ng-hide="customerGroupStatus">
+      <li class="mb20 mb23">
+        <label class="node_name_label label-style"><span class="requireRed">*</span>分组名称：</label>
+        <input type="text" class="borderHighlight nameInput" maxlength="45" autocomplete="off"
+               ng-model="creatGroupObj.name" input_partition_name/>
+        <label ng-show="creatGroupObj.errorFalg" class="error ml25">{{creatGroupObj.errorMark}}</label>
+      </li>
+      <li class="mb20">
+        <label class="label-style">所属目录：</label>
+        <input type="text" class="borderHighlight" name="categoryInputNew" readonly
+               ng-custom-select="creatGroupObj.selectCategory()" ng-model="creatGroupObj.categoryName"
+               valueid="{{creatGroupObj.categoryId}}"/>
+      </li>
+      <!--<li class="mb20 mb23">
+        <label class="node_name_label label-style">所属平台：</label>
+        <p style="display: inline-block;margin-left: 9px;">{{creatGroupObj.defaultSubjectId}}</p>
+      </li>-->
+      <li class="mb20 mb19">
+        <label class="node_name_label label-style" style="margin-right: 7px">分组类型：</label>
+        <select class="commSelect ng-pristine ng-valid" style="width: 219px;margin-left: 9px"
+                ng-model="creatGroupObj.selectedGroupType"
+                ng-change="creatGroupObj.changeGroupTypeMethod(creatGroupObj.selectedGroupType)">
+          <option ng-repeat="groupType in creatGroupObj.groupTypeList">{{groupType}}</option>
+        </select>
+      </li>
+      <li class="mb20" style="margin-bottom: 4px;">
+        <label class="search-rule label-style">{{creatGroupObj.selectedGroupType}}规则</label>
+      </li>
+      <!--<li class="mb20 fl">
+        <label class="node_name_label label-style">选择店铺：</label>
+        <p style="display: inline-block;margin-left: 9px;">{{creatGroupObj.staticShop}}</p>
+      </li>-->
+      <li class="mb20 fl" style="width:545px;"></li>
+      <li class="mb20 fl">
+        <label class="label-style">条件关系：</label>
+        <label class="label-style relation">
+          <input class="commRadio" type="radio" name="relationCreate" value="OR"
+                 ng-model="creatGroupObj.relationCreate">
+          满足下列任一条件
+        </label>
+        <label class="label-style relation ">
+          <input class="commRadio" type="radio" name="relationCreate" value="AND"
+                 ng-model="creatGroupObj.relationCreate">
+          满足下列全部条件
+        </label>
+      </li>
+
+    </ul>
+
+    <!--查看/编辑客户分群-->
+    <div class="clearfix readParData" ng-show="customerGroupStatus">
+      <div class="leftContent">
+        <div class="item-wrap">
+          <div class="groupName" ng-hide="creatGroupObj.editName">{{creatGroupObj.name}}<i class="iconfont icon-edit"
+                                                                                           ng-click="creatGroupObj.clickEditName()"></i>
+          </div>
+          <div class="groupName" ng-show="creatGroupObj.editName">
+            <input type="text" class="borderHighlight nameInput clickEditName" maxlength="45"
+                   ng-model="creatGroupObj.name" ng-blur="creatGroupObj.saveEditName()" input_partition_name/>
+            <label ng-show="creatGroupObj.errorFalg" class="error ml25 editNewName">{{creatGroupObj.errorMark}}</label>
+          </div>
+          <div class="item-time">统计人数
+            <span class="updateTime" ng-class="{'timeHide':creatGroupObj.updateTimeFlag}">更新时间:</span>
+            <span class="updateTime">{{creatGroupObj.updatedTime}}
+              <i class="iconfont icon-question-mark" ng-show="creatGroupObj.updateTimeFlag"
+                 ng-title="系统将在10分钟左右计算出人数,这期间您可以正常创建营销活动。"></i>
+              <i class="iconfont icon-question-mark" ng-show="!creatGroupObj.updateTimeFlag"
+                 ng-title="系统每天上午8点之前动态更新分组人数。您也可以直接『创建营销活动』，通过[测试执行]查看当前分组人数。"></i>
+            </span>
+          </div>
+          <div class="item-people">
+            <p class="getCount peopleFont">
+              <span class="peopleCount">{{creatGroupObj.customerCount}}</span>
+              <span class="peopleFont">人</span>
+            </p>
+          </div>
+          <div class="create-cam-warpper">
+            <div class="smalldarkerblueBtn smalldarkerblueBtn_fix360 createCam"
+                 ng-click="creatGroupObj.createCamp(creatGroupObj.curDefaultGroupId,creatGroupObj.name,creatGroupObj.customerCountPost,creatGroupObj.defaultSubjectId)">
+              <a href="javascript:void(0)">创建营销活动</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="centerContent">
+       <div class="te-right">
+         <p><label class="label-style">分组ID：</label></p>
+         <p>{{creatGroupObj.curDefaultGroupId}}</p>
+       </div>
+        <div class="te-right">
+          <p><label class="label-style">所属目录：</label></p>
+          <p ng-hide="creatGroupObj.showSelCategory" style="width: 212px;">{{creatGroupObj.categoryName}}<i
+            class="iconfont icon-edit" ng-click="creatGroupObj.showEditCate()"></i></p>
+          <p ng-show="creatGroupObj.showSelCategory" style="width: 212px;">
+          <span style="position:relative">
+            <input type="text" class="borderHighlight blurCategory style-mark" style="margin-left: 0"
+                   name="categoryInputEdit" readonly
+                   ng-custom-select="creatGroupObj.selectCategoryEdit()" ng-model="creatGroupObj.categoryName"
+                   valueid="{{creatGroupObj.categoryId}}"/>
+          </span>
+          </p>
+        </div>
+        <!--<div class="te-right">
+          <p><label class="label-style">所属平台：</label></p>
+          <p>{{creatGroupObj.subjectIdValue}}</p>
+        </div>-->
+        <div class="te-right">
+          <p><label class="label-style">分组类型：</label></p>
+          <p>{{creatGroupObj.selectedGroupType}}</p>
+        </div>
+      </div>
+      <div class="centerContent">
+        <p>创建人：<span>{{creatGroupObj.creator}}</span></p>
+        <p>创建时间：<span>{{creatGroupObj.created}}</span></p>
+        <p>最后修改时间：<span>{{creatGroupObj.modified}}</span></p>
+      </div>
+    </div>
+    <div ng-show="customerGroupStatus">
+      <ul>
+        <li class="mb20">
+          <label class="label-style edit-rule">{{creatGroupObj.selectedGroupType}}规则</label>
+          <div style="display: inline-block">
+            <button type="button" class="btn btnBlue edit-button" ng-click="creatGroupObj.showButton()"
+                    ng-show="creatGroupObj.buttonFlag">编辑规则
+            </button>
+          </div>
+        </li>
+        <!--平台选择正式交付时请删除-->
+        <li class="mb19 seditRule1" style="display: inline-block;top:-9px;left: -30px;">
+          <label class="node_name_label label-style">平台选择：</label>
+          <p style="display: inline-block;">{{creatGroupObj.defaultSubjectId}}</p>
+        </li>
+        <!--<li class="mb19 seditRule" style="display: inline-block;top:-9px;left: 76px;">-->
+          <!--<label class="node_name_label label-style">选择店铺：</label>-->
+          <!--<p style="display: inline-block;max-width: 235px;overflow: hidden;height: 20px;position: relative; padding: 1px 1px 1px 0px;top: 7px;" title="{{creatGroupObj.staticShop}}">{{creatGroupObj.staticShop}}</p>-->
+        <!--</li>-->
+        <li class="mb19 seditRulet" style="display: inline-block;top:-9px;left:184px">
+          <label class="label-style">条件关系：</label>
+          <label class="label-style" style="width: 100px;" ng-hide="creatGroupObj.editRule">{{creatGroupObj.relationEdit=="OR"?"满足下列任一条件":"满足下列全部条件"}}</label>
+          <label class="label-style relation" ng-show="creatGroupObj.editRule">
+            <input class="commRadio" type="radio" name="relationEdit" value="OR" ng-model="creatGroupObj.relationEdit"
+                   ng-checked="creatGroupObj.relation=='OR'">
+            满足下列任一条件
+          </label>
+          <label class="label-style relation" ng-show="creatGroupObj.editRule">
+            <input class="commRadio" type="radio" name="relationEdit" value="AND" ng-model="creatGroupObj.relationEdit"
+                   ng-checked="creatGroupObj.relation=='AND'">
+            满足下列全部条件
+          </label>
+        </li>
+      </ul>
+    </div>
+    <div class="customerQuery" ng-include="" src="creatGroupObj.iframeQuery"></div>
+    <!--嵌入进来查询节点-->
+    <!--新建保存-->
+    <div class="customerCommButtom" ng-show="!customerGroupStatus">
+      <div class="commBottom commBottomNew">
+        <div class="mb" style="padding-left: 0;text-align: center;margin-top: 9px">
+          <label class="label-style error ml5 ng-binding" style="width:120px;" ng-show="creatGroupObj.isnotCondition">请至少配置一种条件</label>
+          <button ng-click="creatGroupObj.postCreateGroup()" class="btn btnBlue">确定</button>
+          <button ng-click="partitionLayer.conel_btn()" class="btn">取消</button>
+        </div>
+      </div>
+    </div>
+
+    <!--查看/编辑保存-->
+    <div class="customerCommButtom" ng-show="customerGroupStatus&&creatGroupObj.showPostButton">
+      <div class="commBottom commBottomNew" style="background: #Fcfcfc;border: none;">
+        <div class="mb" style="padding-left: 0;text-align: center;margin-top: 9px;">
+          <label class="label-style error ml5 ng-binding" style="width:120px;" ng-show="creatGroupObj.isnotCondition">请至少配置一种条件</label>
+          <button ng-click="creatGroupObj.postCreateGroup()" class="btn btnBlue">确定</button>
+          <button ng-click="creatGroupObj.conel_operation()" class="btn">取消</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+

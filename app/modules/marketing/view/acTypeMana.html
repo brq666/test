@@ -1,0 +1,29 @@
+<!-- <div ng-controller="acTypeManaCtrl">-->
+<div class="marketLayer1 manageActivityTpye" ng-controller="acTypeManeCtrl" id="manageActivityTpye">
+  <header class="pop-header">
+    <h2 class="pop-header-h" style="margin: 0">活动类型管理</h2>
+    <a class="close" ng-click="viewBack()"></a>
+  </header>
+  <!--<h2 class="heading">活动类型管理</h2><a href="javascript:void(0)" ng-click="viewBack()" class="ac_type_back_btn">< 返回</a>-->
+  <div class="mm20">
+    <input type="text" class="input_border ac_type_input" ng-class="{red_border: isInputEmpty}" ng-model="itemName" add-activity-input maxLength="10">
+    <a class="addBtn grey_border2" ng-click="addItem()" > <span></span> 添加 </a>
+    <span class="error" ng-show="isExisted">活动已存在</span>
+    <div class="ac_type_select">
+      <label>类型状态: </label>
+      <!-- <select name="typeSelect" id="" ng-model="selectedType">
+        <option value="0">启用</option>
+            <option value="1">禁用</option>
+            <option value="2">全部</option>
+          </select> -->
+          <div ac-type-select></div>
+        </div>
+    <div class="ac_type_wrap">
+      <div class="ac-type-item grey_border" ng-repeat="item in items | actypeselect: selectedType" ng-class="{'true':'ac_type_disable','false':'ac_type_enable'}[item.disabled]">
+        <span class="ac_type_span">{{item.categoryValue}}</span>
+        <span class="ac-type-icon change_type" title="点击{{item.disabled | actypestatus}}"   ng-click="changeType(item)"></span>
+        <span class="ac-type-remove ac-type-icon" title="点击删除" ng-click="deleteItem(item)"></span>
+      </div>
+    </div>
+  </div>
+</div>

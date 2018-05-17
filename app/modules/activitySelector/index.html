@@ -1,0 +1,121 @@
+<!--<nscript get-root _src="modules/activitySelector/controller/controllers.js"></nscript>-->
+<div class="commActivityPlug" ng-controller="ActivityCtrl">
+  <div>
+    <div class="top">
+      <div class="clearfix selectedNodeTitleWrap">
+        <p class="fl commFontMark mr10 blueColor" ng-repeat="node in activityScopeObj.selectedNodeTitleObj">{{activityScopeObj.disposeNodeTitleView(node)}}<a href="javascript:void(0)" ng-click="activityScopeObj.delTitle($index)"><img width="10" height="10" ng-src="/ccms/images/deletex.png" /></a></p>
+      </div>
+      <label>当前选择：</label>
+      <!--p class="toggleBtn blueColor">展开<a class="sanjiaoPosition downSanjiao" title="展开" toggle-banner="" href="javascript:void(0)"></a></p-->
+    </div>
+    <div class="activityContentWrap">
+      <div class="ztreeMenuWrap">
+        <div class="market_tree_input_wrapper">
+          <input type="text" name="queryTreeInput" class="market_tree_search_input system_search" maxlength="20" ng-placeholder="活动分类" ng-model="searchValue" tree-node-search-input="" />
+        </div>
+        <div class="market_tree_wrapper">
+          <div class="ztree defaultWrapztree" activity-ztree="" out-root-tree="" id="aaa" style="min-height:200px;"></div>
+        </div>
+      </div>
+      <div class="selectorArea">
+        <div class="clearfix">
+          <div class="activityBox selectionBox">
+            <div ng-show="activityListLoadingFlag" class="loading activityLoadClass">
+              <i></i>活动加载中...
+            </div>
+            <p class="selectionBoxTitle">活动选择</p>
+            <div class="mt clearfix">
+              <span class="fl selectAllItems"><span ng-class="{button_chk:allActivityCheckedNone,checkbox_true_part:allActivityCheckedPart,checkbox_true_full:allActivityCheckedFull}" id="prevAllchecked" ng-click="activityScopeObj.getAllSelectedActivityBtn()"></span>全选</span>
+              <span class="selectMyItems">
+              <span style="margin-right:4px;margin-top:3px;" class="button_chk" ng-class="{checkbox_true_full:allMyActivityCheckedFull}" ng-click="activityScopeObj.getMySelectedActivityBtn()"></span>
+              只显示我创建的活动
+              </span>
+              <div activity-selected-selector="" class="selectBox tingeBlue" style="display:inline-block"></div>
+              <span class="commSearch"> <label class="default_color" ng-searcheffect="">活动名称/活动ID</label> <input class="commSearchVal" type="text" ng-searcheffect="" ng-model="activityScopeObj.activityKerword" name="activityKerword" /> <button class="commSearchBtn" ng-click="activityScopeObj.searchActivityByKaeword(activityScopeObj.activityKerword)"></button> </span>
+            </div>
+            <div class="activitySelectList">
+              <div ng-repeat="list in activityScopeObj.activityLists">
+                <div class="items">
+                  <div class="pic ml10">
+                    <span ng-class="{button_chk:list.activityCheckedNone,checkbox_true_part:list.activityCheckedPart,checkbox_true_full:list.activityCheckedFull}" ng-click="activityScopeObj.getSelectedActivityIds(list,'',$event)"></span>
+                  </div>
+                  <div class="info" ng-click="activityScopeObj.getSelectedActivityIds(list,true,$event)">
+                    <p class="goodsName"><span class="ac_status ac_item_{{list.status}}"></span><span class="blueColor">{{list.campName}}</span><span class="ml5">[{{list.campId}}]</span></p>
+                    <p><span class="goodsId">活动时间：<span>{{list.createdTime}}</span></span><span class="" style="padding-left:20px;">创建人：{{list.creater}}</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mb">
+              <div class="pDiv2">
+                <div class="pGroup">
+                  <div class="pFirst pButton" ng-click="activityScopeObj.firstPage()">
+                    <span></span>
+                  </div>
+                  <div class="pPrev pButton" ng-click="activityScopeObj.prevPage()">
+                    <span></span>
+                  </div>
+                </div>
+                <div class="pGroup">
+                  <span class="pcontrol">跳至 <input class="activityInputPage" type="text" value="1" size="4" min="1" max="{{activityScopeObj.totalPage}}" ng-search-number="2" ng-model="activityScopeObj.currentPageInput" /> 页</span>
+                  <div class="pageTips"></div>
+                </div>
+                <div class="pGroup">
+                  <div class="pNext pButton" ng-click="activityScopeObj.nextPage()">
+                    <span></span>
+                  </div>
+                  <div class="pLast pButton" ng-click="activityScopeObj.lastPage()">
+                    <span></span>
+                  </div>
+                </div>
+                <div class="pGroup pagetotal">
+                  <span class="currentPage">{{activityScopeObj.currentPage}}</span>/
+                  <span class="totalPage">{{activityScopeObj.totalPage}}</span>
+                </div>
+                <div class="pGroup">
+                  <select name="rp" ng-model="activityScopeObj.rp" ng-change="activityScopeObj.changeRp()">
+                    <option value="10">10&nbsp;&nbsp;</option>
+                    <option value="15">15&nbsp;&nbsp;</option>
+                    <option value="20">20&nbsp;&nbsp;</option>
+                    <option value="30">30&nbsp;&nbsp;</option>
+                    <option value="50">50&nbsp;&nbsp;</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nodeBox selectionBox">
+            <p class="selectionBoxTitle">节点选择</p>
+            <div class="mt clearfix">
+              <span class="fl selectAllItems"> <span ng-class="{button_chk:allNodeCheckedNone,checkbox_true_part:allNodeCheckedPart,checkbox_true_full:allNodeCheckedFull}" id="prevAllchecked" ng-click="activityScopeObj.curNodeCheckedAll(allNodeCheckedFull)"></span>全选 </span>
+              <span class="commSearch"> <label class="default_color" ng-searcheffect="">节点名称</label> <input class="commSearchVal" type="text" ng-searcheffect="" ng-model="activityScopeObj.searchActivityNodeName" name="couponName" /> <button class="commSearchBtn" ng-click="searchObj.searchHdButton(hdValue)"></button> </span>
+            </div>
+            <div class="activitySelectList">
+              <div ng-repeat="nodeList in activityScopeObj.searchNodeLists">
+                <div class="items">
+                  <div class="pic ml10">
+                    <span ng-class="{button_chk:nodeList.nodeCheckedNone,checkbox_true_full:nodeList.nodeCheckedFull}" ng-click="activityScopeObj.selecterNodeMethod(nodeList)"></span>
+                  </div>
+                  <div class="info">
+                    <p><span class="goodsId blueColor">{{nodeList.name}}</span><span class="ml5">[{{nodeList.id}}]</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mb">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="ling_di"></div>
+      <div class="commBottom">
+        <div class="mb" style="margin-top:0px;">
+          <button ng-click="activityScopeObj.sureAddActivity()" type="button" class="btn btnBlue" id="activityScopeObjSureAddActivity">确定</button>
+          <button ng-close-child-window="" class="btn" type="button">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+
+<div ng-controller="metaSegmentation">
+  <div class="maincontainer sourceDataBox">
+    <div class="clearfix">
+      <h2 class="heading fl">分组元模型配置</h2>
+    </div>
+      <div class="smalldarkerblueBtn newbuildBtn">
+        <a ng-click="tpl.add()" href="javascript:void(0)">新建分组元模型配置</a>
+      </div>
+      <div class="">
+        <div class="item" ng-repeat=""></div>
+      </div>
+    </div>
+  <div class = "createSegmentation">
+    <div ng-controller = "">
+      <label class="commLabelWidth100">选择表：</label>
+      <select class="commSelect width130" ng-model="">
+        <option ng-repeat="table in "></option>
+      </select>
+      <label class="commLabelWidth100">分组ID字段：</label>
+      <select class="commSelect width130" ng-model="">
+        <option ng-repeat="table in "></option>
+      </select>
+      <label class="commLabelWidth100">分组名称字段：</label>
+      <select class="commSelect width130" ng-model="">
+        <option ng-repeat="table in "></option>
+      </select>
+      <label class="commLabelWidth100">显示名称：</label>
+      <input ng-model="" />
+    </div>
+
+    <div class="commBottom">
+      <div class="mb">
+        <button ng-click="configuration.saveSegmentation()" class="btn btnBlue">确定</button>
+        <button ng-close-window class="btn">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+{
+  "name": "./shujuguanli/data",
+  "description": "数据管理相关数据mock",
+  "routes": {
+    "POST /web-common-component/checklist/subject": "postNode",
+    "POST /web-common-component/checklist/group": "postGroup",
+    "GET /web-common-component/checklist/group": "getGroup",
+    "GET /web-common-component/checklist/group/tenantId/:tenantId/type/:type": "getGroup",
+    "GET /web-common-component/checklist/subject": "getSubject",
+    "DELETE /web-common-component/checklist/group/:id": "deleteGroup",
+    "GET /web-common-component/checklist": "getRedAndBlackList",
+    "POST /web-common-component/checklist/": "postRedAndBlackCustom",
+    "PUT /web-common-component/checklist": "editRedAndBlackCustom",
+    "GET /web-common-component/checklist/:id": "getRedAndBlackCustomById",
+    "DELETE /web-common-component/checklist/:id": "deleteRedAndBlackCustomById",
+    "POST /web-common-component/checklist/bulk": "postBulkList",
+    "PUT /web-common-component/checklist/bulk": "putBulkList",
+    "DELETE /web-common-component/checklist/bulk": "deleteBulkList"
+  }
+}

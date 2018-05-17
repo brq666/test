@@ -1,0 +1,409 @@
+@charset "utf-8";
+
+/*!
+ * animate.css -http://daneden.me/animate
+ * Version - 3.5.0
+ * Licensed under the MIT license - http://opensource.org/licenses/MIT
+ *
+ * Copyright (c) 2016 Daniel Eden
+ */
+
+.ccmsPublicPopAnimated {
+    animation-duration: 0.35s;
+    animation-fill-mode: none;
+}
+
+@keyframes ccmsPublicPopFadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.ccmsPublicPopFadeInDown {
+    animation-name: ccmsPublicPopFadeInDown;
+}
+
+@keyframes ccmsPublicPopFadeOutUp {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+}
+
+.ccmsPublicPopFadeOutUp {
+    animation-name: ccmsPublicPopFadeOutUp;
+}
+
+
+/* 结束动画 */
+
+.ccmsPublicPop .close,
+.ccmsPublicPop .areaScreen,
+.ccmsPublicPop .fullScreen {
+    background-image: url("../../components/ccms_pop/css/img/all.png");
+    background-repeat: no-repeat;
+}
+
+.ccmsPublicPop {
+    border: 1px solid #c5c5c5;
+    background: #f8f8f8;
+}
+
+.ccmsPublicPop .title {
+    color: #797979;
+    font-size: 14px;
+    padding: 4px 0;
+    line-height: 30px;
+    position: relative;
+    border-bottom: 1px solid #E9E9E9;
+    font-family: "微软雅黑";
+    margin-bottom: 1px;
+    text-indent: 12px;
+    background: #EDEDED;
+    text-align: left;
+}
+
+.ccmsPublicPop .close {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    display: block;
+    margin: 0;
+    background-position: -483px -22px
+}
+
+.ccmsPublicPop .big {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 3px;
+    right: 25px;
+    background: url("../../components/ccms_pop/css/img/all.png") no-repeat scroll -415px -22px transparent;
+    display: block;
+    margin: 0;
+}
+
+.ccmsPublicPop .close:hover {
+    background: url("../../components/ccms_pop/css/img/all.png") no-repeat scroll 4px -22px transparent;
+}
+
+.ccmsPublicPopBg {
+    border: 5px solid rgba(231, 231, 231, 0.5);
+    border-radius: 4px 4px 4px 4px;
+}
+.ccmsPublicPopBgNew {
+  border-radius: 4px 4px 4px 4px;
+}
+.ccmsPublicPopMain {
+    padding: 0 12px;
+}
+
+.ccmsPublicPop .areaScreen {
+    background-position: -419px -26px;
+    width: 16px;
+    height: 13px;
+    display: inline-block;
+    position: absolute;
+    top: 14px;
+    right: 45px;
+}
+
+.ccmsPublicPop .areaScreen:hover {
+    background-position: -453px -26px;
+}
+
+.ccmsPublicPop .fullScreen {
+    background-position: -350px -26px;
+    width: 16px;
+    height: 13px;
+    display: inline-block;
+    position: absolute;
+    top: 14px;
+    right: 45px;
+}
+
+.ccmsPublicPop .fullScreen:hover {
+    background-position: -386px -26px;
+}
+
+.contentP {
+    min-height: 228px;
+    padding: 0 45px 15px 145px;
+    width: 330px;
+    background: url(../../components/ccms_pop/css/img/ccms_popContent.png) no-repeat 0 0;
+    font-family: "微软雅黑";
+}
+.contentPNew{
+  min-height:168px;
+  width:445px;
+  font-family:"微软雅黑";
+}
+.contentPNew .text{
+  font-size: 14px;
+  min-height: 85px;
+  color: #666;
+  padding: 33px 0 0 24px;
+}
+.contentPNew .p2New{
+  background: #f5f5f5;
+  box-shadow: 0px -1px 0px 0px #f1f1f1;
+  height: 50px;
+  line-height: 48px;
+  text-align: right;
+  padding-right: 7px;
+}
+.contentPNew .btnBlueNew{
+  color: #fff;
+  border-color: #00aaf1;
+  background: #00aaf1;
+  border-radius: 2px;
+}
+.contentPNew .cancelNew{
+  border-radius: 2px;
+  border: 1px solid #e3e3e3;
+  background-color: #fafafa;
+  color: #333;
+  background-image: none;
+}
+.contentPNew .btnBlueNew:hover{
+  color: #fff;
+  background-color: #43c0fe;
+  border-color: #43c0fe;
+  background-image: none;
+}
+.contentPNew .cancelNew:hover{
+  border-color: #e3e3e3;
+  background-color: #f0f0f0;
+  color: #333;
+  background-image: none;
+}
+.plugContent {
+    min-width: 200px;
+    width: 400px;
+    margin: 10px 0;
+    text-align: center;
+    font-family: "微软雅黑";
+}
+
+.plugContent .plugText,
+.plugContent .errorText {
+    margin: 15px;
+    max-width: 400px;
+    word-wrap: break-word;
+    text-align: center;
+    padding-left: 40px;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.plugContent .plugText {
+    background: url(../../components/ccms_pop/css/img/success.png) no-repeat 0 0;
+}
+
+.plugContent .errorText {
+    background: url(../../components/ccms_pop/css/img/fillBg.png) no-repeat 0 0;
+}
+
+.contentP .text {
+    font-size: 14px;
+    padding: 30px 0 0 5px;
+    min-height: 82px;
+    color: #3d3d3d;
+}
+
+.contentP .text .spanMark {
+    display: block;
+    font-size: 12px;
+    color: red;
+    margin-top: 5px;
+}
+
+.Alert,
+.Confirm {
+    display: inline-block;
+}
+
+.ccms_tips {
+    display: inline-block;
+    padding: 0 13px 13px;
+    line-height: 18px;
+    min-height: 18px;
+    background: url(../../components/ccms_pop/css/img/ccms_tips.png) no-repeat 0 0;
+    vertical-align: text-top;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 12px;
+    font-family: "microsoft yahei";
+}
+
+.ccms_normal_tips {
+    display: inline-block;
+    background: url(../../images/order/icos.gif) -12px -49px no-repeat;
+    width: 15px;
+    height: 12px;
+    vertical-align: middle;
+    margin: 0 3px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.ccms_tips .ccms_tipsContent {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    max-width: 240px;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0 0 10px #C5C5C5;
+    border-radius: 3px;
+    background: #fff;
+    padding: 8px 12px;
+    margin-left: 10px;
+    margin-top: -3px;
+}
+
+.ccms_tips .ccms_tipsContent b {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-right-color: #777777;
+    top: 3px;
+    left: -13px;
+}
+
+.ccms_tips .left {
+    margin-left: 10px;
+    margin-top: -3px;
+}
+
+.ccms_normal_tips .ccms_tipsContent {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    max-width: 240px;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0 0 10px #C5C5C5;
+    border-radius: 3px;
+    background: #fff;
+    padding: 8px 12px;
+    margin-left: 10px;
+    margin-top: -3px;
+}
+
+.ccms_normal_tips .ccms_tipsContent b {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-right-color: #777777;
+    top: 3px;
+    left: -13px;
+}
+
+.huaat_tips {
+    border: 1px solid #2884f7;
+    padding: 1px 5px;
+    border-radius: 5px;
+    display: inline-block;
+    background: #b5d5fc;
+    color: #fff;
+    position: absolute;
+}
+
+.addInteractivePopTitle {
+    background: #66a9fc;
+    color: #FFFFFF;
+    padding: 3px 10px;
+    overflow: hidden;
+    zoom: 1;
+    height: 18px;
+}
+
+.btn,
+.btnDisabled {
+    height: auto;
+    width: 100px;
+    font-family: "microsoft Yahei";
+    margin: 5px;
+    display: inline-block;
+    *display: inline;
+    *margin-left: .3em;
+    font-size: 14px;
+    line-height: 28px;
+    *line-height: 34px;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #8a8a8a;
+    *background-color: #8a8a8a;
+    background-image: linear-gradient(#9a9a9a, #777777);
+    background-repeat: repeat-x;
+    border: none;
+    border-radius: 4px;
+    filter: progid: dximagetransform.microsoft.gradient(startColorstr='#9a9a9a', endColorstr='#777777', GradientType=0);
+    filter: progid: dximagetransform.microsoft.gradient(enabled=false);
+    *zoom: 1;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn:hover {
+    background-color: #9b9b9b;
+    *background-color: #9b9b9b;
+    background-image: linear-gradient(#aaaaaa, #a9a9a9);
+}
+
+.btn:active {
+    background-color: #9b9b9b;
+    *background-color: #9b9b9b;
+    background-image: linear-gradient(#8d8d8d, #8e8e8e);
+}
+
+.btnBlue {
+    color: #fff;
+    background-color: #2ba4da;
+    *background-color: blue;
+    background-image: linear-gradient(#31b1eb, #2495c7);
+    background-repeat: repeat-x;
+    border-color: #2495c7 #2495c7 #29abe2;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid: dximagetransform.microsoft.gradient(startColorstr='#31b1eb', endColorstr='#2495c7', GradientType=0);
+    filter: progid: dximagetransform.microsoft.gradient(enabled=false);
+}
+
+button.btnBlue:hover,
+a.btnBlue:hover {
+    background-color: #3dbaf2;
+    *background-color: blue;
+    background-image: linear-gradient(#47c1f8, #31b1eb);
+}
+
+button.btnBlue:active,
+a.btnBlue:active {
+    background-color: #3cb9f1;
+    *background-color: blue;
+    background-image: linear-gradient(#31b1eb, #47c1f8);
+}
+
+.btnSmall {
+    width: 50px;
+    height: 30px;
+}
+
+.btnLine24 {
+    margin: 0;
+    line-height: 24px;
+    vertical-align: -2px;
+}

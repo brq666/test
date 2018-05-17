@@ -1,0 +1,57 @@
+<!--<script type="text/javascript" src="controller/businessConfiguration/blackAndRedNodeConfig.js"></script>-->
+<div class="maincontainerB">
+  <div class="maincontainer" ng-controller="BlackAndRedCtrl">
+    <div class="clearfix">
+      <h2 class="heading fl"> 黑红名单节点配置 </h2>
+      <div class="smalldarkerblueBtn newbuildBtn">
+        <a href="javascript:void(0)" ng-click="Pop.addOrModify()">新增主题</a>
+      </div>
+    </div>
+    <ul class="subjectArray" ng-repeat="item in ListNode">
+      <li>主题：{{item.subjectName}}</li>
+      <li>手机号：{{item.phoneAttributeName}}</li>
+      <li>邮箱：{{item.emailAttributeName}}</li>
+      <li><a href="javascript:void(0)">修改</a></li>
+      <li><a href="javascript:void(0)">删除</a></li>
+    </ul>
+    <!--添加红黑名单主题配置 begin-->
+    <div class="addPop" style="display: none">
+      <div class="title">
+        黑红名单配置
+      </div>
+      <div class="ccmsPublicPopMain">
+        <div class="configAttrBox">
+          <ul>
+            <li>
+              <label class="commLabelWidth84"> 选择主题： </label>
+              <select ng-model="subject" ng-options="subject.subjectName for subject in Subjects" class="commSelect width210" ng-change="Pop.ChangeSubject()">
+                <option value=""> --请选择主题-- </option>
+              </select>
+              <label class="error" ng-show="subjectShow"> 必选 </label>
+            </li>
+            <li>
+              <label class="commLabelWidth84"> 选择手机号： </label>
+              <select id="mobile" class="commSelect width210" ng-model="mobile" disabled="disabled" ng-options="attribute.attributeName for attribute in attributes">
+                <option value=""> --选择手机号-- </option>
+              </select>
+              <label class="error" ng-show="mobileShow"> 必选 </label>
+            </li>
+            <li>
+              <label class="commLabelWidth84"> 选择邮箱 </label>
+              <select id="mail" class="commSelect width210" ng-model="mail" disabled="disabled" ng-options="attribute.attributeName for attribute in attributes">
+                <option value=""> --选择邮箱-- </option>
+              </select>
+              <label class="error" ng-show="mailShow"> 必选 </label>
+            </li>
+            <li>
+              <label class="commLabelWidth100"> </label>
+              <button class="btn btnBlue" type="button" ng-click="Pop.addPopSave()"> 确定 </button>
+              <button class="btn" type="button" ng-close-window=""> 取消 </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--添加红黑名单主题配置 end-->
+  </div>
+</div>

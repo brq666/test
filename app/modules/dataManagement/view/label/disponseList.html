@@ -1,0 +1,201 @@
+
+<div ng-controller="DisponseListCtrl" ng-cloak>
+  <div class="productSearchBox">
+    <ul class="searchConditions clearfix" >
+      <li>
+        <span class="itemCondition">
+          <label class="itemName">店铺：</label>
+          <span class="commPenEditor">
+            <input class="borderHighlight m0" type="text" title="" ng-model="disponseLabelObj.shopName" ng-data-init-select="disponseLabelObj.getSearchShops()" readonly="readonly" name="labelShops">
+          </span>
+        </span>
+        <span class="itemCondition">
+          <label class="itemName">商品ID：</label>
+          <input class="borderHighlight m0" type="text" ng-model="disponseLabelObj.productId" />
+        </span>
+        <span class="itemCondition">
+          <label class="itemName">关键字：</label>
+          <span class="commPenEditor">
+            <input class="borderHighlight width100 viewInput m0" type="text" ng-model="disponseLabelObj.viewFontValues" title="{{disponseLabelObj.viewFontValuesTitle}}" ng-click="disponseLabelObj.settingKeyWords()" readonly="readonly">
+            <a class="pen" ng-click="disponseLabelObj.settingKeyWords()" href="javascript:void(0)"></a>
+          </span>
+        </span>
+        <div class="commSelectPlug keyWorldsPlug" ng-include src="disponseLabelObj.keyWordSrc"></div>
+        <p class="fr blueColor mr10" ng-click="disponseLabelObj.toggleConditions()" title="{{disponseLabelObj.toggleVal}}">
+          {{disponseLabelObj.toggleVal}}<a class="downSanjiao" ng-class="{downSanjiao:disponseLabelObj.searchBoxStatus,upSanjiao:!disponseLabelObj.searchBoxStatus}" href="javascript:void(0)"></a>
+        </p>
+      </li>
+      <li ng-show="!disponseLabelObj.searchBoxStatus">
+        <span class="itemCondition">
+          <label class="itemName">价格：</label>
+          <span class="commPenEditor">
+            <input type="text" ng-model="disponseLabelObj.priceMin"  ng-data-number-point="2" max="9999999.99" class="borderHighlight w53 m0" />
+            -
+            <input type="text" ng-model="disponseLabelObj.priceMax" ng-data-number-point="2" max="9999999.99" class="borderHighlight w53 m0" />
+          </span>
+        </span>
+        <span class="itemCondition">
+          <label class="itemName">商品标准类目：</label>
+          <span class="commPenEditor">
+            <input class="borderHighlight m0" type="text" title="" ng-model="disponseLabelObj.viewMarkValue" ng-disabled="!disponseLabelObj.shopName" ng-data-init-select="disponseLabelObj.gettingMark()" readonly="readonly" name="productMarkZtree">
+          </span>
+        </span>
+        <span class="itemCondition">
+          <label class="itemName">商品属性：</label>
+          <span class="commPenEditor">
+            <input class="borderHighlight m0" type="text" title="{{disponseLabelObj.viewAttributeValue}}" ng-model="disponseLabelObj.viewAttributeValue" ng-disabled="!disponseLabelObj.viewMarkValue" ng-data-init-select="disponseLabelObj.gettingAttribute()" readonly="readonly" name="productAttributes">
+          </span>
+        </span>
+        <span class="itemCondition">
+          <label class="itemName">属性值：</label>
+          <span class="commPenEditor">
+            <input class="borderHighlight m0" type="text" title="{{disponseLabelObj.attributeSelectVal}}" ng-model="disponseLabelObj.attributeSelectVal" ng-disabled="!disponseLabelObj.viewAttributeValue" ng-data-init-select="disponseLabelObj.gettingAttributeSelectVal()" readonly="readonly" name="productAttributeSelectVal">
+          </span>
+        </span>
+      </li>
+      <li ng-show="!disponseLabelObj.searchBoxStatus">
+        <span class="itemCondition ngplaceholder_wrapper">
+          <label class="itemName">商品自定义类目：</label>
+          <span class="commPenEditor">
+            <input class="borderHighlight m0" type="text" title="{{disponseLabelObj.configLmValues}}" ng-model="disponseLabelObj.configLmValues" ng-disabled="!disponseLabelObj.shopName" ng-click="disponseLabelObj.gettingConfigLm()"  readonly="readonly" name="configLmZtree">
+            <a class="commSimulateSelect" ng-click="disponseLabelObj.gettingConfigLm()"></a>
+          </span>
+          <div class='customTypeZtreeChoice' ng-show='disponseLabelObj.isShowSelectedTree' ng-mouseleave='disponseLabelObj.hiddenCustomZtree()'>
+            <div class='ztree queryCustomCheckedZtree'></div>
+            <div class='ml15'>
+              <button class='btn btnBlue btnSmall' ng-click='disponseLabelObj.sureCustomZtreeData()'>确定</button>
+              <button class='btn btnSmall'ng-click='disponseLabelObj.hiddenCustomZtree()'>取消</button>
+            </div>
+          </div>
+        </span>
+        <span class="itemCondition">
+          <label class="itemName">商品标签：</label>
+          <span class="commPenEditor">
+            <input class="borderHighlight m0" type="text" ng-model="disponseLabelObj.viewLabelFilterValues" title="{{disponseLabelObj.viewLabelFilterTitle}}" ng-click="disponseLabelObj.settingLabelFilter()" readonly="readonly" name="customZtree2899">
+            <a class="bigGlass" ng-click="disponseLabelObj.settingLabelFilter()"></a>
+          </span>
+          <div class="commSelectPlug labelFilterPlug" ng-include src="disponseLabelObj.productLabelSrc"></div>
+        </span>
+        <span class="itemCondition">
+          <label class="itemName">商品外部编码：</label>
+            <span class="commPenEditor">
+              <input class="borderHighlight m0" type="text" title="" ng-model="disponseLabelObj.wrapCodeType" ng-data-init-select="disponseLabelObj.getWrapCodeType()" readonly="readonly" name="wrapCodeSelect">
+            </span>
+          <span class="commPenEditor mleft3" ng-show="disponseLabelObj.wrapCodeType=='截取'">
+            <input class="borderHighlight w53 m0 ng-pristine ng-valid" type="text" max="99999999999" ng-data-number-point="0" ng-model="disponseLabelObj.startCutBit"> 位
+          -
+            <input class="borderHighlight w53 m0 ng-pristine ng-valid" type="text" max="99999999999" ng-data-number-point="0" ng-model="disponseLabelObj.endCutBit"> 位
+          </span>
+          <input type="text" ng-model="disponseLabelObj.wrapCodeContent" class="borderHighlight mleft3" />
+          <label class="error ng-binding" ng-show="disponseLabelObj.outerShow">{{disponseLabelObj.outerShowValue}}</label>
+        </span>
+      </li>
+    </ul>
+    <div class="searchBtn">
+      <button class="btn commSmallBtn" ng-class="{btnBlue:!searchButtonStatus}" ng-click="disponseLabelObj.searchProductList(1,20,true)" type="button" ng-disabled="searchButtonStatus">{{searchButtonStatus ? "加载中":"搜索"}} </button>
+      <a class="reset blueColor" ng-click="disponseLabelObj.resetConditions()" ng-hide="searchButtonStatus">重置</a>
+    </div>
+    <div class="uneditorMark" ng-show="searchButtonStatus"></div>
+  </div>
+  <div class="resultProductBox" ng-class="{downTop:!disponseLabelObj.searchBoxStatus,upTop:disponseLabelObj.searchBoxStatus}">
+    <div class="resultHeader clearfix">
+      <table>
+        <tr>
+          <td width="31%">
+            <span class="fl selectAllItems">
+              <span ng-click="disponseLabelObj.getAllSelectedActivityBtn()" id="prevAllchecked" ng-class="{checkbox_true_part:disponseLabelObj.allActivityCheckedPart,checkbox_true_full:disponseLabelObj.allActivityCheckedFull}" class="button_chk"></span>
+            </span>
+            <select class="fl mt4" ng-model="disponseLabelObj.isThisPage" ng-change="disponseLabelObj.changePageType()">
+              <option value="0">选择当页</option>
+              <option value="1">选择全部</option>
+            </select>
+            <span class="fl ml10 mr10 mt4 cursorPointer" ng-click="disponseLabelObj.actionProLabelBatch();" title="批量增加">批量增加</span>
+            <span class="fl mt4 cursorPointer" ng-click="disponseLabelObj.actionProLabelBatch('批量删除');" title="批量删除">批量删除</span>
+          </td>
+          <td>
+            <p class="itemLabel fl">标签</p>
+          </td>
+        </tr>
+        </table>
+    </div>
+    <div class="resultContent">
+      <table>
+        <tr ng-repeat="productList in disponseLabelObj.resultrProducts track by $index" ng-init="$parentIndex=$index">
+          <td width="32%">
+            <div class="clearfix productDetail">
+              <div class="pic">
+                <input type="checkbox" ng-click="disponseLabelObj.changeSingleCheckbox(productList.isCheck)" ng-model="productList.isCheck" ng-disabled="disponseLabelObj.isThisPage=='1'" class="checkbox">
+                <img width="45" height="45" ng-src="{{productList.pic_url}}" alt="{{productList.title}}">
+              </div>
+              <div class="info">
+                <a class="goodsName ng-binding" ng-href="{{productList.detailUrl}}" target="_blank" title="{{productList.title}}">{{productList.title}}</a>
+                <p>
+                  <span class="goodsId" title="{{productList.num_iid}}">商品ID：
+                    <span class="ng-binding">{{productList.num_iid}}</span>
+                  </span>
+                  <span class="goodsPrice ng-binding" title="{{productList.price}}">{{productList.price}}</span>
+                </p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="labelListsWrap upHeightOverflow">
+              <ul class="clearfix labelContentList">
+                <li class="fl commFontMark mr10 blueColor" ng-repeat="labelsList in productList.tags track by $index" title="{{labelsList.tagDescribe}}">
+                  {{labelsList.tagName}}
+                  <a ng-click="disponseLabelObj.delSingleLabel($parentIndex,$index)" href="javascript:void(0)">
+                    <img width="10" height="10" ng-src="/ccms/images/deletex.png">
+                  </a>
+                </li>
+                <li class="fl mr10 blueColor">
+                  <a class="edit_add_icon customButtonLayout mt5" href="javascript:void(0);" ng-click="disponseLabelObj.addSingleLabel($parentIndex,$index)" title="增加"></a>
+                </li>
+              </ul>
+              <p class="fr blueColor mr10" ng-click="disponseLabelObj.toggleProLabelStatus($event)">
+                <span>更多</span>
+                <a class="downSanjiao" href="javascript:void(0)"></a>
+              </p>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="resultBottom commpageMb clearfix">
+      <p class="fl ml15 mt5">共搜索到{{disponseLabelObj.resultSearchTotal}}个符合条件的商品</p>
+      <div class="pDiv2">
+        <div class="pGroup">
+          <div ng-click="disponseLabelObj.firstPage()" class="pFirst pButton"><span></span></div>
+          <div ng-click="disponseLabelObj.prevPage()" class="pPrev pButton"><span></span></div>
+        </div>
+        <div class="pGroup">
+          <span class="pcontrol">
+            跳至 <input type="text" ng-model="disponseLabelObj.currentPage" dm-search-number="2" max="{{disponseLabelObj.totalPage}}" min="1" size="4" value="1" class="activityInputPage"> 页
+          </span>
+          <div class="pageTips"></div>
+        </div>
+        <div class="pGroup">
+          <div ng-click="disponseLabelObj.nextPage()" class="pNext pButton">
+            <span></span>
+          </div>
+          <div ng-click="disponseLabelObj.lastPage()" class="pLast pButton">
+            <span></span>
+          </div>
+        </div>
+        <div class="pGroup pagetotal">
+          <span class="currentPage ng-binding">{{disponseLabelObj.currentPage}}</span>/
+          <span class="totalPage ng-binding">{{disponseLabelObj.totalPage}}</span>
+        </div>
+        <div class="pGroup">
+          <select ng-change="disponseLabelObj.changeRp()" ng-model="disponseLabelObj.rp" name="rp" class="ng-pristine ng-valid">
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="commSelectPlug productEditorLabelPlug" ng-include src="disponseLabelObj.productEditorLabelPlugSrc"></div>
+    </div>
+</div>

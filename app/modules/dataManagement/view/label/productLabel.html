@@ -1,0 +1,18 @@
+<div class="maincontainerB dataConfigureTable" ng-controller="productLabelCtrl">
+	<div class="maincontainer">
+    <div>
+      <div class="clearfix">
+        <h2 class="heading fl">商品标签</h2><div class="smalldarkerblueBtn newbuildBtn"><a ng-click="productLabelObj.settingLabel()" href="javascript:void(0)">新建标签</a></div>
+      </div>
+      <div class="list" >
+        <ul class="clearfix Tab_title" id="tabpenel_list">
+          <li ng-click="productLabelObj.showLabelPage()" class="showFont" ng-class="productLabelObj.customList" title="标签列表">标签列表</li>
+          <li class="showFont" title="商品标签" ng-click="productLabelObj.hideLabelPage()" ng-class="productLabelObj.customVal">商品标签</li>
+        </ul>
+        <div ng-include src="gridViewUrl"></div>
+      </div>
+    </div>
+  </div>
+  <div ng-include src="configConditionsUrl"></div>
+</div>
+<div class="viewMarkInfoBox" id="couponTip"></div>

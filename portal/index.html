@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="ccmsApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>数据赢家-用数据驱动营销变革</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <script type="text/javascript">
+        /*
+         * create method addTag为生成css和js增加root变量,root变量目的是解决后端与前端文件夹结构不一样
+         */
+        window.root = "";
+        window.rootStatic = "/";
+    </script>
+    <script type='text/javascript'>
+        var _vds = _vds || [];
+        window._vds = _vds;
+        (function(){
+            _vds.push(['setAccountId', 'a50b1114b861c619']);
+            _vds.push(['enableHT', true]);
+            (function() {
+                var vds = document.createElement('script');
+                vds.type='text/javascript';
+                vds.async = true;
+                vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(vds, s);
+            })();
+        })();
+    </script>
+  <link rel="stylesheet" type="text/css" href="https://shuyun-static.b0.upaiyun.com/components/jquery.ui.timepicker/1.1.1/development-bundle/themes/base/jquery.ui.all.css">
+  <link rel="stylesheet" type="text/css" href="https://shuyun-static.b0.upaiyun.com/components/jquery.ui.timepicker/1.1.1/timepicker/css/jquery-ui-timepicker-addon.css">
+  <link href="/portal/app-25c80d11de4d1d7125b1.min.css" rel="stylesheet"><link href="/portal/app-77eac57021c9fbc792ac.min.css" rel="stylesheet"></head>
+
+<body>
+    <cc-loading  class="loading" ng-show="!tmlLoaded"></cc-loading >
+    <menus class="commHeader" style="display: block"></menus>
+    <ui-view class="portalContent"></ui-view>
+    <!-- taobao 孔明锁js -->
+    <script type="text/javascript" src="http://g.tbcdn.cn/sj/securesdk/0.0.3/securesdk_v2.js" id="J_secure_sdk_v2" data-appkey="12283535"></script>
+    <!-- end -->
+    <!-- js监控 -->
+    <script>
+        var _hmt = _hmt || [];
+        (function()
+          { var hm = document.createElement("script"); hm.src = "//hm.baidu.com/hm.js?9210fdec8ea0f041ba0f33c1034e1007"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); }
+        )();
+    </script>
+    <!-- end -->
+    <!-- 透视宝监控 -->
+    <script>
+        function pid(){var a="J45Engw88NchTUhqO1yVctS20NePMUJONRUu3rPwd1/ELx0jWtcvW3hz7**UqCJjyFMKzytuEmtr004ogBRpFQcZYPywW68XoPUf5OHJThi1DSu12FNRlA4ukXAWtnBMebZq1v7cPm60!!",b="xxxxxxxx-xxxx-xxxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,function(a){var b=16*Math.random()|0,c="x"==a?b:3&b|8;return c.toString(16)});return a+"_"+b}var cloudwise_request_id=pid();
+    </script>
+    <script src="//portal.toushibao.com/rum/EndUserAgent.js"></script>
+    <!-- END -->
+    <script src="http://shuyun-static.b0.upaiyun.com/components/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://shuyun-static.b0.upaiyun.com/components/highcharts/highcharts.js"></script>
+    <script src="https://shuyun-static.b0.upaiyun.com/components/jquery.ui.timepicker/1.1.1/js/jquery-ui.custom.js"></script>
+    <script src="https://shuyun-static.b0.upaiyun.com/components/jquery.ui.timepicker/1.1.1/timepicker/js/jquery-ui-timepicker-addon.js"></script>
+    <script src="https://shuyun-static.b0.upaiyun.com/components/jquery.ui.timepicker/1.1.1/development-bundle/ui/i18n/jquery.ui.datepicker-zh-CN.js"></script>
+<script type="text/javascript" src="/portal/libs-c1b9080197a416d3c013.min.js"></script><script type="text/javascript" src="/portal/app-e5e8e5b91d48d7dcdf0e.min.js"></script>
+    <script src="../node_modules/js-cookie/src/js.cookie.js"></script>
+    <script>
+      window.CCMS_INFOS_CONFIG = {
+        UAL: '',
+        TENANT: ''
+      };
+      Cookies.set('USERINFO', {
+        name: 'admin',
+        sub: '111'
+      })
+    </script>
+
+</body>
+</html>

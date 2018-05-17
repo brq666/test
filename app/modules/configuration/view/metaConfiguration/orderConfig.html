@@ -1,0 +1,257 @@
+<div ng-controller="orderConfigCtrl">
+<div class="mt clearfix">
+  <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360">
+    <a href="javascript:void(0)" ng-click="orderConfig.addCondition()">新增条件</a>
+  </div>
+  <div class="commSearch">
+    <label ng-searcheffect="" class="default_color">活动名称</label>
+    <input type="text" ng-searcheffect="" ng-model="hdValue" name="couponName" class="commSearchVal ng-pristine ng-valid" />
+    <button ng-click="searchObj.searchHdButton(hdValue)" class="commSearchBtn"></button>
+  </div>
+</div>
+<div class="orderConfigList">
+</div>
+<div class="addConditionPop">
+  <p> <span class="red">*</span> <label>条件配置：</label> <input type="text" ng-model="conditionName" class="borderHighlight " /> </p>
+  <div class="commBottom">
+    <div class="mb">
+      <button ng-click="orderConfig.saveCondition()" class="btn btnBlue">确定</button>
+      <button ng-close-window="" class="btn">取消</button>
+    </div>
+  </div>
+</div>
+<!--配置处-->
+<div class="orderConfigContent">
+  <h2 class="heading">订单查询配置</h2>
+  <ul id="tabpenel_list" class="clearfix Tab_title">
+    <li ng-click="tab.click('attribute',$event)">属性配置</li>
+    <li ng-click="tab.click('index',$event)">指标配置</li>
+  </ul>
+  <div class="tabContent">
+    <div class="attributeContent">
+      <div class="mt clearfix">
+        <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360">
+          <a href="javascript:void(0)" ng-click="attributeConfig.add()">新增属性</a>
+        </div>
+        <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360">
+          <a href="javascript:void(0)" ng-click="attributeConfig.position()">布局配置</a>
+        </div>
+        <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360">
+          <a href="javascript:void(0)" ng-click="tab.return()">返回</a>
+        </div>
+        <div class="commSearch">
+          <label ng-searcheffect="" class="default_color">活动名称</label>
+          <input type="text" ng-searcheffect="" ng-model="hdValue" name="couponName" class="commSearchVal ng-pristine ng-valid" />
+          <button ng-click="searchObj.searchHdButton(hdValue)" class="commSearchBtn"></button>
+        </div>
+      </div>
+      <div class="attributeCon">
+        <div class="attributeList"></div>
+      </div>
+    </div>
+    <div class="indexContent">
+      <div class="mt clearfix">
+        <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360">
+          <a href="javascript:void(0)" ng-click="">新增指标</a>
+        </div>
+        <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360">
+          <a href="javascript:void(0)" ng-click="tab.return()">返回</a>
+        </div>
+        <div class="commSearch">
+          <label ng-searcheffect="" class="default_color">活动名称</label>
+          <input type="text" ng-searcheffect="" ng-model="hdValue" name="couponName" class="commSearchVal ng-pristine ng-valid" />
+          <button ng-click="searchObj.searchHdButton(hdValue)" class="commSearchBtn"></button>
+        </div>
+      </div>
+      <div class="indexCon">
+        <div class="indexList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--新增属性模块-->
+<div class="addAttributePop">
+  <div class="mb10 clearfix">
+    <div class="fl">
+      <label class="label">属性名称：</label>
+      <input type="text" class="borderHighlight " ng-model="attributeConfig.categoryName" />
+    </div>
+    <div class="fl">
+      <label class="label">属性类型：</label>
+      <select class="commSelect width130 ml9" ng-model="attributeConfig.queryTypeId">
+        <option value="1">字符输入</option>
+        <option value="2">数字输入</option>
+        <option value="3">字典选择</option>
+        <option value="4">日期选择</option>
+        <option value="5">时间选择</option>
+        <option value="6">地区选择</option>
+        <option value="7">标签选择</option>
+        <option value="8">关键字</option>
+        <option value="9">商品选择</option>
+      </select>
+    </div>
+  </div>
+  <div class="mb10">
+    <label class="label">操作符：</label> {{attributeConfig.operator}}
+  </div>
+  <div class="mb10">
+    <label class="label">对应表：</label>
+    <select class="commSelect width130" ng-model="attributeConfig.tableName"></select>
+  </div>
+  <!--此处筛选主要针对地区选择的不同做处理-->
+  <div ng-switch="" on="attributeConfig.queryTypeId">
+    <div ng-switch-when="6"></div>
+    <div ng-switch-default="">
+      <div class="mb10">
+        <label class="label">对应数据项：</label>
+        <input type="radio" value="filed" ng-model="attributeConfig.correspondingData" />字段
+        <input type="radio" value="expression" ng-model="attributeConfig.correspondingData" />表达式
+      </div>
+      <div class="mb10" ng-switch="" on="attributeConfig.correspondingData">
+        <div ng-switch-when="filed">
+          <label class="label">&nbsp;</label>
+          <select class="commSelect width130" ng-model="attributeConfig.filedName"></select>
+        </div>
+        <div ng-switch-when="expression">
+          <label class="label">&nbsp;</label>
+          <input type="text" class="borderHighlight " ng-model="attributeConfig.expressionName" />
+        </div>
+      </div>
+      <!--此处为不同类型下的不同结构-->
+      <div ng-switch="" on="attributeConfig.queryTypeId">
+        <div ng-switch-when="2">
+          <div class="mb10">
+            <label class="label">输入类型：</label>
+            <select class="commSelect width130">
+              <option>整数</option>
+              <option>小数</option>
+              <option>百分数</option>
+            </select>
+          </div>
+          <div class="mb10">
+            <label class="label">输入精度：</label> 小数点后
+            <input type="text" class="borderHighlight " />位
+          </div>
+          <div class="mb10">
+            <label class="label">范围：</label>
+            <input type="text" class="borderHighlight " />——
+            <input type="text" class="borderHighlight " />
+          </div>
+        </div>
+        <div ng-switch-when="1">
+          <div class="mb10">
+            <label class="label">是否模糊查询：</label>
+            <input type="radio" value="1" />是
+            <input type="radio" value="0" />否
+          </div>
+          <div class="mb10">
+            <label class="label">长度限制：</label>
+            <input type="text" class="borderHighlight " />
+          </div>
+          <div class="mb10">
+            <label class="label">特殊校验：</label>
+            <input type="radio" />手机
+            <input type="radio" />Email
+            <input type="radio" />身份证
+          </div>
+        </div>
+        <div ng-switch-when="3">
+          <div class="mb10 clearfix">
+            <div class="fl">
+              <label class="label" ng-model="attributeConfig.categoryName">字典表：</label>
+              <select class="commSelect width130 ml9"> </select>
+            </div>
+            <div class="fl">
+              <label class="label">字典字段：</label>
+              <select class="commSelect width130 ml9"> </select>
+            </div>
+          </div>
+        </div>
+        <div ng-switch-when="9">
+          <div class="mb10">
+            <label class="label">是否支持SKU：</label>
+            <input type="radio" value="1" />是
+            <input type="radio" value="0" />否
+          </div>
+          <div class="mb10">
+            <label class="label">保存为条件：</label>
+            <input type="radio" value="1" />支持
+            <input type="radio" value="0" />不支持
+          </div>
+          <div class="mb10">
+            <label class="label">最大选择数量：</label>
+            <input type="text" class="borderHighlight " />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mb10">
+    <label class="label">tips：</label>
+    <input type="text" class="borderHighlight " ng-model="attributeConfig.tips" />
+  </div>
+  <div class="mb10">
+    <label class="label">全局参数约束：</label>
+    <input type="checkbox" ng-model="attributeConfig.globalParame" />相对绝对时间
+  </div>
+  <!--依赖关系-->
+  <div class="mb10">
+    <label class="label">依赖其他属性：</label>
+    <input type="radio" value="1" ng-model="attributeConfig.dependence" />是
+    <input type="radio" value="0" ng-model="attributeConfig.dependence" />否
+  </div>
+  <div class="mb10">
+    <label class="label">依赖关系：</label>
+  </div>
+  <div class="commBottom">
+    <div class="mb">
+      <button ng-click="attributeConfig.save()" class="btn btnBlue">确定</button>
+      <button ng-close-window="" class="btn">取消</button>
+    </div>
+  </div>
+</div>
+<!--新增指标模块-->
+<div class="addIndexPop">
+</div>
+<!--订单查询布局配置模块-->
+<div class="orderPositionPop">
+  <div class="content">
+    <div class="globalParame_Posi clearfix">
+      <div class="item">
+        <input type="radio" class="label" />绝对时间
+      </div>
+      <div class="item">
+        <input type="radio" class="label" />相对时间
+      </div>
+    </div>
+    <div class="attribute_Posi">
+      <div class="left">
+        <div class="item" ng-repeat="item in orderPosition_left">
+          <span class="placeholder"></span>
+          <span position-config="left,{{$index}}"></span>
+          <a href="javascript:void(0);" title="添加" class="add" ng-click=""></a>
+          <a href="javascript:void(0);" title="删除" class="del" ng-click="positionConfig.del()"></a>
+        </div>
+      </div>
+      <div class="center">
+        <div class="item" ng-repeat="item in orderPosition_center">
+          <span class="placeholder"></span>
+          <span position-config="center,{{$index}}"></span>
+          <a href="javascript:void(0);" title="添加" class="add" ng-click=""></a>
+          <a href="javascript:void(0);" title="删除" class="del" ng-click="positionConfig.del()"></a>
+        </div>
+      </div>
+      <div class="right">
+        <div class="item" ng-repeat="item in orderPosition_right">
+          <span class="placeholder"></span>
+          <span position-config="right,{{$index}}"></span>
+          <a href="javascript:void(0);" title="添加" class="add" ng-click=""></a>
+          <a href="javascript:void(0);" title="删除" class="del" ng-click="positionConfig.del()"></a>
+        </div>
+      </div>
+    </div>
+    <div class="index_Posi"></div>
+  </div>
+</div>
+</div>
+<script type="text/javascript" src="controller/orderConfig.js"></script>

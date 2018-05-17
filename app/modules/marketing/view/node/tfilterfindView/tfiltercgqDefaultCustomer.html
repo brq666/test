@@ -1,0 +1,69 @@
+<!-- <script type="text/javascript" src="controller/node/tfilterfindJs/queryCustomerGroupCtrl.js"></script> -->
+<div class="commDataTableStyle customerGroupSelected queryCustomerGroupClass" ng-controller="QueryCgqCustomerGroupCtrl" ng-cloak>
+    <div>
+        <div class="clearfix commPenEditor height30" style="top: -3px;">
+            <p class="fl mt5 ml5">
+                <label>已选择分组：</label>
+                <span class="commFontMark mr10 blueColor verticalAlignTop" ng-class="{'history_custom_errorTop': queryCustomerGroupObj.isError == true}" ng-show="queryCustomerGroupObj.curSelectedGroupName" id="{{queryCustomerGroupObj.curSelectedGroupId}}">{{queryCustomerGroupObj.curSelectedGroupName}}<a ng-click="queryCustomerGroupObj.delTitle($index)" href="javascript:void(0)"><img width="10" height="10" src="/ccms/images/deletex.png" ng-src="/ccms/images/deletex.png"></a>
+                </span>
+            </p>
+          <div class="commSearch">
+            <input class="commSearchVal" type="text" style="width:210px;padding-right: 24px;" ng-keyup="queryCustomerGroupObj.clickGroupById()" ng-model="hdValuePar" maxlength="45" placeholder="分组名称/分组ID" >
+            <button class="commSearchBtn" ng-click="queryCustomerGroupObj.clickGroupById()"></button>
+          </div>
+        </div>
+    </div>
+
+    <div>
+      <div class="market_types_tree grey_border customerGroupNodeZTree partitionNode" ng-cloak>
+        <div ztreemenu></div>
+        <div class="market_tree_input_wrapper">
+          <input type="text" class="system_search" style="width: 125px;height: 20px;border: 1px solid #d9d9d9; padding: 1px 24px 1px 1px;margin-bottom: 10px"  maxlength="15" ng-placeholder="分组目录" ng-model="searchValue" par-tree-node-search-input></div>
+        <div class="market_tree_wrapper"  style="width:169px">
+          <div class="ztree defaultWrapztree" customer-node-ztree out-root-tree id="aaa" style="min-height:200px;"></div>
+        </div>
+
+      </div>
+      <div class="dataTableGird ml200" style="padding: 3px 0 10px 0;">
+        <div class="grey" style="height: 29px;line-height: 29px;">
+          <span class="center w9 mt5"></span>
+          <span class="left w16 mt5">分组ID</span>
+          <span class="left w27 mt5">分组名称</span>
+          <!-- <span class="right w16 mt5">人数</span> -->
+          <span class="center w16 mt5">所属平台</span>
+          <span class="center w14 mt5">类型</span>
+        </div>
+        <div class="dataTableList inQueryDataList" style="height: 310px;">
+          <div class="dataConfigureTableListStyle clearfix" ng-repeat="unselectedTable in queryCustomerGroupObj.customerGroupLists">
+            <div class="w9 center"><input class="mt4" type="radio" ng-model="queryCustomerGroupObj.defaultRadioSelect" ng-click="queryCustomerGroupObj.changeCurGroupTitleView(unselectedTable.groupName,unselectedTable.id,unselectedTable.subjectId)" name="customerGroupList" value="{{unselectedTable.id}}" groupName="{{unselectedTable.groupName}}" /></div>
+            <div  class="tableName left w16">{{unselectedTable.id}}</div>
+            <div  class="tableName left w27" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;" title="{{unselectedTable.groupName}}">{{unselectedTable.groupName}}</div>
+            <!-- <div  class="tableState right w16">{{unselectedTable.customerCount}}</div> -->
+            <div  class="tableName center w16" ng-class="{'add_indent22': queryCustomerGroupObj.customerGroupLists.length>10}">{{unselectedTable.subjectName}}</div>
+            <div  class="tableState center w14" ng-class="{'add_indent26': queryCustomerGroupObj.customerGroupLists.length>10}">{{unselectedTable.groupType}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="commpageMb" style="bottom: -30px;left: 200px;height: 26px;">
+        <div class="pDiv2"  style="margin: -2px 0 0 0;">
+          <div class="pGroup">
+            <div ng-click="queryCustomerGroupObj.setPage('first')" class="pFirst pButton"><span></span></div>
+            <div ng-click="queryCustomerGroupObj.noPrevious() ? angular.noop : queryCustomerGroupObj.setPage('prev')" class="pPrev pButton"><span></span></div>
+          </div>
+          <div class="pGroup"><span class="pcontrol">跳至 <input class="width40 ac" type="text" ng-model="queryCustomerGroupObj.pager.currentPage" ng-keyup="queryCustomerGroupObj.enterPage($event)" /> 页</span><div class="pageTips"></div></div>
+          <div class="pGroup">
+            <div ng-click="queryCustomerGroupObj.noNext() ? angular.noop : queryCustomerGroupObj.setPage('next')" class="pNext pButton"><span></span></div>
+            <div ng-click="queryCustomerGroupObj.setPage('last')" class="pLast pButton"><span></span></div>
+          </div>
+          <div class="pGroup pagetotal"><span class="currentPage" ng-bind="queryCustomerGroupObj.pager.currentPage1"></span>/<span class="totalPage" ng-bind="queryCustomerGroupObj.pager.totalPages"></span></div>
+          <div class="pGroup">
+            <select name="rp" ng-model="queryCustomerGroupObj.pager.pagesize" ng-options="number for number in queryCustomerGroupObj.sizeList"></select>
+          </div>
+        </div>
+      </div>
+      <div class="benefit-selector-mark" ng-show="!queryCustomerGroupObj.searching"></div>
+
+
+  </div>
+
+</div>

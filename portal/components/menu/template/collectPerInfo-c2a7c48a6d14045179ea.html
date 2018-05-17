@@ -1,0 +1,23 @@
+<div class="collectPerInfoPop" cc-validators="collectModal.ccValidators " name="collerinfo">
+  <dl class="collectInfoBox">
+    <dt>填写联系人信息的作用是在店铺数据出现异常或系统功能出现升级时第一时间告知店铺掌柜</dt>
+    <dd>
+      <label>联系人姓名 ：</label>
+      <input class="borderHighlight" ng-model="collectModal.contactName" type="text" />
+      <label>QQ ：</label>
+      <input class="borderHighlight" ng-model="collectModal.contactQQ" type="text" />
+    </dd>
+    <dd>
+      <label>手机号码 ：</label>
+      <input class="borderHighlight" ng-model="collectModal.contactPhone"  cc-validator="phone" type="text" />
+      <label>旺旺 ：</label>
+      <input class="borderHighlight" ng-model="collectModal.contactWW" type="text" />
+    </dd>
+    <dd>
+      <label>邮件地址 ：</label>
+      <input class="borderHighlight" ng-model="collectModal.contactEmail" type="text" />
+      <label>新浪微博 ：</label>
+      <input class="borderHighlight" ng-model="collectModal.contactWeibo" type="text" />
+    </dd>
+  </dl>
+</div>

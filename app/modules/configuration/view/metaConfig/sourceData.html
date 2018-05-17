@@ -1,0 +1,27 @@
+<div class="maincontainerB dataConfigureTable" ng-controller="sourceDataCtrl">
+  <div class="maincontainer sourceDataBox">
+    <div class="clearfix">
+      <h2 class="heading fl">源数据配置</h2>
+    </div>
+    <div class="smalldarkerblueBtn newbuildBtn">
+      <a ng-click="tpl.add()" href="javascript:void(0)">新建数据源</a>
+    </div>
+    <div class="configContent publicList1">
+      <div class="item" ng-repeat="item in dataList">
+        <p>
+          <span>数据源类型：{{item.metaDataSourceTemplate.templateName}}</span>
+          <span>数据源名称：{{item.dataSourceName}}</span>
+        </p>
+        <p ng-repeat="connection in item.metaDataSourceConnection">
+          <span>{{connection.metaDataSourceConnectionDefinition.connectionKey}}：{{connection.connectionValue}}</span>
+        </p>
+        <div class="operationBtn">
+          <a title="修改" class="edit_delete edit_icon" href="javascript:void(0);"></a>
+          <a title="删除" class="edit_delete delete_icon" ng-click="tpl.delete(item.dataSourceId)"></a>
+        </div>
+      </div>
+    </div>
+    <!--新增tpl-->
+    <div class="sourceData_addTpl" ng-include="" src="tpl.src"></div>
+  </div>
+</div>

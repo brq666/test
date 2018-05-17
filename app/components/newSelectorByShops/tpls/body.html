@@ -1,0 +1,73 @@
+<div class="bm-component-new-selector">
+    <div class="menu-tree" new-selector-tree-manager ng-if="!$ctrl.sideFlag">
+
+        <!-- 搜索 -->
+        <div class="instant-search">
+            <input type="text"
+            		class="instant-search-input"
+            		ng-model="$ctrl.treeKeywords"
+            		ng-enter="searchTree()"
+            		placeholder="请输入关键词"
+			>
+            <span class="instant-search-icon search-btn"></span>
+        </div>
+
+        <!-- 目录列表 -->
+        <div class="menu">
+            <ul class="item">
+                <li class="root-tree-parent">
+                    <h4 class="root-tree" pkid="" level="0">
+                    	<i class="icon-arrow root-tree-toggle"></i>
+                    	<span>全部</span>
+                    </h4>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="grid-data">
+        <div class="grid-header">
+            <!-- 搜索 -->
+			<div class="advanced-search"
+				ng-if="$ctrl.searchColumn.length"
+				ng-class="{'open': $ctrl.advancedSearchState}"
+				ng-click="$ctrl.advancedSearchState = !$ctrl.advancedSearchState">
+				<i class="iconfont icon-arrow"></i>
+
+				<!-- 提示 -->
+				<span ng-if="$ctrl.searchValue.length === 0">搜索条件</span>
+
+				<!-- 选好的值 -->
+				<div ng-if="$ctrl.searchValue.length !== 0" class="selected-items">
+					<span ng-repeat="conf in $ctrl.searchValue track by $index" class="item" ng-bind="conf.value"></span>
+				</div>
+			</div>
+
+			<!-- 搜索配置 -->
+			<div class="advanced-search-conf" ng-if="$ctrl.advancedSearchState">
+				<dl ng-repeat="conf in $ctrl.searchColumn track by $index">
+					<dt>{{ conf.title }}：</dt>
+					<dd>
+						<input type="text" ng-model="$ctrl.searchConf[conf.code]" ng-enter="$ctrl.onSearch()" maxlength="20" ng-change="$ctrl.onChangeSearchValue()">
+					</dd>
+				</dl>
+				<div class="advanced-search-btns">
+					<button class="btn-function-highlight" ng-click="$ctrl.onSearch()">搜索</button>
+					<button class="btn-reset" ng-click="$ctrl.onReset()">重置</button>
+				</div>
+			</div>
+			<span>【注:无权限数据筛选后不可使用】</span>
+            <div class="only-show-selected">
+                <label>
+                    <input type="checkbox" ng-model="$ctrl.onlySelected" ng-change="$ctrl.onOnlySelected()">
+					<span>只显示选中的数据</span>
+					<span class="selected-count" ng-if="!$ctrl.selectedAll">({{$ctrl.items.length | number}})</span>
+                </label>
+            </div>
+        </div>
+        <div class="grid-body">
+            <cc-grid opts="$ctrl.gridOptions" selected-items="$ctrl.items" type="selectable">
+            </cc-grid>
+        </div>
+    </div>
+</div>

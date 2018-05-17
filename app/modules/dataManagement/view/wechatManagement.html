@@ -1,0 +1,50 @@
+<div class="maincontainerB dataConfigureTable" ng-controller="wechatManagementCtrl">
+  <div class="maincontainer">
+    <div>
+      <div class="clearfix">
+        <h2 class="heading fl">微信公众号管理</h2>
+        <a class="wechat-access blueColor" target="_blank" href="{{managementObj.authDomain}}" title="公众号授权">公众号授权</a>
+      </div>
+      <div class="list list-fix">
+        <div>
+          <div class="gridCommCursom clearfix">
+            <div class="fl mt5 gridCommCursom" style="margin-left:11px;">
+             <label>
+               <input class="commCheckbox" type="checkbox" ng-click="managementObj.checkedAll()" name="check-all" />
+               全选
+             </label>
+              <span class="ml5 mr5">|</span>
+             <a class="gray9" href="javascript:;" ng-click="managementObj.bindShop()" title="批量关联">批量关联</a>
+            </div>
+            <div class="commSearch">
+              <input class="commSearchVal" type="text" maxlength="45" ng-model="managementObj.hdValue" placeholder="店铺名称" name="queryName">
+              <button class="commSearchBtn" ng-click="managementObj.searchButtonClick()"></button>
+            </div>
+          </div>
+          <div class="couponListssBox gridCommLayout">
+            <div id="shopListsGrid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="settingAttributes settingBind">
+    <div class="configAttrBox">
+      <ul>
+        <li>
+          <label>微信公众号：</label>
+          <select class="commSelect width210 ml9" ng-model="managementObj.curBindWechat" ng-options="item.offAcctName for item in managementObj.weChatListData">
+          </select>
+          <label class="error" ng-show="curStoreTypeFlag">请选择属性类型</label>
+        </li>
+      </ul>
+    </div>
+    <div class="ling_di"></div>
+    <div class="commBottom">
+      <div class="mb">
+        <button class="btn btnBlue" ng-click="managementObj.searchBindShops()" ng-disabled="submitDisF">确定</button>
+        <button class="btn" dm-close-window>取消</button>
+      </div>
+    </div>
+  </div>
+</div>

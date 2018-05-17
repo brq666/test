@@ -1,0 +1,55 @@
+<div class="maincontainerB dataConfigureTable" ng-controller="tablesCtrl">
+  <div class="maincontainer tablesBox">
+    <div class="clearfix">
+      <h2 class="heading fl mr15">表配置</h2>
+      <div class="smalldarkerblueBtn newbuildBtn">
+        <a ng-click="addTable.add()" href="javascript:void(0)">新增注册表</a>
+      </div>
+    </div>
+    <div class="mt">
+      <div class="commSearch">
+        <label table-data-search="" class="default_color">搜索表名</label>
+        <input type="text" table-data-search="" name="couponName" ng-model="tableSearchVal" class="commSearchVal ng-pristine ng-valid" />
+        <button ng-click="searchTableButtonClick(tableSearchVal)" class="commSearchBtn"></button>
+      </div>
+      <div class="fr mt2">
+        <label>数据源:</label>
+        <select class="commSelect width130" ng-model="dataSourceNameModel" ng-options="dataSource.dataSourceName for dataSource in dataSourceList"> </select>
+      </div>
+    </div>
+    <div class="configContent ">
+      <div class="registerTable_flexgrid"></div>
+    </div>
+    <div class="dataConfigure_mask unselectedTableMark" ng-show="isShowMetaTable" commonconfigure-newtable-dialog="" style="display:none">
+      <div class="dataConfigure_table">
+        <div class="clearfix">
+          <input class="tableSearch borderHighlight" type="text" ng-model="selectTable" />
+        </div>
+        <div class="dataConfigure_table_gird">
+          <div class="grey">
+            <span class="center w20"><input class="selectAllClass" type="checkbox" ng-model="selectAll" /></span>
+            <span class="center w40">表名</span>
+            <span class="center w40">表说明</span>
+          </div>
+          <div class="dataConfigure_table_list">
+            <div class="dataConfigure_table_list_style" ng-repeat="unselectedTable in unselectedTables">
+              <div class="w20 center">
+                <input type="checkbox" ng-checked="selectAll" name="{{unselectedTable.tableName}}" comment="{{unselectedTable.tableComment}}" scheam="{{unselectedTable.tableSchema}}" />
+              </div>
+              <div class="tableName center w40">
+                {{unselectedTable.tableName}}
+              </div>
+              <div class="tableState center w38">
+                {{unselectedTable.tableComment}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom">
+          <button class="btn btnBlue SBox width65" ng-click="addTable.save()" ng-disabled="submitStatus">确认</button>
+          <button class="btn btnBlue SBox width65" ng-click="cancelSelectTable()">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

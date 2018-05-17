@@ -1,0 +1,20 @@
+.customer-attr-container {
+    .grid-box {
+        .ellipsis {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 120px;
+            display: inline-block;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+        .tag-name {
+            color: #145681;
+        }
+    }
+    #createMaketLayer {
+        .dropdown-select-input {
+            width: 173px;
+          }
+    }
+}

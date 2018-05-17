@@ -1,0 +1,36 @@
+<style>
+.ccmsPublicPopMain {
+  overflow: visible !important;
+}
+</style>
+<div ng-controller="tcommunicateOtherCtrl">
+  <div class="commWrapFour commNodeMarkRelative">
+    <div class="bannerCommStyle areaHeight26" ng-show="tcommunicateOther.tips">
+      {{tcommunicateOther.tips}}
+      <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+    </div>
+    <div class="offline-node">
+      <table>
+        <tbody>
+        <tr>
+          <th><label>节点名称：</label></th>
+          <td>
+            <div class="pr">
+              <input type="text" class="borderHighlight nameInput fl" ng-model="tcommunicateOther.name" maxlength="20" ng-noderequire="" />
+              <span nodetip=""></span>
+            </div>
+          </td>
+          <td><label style="width:200px;">节点代码：{{tcommunicateOther.id}}</label></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="ling_di"></div>
+  <div class="commBottom">
+    <div class="mb">
+      <button class="btn btnBlue" id="marketSure" ng-click="checkTcommunicateOther()">确定</button>
+      <button class="btn" id="marketCancel" ng-close-window="">取消</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+﻿<!--<script type="text/javascript" src="controller/customer/addGroup.js"></script>-->
+<div class="customerGroupLayer" ng-controller="AddGroupCtrl" ng-cloak="">
+  <h2 class="heading">{{creatGroupObj.typeTitle}}分组</h2>
+  <div class="customerGroupAdd">
+    <ul class="clearfix customerGroupAddOptions">
+      <li class="fl mr20">
+        <label class="node_name_label">分组名称：</label>
+        <input class="borderHighlight nameInput width200" type="text" maxlength="45" ng-model="creatGroupObj.name" />
+      </li>
+      <li class="fl mr20">
+        <label>分组所属分类：</label>
+        <input type="text" class="borderHighlight width200" name="categoryInput" readonly="readonly" ng-custom-select="creatGroupObj.selectCategory()" ng-model="creatGroupObj.categoryName" valueid="{{creatGroupObj.categoryId}}" />
+      </li>
+      <li class="fl">
+        <label class="node_name_label">分组类型：</label>
+        <select class="commSelect width200 " ng-model="creatGroupObj.selectedGroupType" ng-change="creatGroupObj.changeGroupTypeMethod(creatGroupObj.selectedGroupType)" ng-disabled="creatGroupObj.selectedGroupTypeFlag">
+          <option ng-repeat="groupType in creatGroupObj.groupTypeList">{{groupType}}</option>
+        </select>
+      </li>
+      <li ng-show="creatGroupObj.errorFalg">
+        <label class="error ml25">{{creatGroupObj.errorMark}}</label>
+      </li>
+    </ul>
+    <div class="radioTitleWrap mt20" ng-show="creatGroupObj.selectedGroupType=='动态分组'">
+      <!--平台选择 start-->
+      <div class="fl mr20">
+        <label class="commLabelWidth75 ng-binding">平台选择：</label>
+        <select ng-options="subjectListItem.subjectId as subjectListItem.subjectId for subjectListItem in creatGroupObj.subjectList" ng-change="creatGroupObj.changeSubject()" ng-model="creatGroupObj.defaultSubjectId" class="commSelect width130 ng-pristine ng-valid" name="relationship">
+        </select>
+      </div>
+      <!--平台选择 end-->
+    </div>
+    <div class="customerQuery" ng-include="" src="creatGroupObj.iframeQuery"></div>
+    <!--嵌入进来查询节点-->
+    <div class="customerCommButtom">
+      <div class="ling_di"></div>
+      <div class="commBottom">
+        <div class="mb">
+          <label class="error ml5 ng-binding" ng-show="creatGroupObj.isnotCondition">请至少配置一种条件</label>
+          <button ng-click="creatGroupObj.postCreateGroup()" class="btn btnBlue">确定</button>
+          <button ng-click="groupObj.conel_btn()" class="btn">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+
+<div class="maincontainerB dataConfigureTable" ng-controller="findCtrl">
+  <div class="maincontainer findBox">
+    <div class="configureNode_page">
+      <div class="clearfix">
+        <h2 class="heading fl">源数据配置</h2>
+      </div>
+      <div class="smalldarkerblueBtn newbuildBtn"><a href="javascript:void(0)" ng-click="funciton($event)">新增节点</a></div>
+      <div class="configContent publicList1">
+        <div class="item" ng-dblclick="configurationNode.dbclick()">
+          <p><span>节点名称：查询节点一</span><span>创建时间：2014-3-14</span><span>状态：已配置</span></p>
+          <div class="operationBtn">
+            <a title="修改" class="edit_delete edit_icon" href="javascript:void(0);"></a>
+            <a title="删除" class="edit_delete delete_icon" ng-click="tpl.delete(item.id)"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--配置主题-->
+    <div class="subject_page" ng-include src="subject.src" style="display:none;" onload="subject.loadingFn()"></div>
+    <!--配置条件-->
+    <div class="condition_page" ng-include src="condition.src" style="display:none;"></div>
+  </div>
+</div>

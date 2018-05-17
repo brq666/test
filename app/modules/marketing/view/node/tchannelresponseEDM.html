@@ -1,0 +1,80 @@
+<div ng-controller="tchannelresponseEDMCtrl">
+  <div class="commWrapFour commNodeMarkRelative">
+    <div class="selectUrl" style="display:none;">
+      <ul class="urlList">
+        <li ng-repeat="a in responseEDMUrl"><input ng-model="a.check" ng-checked="a.check" type="checkbox" />{{a.url}}</li>
+      </ul>
+      <div class="ling_di"></div>
+      <div class="commBottom">
+        <div class="mb">
+          <button class="btn btnBlue" id="marketSure" ng-click="saveUrls()">确定</button>
+          <button class="btn" id="marketCancel" ng-click="closeSelectUrls()">取消</button>
+        </div>
+      </div>
+    </div>
+    <div class="commWrapFour clearfix">
+      <div class="bannerCommStyle canNotUnderstand areaHeight26" ng-show="responseEDM.tips">
+        {{responseEDM.tips}}
+        <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+      </div>
+      <div class="vipNode">
+        <table>
+          <tbody>
+          <tr>
+            <th class="tl" width="10%">节点名称：</th>
+            <td>
+              <div class="pr">
+                <input type="text" class="borderHighlight nameInput fl" ng-model="responseEDM.name" maxlength="20" ng-noderequire="" />
+                <span nodetip=""></span>
+              </div>
+            </td>
+            <td><label class="code fr mr40">节点代码：{{responseEDM.id}}</label></td>
+          </tr>
+          <tr>
+            <th class="tl" colspan="3">选择EDM响应类型</th>
+          </tr>
+          <tr>
+            <td class="tl" colspan="3">
+              <p>
+                <input class="v1 commRadio" type="radio" value="0" ng-model="responseEDM.outputType" />邮件是否发送成功
+                <em class="ico_tips" ng-title="选择此类型需要EDM响应节点之前的EDM节点的输出类型选择为“全部客户”，否则无法查询出发送失败客户"></em>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td class="tl" colspan="3">
+              <p>
+                <input class="v1 commRadio" type="radio" value="1" ng-model="responseEDM.outputType" />邮件是否打开
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td class="tl" colspan="3">
+              <p>
+                <input class="v1 commRadio" type="radio" value="2" ng-model="responseEDM.outputType" />邮件是否点击
+                <em class="ico_tips" ng-title="客户只要点击了邮件内除了退订链接外的任意链接，即为点击过邮件"></em>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td class="tl" colspan="3">
+              <p>
+                <input class="v1 commRadio" type="radio" value="3" ng-model="responseEDM.outputType" />邮件中指定URL是否被点击
+                <input type="text" ng-disabled="responseEDM.outputType!=3" ng-click="selectUrls()" ng-model="responseEDM.urls" readonly="true" class="borderHighlight subjectInput" />
+                <em class="ico_tips" ng-title="点击任意一个指定URL即为点击过指定URL"></em>
+              </p>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="ling_di clearfix mt10"></div>
+  <div class="commBottom clearfix">
+    <div class="mb">
+      <button class="btn btnBlue" id="marketSure" ng-click="saveResponseEDM()">确定</button>
+      <button class="btn" id="marketCancel" ng-close-window="">取消</button>
+    </div>
+  </div>
+</div>

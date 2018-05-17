@@ -1,0 +1,40 @@
+<div class="addTpl">
+  <h2 class="heading ng-binding">{{datacoupon.title}}</h2>
+  <form id="coupon_form">
+    <div class="bg">
+      <div class="mb10">
+        <label class="label">优惠名称：</label>
+        <input type="text" class="borderHighlight width200" ng-model="datacoupon.name" name="name" maxlength="20" input_activity_name="" />
+      </div>
+      <div class="mb10">
+        <label class="label">所属店铺：</label>
+        <input type="text" class="borderHighlight ml9 required width200" readonly="readonly" ng-disabled="!datacoupon.isSelectEdit" name="discountShop" valueid="{{shopForCounpon.id}}" ng-model="shopForCounpon.name" comm-select-config="datacoupon.getShops()" />
+      </div>
+      <div class="mb10">
+        <label class="label">优惠券面额：</label>
+        <input type="text" class="borderHighlight ml9 width200" readonly="readonly" ng-disabled="!datacoupon.isSelectEdit" name="money" valueid="{{datacoupon.money}}" ng-model="datacoupon.moneyName" comm-select-config="datacoupon.getCouponsVal()" />
+      </div>
+      <div class="mb10">
+        <label class="label">使用条件：</label>
+        <input type="text" class="borderHighlight text width200" ng-model="datacoupon.useConditionDetail" name="useConditionDetail" ng-disabled="!datacoupon.isEdit" />
+        <em class="ico_tips" ng-title="不输入代表优惠券面额+1分钱"></em>
+      </div>
+      <div class="mb10">
+        <label class="label">活动开始时间：</label>
+        <input type="text" picker3="" id="startTime" class="width180 datetimepicker borderHighlight text" ng-model="datacoupon.startTime" name="startTime" readonly="readonly" ng-disabled="!datacoupon.isEdit" />
+      </div>
+      <div class="mb10">
+        <label class="label">活动结束时间：</label>
+        <input type="text" picker3="" class="width180 datetimepicker borderHighlight text" ng-model="datacoupon.endTime" name="endTime" readonly="readonly" ng-disabled="!datacoupon.isEdit" />
+      </div>
+      <div class="mb10">
+        <label class="label">备注：</label>
+        <textarea ng-model="datacoupon.remark" ng-maxlength="200" maxlength="200"></textarea>
+      </div>
+    </div>
+    <div class="mb">
+      <button type="submit" class="btn btnBlue" ng-click="datacoupon.submit()">确定</button>
+      <span class="btn" ng-click="datacoupon.closeTpl()">取消</span>
+    </div>
+  </form>
+</div>

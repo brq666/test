@@ -1,0 +1,74 @@
+<div class="maincontainerB dataConfigureTable" ng-controller="fieldCtrl">
+  <div class="maincontainer fieldBox">
+    <div class="clearfix">
+      <h2 class="heading fl">字段配置</h2>
+    </div>
+    <div class="configContent">
+      <div class="sideBox">
+        <input type="text" class="borderHighlight" />
+        <a href="javascript:void(0)" ng-repeat="tables in tablesData" ng-click="changeTables(tables)">{{tables.registerTableName}}</a>
+      </div>
+      <div class="contect">
+        <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360 mb15">
+          <a href="javascript:void(0)" ng-click="field_tpl.add()">新增字段</a>
+        </div>
+        <div class="flexgridList">
+          <table class="combination_table">
+            <thead>
+            <tr>
+              <th>字段ID</th>
+              <th>字段名称</th>
+              <th>字段备注</th>
+              <th>字段类型</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="field in FieldData">
+              <td>{{field.registerColumnId}}</td>
+              <td>{{field.registerColumnName}}</td>
+              <td>{{field.registerColumnComment}}</td>
+              <td>{{field.registerColumnDataType}}</td>
+              <td>
+                <a href="javascript:void(0);" class="edit_delete delete_icon" title="删除" ng-click="delField.del(field.registerColumnId)"></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!--注册Tpl-->
+    <div class="dataConfigure_mask unselectedTableMark" commonconfigure_table_dialog="" ng-show="isAddField" style="display:none;">
+      <div class="dataConfigure_table">
+        <div class="clearfix">
+          <input class="tableSearch borderHighlight" type="text" ng-model="filterFieldData" />
+        </div>
+        <div class="dataConfigure_table_gird">
+          <div class="grey clearfix">
+            <span class="center w10"><input class="selectAllClass" type="checkbox" ng-model="selectAll" /></span>
+            <span class="center w30">字段名</span>
+            <span class="center w60">字段说明</span>
+          </div>
+          <div class="dataConfigure_table_list">
+            <div class="dataConfigure_table_list_style clearfix" ng-repeat="cloumn in cloumnData">
+              <div class="w10 center">
+                <input type="checkbox" ng-checked="selectAll" />
+              </div>
+              <div class="tableName center w30">
+                {{cloumn.columnName}}
+              </div>
+              <div class="tableState center w60">
+                {{cloumn.columnComment}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom">
+          <button class="btn btnBlue SBox width65" ng-click="field_tpl.save()">确认</button>
+          <button class="btn btnBlue SBox width65" ng-click="field_tpl.cancel()">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

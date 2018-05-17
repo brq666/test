@@ -1,0 +1,34 @@
+﻿<!--<script type="text/javascript" src="controller/customer/viewGroup.js"></script>-->
+<div class="customerGroupLayer customerGroupLayerView" ng-controller="ViewGroupCtrl" ng-cloak>
+  <div class="customerGroupView">
+    <ul class="clearfix">
+      <li class="fl mr40 ml10">
+        <label class="node_name_label">所属分类：</label>
+        <span>{{viewGroupObj.categoryName}}</span>
+      </li>
+      <li class="fl">
+        <label class="node_name_label">分组类型：</label><span>{{viewGroupObj.groupType}}</span>
+      </li>
+      </ul>
+      <div class="radioTitleWrap mt20">
+        <!--平台选择 start-->
+        <div class="fl mr20" style="">
+          <label class="commLabelWidth75 ng-binding">平台选择：</label>
+          <select ng-options="subjectListItem.id as subjectListItem.name for subjectListItem in viewGroupObj.subjectList" ng-change="viewGroupObj.changeSubject()" ng-model="viewGroupObj.defaultSubjectId" class="commSelect width130 ng-pristine ng-valid" name="relationship"><option value="0" selected="selected">淘宝客户</option><option value="1" selected="selected">京东客户</option><option value="2">易迅</option></select>
+        </div>
+        <!--平台选择 end-->
+      </div>
+      <div class="customerQuery" ng-include src="viewGroupObj.iframeQuerySrc"></div> <!--嵌入进来查询节点-->
+      <div class="customerCommButtom">
+        <div class="ling_di"></div>
+        <div class="commBottom">
+          <div class="mb">
+             <a class="watchData" ng-click="marketList.viewCustomerData()" title="客户数据查看" href="javascript:void(0)" ng-show="marketList.display" >
+               <img width="109" height="30" src="../../images/watchDataBtn.jpg">
+             </a>
+          </div>
+        </div>
+      </div>
+      <div class="unEditorMark"></div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div>
+  <div class="gridCommCursom clearfix" ng-controller="senderReportCtrl">
+    <div class="fl mt5 channelWrapper">
+      <label>选择发送渠道:</label>
+      <ul class="selectChannel">
+        <li ng-repeat="channelNode in channelNodes" ng-class="{'selectedChannel':channelSwitch=={{channelNode.number}}}" title="{{channelNode.nodeName}}" ng-click="channelObject.showCurrentChannelPage(channelNode.number,$event)">{{channelNode.nodeName}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="couponListssBox gridCommLayout" style="top:120px">
+  </div>
+</div>

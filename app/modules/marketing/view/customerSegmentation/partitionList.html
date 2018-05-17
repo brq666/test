@@ -1,0 +1,139 @@
+<!--<script type="text/javascript" src="controller/customer/partitionListCtrl.js"></script>-->
+<div class="marketingCampGraph" ng-controller="partitionListCtrl">
+  <div class="wrapPartitionListCon"  ng-cloak="">
+    <div class="customer-partition-container  clearfix"  ng-cloak="">
+      <div class="mt par-button-wrap clearfix">
+        <div class="commSearch">
+          <input class="commSearchVal" type="text" name="parName" ng-model="hdValueParName" placeholder="分组名称/分组ID" maxlength="45" ng-keyup="partitionListObj.enter($event)">
+          <a class="commSearchBtn searchBtnClear" ng-show="hdValueParName" ng-click="partitionListObj.clearInput()">
+            <i class="iconfont icon-clear"></i>
+          </a>
+          <a class="commSearchBtn" ng-click="searchParObj.searchHdButton(hdValueParName)">
+            <i class="iconfont icon-search"></i>
+          </a>
+          <!--<button class="commSearchBtn" ng-click="searchParObj.searchHdButton(hdValueParName)"></button>-->
+          <div class="change-view-layout" style="display: none;">
+            <a href="javascript:void(0);" class="changeView" ng-click="partitionListObj.changeView('card')">
+              <i class="iconfont icon-view-chart" ng-class="{'button-light-blue':partitionListObj.isCardShow}"></i>
+            </a>
+            <a href="javascript:void(0);" class="changeView" ng-click="partitionListObj.changeView('list')">
+              <i class="iconfont icon-view-list" ng-class="{'button-light-blue':!partitionListObj.isCardShow}"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!--card-->
+      <dl class="left-content-show" style="display: none" ng-cloak="">
+        <dd class="middle-content-grouping"  ng-class="{'middle-content-grouping-noData':!!groupData && !groupData.length}">
+          <ul class="content-grouping-lists">
+            <p class="emptyMsg" ng-show="!!groupData && !groupData.length">
+              <i class="iconfont icon-caution"></i>
+              <span class="tips">没有符合搜索条件的分组</span>
+            </p>
+            <li class="item" ng-repeat="item in groupData">
+              <div class="preview-item" ng-class="{'addShadow':hov}" ng-mouseenter="hov=true" ng-mouseleave="hov=false" ng-init="hov=false">
+                <div class="item-header">
+                  <p class="groupName" ng-click="partitionLayer.add(item.id,item.groupType, null, true)" title="{{item.groupName}}">{{item.groupName}}</p>
+                </div>
+                <div class="item-people">
+                  <p class="getCount peopleFont">
+                    <span class="peopleCount" ng-show="item.customerCount!=null">{{item.customerCount}}</span>
+                    <span class="peopleFont"  ng-show="item.customerCount!=null">人</span>
+                    <span ng-show="item.customerCount==null">等待更新中……</span>
+                  </p>
+                </div>
+                <div class="create-cam-warpper">
+                  <div class="smalldarkerblueBtn smalldarkerblueBtn_fix360 createCam" ng-click="partitionLayer.createCamp(item.id,item.groupName,item.customerCount,item.subjectId)">
+                    <a href="javascript:void(0)">创建营销活动</a>
+                  </div>
+                </div>
+                <div class="item-top-content">
+                  <!--<p class="shopIcon">
+                    <i class="iconfont" ng-class="{'icon-taobaowang':item.subjectName.indexOf('淘宝')!=-1,'icon-jingdong':item.subjectName.indexOf('京东')!=-1,'icon-dangdangwang':item.subjectName.indexOf('当当')!=-1,'icon-yihaodian':item.subjectName.indexOf('一号店')!=-1}"></i>
+                  </p>-->
+                  <div class="function-header" ng-class="{'opacityShow':!action}" ng-mouseleave="action=true">
+                    <div class="clickOption" ng-click="action=!action"  ng-init="action=true">
+                      <i class="iconfont icon-more1" ng-if="action==true"></i>
+                      <i class="iconfont icon-diable" ng-if="action==false"></i>
+                    </div>
+                    <div class="item" ng-click="partitionListObj.parMove(item,0)">
+                      <i class="icon iconfont icon-move"></i><em>移动目录</em>
+                    </div>
+                    <div class="item" ng-delete-partition groupId="{{item.id}}" groupName="{{item.groupName}}"><i class="iconfont icon-trash"></i><em>删除</em></div>
+                  </div>
+                </div>
+
+              </div>
+            </li>
+          </ul>
+        </dd>
+        <dd ng-show="!groupData || groupData.length">
+          <paginator total='{{options.total}}' offset="{{options.page}}" fetchs="partitionListObj.getPagerList(offset)"/>
+        </dd>
+      </dl>
+      <!--list-->
+        <div class="wrapCampaignListCon wrapCampaignListConPar"ng-cloak="">
+          <div class="campaignListConPar"></div>
+        </div>
+
+      <!-- 分组管理目录 -->
+
+    </div>
+    <div class=" market_types_tree market_types_tree_par par-tree-bottom" ng-cloak>
+        <div partition-ztree-menu pos="changeTop"></div>
+        <div class="market_tree_input_wrapper">
+          <input type="text" style="display: none" class="market_tree_search_input system_search"
+                 tree-node-search-input>
+        </div>
+        <!--<div class="market_tree_wrapper par_tree" ng-class="{'card-height':partitionListObj.isCardShow}">-->
+      <div class="market_tree_wrapper par_tree" >
+          <span class="bigTitle">分组目录</span><span class="smallTitle">右键编辑目录</span>
+          <div class="ztree defaultWrapztree" partition-ztree out-root-tree isName="partition" id="aaa" ></div>
+          <a class="addfile" ng-click="addNode(true)" href="javascript:void(0)">+新增目录</a>
+        </div>
+      </div>
+
+  </div>
+  <!-- 选择目录 -->
+  <div class="moveToNewCategory">
+      <div class="groupUlBox topTips">
+        <label>此目录下包含客户分组,请选择将这些客户分组移至新的目录下</label>
+      </div>
+      <div class="delSelTree">
+        <div>
+          <label>移至新的目录：</label>
+          <span  class="parent-pos">
+          <input type="text" class="borderHighlight width200 ml5 style-mark" style="margin-left:0" readonly="readonly" name="categoryInput"
+                 ng-model="partitionListObj.categoryName" comm-select-config="partitionListObj.selectCategory()"
+                 valueid="{{partitionListObj.categoryId}}"/>
+          </span>
+          <label class="error" ng-show="partitionListObj.delSaveNewCtgFlag">请选择想要移动的目录</label>
+        </div>
+      </div>
+    <div class="listsButton">
+      <button type="button" class="btn btnBlue" ng-click="partitionListObj.delSaveNewCtg()">确定</button>
+      <button type="button" class="btn" ng-close-child-window>取消</button>
+    </div>
+  </div>
+
+  <!--单个分组移动目录操作-->
+  <div class="parMoveCategory">
+    <div class="groupUlBox topTips">
+      <label>当前目录:</label>
+      <span>{{partitionListObj.cCategoryName}}</span>
+    </div>
+    <div class="delSelTree">
+      <label style="margin-left:-17px">移至新的目录:</label>
+      <span class="parent-pos" style="left:4px">
+      <input type="text" class="borderHighlight width200 ml5 style-mark" style="margin-left: 0" readonly="readonly" name="parMoveCategory"
+             comm-select-config="partitionListObj.parMoveInput()" ng-model="partitionListObj.parMoveCategory"
+             valueid="{{partitionListObj.parMoveCategoryId}}"/>
+      </span>
+      <label class="error" ng-show="partitionListObj.saveParMoveFlag">请选择想要移动的目录</label>
+    </div>
+    <div class="listsButton">
+      <button type="button" class="btn btnBlue" ng-click="partitionListObj.saveParMove()">确定</button>
+      <button type="button" class="btn" ng-close-child-window >取消</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="commActivityPlug" ng-controller="dataBatchCtrl">
+  <div class="">
+    <div class="clearfix mr10 mt5">
+      <div class="commSearch">
+        <label ng-searcheffect="" class="default_color">批次名称</label>
+        <input type="text" ng-searcheffect="" ng-model="datchValue" name="couponName" class="commSearchVal ng-pristine ng-valid">
+        <button ng-click="dataBatchObj.searchHdButton(datchValue)" class="commSearchBtn"></button>
+      </div>
+    </div>
+    <div class="dataBatchWrap commOverflowXAuto">
+      <div class="dataBatchGridWrap">
+        <div class="dataBatchInfoGrid"></div>
+      </div>
+    </div>
+    <div>
+      <div class="ling_di"></div>
+      <div class="commBottom">
+        <div class="mb">
+          <button ng-click="dataBatchObj.sureAddBatch()" type="button" class="btn btnBlue">确定</button>
+          <button ng-close-child-window class="btn" type="button">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,217 @@
+<div class="campmain" ng-if="!isGroupApp">
+  <div class="campmainleft">
+    <p>营销活动历史</p>
+    <div class="campmainleft_step_two">
+      <a ng-click="tfilterFindObj.addNewSuccessNum()">参加营销活动</a>
+      <a ng-click="tfilterFindObj.addNewLastTime()">最后一次参加营销活动的时间</a>
+      <a ng-click="tfilterFindObj.addNewActivityNum()">参加营销活动次数</a>
+    </div>
+  </div>
+  <div class="campmainright">
+    <!-- ng-repeat -->
+    <div ng-repeat="condition in tfilterFindObj.conditions">
+      <div class="campmain_active_num" ng-show="condition.type=='参加次数'?true:false">
+        <div class="campmain_active_title">
+          参加营销活动次数
+          <div class="campmain_node_close" ng-click="tfilterFindObj.queryConditionClose($index,'activity')"></div>
+        </div>
+        <div style="padding-top: 15px;" class="typeone typetwo">
+          <div class="campmain_active_one">
+            <div class="campmain_active_one_div">
+              <p>最近 :</p>
+              <div class="preferentialSelecttime" index="$index" values="condition.values" get-values="condition.getExcludedselecttime" have="true" preferential-selecttime index="$index">选择时间</div>
+            </div>
+          </div>
+          <div class="campmain_active_two">
+            <div class="campmain_active_two_div">
+              <p>沟通方式 :</p>
+              <div class="preferentialPolicies" values="condition.valueChannel" get-values="condition.getExcludedselectcheckbox" have="true" preferential-policies channel-type-data="tfilterFindObj.channelTypeData" index="$index">沟通方式</div>
+            </div>
+          </div>
+          <div class="campmain_active_three">
+            <div class="campmain_active_three_div">
+              <p>参与活动次数 :</p>
+              <div class="preferentialJoinnum" values="condition.values" get-values="condition.getExcludedselectnum" have="true" is-group="false" preferential-joinnum index="$index">参与活动次数</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- two -->
+      <div class="campmain_active_num" style="height:162px;" ng-show="condition.type=='最后参加时间'?true:false">
+        <div class="campmain_active_title">
+          最后一次参加营销活动的时间
+          <div class="campmain_node_close" ng-click="tfilterFindObj.queryConditionClose($index,'last')"></div>
+        </div>
+        <div style="padding-top: 15px;" class="typeone typetwo">
+          <div class="campmain_active_two" style="padding-left:18px;">
+            <div class="campmain_active_two_div">
+              <p>沟通方式 :</p>
+              <div class="preferentialLasttime" values="condition.valueChannel" get-values="condition.getExcludedselectlasttime" have="true" channel-type-data="tfilterFindObj.channelTypeData" preferential-lasttime index="$index">沟通方式</div>
+            </div>
+          </div>
+          <div class="campmain_join_three">
+            <div class="campmain_join_three_div">
+              <p>最后一次参与时间在 :</p>
+              <div class="campmain_join_three_data">
+                <div class="campmain_join_three_one">
+                  <label>
+                    <input type="radio" ng-name="$index" value="absolutely" ng-model="condition.values.type"><span>绝对时间</span>
+                  </label>
+                  <label>
+                    <input type="radio" ng-name="$index" value="relatively" ng-model="condition.values.type"><span>相对时间</span>
+                  </label>
+                </div>
+                <div class="campmain_join_three_two">
+                  <div ng-show="condition.values.type=='absolutely'?true:false">
+                    <div class="preferentialAbsolutely" values="condition.values" get-values="condition.getExcludedabsolutely" have="true" preferential-absolutely index="$index"></div>
+                  </div>
+                  <div ng-show="condition.values.type=='relatively'?true:false">
+                    <div class="preferentialRelatively" values="condition.values" get-values="condition.getExcludedrelatively" have="true" preferential-relatively index="$index"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- three -->
+      <div class="campmain_active_num" style="height:141px;" ng-show="condition.type=='活动成功'?true:false">
+        <div class="campmain_active_title">
+          参加营销活动
+          <div class="campmain_node_close" ng-click="tfilterFindObj.queryConditionClose($index,'success')"></div>
+        </div>
+        <div style="padding-top: 15px;" class="typeone">
+          <div class="campmain_active_two" style="padding-left:18px;">
+            <div class="campmain_active_two_div">
+              <p style="float:left;height:26px;line-height:26px;">沟通方式 :</p>
+              <div class="preferentialSuccess" values="condition.valueChannel" get-values="condition.getExcludedselectsuccess" have="true" channel-type-data="tfilterFindObj.channelTypeData" preferential-success index="$index">沟通方式</div>
+            </div>
+          </div>
+          <div class="campmain_join_three">
+            <div class="campmain_join_three_div">
+              <p style="float:left;height:26px;line-height:26px;">参加了以下活动 :</p>
+              <div class="excludedActivities" values="condition.values" get-values="condition.getExcludedActivitiesValues" have="true" excluded-activities index="$index">指定/排除活动</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="campmain" ng-if="isGroupApp">
+  <div class="campmainleft" ng-class="{'flex—height':upArrow}" ng-if="isGroupApp&&creatGroupObj.eNodeFlag">
+    <p>营销活动历史<span class="iconfont icon-arrow" ng-class="{'icon-arrow-rotate':upArrow}" ng-click="upArrow=!upArrow" ng-init="upArrow=false"></span></p>
+    <div class="campmainleft_step_two" ng-hide="upArrow">
+      <a ng-class="{'select':!tfilterFindObj.addNewsuccess}" ng-click="tfilterFindObj.addNewSuccessNum()">参加营销活动</a>
+      <a ng-class="{'select':!tfilterFindObj.addNewactivity}" ng-click="tfilterFindObj.addNewActivityNum()">参加营销活动次数</a>
+      <a ng-class="{'select':!tfilterFindObj.addNewlast}" ng-click="tfilterFindObj.addNewLastTime()">最后一次参加营销活动的时间</a>
+    </div>
+  </div>
+  <div class="campmainright" ng-class="{'moveToLeft':isGroupApp&&!creatGroupObj.eNodeFlag}">
+    <!-- ng-repeat -->
+    <div class="campmain_active_num">
+      <div class="campmain_active_title">
+        营销活动历史
+      </div>
+      <div ng-repeat="condition in tfilterFindObj.conditions" style="position: relative">
+        <div class="campmain_active_num_item" ng-class="{'add_border':$index+1!=tfilterFindObj.conditions.length}" ng-show="condition.type=='参加次数'?true:false">
+          <div class="campmain_active_title_item">
+            参加营销活动次数
+            <div class="campmain_node_close" ng-show="isGroupApp&&creatGroupObj.eNodeFlag" ng-click="tfilterFindObj.queryConditionClose($index,'activity')">
+              <i class="iconfont icon-trash"></i>
+            </div>
+          </div>
+          <div style="padding-top: 15px;" class="typeone typetwo">
+            <div class="campmain_active_one" style="width: 198px;padding-left: 20px;">
+              <div class="campmain_active_one_div">
+                <p>最近 :</p>
+                <div class="preferentialSelecttime" index="$index" values="condition.values" get-values="condition.getExcludedselecttime"  have="creatGroupObj.eNodeFlag" preferential-selecttime index="$index">选择时间</div>
+              </div>
+            </div>
+            <div class="campmain_active_three" style="padding-left: 35px;">
+              <div class="campmain_active_three_div" style="width: 262px;">
+                <p>参与活动次数 :</p>
+                <div class="preferentialJoinnum" values="condition.values" get-values="condition.getExcludedselectnum" have="creatGroupObj.eNodeFlag" is-group="true" preferential-joinnum index="$index">参与活动次数</div>
+              </div>
+            </div>
+            <div class="campmain_active_two" style="padding-left: 46px;">
+              <div class="campmain_active_two_div">
+                <p>沟通方式 :</p>
+                <div class="preferentialPolicies"  values="condition.valueChannel" get-values="condition.getExcludedselectcheckbox" have="creatGroupObj.eNodeFlag" preferential-policies index="$index" channel-type-data="tfilterFindObj.channelTypeData">沟通方式</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- two -->
+        <div class="campmain_active_num_item"  ng-class="{'add_border':$index+1!=tfilterFindObj.conditions.length}" style="height:162px;" ng-show="condition.type=='最后参加时间'?true:false">
+          <div class="campmain_active_title_item">
+            最后一次参加营销活动的时间
+            <div class="campmain_node_close" ng-show="isGroupApp&&creatGroupObj.eNodeFlag" ng-click="tfilterFindObj.queryConditionClose($index,'last')">
+              <i class="iconfont icon-trash"></i>
+            </div>
+          </div>
+          <div style="padding-top: 15px;" class="typeone typetwo">
+            <div class="campmain_join_three">
+              <div class="campmain_join_three_div">
+                <p>最后一次参与时间在 :</p>
+                <div class="campmain_join_three_data">
+                  <div class="campmain_join_three_one">
+                    <label ng-if="!creatGroupObj.eNodeFlag">
+                      <input type="radio" ng-name="$index" value="absolutely" ng-model="condition.values.type" disabled="{{creatGroupObj.eNodeFlag}}"><span>绝对时间</span>
+                    </label>
+                    <label ng-if="creatGroupObj.eNodeFlag">
+                      <input type="radio" ng-name="$index" value="absolutely" ng-model="condition.values.type"><span>绝对时间</span>
+                    </label>
+                    <label ng-if="!creatGroupObj.eNodeFlag">
+                      <input type="radio" ng-name="$index" value="relatively" ng-model="condition.values.type" disabled="{{creatGroupObj.eNodeFlag}}"><span>相对时间</span>
+                    </label>
+                    <label ng-if="creatGroupObj.eNodeFlag">
+                      <input type="radio" ng-name="$index" value="relatively" ng-model="condition.values.type"><span>相对时间</span>
+                    </label>
+                  </div>
+                  <div class="campmain_join_three_two">
+                    <div ng-show="condition.values.type=='absolutely'?true:false">
+                      <div class="preferentialAbsolutely" values="condition.values" get-values="condition.getExcludedabsolutely"  have="creatGroupObj.eNodeFlag" preferential-absolutely index="$index"></div>
+                    </div>
+                    <div ng-show="condition.values.type=='relatively'?true:false">
+                      <div class="preferentialRelatively" values="condition.values" get-values="condition.getExcludedrelatively" have="creatGroupObj.eNodeFlag" preferential-relatively index="$index"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="campmain_active_two">
+              <div class="campmain_active_two_div">
+                <p>沟通方式 :</p>
+                <div class="preferentialLasttime"  values="condition.valueChannel" get-values="condition.getExcludedselectlasttime"  have="creatGroupObj.eNodeFlag" preferential-lasttime channel-type-data="tfilterFindObj.channelTypeData" index="$index">沟通方式</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- three -->
+        <div class="campmain_active_num_item"  ng-class="{'add_border':$index+1!=tfilterFindObj.conditions.length}" style="height:141px;" ng-show="condition.type=='活动成功'?true:false">
+          <div class="campmain_active_title_item">
+            参加营销活动
+            <div class="campmain_node_close" ng-show="creatGroupObj.eNodeFlag" ng-click="tfilterFindObj.queryConditionClose($index,'success')">
+              <i class="iconfont icon-trash"></i>
+            </div>
+          </div>
+          <div style="padding-top: 15px;" class="typeone">
+            <div class="campmain_join_three">
+              <div class="campmain_join_three_div">
+                <p style="float:left;height:26px;line-height:26px;">参加了以下活动 :</p>
+                <div class="excludedActivities" values="condition.values" get-values="condition.getExcludedActivitiesValues" have="creatGroupObj.eNodeFlag" excluded-activities index="$index">指定/排除活动</div>
+              </div>
+            </div>
+            <div class="campmain_active_two">
+              <div class="campmain_active_two_div">
+                <p style="float:left;height:26px;line-height:26px;">沟通方式 :</p>
+                <div class="preferentialSuccess"  values="condition.valueChannel" get-values="condition.getExcludedselectsuccess" have="creatGroupObj.eNodeFlag" preferential-success index="$index" channel-type-data="tfilterFindObj.channelTypeData">沟通方式</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

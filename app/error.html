@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wb="https://open.weibo.com/wb" ng-app="loginApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript">
+/*
+* create method addTag为生成css和js增加root变量,root变量目的是解决后端与前端文件夹结构不一样
+*/
+
+/*var root = "",rootStatic="/";
+if (location.pathname.indexOf("login") > -1) {
+     root = /.*login\/page\//.exec(location.pathname)[0];
+} else if(location.pathname.indexOf("ccms-web-builder") > -1){
+	root="/ccms-web-builder/";
+}else{
+    root = "/";
+}*/
+(function(){
+	function addTag(name, attributes, urlType) {
+		var el = document.createElement(name),attrName;
+		for (attrName in attributes) {
+		  if(urlType != 'absUrl' && (attrName == 'href' || attrName == 'src')){
+			attributes[attrName] = root + attributes[attrName];
+		  }
+		  el.setAttribute(attrName, attributes[attrName]);
+		}
+		document.write(outerHTML(el));
+	};
+
+	function outerHTML(node){
+		// if IE, Chrome take the internal method otherwise build one
+		return node.outerHTML || (
+			function(n){
+				var div = document.createElement('div'), h;
+				div.appendChild(n);
+				h = div.innerHTML;
+				div = null;
+				return h;
+		})(node);
+	};
+	/*调用css && js start*/
+	 //addTag('link',{rel: 'stylesheet', href: 'css/login.css', type: 'text/css'});
+	 //addTag('script',{src:'lib/jquery-1.7.1.min.js'});
+	 //addTag('script',{src:'lib/angular-1.0.3.min.js'});
+	 //addTag('script',{src:'lib/login.js'});
+	/*调用css && js end*/
+})();
+</script>
+<title>登录出错</title>
+<style type="text/css">
+    body{background:#FCFCFC;font-family: "微软雅黑";}
+    .content{width:900px;height:500px;margin:0 auto;position:relative;}
+    .errorBg{background:url("images/error.png?") no-repeat 0 0;width:838px ;height:401px;margin-top:100px;}
+    .errorContent{position:absolute;top:100px;left:300px;}
+    a{text-decoration: none;}
+    .btn{
+        width: 100px;
+        font-family:"microsoft Yahei";
+        margin: 5px;
+        display:inline-block;
+        *display: inline;
+        *margin-left: .3em;
+        font-size: 14px;
+        line-height: 28px;
+        *line-height: 34px;
+        color: #fff;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        background-color: #8a8a8a;
+        *background-color: #8a8a8a;
+        background-image: -ms-linear-gradient(top, #9a9a9a, #777777);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#9a9a9a), to(#777777));
+        background-image: -webkit-linear-gradient(top, #9a9a9a, #777777);
+        background-image: -o-linear-gradient(top, #9a9a9a, #777777);
+        background-image: linear-gradient(top, #9a9a9a, #777777);
+        background-image: -moz-linear-gradient(top, #9a9a9a, #777777);
+        background-repeat: repeat-x;
+        border: none;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        filter: progid:dximagetransform.microsoft.gradient(startColorstr='#9a9a9a', endColorstr='#777777', GradientType=0);
+        filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+        *zoom: 1;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    .btn:hover{
+        background-color: #9b9b9b;
+        *background-color: #9b9b9b;
+        background-image: -ms-linear-gradient(top, #aaaaaa, #a9a9a9);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#aaaaaa), to(#a9a9a9));
+        background-image: -webkit-linear-gradient(top, #aaaaaa, #a9a9a9);
+        background-image: -o-linear-gradient(top, #aaaaaa, #a9a9a9);
+        background-image: linear-gradient(top, #aaaaaa, #a9a9a9);
+        background-image: -moz-linear-gradient(top, #aaaaaa, #a9a9a9);
+    }
+    .btn:active{
+        background-color: #9b9b9b;
+        *background-color: #9b9b9b;
+        background-image: -ms-linear-gradient(top, #8d8d8d, #8e8e8e);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#8d8d8d), to(#8e8e8e));
+        background-image: -webkit-linear-gradient(top, #8d8d8d, #8e8e8e);
+        background-image: -o-linear-gradient(top, #8d8d8d, #8e8e8e);
+        background-image: linear-gradient(top, #8d8d8d, #8e8e8e);
+        background-image: -moz-linear-gradient(top, #8d8d8d, #8e8e8e);
+    }
+    .btnBlue{
+        color: #fff;
+        background-color: #2ba4da;
+        *background-color: blue;
+        background-image: -ms-linear-gradient(top, #31b1eb, #2495c7);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#31b1eb), to(#2495c7));
+        background-image: -webkit-linear-gradient(top, #31b1eb, #2495c7);
+        background-image: -o-linear-gradient(top, #31b1eb, #2495c7);
+        background-image: -moz-linear-gradient(top, #31b1eb, #2495c7);
+        background-image: linear-gradient(top, #31b1eb, #2495c7);
+        background-repeat: repeat-x;
+        border-color: #2495c7 #2495c7 #29abe2;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+        filter: progid:dximagetransform.microsoft.gradient(startColorstr='#31b1eb', endColorstr='#2495c7', GradientType=0);
+        filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+    }
+    button.btnBlue:hover,a.btnBlue:hover{
+        background-color: #3dbaf2;
+        *background-color: blue;
+        background-image: -ms-linear-gradient(top, #47c1f8, #31b1eb);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#47c1f8), to(#31b1eb));
+        background-image: -webkit-linear-gradient(top, #47c1f8, #31b1eb);
+        background-image: -o-linear-gradient(top, #47c1f8, #31b1eb);
+        background-image: -moz-linear-gradient(top, #47c1f8, #31b1eb);
+        background-image: linear-gradient(top, #47c1f8, #31b1eb);
+    }
+    button.btnBlue:active,a.btnBlue:active{
+        background-color: #3cb9f1;
+        *background-color: blue;
+        background-image: -ms-linear-gradient(top, #31b1eb, #47c1f8);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#31b1eb), to(#47c1f8));
+        background-image: -webkit-linear-gradient(top, #31b1eb, #47c1f8);
+        background-image: -o-linear-gradient(top, #31b1eb, #47c1f8);
+        background-image: -moz-linear-gradient(top, #31b1eb, #47c1f8);
+        background-image: linear-gradient(top, #31b1eb, #47c1f8);
+    }
+</style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="errorBg"></div>
+        <div class="errorContent">
+            <h4>出错了！！！</h4>
+            <p>您当前绑定的系统帐号帐号处于禁用中，请去管理平台启用帐号。</p>
+            <div>
+                <a href="" class="btn btnBlue">去管理平台</a>
+                <button class="btn">退出</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<div>
+  <div class="gridCommCursom clearfix" ng-controller="workbenchValuesCtrl">
+    <div class="fl mt5">
+      <label>店铺:</label>
+      <select class="commSelect width130" ng-model="curWorkbenchShop" ng-options="workbenchShop.name for workbenchShop in workbenchShopsLists" ng-change="updateWorkbenchValues()"></select>
+    </div>
+    <div class="commSearch">
+      <label class="default_color" ng-data-grid-search>搜索客户ID</label>
+      <input class="commSearchVal" type="text" ng-model="searchAttrVal" ng-data-grid-search="attr" name="queryName">
+      <button class="commSearchBtn" ng-click="customObj.searchButtonClick(searchAttrVal,'othFlag')"></button>
+    </div>
+  </div>
+  <div class="showConfigAttr gridCommLayout"></div>
+</div>

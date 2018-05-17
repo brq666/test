@@ -1,0 +1,367 @@
+<div id="nodetime" ng-class="node_class" ng-controller="timeNodeCtrl">
+  <div class="ng-scope alert">
+    <div class="bg ticketsInfoBox commWrapOne commWrapFour commNodeMarkRelative">
+      <div class="bannerCommStyle areaHeight26" ng-show="timeNodeTips" ng-bind="timeNodeTips">
+        <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+      </div>
+      <div class="contentNodeWrap">
+        <table>
+          <tbody>
+            <tr>
+              <th class="tl" width="13%">
+                <label class="nameInput">节点名称：</label>
+              </th>
+              <td>
+                <div class="pr">
+                  <input type="text" class="borderHighlight node_length fl" ng-model="Timenode.name" maxlength="20" ng-noderequire="" />
+                  <span nodetip=""></span>
+                </div>
+              </td>
+              <td>
+                <label ng-show="Timenode.id" class="fr mr40" ng-click="up()" >节点代码：<span ng-bind="Timenode.id"></span></label>
+              </td>
+            </tr>
+            <tr>
+              <th class="tl">
+                <input type="radio" name="time" ng-model="Timenode.executionType" checked="checked" value="0" class="radio ng-valid ng-dirty vm" />即时执行</th>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="tl" colspan="2">
+                <input type="radio" name="time" ng-model="Timenode.executionType" value="1" class="radio ng-pristine ng-valid vm" />定时一次性执行
+                <input ng-disabled="Timenode.executionType!=1" class="datetimepicker required borderHighlight text w150" type="text" readonly="readonly" name="startTime" id="time" ng-model="Timenode.fixedBegin" required="" datepicker="" />
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="tl" colspan="2">
+                <input type="radio" name="time" ng-model="Timenode.executionType" value="2" class="radio ng-pristine ng-valid vm" />周期性执行</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="circle areaHeightAuto clearfix" ng-disabled="circleChecked">
+          <div class="margbo">
+            <span class="fl mr25">周期 ： </span>
+            <div class="m20">
+              <label class="m20" style="margin-left: 5px;">
+                <input ng-disabled="circleChecked" type="radio" ng-model="Timenode.cycleType" value="0" ng-click="weekShow()" class="radio ng-pristine ng-valid vm" />按天</label> 每
+              <input id="cycleDay" ng-disabled="byDay||circleChecked" type="text" ng-number="" ng-model="Timenode.cycleDay" class="num borderHighlight vm"  min="1" max="10" ng-cloak /> 天
+            </div>
+            <div class="ml15 ml70 height30 mb5">
+              <label class="mr15" style="height: 30px;">
+                <input ng-disabled="circleChecked" type="radio" id="byweek" ng-model="Timenode.cycleType" ng-click="weekShow()" value="1" class="radio ng-pristine ng-valid vm" />按周</label> 每
+              <input ng-disabled="byWeek" type="text" ng-number="" ng-model="Timenode.cycleWeek" class="num borderHighlight vm" name="points"  min="1" max="10" ng-cloak /> 周
+            </div>
+            <div id="week" ng-show="week" class="week">
+              <form ng-class="week_form">
+                <div class="arrows_week"></div>
+                <dd>
+                  <div class="check_week">
+                    <input ng-model="Timenode.day[0]" value="0" type="checkbox" />&nbsp;星期日
+                  </div>
+                  <div class="check_week">
+                    <input ng-model="Timenode.day[1]" value="1" type="checkbox" />&nbsp;星期一
+                  </div>
+                  <div class="check_week">
+                    <input ng-model="Timenode.day[2]" value="2" type="checkbox" />&nbsp;星期二
+                  </div>
+                  <div id="week_three">
+                    <input ng-model="Timenode.day[3]" value="3" type="checkbox" />&nbsp;星期三
+                  </div>
+                  <div class="check_week">
+                    <input ng-model="Timenode.day[4]" value="4" type="checkbox" />&nbsp;星期四
+                  </div>
+                  <div class="check_week">
+                    <input ng-model="Timenode.day[5]" value="5" type="checkbox" />&nbsp;星期五
+                  </div>
+                  <div class="check_week">
+                    <input ng-model="Timenode.day[6]" value="6" type="checkbox" />&nbsp;星期六
+                  </div>
+                </dd>
+              </form>
+            </div>
+            <div class="ml15 ml70">
+              <label>
+                <input ng-disabled="circleChecked" type="radio" ng-model="Timenode.cycleType" value="2" class="radio ng-pristine ng-valid" />按月 </label>
+              <div class="month">
+                <input ng-disabled="Timenode.cycleType!=2||Timenode.executionType!=2" type="radio" value="0" name="time_by_s" ng-model="Timenode.cycleMonthType" class="radio ng-pristine ng-valid vm" />每
+                <input ng-disabled="Timenode.cycleMonthType!=0||Timenode.cycleType!=2||Timenode.executionType!=2" type="text" ng-number="" ng-model="Timenode.cycleMonth1" class="num borderHighlight" name="points" min="1" max="10" ng-cloak />个月的第
+                <input readonly="" ng-disabled="Timenode.cycleMonthType!=0||Timenode.cycleType!=2||Timenode.executionType!=2" id="receiverState" class=" borderHighlight" ng-class="warn" ng-model="monthBeginShow" ng-click="showOrHideMonth('monthstart')" /> 天
+                <div id="monthstart" ng-show="monthstart" class="month_start ng-hide">
+                  <form class="month_form">
+                    <dd>
+                      <div id="monthDay" class="monthDay">
+                        <span class="ng-scope"></span>
+                        <dl class="ng-scope dl">
+                          <dd>
+                            <div ng-click="proSelect($event);" id="monthBegin1" ng-model="Timenode[monthBegin][1]" class="cur">
+                              1
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin2" ng-model="Timenode[monthBegin][2]" class="cur">
+                              2
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin3" ng-model="Timenode[monthBegin][3]" class="cur">
+                              3
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin4" ng-model="Timenode[monthBegin][4]" class="cur">
+                              4
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin5" ng-model="Timenode[monthBegin][5]" class="cur">
+                              5
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin6" ng-model="Timenode[monthBegin][6]" class="cur">
+                              6
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin7" ng-model="Timenode[monthBegin][7]" class="cur">
+                              7
+                            </div>
+                            <br />
+                            <div ng-click="proSelect($event);" id="monthBegin8" ng-model="Timenode[monthBegin][8]" class="cur">
+                              8
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin9" ng-model="Timenode[monthBegin][9]" class="cur">
+                              9
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin10" ng-model="Timenode[monthBegin][10]" class="cur">
+                              10
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin11" ng-model="Timenode[monthBegin][11]" class="cur">
+                              11
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin12" ng-model="Timenode[monthBegin][12]" class="cur">
+                              12
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin13" ng-model="Timenode[monthBegin][13]" class="cur">
+                              13
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin14" ng-model="Timenode[monthBegin][14]" class="cur">
+                              14
+                            </div>
+                            <br />
+                            <div ng-click="proSelect($event);" id="monthBegin15" ng-model="Timenode[monthBegin][15]" class="cur">
+                              15
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin16" ng-model="Timenode[monthBegin][16]" class="cur">
+                              16
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin17" ng-model="Timenode[monthBegin][17]" class="cur">
+                              17
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin18" ng-model="Timenode[monthBegin][18]" class="cur">
+                              18
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin19" ng-model="Timenode[monthBegin][19]" class="cur">
+                              19
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin20" ng-model="Timenode[monthBegin][20]" class="cur">
+                              20
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin21" ng-model="Timenode[monthBegin][21]" class="cur">
+                              21
+                            </div>
+                            <br />
+                            <div ng-click="proSelect($event);" id="monthBegin22" ng-model="Timenode[monthBegin][22]" class="cur">
+                              22
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin23" ng-model="Timenode[monthBegin][23]" class="cur">
+                              23
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin24" ng-model="Timenode[monthBegin][24]" class="cur">
+                              24
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin25" ng-model="Timenode[monthBegin][25]" class="cur">
+                              25
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin26" ng-model="Timenode[monthBegin][26]" class="cur">
+                              26
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin27" ng-model="Timenode[monthBegin][27]" class="cur">
+                              27
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin28" ng-model="Timenode[monthBegin][28]" class="cur">
+                              28
+                            </div>
+                            <br />
+                            <div ng-click="proSelect($event);" id="monthBegin29" ng-model="Timenode[monthBegin][29]" class="cur">
+                              29
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin30" ng-model="Timenode[monthBegin][30]" class="cur">
+                              30
+                            </div>
+                            <div ng-click="proSelect($event);" id="monthBegin31" ng-model="Timenode[monthBegin][31]" class="cur">
+                              31
+                            </div>
+                          </dd>
+                        </dl>
+                        <center class="mb fr" style="width:100%">
+                          <button class=" btn btnBlue smallbut" id="Button2" ng-click="monthSave('monthstart')">确定</button>
+                          <button class="btn smallbut" id="Button3" ng-click="weekDelect('1')">取消</button>
+                        </center>
+                      </div>
+                    </dd>
+                  </form>
+                </div>
+              </div>
+              <div style="margin-left: 60px; margin-top: 5px;">
+                <input ng-disabled="Timenode.cycleType!=2||Timenode.executionType!=2" type="radio" name="time_by_s" value="1" ng-model="Timenode.cycleMonthType" class="radio ng-pristine ng-valid vm" />每
+                <input ng-disabled="Timenode.cycleMonthType!=1||Timenode.cycleType!=2||Timenode.executionType!=2" type="text" ng-number="" ng-model="Timenode.cycleMonth2" class="num borderHighlight"  name="points" min="1" max="10" ng-cloak />个月的最后第
+                <input ng-class="warn_end" readonly="" ng-disabled="Timenode.cycleMonthType!=1||Timenode.cycleType!=2||Timenode.executionType!=2" id="Text3" class="borderHighlight" ng-model="monthEndShow" ng-click="showOrHideMonth('monthend')" /> 天
+                <div id="monthend" ng-show="monthend" class="monthend ng-hide">
+                  <form class="monthend_form">
+                    <dd>
+                      <div id="monthendid" class="provinceBox ">
+                        <span class="ng-scope"></span>
+                        <dl class="ng-scope dl">
+                          <dd>
+                            <div ng-click="proSelect2($event);" id="monthEnd1" ng-model="Timenode[monthEnd][1]" class="cur">
+                              1
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd2" ng-model="Timenode[monthEnd][2]" class="cur">
+                              2
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd3" ng-model="Timenode[monthEnd][3]" class="cur">
+                              3
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd4" ng-model="Timenode[monthEnd][4]" class="cur">
+                              4
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd5" ng-model="Timenode[monthEnd][5]" class="cur">
+                              5
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd6" ng-model="Timenode[monthEnd][6]" class="cur">
+                              6
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd7" ng-model="Timenode[monthEnd][7]" class="cur">
+                              7
+                            </div>
+                            <br />
+                            <div ng-click="proSelect2($event);" id="monthEnd8" ng-model="Timenode[monthEnd][8]" class="cur">
+                              8
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd9" ng-model="Timenode[monthEnd][9]" class="cur">
+                              9
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd10" ng-model="Timenode[monthEnd][10]" class="cur">
+                              10
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd11" ng-model="Timenode[monthEnd][11]" class="cur">
+                              11
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd12" ng-model="Timenode[monthEnd][12]" class="cur">
+                              12
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd13" ng-model="Timenode[monthEnd][13]" class="cur">
+                              13
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd14" ng-model="Timenode[monthEnd][14]" class="cur">
+                              14
+                            </div>
+                            <br />
+                            <div ng-click="proSelect2($event);" id="monthEnd15" ng-model="Timenode[monthEnd][15]" class="cur">
+                              15
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd16" ng-model="Timenode[monthEnd][16]" class="cur">
+                              16
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd17" ng-model="Timenode[monthEnd][17]" class="cur">
+                              17
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd18" ng-model="Timenode[monthEnd][18]" class="cur">
+                              18
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd19" ng-model="Timenode[monthEnd][19]" class="cur">
+                              19
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd20" ng-model="Timenode[monthEnd][20]" class="cur">
+                              20
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd21" ng-model="Timenode[monthEnd][21]" class="cur">
+                              21
+                            </div>
+                            <br />
+                            <div ng-click="proSelect2($event);" id="monthEnd22" ng-model="Timenode[monthEnd][22]" class="cur">
+                              22
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd23" ng-model="Timenode[monthEnd][23]" class="cur">
+                              23
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd24" ng-model="Timenode[monthEnd][24]" class="cur">
+                              24
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd25" ng-model="Timenode[monthEnd][25]" class="cur">
+                              25
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd26" ng-model="Timenode[monthEnd][26]" class="cur">
+                              26
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd27" ng-model="Timenode[monthEnd][27]" class="cur">
+                              27
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd28" ng-model="Timenode[monthEnd][28]" class="cur">
+                              28
+                            </div>
+                            <br />
+                            <div ng-click="proSelect2($event);" id="monthEnd29" ng-model="Timenode[monthEnd][29]" class="cur">
+                              29
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd30" ng-model="Timenode[monthEnd][30]" class="cur">
+                              30
+                            </div>
+                            <div ng-click="proSelect2($event);" id="monthEnd31" ng-model="Timenode[monthEnd][31]" class="cur">
+                              31
+                            </div>
+                          </dd>
+                        </dl>
+                        <center class="mb center_right">
+                          <button class=" btn btnBlue smallbut" id="Button4" ng-click="monthSave('monthend')">确定</button>
+                          <button class=" btn  smallbut" id="Button5" ng-click="weekDelect('2')">取消</button>
+                        </center>
+                      </div>
+                    </dd>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="div_zhixing fl">
+            <span class="fl">执行范围 ：</span>
+          </div>
+          <div class="fl" style="margin-top: 42px;margin-left: 8px;">
+            <div class="mb10">
+              <label class="lable_zhixing"> 开始：</label>
+              <input id="Text1" ng-cloak ng-model="Timenode.cycleBegin" ng-disabled="circleChecked" class="w150 datetimepicker borderHighlight text" type="text" readonly="readonly" name="startTime"  required="" datepicker="" />
+            </div>
+            <div class="mt10">
+              <label class="m30 w110"> 结束：</label>
+              <div class="div_jiesu">
+                <div class="m30 h30">
+                  <label class="m30">
+                    <input ng-disabled="circleChecked" type="radio" value="0" name="cl" ng-model="Timenode.cycleEndType" class="radio ng-pristine ng-valid vm" ng-cloak />无结束时间</label>
+                </div>
+                <div class="m30 h30 mb5">
+                  <label class="w50">
+                    <input ng-disabled="circleChecked" type="radio" name="cl" value="1" ng-model="Timenode.cycleEndType" class="radio ng-pristine ng-valid vm" />执行</label>
+                  <input ng-disabled="Timenode.cycleEndType!=1||circleChecked" ng-model="Timenode.repeats" type="text" ng-number="" class="num borderHighlight" value="1" name="points" min="2" max="99" /> 次结束
+                </div>
+                <div class="m30">
+                  <label class="m30 w80">
+                    <input ng-disabled="circleChecked" type="radio" value="2" name="cl" ng-model="Timenode.cycleEndType" class="radio ng-pristine ng-valid vm" />结束时间</label>
+                  <input id="endtime" ng-model="Timenode.cycleEnd" ng-disabled="Timenode.cycleEndType!=2||circleChecked" style="width: 150px;margin-left: -5px;" class="datetimepicker borderHighlight text" type="text" readonly="readonly" name="startTime"  datepickertomorrow="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ling_di fl"></div>
+    <div class="commBottom fr">
+      <div class="mb">
+        <button class="btn btnBlue" id="Button1" ng-click="saveTimeNode()">确定</button>
+        <button class="btn" id="Button6" ng-close-window="">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

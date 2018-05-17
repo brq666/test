@@ -1,0 +1,11 @@
+<!--默认表格头部模板-->
+<th ng-repeat="column in $ctrl.opts.columnsDef track by $index" ng-if="!column.isHidden" ng-class="{'column-sort':column.sortProp}"
+  ng-style="{width:column.width, 'text-align':column.align}">
+
+  <span ng-click="$parent.$parent.$parent.$parent.$ctrl.toggleSort(column, $ctrl.opts.columnsDef)">
+    <span ng-bind="column.displayName"></span>
+
+    <span class="iconfont icon-sort" ng-class="{'column-sort-none':column.sortOrder===undefined,'column-sort-asc':column.sortOrder==='asc','column-sort-desc':column.sortOrder==='desc'}"
+      ng-if="column.sortProp"></span>
+  </span>
+</th>

@@ -1,0 +1,79 @@
+<div class="maincontainerOth maincontainerOth20" ng-controller="ConfigQueryCtrl">
+  <!--ztree start-->
+  <div class="market_types_tree grey_border queryZtree" id="market_tree">
+    <div ztreemenu=""></div>
+    <div class="market_tree_input_wrapper">
+      <input type="text" class="market_tree_search_input system_search" ng-placeholder="参数分类" ng-model="searchValue" tree-node-search-input="" />
+      <a class="addRootfile" title="新增目录" href="javascript:void(0)" ng-click="addNode(true)"></a>
+    </div>
+    <div class="market_tree_wrapper">
+      <div class="ztree defaultWrapztree" query-ztree="" id="aaa" style="min-height:200px;"></div>
+    </div>
+  </div>
+  <!--ztree end-->
+  <div class="configQueryClass">
+    <div class="clearfix">
+      <h2 class="heading fl">查询节点配置</h2>
+      <div class="acTypeMana" ng-click="configuration.addGlobal()">
+        全局参数
+      </div>
+    </div>
+    <ul class="clearfix Tab_title" id="tabpenel_list">
+      <li class="hover">条件配置</li>
+    </ul>
+    <div class="tabContentArea">
+      <div class="configListContent">
+        <div class="wrapConfigList">
+          <div class="mt">
+            <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360" ng-click="marketLayer.add()">
+              <a href="javascript:void(0)" ng-click="configuration.addConfig()">新增条件</a>
+            </div>
+            <span style="width:20px; display:inline-block"></span>
+            <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360 splitGroupButton" ng-show="configuration.splitGroupButtonFlag">
+              <a href="javascript:void(0)" ng-click="splitGroupObj.addConfigGroup()">分组配置</a>
+            </div>
+            <div class="commSearch">
+              <label class="default_color" ng-searcheffect="">活动名称</label>
+              <input class="commSearchVal" type="text" name="couponName" ng-model="hdValue" ng-searcheffect="" />
+              <button class="commSearchBtn" ng-click="searchObj.searchHdButton(hdValue)"></button>
+            </div>
+          </div>
+          <div class="campaignListCon"></div>
+        </div>
+      </div>
+    </div>
+    <div class="configurationPop" ng-include="" src="configuration.pop_src"></div>
+  </div>
+  <div class="addCategoryPop">
+    <div class="configContentBox">
+      <div>
+        <p class="mb10 mt20">
+          <label class="commLabelWidth75">
+            <span class="red">*</span> 分类名称：
+          </label>
+          <input ng-model="categoryTypeObj.curCategoryName" hide-error="" class="borderHighlight" type="text" />
+          <label class="error ml5" ng-show="categoryTypeObj.errorMark">请填写分类名称</label>
+        </p>
+        <p>
+          <label class="commLabelWidth75">分类类型：</label>
+          <select class="commSelect" ng-model="categoryTypeObj.curCategoryType" ng-options="c.typeName for c in categoryTypeList" ng-disabled="categoryTypeObj.categoryDisabled"></select>
+        </p>
+      </div>
+    </div>
+    <div class="ling_di mt20"></div>
+    <div class="commBottom">
+      <div class="mb">
+        <button ng-click="categoryTypeObj.saveCategory()" class="btn btnBlue">确定</button>
+        <button ng-close-window="" class="btn">取消</button>
+      </div>
+    </div>
+  </div>
+  <!--分组配置模块-->
+  <div class="splitGroupPop" ng-include="" src="splitGroupObj.splitGroupSrc"></div>
+  <!--订单配置模块-->
+  <div class="orderConfig">
+    <div class="orderContent" ng-include="" src="orderConfig.src"></div>
+  </div>
+  <!--全局参数配置-->
+  <div ng-include="" src="configuration.globalView"></div>
+</div>

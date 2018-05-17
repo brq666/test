@@ -1,0 +1,71 @@
+<div>
+  <div class="clearfix">
+    <h2 class="heading fl">运行监控</h2>
+    <div class="shopinfo" id="shopinfo">
+      <b>店铺选择 :</b>
+      <select class="comm-select" ng-model="$parent.currentShopId" ng-options="item.idInPlat as item.name for item in $parent.shops" ng-change="getPlansInit($parent.currentShopId)"></select>
+    </div>
+  </div>
+  <div class="monitoringcontent">
+    <!--今日-->
+    <div class="clear">
+      <!--方案列表-->
+      <div class="padtop10 inline-block" ng-repeat="plan in plans">
+        <!--开启-->
+        <div class="fl marginrig24" ng-if="plan.rules.length &gt; 0" ng-click="setActive(plan,$index)">
+          <div class="relative {{plan == currentPlan ? 'cursolution' : 'solution_off'}}">
+            <ul class="solutiondetail pad15">
+              <li class="blue_pa font14">{{plan.name}}</li>
+              <li class="gray_66 font12">
+                <p>规则数：{{plan.rules.length}}<br />处理订单：{{plan.statuses.handled}}笔<br />备注订单：{{plan.statuses.matched}}笔</p>
+              </li>
+              <li class="font12 blue_pb" ng-show="plan.active">
+                <span ng-bind-html="plan.formatDiffString"></span>
+              </li>
+            </ul>
+            <p class="absolute padlef10 font14 {{plan.active? 'de_solutiontitle' : 'de_title'}}">
+              <span class="fl w70">方案{{$index + 1}}</span>
+              <span class="fr padrig20 {{plan.active? 'blue_pc' : 'gray_c8'}}">{{plan.active? '已开启' : '已关闭'}}</span>
+            </p>
+          </div>
+        </div>
+        <!--未配置-->
+        <div class="fl marginrig24" ng-if="plan.rules.length == 0">
+          <div class="solution_not relative">
+            <span class="deploymentlist font16 gray_a3">未配置</span>
+            <p class="absolute de_title padlef10 font14">方案{{$index + 1}}</p>
+          </div>
+        </div>
+      </div>
+      <!--方案相关数据-->
+      <div>
+        <p class="clear trangle20 {{className}}"></p>
+        <!--方案对应表格数据-->
+        <table class="tablecommB">
+          <thead>
+          <tr>
+            <th width="10%">优先级</th>
+            <th width="25%"><span>规则名称</span></th>
+            <th width="20%"><span>订单备注内容</span></th>
+            <th width="20%"><span>备注订单数</span></th>
+            <th width="25%"><span class="autoMark">占比<i class="yellownote"></i><em>规则备注订单数/方案备注订单数</em></span></th>
+          </tr>
+          </thead>
+          <tbody ng-repeat="rule in currentPlan.rules">
+          <tr>
+            <td>{{rule.position}}</td>
+            <td>{{rule.name}}</td>
+            <td class="wordbreaka" title="{{rule.remarkContent}}"><span>{{rule.remarkContent}}</span></td>
+            <td>{{ getRuleData(rule).matched }}</td>
+            <td class="w200"> <span class="fl w30 right">{{ getRuleData(rule).rate }}</span>
+              <div class="loadingA inline-block marginlef12">
+                <span class="loadingpercentA inline-block" ng-style="{ width: getRuleData(rule).rate }"></span>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

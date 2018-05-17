@@ -1,0 +1,33 @@
+# Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
+
+# project-specific
+.tmp
+.sass-cache
+dist
+ccms
+
+# bower
+bower_components
+
+# npm
+node_modules
+npm-debug.log
+
+# grunt & gulp
+.grunt
+.gulp
+
+# gradle
+.gradle
+.htaccess
+
+# OS and IDE
+.DS_Store
+.emacs*
+.c9
+*.flymake
+*~
+.#*
+.idea
+*.sublime-*
+campagin-fe.iml

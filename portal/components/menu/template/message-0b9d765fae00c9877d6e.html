@@ -1,0 +1,71 @@
+<div>
+  <div class="moreMessagePop">
+    <div>
+      <table class="tableCommA" width="830">
+        <thead>
+        <tr>
+          <th width="40">
+            <input style="position: relative;left: 5px" type="checkbox" ng-model="messageModal.selectAll" ng-change="messageModal.noticeObj.setSelectAll(messageModal.selectAll)">
+          </th>
+          <th class="al">
+            <span>主题</span>
+          </th>
+          <th width="160" class="ac">
+            <span>时间</span>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="mess in messageModal.popMesses" ng-class-even="'even'" ng-class="{bold:mess.isRead, bold:!mess.isRead}">
+          <td style="cursor: default" width="40" class="al">
+            <input type="checkbox" ng-change="messageModal.noticeObj.selectNoticeId(mess.noticeId, mess.select)"  ng-model="mess.select">
+          </td>
+          <td ng-click="messageModal.noticeObj.readClick($index)" class="gray5e">{{mess.title}}</td>
+          <td style="cursor: default" class="ac gray3d">{{mess.created}}</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="pages">
+            <div class="fr">
+              <cc-pagination type="simple" page-num="messageModal.page" page-size="10" total-pages="messageModal.total" on-change="messageModal.noticeObj.onPageChange(pageNum)"></cc-pagination >
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="messageFooter">
+        <button ng-click="messageModal.noticeObj.deleteNotice()" ng-class="{'btn-ok':messageModal.deleteButton}" class="btn-cancel ">删除选中</button>
+        <button ng-click="messageModal.noticeObj.clearNotice()" class="btn-ok">删除已读</button>
+      </div>
+    </div>
+  </div>
+  <div class="isShowMessContent" id="isShowMessContent" ng-show="messageModal.isShowMessContent">
+    <div id="mask2"></div>
+    <div id="popBack2">
+      <!--通知&消息&公告类弹层-->
+      <div class="contentPop" class="absolute-center">
+        <div class="popbg">
+          <div class="noticePopComm absolute-center">
+            <!--title-->
+            <div class="noticeTitle">
+              <span class="noticeType"></span>
+              <div class="noticeTitleFont">
+                <h3 class="elli-text f16 white">{{messageModal.contitle}}</h3>
+
+                <p class="blueA f11">
+                  <span>来源：数据赢家</span>
+                  <span class="padl25">{{messageModal.condate}}</span>
+                </p>
+              </div>
+              <a class="noticeClose" href="javascript:void(0);" ng-click="messageModal.noticeObj.hideContentDialog()"></a>
+            </div>
+            <!--content-->
+            <div class="noticeContent">
+              <!--   <p parseContent>{{content}}</p>-->
+              <p ng-bind-html="messageModal.content"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="dataConfigStyle height220" ng-controller="aaa">
+  <dl>
+    <dt class="mb10">
+      <label class="commLabelWidth75">参数配置：</label>
+      <span class="commLabelWidth80">操作符：</span>
+      <span class="ml5">等于,不等于,包含,不包含,以字符开头,以字符结尾</span>
+    </dt>
+    <ul class="commPaddingLeft75">
+      <li>
+        <p class="mb10">
+          <span class="commLabelWidth80">输入类型：</span>
+          <select class="commSelect width130">
+            <option>1</option>
+          </select>
+        </p>
+      </li>
+      <li>
+        <p class="mb10">
+          <span class="commLabelWidth80">输入进度：</span>
+          <span class="ml5">小数点后
+            <select class="commSelect width40 mr5">
+              <option>1</option>
+            </select>
+            位
+          </span>
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="commLabelWidth80">输入范围：</span>
+          <input class="borderHighlight" type="text" />
+          <i class="ml5 colorGray">—</i>
+          <input class="borderHighlight" type="text" />
+        </p>
+      </li>
+    </ul>
+  </dl>
+</div>
+<script type="text/javascript">
+  function aaa($scope,$http){
+    $scope.init=function(){
+    };
+    $scope.init();
+    console.log($scope);
+  }
+
+</script>

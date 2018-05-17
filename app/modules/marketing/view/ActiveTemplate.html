@@ -1,0 +1,47 @@
+<!--<link type="text/css" rel="stylesheet" href="css/template.css"/>-->
+<div class="maincontainerB activeTemplateCtrl" ng-controller="ActiveTemplateCtrl">
+  <div class="maincontainer">
+    <div class="ccms-ump">
+      <div class="clearfix">
+        <h2 class="heading-second fl">活动模板</h2><div class="smalldarkerblueBtn newbuildBtn"><a href="javascript:void(0)" ng-click="tpl.add()">新建模板</a></div>
+      </div>
+      <ul class="clearfix Tab_title" id="tabpenel_list"  >
+        <li ng-click="tabpanel_campaign.backList()" class="hover">
+          本地模板
+        </li>
+        <li ng-repeat="tab in tabpanel_campaign.tabList" id="{{tab.id}}" ng-click="tabpanel_campaign.click_tabTitle($index+1)"> {{tab.name}}
+          <a class="TabClose" href="javascript:void(0);" ng-click="tabpanel_campaign.click_tabClose($index+1)"></a>
+        </li>
+      </ul>
+      <div class="tabContentArea" ng-hide="tabpanel_campaign.isCreatFlag">
+        <div class="mt">
+          <div class="commSearch">
+            <input class="commSearchVal" type="text" name="couponName" ng-model="hdValue" placeholder="模板名称/模板ID" maxlength="50" >
+            <button class="commSearchBtn" ng-click="marketList.searchHdButton(hdValue)"></button>
+          </div>
+        </div>
+        <div class="activeList active-template couponListssBox">
+          <div class="campaignListCon campaignListConTemplate"></div>
+        </div>
+        <div class="activityFlow" ng-include src="flowTpl_src" ng-hide="tabpanel_campaign.flag"></div>
+      </div>
+      <!--start上传 -->
+      <div class="upload" style="display:none">
+        <h3>输入模板说明链接:</h3>
+        <input class="borderHighlight width302" maxlength="50" type="text" required ng-model="upload.name"/>
+        <div class="mb">
+          <button class="btn btnBlue commSmallBtn" type="submit" ng-click="upload.save()">确定</button>
+          <button class="btn commSmallBtn" type="button" ng-close-window>取消</button>
+        </div>
+      </div>
+      <!--end 上传 -->
+    </div>
+    <!--start 新增-->
+    <div ng-include src="tpl.src" id="addUmp"></div>
+    <!--end 新增-->
+  </div>
+</div>
+<div class="viewMarkInfoBox" id="couponTip"></div>
+
+
+

@@ -1,0 +1,684 @@
+@charset "UTF-8";
+.productBox {
+  width: 880px;
+  color: #000; }
+
+.proSearchCategory {
+  border: 1px solid #d6effe;
+  background: #ecf8fc;
+  padding: 5px 8px 5px;
+  margin-top: 6px; }
+
+.proSearchCategory div {
+  line-height: 30px; }
+
+.proSearchCategory .btn_modify {
+  vertical-align: middle; }
+
+.proSearchCategory label {
+  width: 100px;
+  display: inline-block;
+  text-align: right;
+  vertical-align: middle; }
+
+.proSearchCategory .uneditorMark {
+  position: absolute;
+  z-index: 20;
+  right: 0;
+  left: 0;
+  bottom: 64%;
+  top: 6%; }
+
+.productBox .w50 {
+  width: 51px; }
+
+.productBox .w50:nth-of-type(2) {
+  margin-left: 0px; }
+
+.productBox .w30 {
+  width: 30px; }
+
+.productBox .w30:nth-of-type(2) {
+  margin-left: 0px; }
+
+.productBox .width140 {
+  width: 140px; }
+
+.productBox .width65 {
+  width: 65px; }
+
+.productBox .reset {
+  width: 65px; }
+
+.productBox a {
+  color: #299fd4; }
+
+.productBox a:hover {
+  text-decoration: none; }
+
+.productBox .btn_modify {
+  width: 16px;
+  height: 16px;
+  background: url(/app/images/btn-modify.gif) center center no-repeat;
+  display: inline-block;
+  margin-left: -25px; }
+
+.productBox .btn_search {
+  width: 16px;
+  height: 16px;
+  background: url(/app/images/search.png) center center no-repeat;
+  display: inline-block;
+  margin-left: -25px;
+  position: relative;
+  top: 5px; }
+
+.productBox .btn_save {
+  width: 16px;
+  height: 16px;
+  background: url(/app/images/save.png) center center no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  left: -2px; }
+
+.pFirst {
+  background: url(/app/images/kfzx_icon.png) no-repeat scroll 0 -146px transparent; }
+
+.pPrev {
+  background: url(/app/images/kfzx_icon.png) no-repeat scroll 0 -164px transparent; }
+
+.pNext {
+  background: url(/app/images/kfzx_icon.png) no-repeat scroll 0 -181px transparent; }
+
+.pLast {
+  background: url(/app/images/kfzx_icon.png) no-repeat scroll 0 -199px transparent; }
+
+div.pButton {
+  border: 0 none;
+  cursor: pointer;
+  float: left;
+  height: 22px;
+  overflow: hidden;
+  width: 22px; }
+
+div.pButton span {
+  display: block;
+  float: left;
+  height: 20px;
+  width: 20px; }
+
+.searchStrMark {
+  margin-left: 10px;
+  color: #FF0000; }
+
+.productListArea {
+  overflow: hidden;
+  margin-top: 6px; }
+
+.selectionBox {
+  float: left;
+  border: 1px solid #e8e8e8;
+  position: relative;
+  width: 400px;
+  height: 460px;
+  min-height: 235px; }
+
+.selectionBox .mt {
+  height: 18px;
+  padding: 4px 5px;
+  background: #f7f7f7;
+  border-bottom: 1px solid #eaeaea;
+  margin: 0; }
+
+.selectionBox .mt .clearGoods {
+  margin-left: 20px;
+  color: #999999; }
+
+.selectionBox .mt .clearGoods:hover {
+  text-decoration: none;
+  color: #999999; }
+
+.selectionBox .mt input {
+  margin-right: 5px;
+  vertical-align: middle; }
+
+.selectionBox .productList {
+  position: absolute;
+  top: 27px;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  overflow-y: auto; }
+
+.selectionBox .productList .items {
+  padding: 6px 0 6px 100px;
+  margin: 0 8px;
+  border-bottom: 1px dashed #ccc;
+  min-height: 45px;
+  position: relative;
+  background: #fcfcfc; }
+
+.selectionBox .productList .items:hover {
+  background: #f3fcff; }
+
+.selectionBox .productList .pic {
+  position: absolute;
+  left: 0;
+  top: 5px; }
+
+.selectionBox .productList .pic input {
+  margin: 0 10px; }
+
+.selectionBox .productList img {
+  vertical-align: middle; }
+
+.selectionBox .productList .tag {
+  background-color: green;
+  color: white;
+  display: inline-block;
+  float: right;
+  width: 30px;
+  margin-right: 5px;
+  text-align: center;
+  margin-top: -20px; }
+
+.selectionBox .productList .disTag {
+  background-color: #808080;
+  color: white;
+  display: inline-block;
+  float: right;
+  width: 30px;
+  margin-right: 5px;
+  text-align: center;
+  margin-top: -20px; }
+
+.selectionBox .productList .goodsName {
+  height: 20px;
+  line-height: 20px;
+  color: #0083ba;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
+
+.selectionBox .productList .goodsId {
+  color: #8f8f8f; }
+
+.linenone {
+  color: black; }
+
+.selectionBtn {
+  width: 70px;
+  text-align: center;
+  position: relative;
+  float: left;
+  left: -13px;
+  display: table-cell; }
+
+#nextSelection {
+  float: right; }
+
+#nextSelection .mb em {
+  color: #3D3D3D; }
+
+.selectionBox .closeGoods {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  font-size: 28px;
+  cursor: pointer; }
+
+.selectionBox .items:hover .closeGoods {
+  color: #29a0d5; }
+
+.selectionBox .goodsPrice {
+  color: #fe8c8c;
+  margin-left: 20px; }
+
+#prevSelection .mb, #nextSelection .mb {
+  line-height: 30px;
+  font-size: 12px;
+  margin-left: 0px;
+  text-align: left;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-left: 0px;
+  right: 0;
+  height: 30px;
+  background: #F3F3F3;
+  padding: 0 10px;
+  border-top: 1px solid #e8e8e8; }
+
+.productBox .footer {
+  margin-left: 0px;
+  text-align: center;
+  margin-top: 0px; }
+
+.mbcondition {
+  position: absolute;
+  left: 0;
+  bottom: 31px;
+  right: 0;
+  line-height: 30px;
+  max-height: 60px;
+  background: #eff7ff;
+  border: 1px solid #3ca0cb;
+  color: #3ca0cb;
+  padding: 0 10px;
+  /* border-top:1px solid #e8e8e8; */ }
+
+span.smalldarkerblue-btn {
+  height: 22px;
+  line-height: 22px;
+  margin: 0px 10px 0px 5px; }
+
+.smalldarkerblue-btn a {
+  color: white;
+  background: none;
+  padding: 0 15px;
+  height: 20px; }
+
+.selectionBtn .smalldarkerblue-btn {
+  background: none;
+  color: #3a3a3a;
+  cursor: pointer;
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  margin: 4px 0 0 16px;
+  padding: 0 6px 0 5px; }
+
+.selectionBtn .smalldarkerblue-btn .addGoods {
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  background: url(/app/images/packagePt.png) no-repeat 0 -366px;
+  padding: 0;
+  display: inline-block;
+  color: white;
+  width: 62px;
+  height: 20px; }
+
+.listsButton {
+  margin: 5px auto; }
+
+div.pGroup {
+  position: relative;
+  margin-top: 4px; }
+
+.flexigrid .pDiv .pGroup select[name=rp] {
+  margin-top: 2px; }
+
+.flexigrid .pDiv .pGroup div.pButton {
+  margin-top: 2px; }
+
+.flexigrid .pDiv .pGroup {
+  margin-top: 0; }
+
+.pGroup .pageTips {
+  position: absolute;
+  top: -28px;
+  left: 25px;
+  width: 200px; }
+
+.pGroup .pageTips .huaat_tips {
+  padding-left: 10px;
+  padding-right: 20px;
+  background: #fe8383;
+  border: none; }
+
+.pGroup .pageTips .huaat_tips span {
+  position: absolute;
+  left: 10px;
+  top: 26px;
+  width: 0;
+  height: 0;
+  border: 4px solid transparent;
+  border-top-color: #fe8383; }
+
+.proSearchCategory label.labelFour input {
+  vertical-align: -2px;
+  margin-right: 3px; }
+
+/*star商品选择关键字和标签选择框*/
+.goodsListKeyWorld {
+  width: 300px;
+  display: none; }
+
+.goodsListLabel {
+  width: 300px;
+  display: none; }
+
+.goodsEditor {
+  padding: 5px 10px 20px 10px; }
+
+.goodsEditor p {
+  margin: 0 0 5px 0; }
+
+.goodsEditor label {
+  margin: 0 0 0 9px; }
+
+.goodsEditor button {
+  cursor: pointer;
+  margin: 0 0 0 10px; }
+
+.goodsEditor span {
+  width: 80px;
+  display: inline-block;
+  text-align: right; }
+
+.goodsEditor ul {
+  margin: 10px;
+  overflow-x: hidden;
+  max-height: 200px; }
+
+.goodsEditor ul li span {
+  text-overflow: ellipsis;
+  /*让截断的文字显示为点点。还有一个值是clip意思是截断不显示点点*/
+  white-space: nowrap;
+  /*让文字不换行*/
+  overflow: hidden; }
+
+.goodsEditor li {
+  float: left;
+  margin: 0 5px 5px 0;
+  padding: 2px 0 2px 20px;
+  border: 1px solid #D9D9D9;
+  position: relative; }
+
+.goodsEditor .goodsDeleteKeyWorld {
+  margin: 0 5px 0 10px; }
+
+.goodsEditor #goodsKeyWorldSure {
+  margin: 0 0 0 90px; }
+
+.productBox .goodsMark {
+  background: #000000;
+  height: 586px;
+  width: 906px;
+  left: -1px;
+  opacity: 0.3;
+  position: absolute;
+  top: -1px; }
+
+.goodsEditor input.isError {
+  border-color: #FF0000; }
+
+.goodsEditor em {
+  font-style: normal;
+  color: #FF0000;
+  margin-left: 10px; }
+
+.goodsEditor .ico_tips {
+  width: 12px;
+  margin: 0 0 0 10px; }
+
+.goodsListLabel .listsBox {
+  margin: 15px 2px 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 98px; }
+
+.goodsListLabel .listsBox li {
+  float: left;
+  height: 36px;
+  margin: 13px 0 0 12px;
+  overflow: hidden;
+  position: relative;
+  width: 225px; }
+
+.goodsListLabel .listsBox li a {
+  background: #F7FBFE;
+  border: 1px solid #CCCCCC;
+  color: #0083BA;
+  display: block;
+  height: 34px;
+  line-height: 34px;
+  overflow: hidden;
+  text-align: center;
+  width: 223px; }
+
+.goodsListLabel .listsBox li a:hover {
+  background: #FFFFFF;
+  color: #3D3D3D; }
+
+.goodsListLabel .listsBox li.cur a, .goodsListLabel .listsBox li a:hover {
+  border: 2px solid #409D00;
+  height: 32px;
+  line-height: 32px;
+  outline: medium none;
+  text-decoration: none;
+  width: 221px; }
+
+.goodsListLabel .listsBox li.cur span.trianger {
+  border-color: transparent #409D00 #409D00 transparent;
+  border-left: 15px solid transparent;
+  border-right: 15px solid #409D00;
+  border-style: solid;
+  border-width: 15px;
+  bottom: 0;
+  height: 0;
+  position: absolute;
+  right: 0;
+  width: 0; }
+
+.goodsListLabel .listsBox li.cur .gg {
+  background: url(/app/images/gg.png) no-repeat scroll 6px 5px transparent;
+  bottom: 0;
+  display: inline-block;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  width: 20px; }
+
+.goodsListLabel .listsButton {
+  text-align: right;
+  margin-right: 40px; }
+
+/*end 商品选择关键字选择框*/
+/*活动类型弹框*/
+.slideUnfold {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  border: 6px solid transparent;
+  display: inline-block;
+  vertical-align: -6px;
+  margin-left: 225px;
+  border-bottom-color: #d8d8d8;
+  margin-top: -18px; }
+
+.slideUnfold2 {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  border: 5px solid transparent;
+  display: inline-block;
+  vertical-align: -6px;
+  margin-left: 226px;
+  border-bottom-color: #f7f7f7;
+  margin-top: -15px; }
+
+.slideUnfold3 {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  border: 6px solid transparent;
+  display: inline-block;
+  margin-left: 225px;
+  border-top-color: #d8d8d8;
+  position: relative;
+  margin-bottom: -13px;
+  top: 5px; }
+
+.slideUnfold4 {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  position: relative;
+  border: 5px solid transparent;
+  display: inline-block;
+  margin-left: 226px;
+  border-top-color: #f7f7f7;
+  margin-bottom: -10px;
+  top: 5px; }
+
+.skuItems {
+  position: absolute;
+  display: block;
+  width: 250px;
+  z-index: 1001;
+  margin-right: 10px;
+  padding: 5px 0px;
+  border: 1px solid #696969;
+  background-color: #f7f7f7;
+  border: 1px solid #d8d8d8;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  -moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box; }
+
+.skuItems .creatHdTypeLists {
+  overflow-y: auto;
+  max-height: 135px; }
+
+.skuItems .creatHdTypeLists li {
+  margin: 0px;
+  min-height: 36px;
+  color: #8f8f8f;
+  padding: 4px 7px; }
+
+.skuItems .creatHdTypeLists li:not(:last-child) {
+  border-bottom: 1px dashed #cccccc; }
+
+.skuItems .creatHdTypeLists li:hover,
+.skuItems .creatHdTypeLists li.cur {
+  border: 2px solid #409d00;
+  min-height: 36px;
+  padding: 2px 5px; }
+
+.skuItems .creatHdTypeLists li.cur span.trianger {
+  position: relative;
+  bottom: 8px;
+  right: -5px;
+  float: right;
+  display: block;
+  height: 0px;
+  width: 0px;
+  border-left: 15px solid transparent;
+  border-right: 15px solid #409d00;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid #409d00; }
+
+.skuItems .creatHdTypeLists li.cur .gg {
+  background: url(/app/images/gg.png) no-repeat;
+  float: right;
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: relative;
+  right: -35px;
+  background-position: 6px 5px; }
+
+.skuItems .creatHdTypeLists li .gg {
+  display: none; }
+
+.productList .remove {
+  display: none;
+  position: relative;
+  font-size: 27px;
+  float: right;
+  right: -50px;
+  top: -36px;
+  color: #3ca0cb; }
+
+.items:hover .remove {
+  display: inline-block; }
+
+.skuItems li .removeItem {
+  display: none; }
+
+.skuItems li:hover .removeItem {
+  background: url(/app/images/deleteItem.png) no-repeat;
+  float: right;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  position: relative;
+  margin-top: -15px;
+  /* background-position: 6px 5px; */ }
+
+.zTreeBoxStyle {
+  width: 300px;
+  height: 230px;
+  margin-bottom: 10px;
+  overflow: auto; }
+
+.option {
+  width: 15px;
+  height: 21px;
+  vertical-align: -8px;
+  display: inline-block;
+  background: url(/app/images/file_btn.jpg) no-repeat 0 0;
+  position: relative;
+  top: -2px;
+  left: -21px;
+  margin-right: -15px; }
+
+.productBox input.borderHighlight {
+  margin-left: 5px; }
+
+.productBox .ico_tips {
+  position: relative;
+  left: -1px;
+  margin-right: -15px; }
+
+.StandardCategory {
+  position: absolute;
+  top: 102px;
+  left: 130px;
+  z-index: 1010; }
+
+.ClassificationValue {
+  position: absolute;
+  top: 132px;
+  left: 130px;
+  z-index: 1010; }
+
+label.error {
+  background: url(/app/images/couponMark.png) no-repeat 0 0;
+  padding-left: 20px;
+  display: inline; }
+
+.hand {
+  cursor: pointer; }
+
+.i {
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  color: #3ca0cb;
+  float: right;
+  text-align: center;
+  position: absolute;
+  bottom: 5px;
+  right: 5px; }
+
+.isOnline {
+  vertical-align: middle;
+  margin-right: 5px; }
+
+.loading {
+  z-index: 1000;
+  top: 50%;
+  left: 50%; }
+
+.skuListLoading {
+  left: 93%;
+  top: 43%;
+  display: none; }
+
+/*# sourceMappingURL=goodsList.css.map */

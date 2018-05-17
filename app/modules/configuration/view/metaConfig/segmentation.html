@@ -1,0 +1,53 @@
+<div class="maincontainerB dataConfigureTable" ng-controller="segmentationCtrl">
+  <div class="maincontainer segmentationBox">
+    <div class="clearfix">
+      <h2 class="heading fl">分组模型配置</h2>
+    </div>
+    <div class="smalldarkerblueBtn newbuildBtn">
+      <a href="javascript:void(0)" ng-click="segmentationAdd()">新建分组模型</a>
+    </div>
+    <div class="configContent ">
+      <table class="combination_table">
+        <thead>
+        <tr>
+          <th>分组名称</th>
+          <th>分组key</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="segmentation in segmentationData">
+          <td>{{segmentation.segmentationMetaName}}</td>
+          <td>{{segmentation.segmentationKey}}</td>
+          <td ng-switch="" on="segmentation.isEnabled">
+            <span ng-switch-when="true">已启用
+              <a href="javascript:void(0)" title="点击禁用" class="avaliableTrue" ng-click="segmentationDisable(segmentation.segmentationMetaId,segmentation.isEnabled)"></a>
+            </span>
+            <span ng-switch-when="false">未启用
+              <a href="javascript:void(0)" title="点击禁用" class="avaliableFalse" ng-click="segmentationDisable(segmentation.segmentationMetaId,segmentation.isEnabled)"></a>
+            </span>
+          </td>
+          <td>
+            <a title="修改" class="edit_delete edit_icon" href="javascript:void(0);" style="display:inline-block;" ng-click="segmentationModify(segmentation.segmentationMetaId)"></a>
+            <a title="删除" class="edit_delete delete_icon" href="javascript:void(0);" style="display:inline-block;" ng-click="segmentationDel(segmentation.segmentationMetaId)"></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--新建修改弹框-->
+    <div class="segmentationTpl">
+      <div class="con">
+        <div class="mb10">
+          <label>显示名称:</label>
+          <input type="text" class="borderHighlight" ng-model="segmentationName" />
+        </div>
+        <div class="mb">
+          <button type="submit" class="btn btnBlue" ng-click="segmentationSave()">确定</button>
+          <button class="btn" ng-close-window="">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="ccmsApp" ng-controller="mainCtrl">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script type="text/javascript">
+    /*
+     * create method addTag为生成css和js增加root变量,root变量目的是解决后端与前端文件夹结构不一样
+     */
+    var root = /(.*)modules\//.exec(location.pathname)[1];
+    var rootStatic="/";
+    (function(){
+      function addTag(name, attributes, urlType) {
+        var el = document.createElement(name),attrName;
+        for (attrName in attributes) {
+          if(urlType != 'absUrl' && (attrName == 'href' || attrName == 'src')){
+            attributes[attrName] = root + attributes[attrName];
+          }
+          el.setAttribute(attrName, attributes[attrName]);
+        }
+        document.write(outerHTML(el));
+      };
+
+      function outerHTML(node){
+        // if IE, Chrome take the internal method otherwise build one
+        return node.outerHTML || (
+            function(n){
+              var div = document.createElement('div'), h;
+              div.appendChild(n);
+              h = div.innerHTML;
+              div = null;
+              return h;
+            })(node);
+      };
+      /*调用css && js start*/
+      addTag('link',{rel: 'stylesheet', href: 'css/comm_css.css', type: 'text/css'});
+      addTag('link',{rel: 'stylesheet', href: 'components/ccms_pop/css/style.css', type: 'text/css'});
+      addTag('link',{rel: 'stylesheet', href: 'components/flexigrid/css/flexigrid.css', type: 'text/css'});
+      addTag('link',{rel: 'stylesheet', href: 'components/jquery.ui.timepicker/development-bundle/themes/base/jquery.ui.all.css', type: 'text/css'});
+      addTag('link',{rel: 'stylesheet', href: 'components/jquery.ui.timepicker/timepicker/css/jquery-ui-timepicker-addon.css', type: 'text/css'});
+      addTag('link',{rel: 'stylesheet', href: 'modulescustomer/customer.css', type: 'text/css'});
+      addTag('link',{rel: 'stylesheet', href: 'modulesheader/menu.css', type: 'text/css'});
+      addTag('link',{rel: 'stylesheet', href: 'modulesleftmenu/nav.css', type: 'text/css'});
+      addTag('script',{src:'lib/jquery-1.7.1.min.js'});
+      addTag('script',{src:'lib/angular-1.0.3.min.js'});
+      addTag('script',{src:'components/flexigrid/js/flexigrid.js'});
+      addTag('script',{src:'components/jquery.ui.timepicker/js/jquery-ui.custom.js'});
+      addTag('script',{src:'components/jquery.ui.timepicker/timepicker/js/jquery-ui-timepicker-addon.js'});
+      addTag('script',{src:'components/jquery.ui.timepicker/development-bundle/ui/i18n/jquery.ui.datepicker-zh-CN.js'});
+      addTag('script',{src:'components/jquery.validate/jquery.validate.js'});
+      addTag('script',{src:'components/jquery.validate/messages_zh.js'});
+      addTag('script',{src:'components/ccms_pop/js/yunat_pop.js'});
+      addTag('script',{src:'modulescustomer/controller/mainCtrl.js'});
+      /*调用css && js end*/
+    })();
+  </script>
+  <!--title>客服中心</title-->
+  <title>数据赢家-用数据驱动营销变革</title>
+  <!--[if IE]>
+  <script type="text/javascript">
+    (function(){if(!/*@cc_on!@*/0)return;var e = "abbr,article,aside,audio,canvas,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(','),i=e.length;while(i--){document.createElement(e[i])}})();
+    document.createElement("header");
+    document.createElement("nav");
+    document.createElement("article");
+    document.createElement("section");
+    document.createElement("canvas");
+    document.createElement("footer");
+  </script>
+  <![endif]-->
+</head>
+<body>
+  <div class="commHeader" ng-include="" src="headerUrl"></div>
+  <div class="commNav" ng-include="" src="navUrl"></div>
+  <div ng-show="!tmlLoaded" class="loading">
+    <i></i>加载中...
+  </div>
+  <div onload="afterLoadCont();" src="pageUrl" ng-visible="tmlLoaded" ng-include=""></div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<style>
+  .li_de {
+    width: 250px;
+    float: left;
+    height: 80px;
+  }
+  .otherPageList li img {
+    border: 1px solid #e8eae9;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  .otherPageList {
+    padding-left: 13px;
+    padding-top: 10px;
+  }
+</style>
+<div class="maincontainerB" ng-controller="departmentManagementCtrl">
+  <div class="maincontainer">
+    <div class="clearfix" ng-click="test()">
+      <h2 class="heading fl">部门管理</h2>
+    </div>
+    <div class="market_types_tree grey_border" style="margin-top: 70px;">
+      <div department-ztree-menu></div>
+      <div class="market_tree_input_wrapper">
+        <input type="text" class="market_tree_search_input  system_search" ng-model="searchValue" ng-placeholder="部门搜索" tree-node-search-input>
+        <a class="addRootfile" ng-click="addNode(true)" href="javascript:void(0)" title="新增部门"></a>
+          <!-- <a class="market_tree_search_icon" ng-click="searchTreeNode()"></a> -->
+      </div>
+      <div class="market_tree_wrapper">
+        <div class="ztree" ztree department-tree id="aaa" style="min-height: 200px"></div>
+      </div>
+    </div>
+    <div style="margin-left: 220px; position: absolute; top: 0; bottom: 20px; right: 0; left: 0; margin-top: 70px;">
+      <label style="width: 60px;float:left">
+        <input type="checkbox" name="role" ng-click="getAll($event)" ng-model="all" value="0" ng-disabled="dis" class="radio ng-valid ng-dirty" id="selectAllCk" style="margin-left: 14px;">&nbsp;&nbsp;全选
+      </label>
+      <label id="Span1" class="ccms_normal_tips fl selector" style="margin-left: 5px; margin-top: 2px;">
+        <span class="ccms_tipsContent" style="display: none;"><b></b>部门直属员工将拥有已勾选店铺的操作权限</span>
+      </label>
+      <div style="border: 1px solid #e3e7ea; width: 800px; height: 490px;margin-top: 25px;overflow:auto;">
+        <ul class="otherPageList clearfix">
+          <li ng-repeat="shop in shops" class="li_de">
+            <label style="width: 57px;">
+              <input type="checkbox" name="role" value="0" class="radio ng-valid ng-dirty" ng-click="checkedOne($event)" data-id="{{shop.shopId}}" ng-disabled="dis" ng-model="my[shop.shopId]">
+              <img ng-src={{shop.img}} width="65" height="65">
+              <span class="shopName">{{shop.name}}</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+      <div class="mb" style="margin-left: 700px;margin-bottom: 10px;">
+          <button class="btn btnBlue" id="Button1" ng-disabled="dis" ng-click="saveShops.saveShops()">确定</button>
+      </div>
+    </div>
+  </div>
+</div>

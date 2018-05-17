@@ -1,0 +1,193 @@
+<style type="text/css">
+/* 修复活动列表和活动模板刷新高度不够 */
+
+.wrapCampaignListCon {
+    position: absolute;
+    margin-left: 206px;
+    top: 1px;
+    bottom: -29px;
+    right: 0;
+    left: 0;
+}
+
+.activeList {
+    position: absolute;
+    margin-left: 206px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+</style>
+<!-- build:css ../../css/marketing/marketing.css -->
+<link class="usemin" type="text/css" rel="stylesheet" href="../../../ccms/css/shuyun.lib.css" />
+<link class="usemin" type="text/css" rel="stylesheet" href="../../../ccms/css/marketing/marketing.css" />
+<!-- endbuild -->
+<!-- build:remove  -->
+<script src="../../../app/lib/angular-1.2.19/angular.min.js"></script>
+<script type="text/javascript" src="../../../app/lib/angular-1.2.19/angular-route.min.js"></script>
+<!-- endbuild -->
+<!-- build:js ../../js/marketing/marketing.min.js -->
+<script type="text/javascript" src="../../../app/lib/js-cookie.js"></script>
+<script type="text/javascript" src="../../../ccms/js/config.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/setting.js"></script>
+<script type="text/javascript" src="../../../app/components/ztree/js/jquery.ztree.all-3.5.js"></script>
+<script type="text/javascript" src="../../../app/components/flexigrid/js/flexigrid.js"></script>
+<script type="text/javascript" src="../../../app/components/echart/echarts.min.js"></script>
+<script type="text/javascript" src="../../../app/components/echart/echarts.common.min.js"></script>
+<script type="text/javascript" src="../../../app/components/jquery.validate/jquery.validate.js"></script>
+<script type="text/javascript" src="../../../app/components/jquery.validate/messages_zh.js"></script>
+<script type="text/javascript" src="../../../app/components/ccms_pop/js/yunat_pop.js"></script>
+<script type="text/javascript" src="../../../app/js/globalMethod.js"></script>
+<script type="text/javascript" src="../../../app/components/highcharts/map.js"></script>
+<script type="text/javascript" src="../../../app/components/highcharts/cn-all.js"></script>
+<script type="text/javascript" src="../../../app/lib/underscore.js"></script>
+<script type="text/javascript" src="../../../app/components/kindeditor-4.1.6/kindeditor-min.js"></script>
+<script type="text/javascript" src="../../../app/components/kindeditor-4.1.6/lang/zh_CN.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/mxGraph/js/mxClient.js"></script>
+<script type="text/javascript" src="../../../app/components/moment/moment.min.js"></script>
+<script type="text/javascript" src="../../../app/components/uploadify/uploadify2.js"></script>
+<script type="text/javascript" src="../../../app/components/calendar/index.js"></script>
+<script type="text/javascript" src="../../../app/components/plupload/moxie.js"></script>
+<script type="text/javascript" src="../../../app/components/plupload/plupload.dev.js"></script>
+<script type="text/javascript" src="../../../app/components/ccms_ui/progressbar.js"></script>
+<script type="text/javascript" src="../../../app/components/newTree/newTree.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/mainCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/ActiveTemplateCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/acTypeManeCtrl.js"></script>
+<!-- 新建 -->
+<script type="text/javascript" src="../../../app/modules/marketing/controller/marketActivityCtrl.js"></script>
+
+<script type="text/javascript" src="../../../app/modules/marketing/controller/queryConditionsCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/workFlow/flowCtr.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/workFlow/toolbar.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/workFlow/addCells.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/workFlow/execute.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/workFlow/nodeConfiguration.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/workFlow/operatePalette.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/workFlow/report.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/workFlow/templateFlowCtr.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/saveTemplateCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/smsCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/dclonsms.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tcommunicateWechat.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/dclonwechat.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tanalysiseffmarket.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tanalysisorder.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tanalysisEffect.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tchannelresponseEC.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tchannelresponseEDM.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tcommunicateEDM.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/dclonedm.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tcommunicateOther.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tcustomerrespondgroup.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/dcltcustomerrespondgroup.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tcustomertargetgroupCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/dcltcustomertargetgroupCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tdataattributeedit.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tdatacustomgroup.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tdatammvip.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tdatammvipnew.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tanalysisFeature.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tanalysisFeatureJs/reportController.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tdiscountBenefit.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tdiscountEC.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tdiscountECBelle.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tdiscountIS.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tdiscountUMP.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/teximimport.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/teximmarketingondemand.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterand.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterBehaviorCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterdataImportCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterexclude.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterFindCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterCampQueryCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterAttrQueryCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterOrderQueryCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterCustomerGroup.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/splitFindNode/campQueryContentCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/splitFindNode/attrQueryContentCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/splitFindNode/attrQueryTemplatesConfig.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfiltergrouppriority.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterHeatCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfiltermerge.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfiltersample.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfiltersplit.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tflowtimeCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tflowwaitCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterfindJs/customConditions.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterfindJs/customOrderQueryConditions.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterfindJs/customConditionsTemplates.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterfindJs/queryConditionsCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterfindJs/queryCgqCustomerGroupCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterfindJs/queryCustomerGroupCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tfilterfindJs/queryTemplatesConfig.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tanalysisorderJs/orderAnalysisConditions.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/node/tanalysisorderJs/orderAnalysisConditionsTemplates.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/discount/main.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/discount/coupon.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/discount/umpOrder.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/discount/umpPostage.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/discount/benefit.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/customer/groupList.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/customer/addGroup.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/customer/customerDataTables.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/customer/customerGroupCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/customer/editorCustomerInfo.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/customer/groupZtreeCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/customer/staticViewGroup.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/customer/viewGroup.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/customerSegmentation/partitionCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/customerSegmentation/partitionListCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/customerSegmentation/addPartition.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/commPlugView/cityCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/commPlugView/dataBatchImport.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/commPlugView/label.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/commPlugView/selectorFonts.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/controller/iframeCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/service/ActiveTemplateService.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/service/marketingService.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/service/dclonService.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/service/waitNodeSer.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/directive/baseDirectives.js"></script>
+<script type="text/javascript" src="../../../app/js/commser.js"></script>
+<script type="text/javascript" src="../../../app/js/interimElement.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/directive/customConditionsDirective.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/directive/marketingDirective.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/directive/orderAnalysisConditionsDirective.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/directive/queryConditionsDirective.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/filter/filter.js"></script>
+<script type="text/javascript" src="../../../app/modules/commSelector/controller/controllers.js"></script>
+<script type="text/javascript" src="../../../app/modules/commSelector/service/service.js"></script>
+<script type="text/javascript" src="../../../app/modules/Selector/controller/productSelection.js"></script>
+<script type="text/javascript" src="../../../app/modules/Selector/service/SelectorService.js"></script>
+<script type="text/javascript" src="../../../app/modules/activitySelector/controller/controllers.js"></script>
+
+
+<script type="text/javascript" src="../../../app/components/selectorByShops/index.js"></script>
+<script type="text/javascript" src="../../../app/components/selectorByShops/controller.js"></script>
+<script type="text/javascript" src="../../../app/components/selectorByShops/service.js"></script>
+
+<script type="text/javascript" src="../../../app/components/newSelectorByShops/index.js"></script>
+<script type="text/javascript" src="../../../app/components/newSelectorByShops/controller.js"></script>
+<script type="text/javascript" src="../../../app/components/newSelectorByShops/service.js"></script>
+
+<script type="text/javascript" src="../../../app/components/selectorByProduct/index.js"></script>
+<script type="text/javascript" src="../../../app/components/selectorByProduct/controller.js"></script>
+<script type="text/javascript" src="../../../app/components/selectorByProduct/service.js"></script>
+
+<script type="text/javascript" src="../../../app/components/universalSelector/index.js"></script>
+<script type="text/javascript" src="../../../app/components/universalSelector/controller.js"></script>
+<!--new create-->
+<script type="text/javascript" src="../../../app/modules/marketing/controller/create/index.js"></script>
+<script type="text/javascript" src="../../../app/modules/marketing/service/resource.js"></script>
+<!-- endbuild -->
+<div class="_campaign" ng-controller="campaignMainCtrl">
+    <div class="ccmsc-main-container content-sidebar-layout" ng-class="{'contract-left':!menusOptions.unfold}">
+        <div class="left-container">
+            <cc-menu-bar unfold="menusOptions.unfold" menu-source="menusOptions.menusResource" shop-source="menusOptions.shopsResource" class="menu-wrap"></cc-menu-bar>
+        </div>
+        <ui-view></ui-view>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="search-content">
+  可在
+  <a href="javascript:;" ng-click="EDMnode.goContentManage()">[ 内容管理 ]</a> 邮件端中，用系统模版快速创建电子邮件。
+</div>
+<div class="search-wrap">
+  <!-- <p class="relative">
+    <input ng-init="EDMnode.getShopsFirstList()" class="borderHighlight ml5 style-mark" type="text" placeholder="选择店铺" readonly name="EDMnodeShop" valueid="{{EDMnode.shopId}}" ng-model="EDMnode.shopName" comm-select-config="EDMnode.getShops()" />
+  </p>
+  <p class="relative">
+    <input class="borderHighlight ml5 style-mark" type="text" placeholder="邮件所属分类" readonly ng-disabled="!EDMnode.shopId" name="EDMCategory" valueid="{{EDMnode.categoryId}}" ng-model="EDMnode.categoryName" ng-custom-select="EDMnode.getCategory()" />
+  </p> -->
+  <p class="">
+    <input class="borderHighlight" type="text" placeholder="邮件名称" ng-model="EDMnode.productName" />
+  </p>
+  <p class="">
+    <button class="btn commSmallBtn ng-binding btnBlue" ng-click="EDMnode.getEmailsData(true)" type="button">搜索 </button>
+  </p>
+</div>
+<div class="dataInfoList">
+  <table class="priorityNodes">
+    <thead>
+    <tr>
+      <th><span></span></th>
+      <th style="text-align:right"><span>邮件编号</span></th>
+      <th style="text-align:left"><span>邮件所属分类</span></th>
+      <th style="text-align:left"><span>邮件名称</span></th>
+      <!-- <th style="text-align:left"><span>所属店铺</span></th> -->
+      <th style="text-align:left"><span>邮件类型</span></th>
+      <th style="text-align:left"><span>创建人</span></th>
+      <th><span>创建时间</span></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in EDMnode.customerEmailData">
+      <td><input type="radio" name="emailModel" ng-checked="item.checked" /></td>
+      <td style="text-align:right;padding-right:11px;">{{item.no}}</td>
+      <td style="text-align:left;padding-left:11px;">{{item.categoryName}}</td>
+      <td style="text-align:left;padding-left:11px;">{{item.name}}</td>
+      <!-- <td style="text-align:left;padding-left:11px;">{{EDMnode.customerEmailData.shopName}}</td> -->
+      <td style="text-align:left;padding-left:11px;">{{item.mailType ? '联合营销邮件' : '普通邮件'}}</td>
+      <td style="text-align:left;padding-left:11px;">{{item.userName}}</td>
+      <td>{{item.created}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="mb commpageMb">
+  <div class="pDiv2">
+    <div class="pGroup">
+      <div class="pFirst pButton" ng-click="EDMnode.setPage('first')">
+        <span></span>
+      </div>
+      <div class="pPrev pButton" ng-click="EDMnode.noPrevious() ? angular.noop : EDMnode.setPage('prev')">
+        <span></span>
+      </div>
+    </div>
+    <div class="pGroup">
+      <span class="pcontrol">跳至 <input class="inputPage" type="text" ng-model="EDMnode.pager.currentPageInput" /> 页</span>
+      <div class="pageTips"></div>
+    </div>
+    <div class="pGroup">
+      <div class="pNext pButton" ng-click="EDMnode.noNext() ? angular.noop : EDMnode.setPage('next')">
+        <span></span>
+      </div>
+      <div class="pLast pButton" ng-click="EDMnode.setPage('last')">
+        <span></span>
+      </div>
+    </div>
+    <div class="pGroup pagetotal">
+      <span class="currentPage" ng-bind="EDMnode.pager.currentPage"></span>/
+      <span class="totalPage" ng-bind="EDMnode.pager.totalPages || 1">1</span>
+    </div>
+    <div class="pGroup">
+      <select name="rp" ng-model="EDMnode.pager.pageSize">
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="ling_di"></div>
+<div class="commBottom">
+  <div class="mb">
+    <button class="btn btnBlue" type="button" ng-click="EDMnode.addEmail()">确定</button>
+    <button class="btn" type="button" ng-close-child-window>取消</button>
+  </div>
+</div>

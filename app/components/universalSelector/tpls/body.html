@@ -1,0 +1,29 @@
+<div class="universal-selector">
+    <span>【注:无权限数据筛选后不可使用】</span>
+    <div class="menu-tree" universal-tree-manager>
+        
+        <!-- 搜索 -->
+        <div class="instant-search">
+            <input type="text"
+            		class="instant-search-input"
+            		ng-model="$ctrl.treeKeywords"
+            		ng-enter="searchTree($event)"
+            		placeholder="请输入关键词"
+			>
+            <span class="instant-search-icon search-btn" ng-click="searchTree($event, true)"></span>
+        </div>
+
+        <!-- 目录列表 -->
+        <div class="menu">
+            <ul class="item">
+                <li class="root-tree-parent" index="1" value="">
+                    <h4 class="root-tree" pkid="" level="0">
+                    	<i class="icon-arrow root-tree-toggle"></i>
+                    	<label><input type="checkbox" ng-click="selectItem($event, true)" value=""> 全部</label>
+                    </h4>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

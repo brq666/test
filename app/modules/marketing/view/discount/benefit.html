@@ -1,0 +1,17 @@
+<div class="maincontainerB">
+  <div class="maincontainer">
+    <div class="ccms-ump ccms-benefit" ng-controller="benefitController">
+      <div class="clearfix">
+        <h2 class="heading fl">淘宝权益</h2>
+        <div ng-click="benefitObject.editorBenefitActive()" class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360">
+          <a href="javascript:void(0)">新建权益活动</a>
+        </div>
+      </div>
+      <ul class="clearfix Tab_title">
+        <li ng-class="{hover:benefitObject.templateValue}" ng-click="benefitObject.toggleTemplate(1)"> 活动列表 </li>
+        <li ng-class="{hover:!benefitObject.templateValue}" ng-click="benefitObject.toggleTemplate(0)"> 权益列表 </li>
+      </ul>
+      <div ng-include="" src="benefitObject.activeUrl" id="addUmp" class="ccmsbenefit"></div>
+    </div>
+  </div>
+</div>

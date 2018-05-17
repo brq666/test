@@ -1,0 +1,15 @@
+
+<div class="maincontainerB dataConfigureTable" ng-controller="filterCtrl">
+  <div class="maincontainer filterBox">
+    <div class="clearfix">
+      <h2 class="heading fl">过滤器配置</h2>
+    </div>
+      <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360"><a href="javascript:void(0)" ng-click="filter.add()">新增主题</a></div>
+      <div class="configContent">
+         <div class="flexgridList"></div>
+      </div>
+      <!--新增filter模板-->
+      <div class="filter_addTpl" ng-include src="addTpl.src" onload="filter.showAddTpl()"></div>
+    </div>
+  </div>
+</div>

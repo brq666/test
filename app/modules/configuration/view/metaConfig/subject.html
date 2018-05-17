@@ -1,0 +1,61 @@
+<div class="maincontainerB dataConfigureTable" ng-controller="subjectCtrl">
+  <div class="maincontainer subjectBox">
+    <div class="clearfix">
+      <h2 class="heading fl">主题配置</h2>
+    </div>
+    <div class="clearfix">
+      选择分组元模型：
+      <select class="commSelect width130" ng-options="c.segmentationMetaName for c in segmentationData" ng-model="segmentationModel"></select>
+    </div>
+    <div class="configContent">
+      <ul id="tabpenel_list" class="clearfix Tab_title" ccms-tabs="tabContent">
+        <li class="hover">主题配置</li>
+        <li>主题关联配置</li>
+      </ul>
+      <div class="tabContent">
+        <div class="metaSubject">
+          <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360">
+            <a href="javascript:void(0)" ng-click="metaSubject.add()">新增主题</a>
+          </div>
+          <div class="publicList1">
+            <div class="item" ng-repeat="item in subjectData">
+              <p>
+                <span>主题名称：{{item.subjectName}}</span>
+                <span>对应主属性集：{{item.primaryAttributeCollectionName}}</span>
+                <span>对应主属性：{{item.primaryAttributeName}}</span><span>已配置属性集：{{item.configAttributeCollectionNum}}</span>
+              </p>
+              <div class="operationBtn">
+                <a title="修改" class="edit_delete edit_icon" href="javascript:void(0);"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="relationSubject" style="display:none;">
+          <div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360">
+            <a href="javascript:void(0)" ng-click="relationSubject.add()">关联主题</a>
+          </div>
+          <div class="con">
+            <div class="item fl" ng-repeat="item in relationData">
+              <h5 class="mb10">主题名称：{{item.subjectName}}</h5>
+              <div class="clearfix mb10" ng-repeat="behaviorList in item.behaviorList">
+                <span class="fl"> <label>行为主题：</label>{{behaviorList.relateSubjectName}} </span>
+                <span class="fl"> <label>关联属性集：</label>{{behaviorList.relateAttributeSetName}} </span>
+                <span class="fl"> <label>关联属性：</label>{{behaviorList.relateAttributeName}} </span>
+              </div>
+              <div class="textRight">
+                <a title="修改" class="edit_delete edit_icon" href="javascript:void(0);"></a>
+                <a title="删除" class="edit_delete delete_icon" ng-click="relationSubject.del(item.subjectId)"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--主题配置弹框-->
+    <div class="mateSubject_AddTpl" ng-include="" src="metaSubject.src" style="display:none;" onload="metaSubject.showAddTpl()"></div>
+    <!--主题关联弹框-->
+    <div class="relationSubject_AddTpl" ng-include="" src="relationSubject.src" style="display:none;" onload="relationSubject.showAddTpl()"></div>
+    <!--主题指标弹框-->
+    <div class="relationSubject_AddTpl" ng-include="" src="relationSubject.src" style="display:none;" onload="relationSubject.showAddTpl()"></div>
+  </div>
+</div>

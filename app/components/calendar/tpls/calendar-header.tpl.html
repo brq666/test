@@ -1,0 +1,20 @@
+<div class="im-calendar-header calendar-flex">
+  <div
+    ng-style="$imCalHead.flex"
+    ng-if="$imCalHead.mode==='month'"
+    ng-click="$imCalHead.onClickHeader($imCalHead.mode,col)"
+    ng-repeat="col in $imCalHead.columns track by $index"
+    >
+    <div class="title-box">第<span ng-bind="col.week"></span>周<span class="exp-info">(<span ng-bind="col.start"></span>-<span ng-bind="col.end"></span>)</span></div>
+  </div>
+  <div
+    ng-style="$imCalHead.flex"
+    ng-if="$imCalHead.mode==='week'"
+    ng-click="$imCalHead.onClickHeader($imCalHead.mode,col)"
+    ng-repeat="col in $imCalHead.columns track by $index"
+    >
+    <div class="title-box">
+      <span ng-bind="col.title"></span><span class="exp-info ml5" ng-bind="col.start"></span>
+    </div>
+  </div>
+</div>

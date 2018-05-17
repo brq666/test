@@ -1,0 +1,40 @@
+<!-- 设计中、设计时预执行、待审批、待审批时预执行 -->
+<div ng-click="$imCalEveBar.onEventClick($event, $imCalEveBar.event)" class="im-calendar-event-bar" ng-style="$imCalEveBar.style" ng-if="$imCalEveBar.event.status==='A1'
+||$imCalEveBar.event.status==='B1'
+||$imCalEveBar.event.status==='A2'
+||$imCalEveBar.event.status==='B2'
+">
+  <i class="dot"></i>
+  <span ng-bind="$imCalEveBar.event.campName" tooltip-append-to-body="true" cc-tooltip="$imCalEveBar.event.campName"></span>
+</div>
+
+<!-- 待执行 -->
+<div ng-click="$imCalEveBar.onEventClick($event, $imCalEveBar.event)" class="im-calendar-event-bar" ng-style="$imCalEveBar.style" ng-if="$imCalEveBar.event.status==='A3'">
+  <i class="dot im-await"></i>
+  <span ng-bind="$imCalEveBar.event.campName" tooltip-append-to-body="true" cc-tooltip="$imCalEveBar.event.campName"></span>
+</div>
+
+<!-- 执行中 -->
+<div ng-click="$imCalEveBar.onEventClick($event, $imCalEveBar.event)" class="im-calendar-event-bar im-running" ng-style="$imCalEveBar.style" ng-if="$imCalEveBar.event.status==='B3'">
+  <i class="iconfont icon-shijian" ng-if="$imCalEveBar.event.isCycle"></i>
+  <span ng-class="{'pl5':!$imCalEveBar.event.isCycle}" ng-bind="$imCalEveBar.event.campName" tooltip-append-to-body="true" cc-tooltip="$imCalEveBar.event.campName"></span>
+</div>
+
+<!-- 终止 -->
+<div ng-click="$imCalEveBar.onEventClick($event, $imCalEveBar.event)" class="im-calendar-event-bar im-warning" ng-style="$imCalEveBar.style" ng-if="$imCalEveBar.event.status==='A4'">
+  <!-- <i class="iconfont icon-warning1"></i> -->
+  <i class="iconfont icon-shijian" ng-if="$imCalEveBar.event.isCycle"></i>
+  <span ng-class="{'pl5':!$imCalEveBar.event.isCycle}" ng-bind="$imCalEveBar.event.campName" tooltip-append-to-body="true" cc-tooltip="$imCalEveBar.event.campName"></span>
+</div>
+
+<!-- 完成 -->
+<div ng-click="$imCalEveBar.onEventClick($event, $imCalEveBar.event)" class="im-calendar-event-bar im-finish" ng-style="$imCalEveBar.style" ng-if="$imCalEveBar.event.status==='A5'">
+  <i class="iconfont icon-shijian" ng-if="$imCalEveBar.event.isCycle"></i>
+  <span ng-class="{'pl5':!$imCalEveBar.event.isCycle}" ng-bind="$imCalEveBar.event.campName" tooltip-append-to-body="true" cc-tooltip="$imCalEveBar.event.campName"></span>
+</div>
+
+<!-- 异常 -->
+<div ng-click="$imCalEveBar.onEventClick($event, $imCalEveBar.event)" class="im-calendar-event-bar im-warning" ng-style="$imCalEveBar.style" ng-if="$imCalEveBar.event.status==='A6'">
+  <i class="iconfont icon-warning1"></i>
+  <span ng-bind="$imCalEveBar.event.campName" tooltip-append-to-body="true" cc-tooltip="$imCalEveBar.event.campName"></span>
+</div>

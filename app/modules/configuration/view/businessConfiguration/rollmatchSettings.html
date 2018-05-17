@@ -1,0 +1,18 @@
+<div class="maincontainerB" ng-controller="RollmatchCtrl" ng-cloak>
+  <div class="maincontainer">
+    <div class="clearfix">
+      <h2 class="heading fl">名单匹配节点配置</h2>
+    </div>
+    <div class="ml15">
+      <h3 class="bold mb10">选择需要生成查询条件的主题</h3>
+      <ul class="attributesSettingsList ml5">
+        <li class="mb5" ng-repeat="subject in subjects">
+          <input class="commCheckbox" type="checkbox" value="{{subject.id}}" ng-model="subject.selected" ng-checked="subject.selected" />{{subject.name}}
+        </li>
+      </ul>
+      <p>
+        <button class="btn btnBlue commSmallBtn" type="button" ng-click="saveCustomerAttributesSettings()">保存</button>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,174 @@
+<div ng-controller="AnalysisCtrl">
+  <div class="analysisNode">
+    <div class="commWrapFour clearfix commNodeMarkRelative">
+      <div class="bannerCommStyle areaHeight26" ng-show="analysisScopeObj.tips">
+        {{analysisScopeObj.tips}}
+        <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+      </div>
+      <div class="contentNodeWrap">
+        <table>
+          <tbody>
+          <tr>
+            <th class="tr paddingright0" width="10%"><label>节点名称：</label></th>
+            <td>
+              <div class="pr">
+                <input type="text" class="borderHighlight nameInput ml4 fl" ng-disabled="analysisScopeObj.isEditorFlag" ng-model="analysisScopeObj.name" maxlength="20" ng-noderequire="" />
+                <span nodetip=""></span>
+              </div>
+            </td>
+            <td><label class="code mr40 fr">节点代码：{{analysisScopeObj.id}}</label></td>
+          </tr>
+          <tr>
+            <td class="tr paddingright0" width="10%"><label>平台选择：</label></td>
+            <td class="paddingleft0" colspan="2">
+              <select class="commSelect width140 ml9" ng-disabled="analysisScopeObj.isEditorFlag" ng-change="analysisScopeObj.changeSubject()" ng-model="analysisScopeObj.defaultSubjectId" ng-options="subject.subjectId as subject.subjectId for subject in analysisScopeObj.subjectAry"></select>
+              <label class="error ml5" ng-show="analysisScopeObj.isnotSubject">请选择平台</label>
+            </td>
+          </tr>
+          <tr>
+            <td class="tr paddingright0" width="10%"><label>店铺选择：</label></td>
+            <td class="paddingleft0" colspan="2">
+              <span class="relativeBox">
+                <input class="borderHighlight width130" type="text" value="{{analysisScopeObj.selectShopsVal}}" ng-disabled="!analysisScopeObj.defaultSubjectId || analysisScopeObj.isEditorFlag" title="{{analysisScopeObj.selectShopsVal}}" ids="{{analysisScopeObj.selectShopsId}}" ng-click="analysisScopeObj.getAnalysisShops()" name="investigator" readonly="readonly" ng-class="{error:analysisScopeObj.isUnShops}" />
+                <a class="optionModule2 location2" href="javascript:void(0);" ng-click="analysisScopeObj.getAnalysisShops()"></a>
+              </span>
+              <label class="error ml5" ng-show="analysisScopeObj.isnotShop">请选择店铺</label>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <!--筛选条件-->
+        <div class="analysisConfigBox clearfix">
+          <div class="configConditions fl">
+            <p class="titleMark">订单筛选条件设置<a class="ml10 blueColor" href="javascript:void(0)" title="编辑" ng-click="analysisScopeObj.editorOrderConditions()">[编辑]</a></p>
+            <div class="ulWrap">
+              <ul>
+                <li class="ac" ng-show="analysisScopeObj.analysisOrderConditionsView.length == 0">不限</li>
+                <li ng-repeat="view in analysisScopeObj.analysisOrderConditionsView">
+                  <span class="analysisConditionsTitle" title="{{view.name}}">{{view.name}}</span>
+                  <span class="analysisConditionsValue" title="{{analysisScopeObj.isImgData(view.value)}}"> :
+                    <span ng-bind-html="view.value"></span>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="analysisContent fl">
+            <p class="titleMark"> 分析内容 <label class="error ml5" ng-show="analysisScopeObj.isErrorShow">{{analysisScopeObj.errorMes}}</label> </p>
+            <div class="analysisContentWrap">
+              <ul class="contentKey clearfix">
+                <li ng-repeat="item in analysisScopeObj.analysisItemsList">
+                  <label  ng-visibility="!item.attributeName">
+                    <input class="commCheckbox " type="checkbox" ng-checked="item.isChecked" ng-model="item.isChecked" name="contentKeyName" attributename="{{item.attributeKey}}" ng-disabled="item.isEditor" />
+                    <span class="analysisContentItemValue">{{item.attributeName}}</span>
+                  </label>
+                </li>
+              </ul>
+              <dl class="weiduKey clearfix">
+                <dt class="fl">
+                  分析维度：
+                </dt>
+                <dl ng-repeat="dimension in analysisScopeObj.analysisDimensionList">
+                  <label>
+                    <input class="commCheckbox" type="checkbox" name="contentKeyName" ng-model="dimension.isChecked" ng-disabled="dimension.isDefaultCheck" ng-checked="dimension.isChecked" dimensionid="{{dimension.dimensionId}}" />
+                    <span class="weiduItemValue">{{dimension.name}}</span>
+                  </label>
+                </dl>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div ng-hide="analysisLoadingFlag &amp;&amp; analysisLoadingSecondFlag" class="loading analysisLoadingClass">
+          <i></i>加载中...
+        </div>
+        <!--end-->
+        <!--订单筛选条件模板 start-->
+        <div ng-include="" src="analysisScopeObj.orderConditionsTemplate" onload="analysisScopeObj.orderConditionsPop()"></div>
+        <!--订单筛选条件模板 end-->
+        <!--店铺选择框 start-->
+        <div class="queryShopsPop shopsChecked analysisShopPop">
+          <div class="shopMenu clearfix">
+            <p class="fl" ng-show="!analysisScopeObj.toggleStatusShop">
+              <label>
+                <input class="mr5 verticalAlign2" type="checkbox" name="shopAllChecked" ng-model="toggleStatuVal" ng-click="analysisScopeObj.toggleAllShops(toggleStatuVal)" />全选
+              </label>
+            </p>
+            <p class="fr" ng-show="analysisScopeObj.ShopUnusedAry.length&gt;0">
+              <a href="javascript:void(0)" title="可选店铺" ng-click="analysisScopeObj.toggleStatusShop=false">可选店铺</a>
+              <span class="fontLine">|</span>
+              <a class="shixiao" href="javascript:void(0)" title="已失效店铺" ng-click="analysisScopeObj.toggleStatusShop=true">已失效店铺</a>
+            </p>
+          </div>
+          <div class="shopUnused" ng-show="analysisScopeObj.toggleStatusShop">
+            <div class="listsBox topNormal">
+              <ul class="unitLists clearfix">
+                <li ng-repeat="list in analysisScopeObj.ShopUnusedAry" class="uneditor">
+                  <a id="{{list.shopId}}" title="{{list.shopName}}" href="javascript:void(0)">{{list.shopName}}</a>
+                  <span class="trianger"></span>
+                  <span class="gg"></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="shopUsed" ng-show="!analysisScopeObj.toggleStatusShop">
+            <div class="listsBox topNormal">
+              <ul class="unitLists editorShops clearfix">
+                <li ng-repeat="list in analysisScopeObj.shopLists" class="{{list.classVal}}" ng-chose-unit="">
+                  <a id="{{list.idInPlat}}" title="{{list.name}}" href="javascript:void(0)">{{list.name}}</a>
+                  <span class="trianger"></span>
+                  <span class="gg"></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="ling_di"></div>
+            <div class="listsButton fr mr15 mt5">
+              <button type="button" class="btn btnBlue" ng-click="analysisScopeObj.sureAddShop()" ng-close-child-window>确定</button>
+              <button type="button" class="btn" ng-close-child-window>取消</button>
+            </div>
+          </div>
+        </div>
+        <!--店铺选择框 end-->
+      </div>
+    </div>
+    <!--查看报告 start-->
+    <div class="analysisDataListView clearfix">
+      <div class="commWrapThree">
+        <div class="bannerCommStyle">
+          下载文件只保留15天，15天后，将不再提供下载。如需保留数据，请及时下载文件保存。
+        </div>
+        <ul class="clearfix Tab_title" id="analysisReport">
+          <li ng-repeat="tab in analysisScopeObj.tabReportList" ng-class="{hover:tab.hoverVal}" title="{{tab.displayName}}" resultid="{{tab.resultId}}" ng-click="analysisScopeObj.toggleReportTitle($index,tab)"> {{tab.displayName}} </li>
+        </ul>
+        <div class="clearfix mb10 loadOut orderInfo">
+          <a class="formdownLoad fr downloadBtn" ng-show="analysisScopeObj.isPower && analysisScopeObj.showViewDate && existFile === 'true'" title="下载订单明细" ng-href="{{appOrigin}}/node/v1/web/node/analysis/order/{{analysisScopeObj.id}}/job/{{analysisScopeObj.jobId}}/download" target="_blank" charset="utf-8">下载订单明细</a>
+          <span class="formdownLoad fr downloadBtn" 
+            style="width: auto;color: #8a8a8a;background: none;" 
+            ng-show="existFile === 'false'">
+            订单明细文件生成中
+          </span>
+        </div>
+        <div class="clearfix mb10 loadOut mt10">
+          <a class="formdownLoad fr downloadBtn" ng-show="analysisScopeObj.showViewDate && existFileResult === 'true'" title="导出分析结果" ng-href="{{appOrigin}}/node/v1/web/node/analysis/order/{{analysisScopeObj.id}}/job/{{analysisScopeObj.jobId}}/results/{{analysisScopeObj.resultId}}/export" target="_blank" charset="utf-8">导出分析结果</a>
+          <span class="formdownLoad fr downloadBtn" 
+          style="width: auto;color: #8a8a8a;background: none;" 
+          ng-show="existFileResult === 'false'">
+          分析结果文件生成中
+        </span>
+        </div>
+        <div class="dataInfoList commOverflowXAuto"></div>
+      </div>
+    </div>
+    <!--查看报告 end-->
+    <div class="ling_di mt10 clearfix"></div>
+    <div class="commBottom clearfix">
+      <a href="javascript:void(0);" ng-click="analysisScopeObj.openResult()" class="reportButton mt5" ng-show="analysisScopeObj.viewAnalysisDataFlag"><span class="reportIcon"></span>分析结果查看</a>
+      <div class="mb">
+        <button class="btn" ng-class="{btnBlue:!analysisScopeObj.isEditorFlag}"  ng-click="analysisScopeObj.postDiscountEcData($event)">确定</button>
+        <button class="btn" ng-close-window="">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<script type="text/javascript" src="controller/node/tanalysisorder.js"></script>-->

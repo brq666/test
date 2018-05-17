@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="ccmsApp" ng-controller="mainCtrl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript">
+/*
+* create method addTag为生成css和js增加root变量,root变量目的是解决后端与前端文件夹结构不一样
+*/
+var root = '';
+var rootStatic="/";
+</script>
+
+<title>数据赢家-用数据驱动营销变革</title>
+  <link rel="stylesheet" type="text/css" href="https://shuyun-static.b0.upaiyun.com/components/jquery.ui.timepicker/1.1.1/development-bundle/themes/base/jquery.ui.all.css">
+  <link rel="stylesheet" type="text/css" href="https://shuyun-static.b0.upaiyun.com/components/jquery.ui.timepicker/1.1.1/timepicker/css/jquery-ui-timepicker-addon.css">
+
+  <link class="usemin" type="text/css" rel="stylesheet" href="../../../app/dist/css/shuyun.lib.css" />
+
+  <link class="usemin" type="text/css" rel="stylesheet" href="../../../app/dist/css/configuration/configuration.css" />
+
+  <!-- build:js /app/dist/js/shuyun.ie8.js -->
+  <script type="text/javascript" src="../../../app/lib/es5-shim/es5-shim.js"></script>
+  <script type="text/javascript" src="../../../app/lib/es5-shim/es5-sham.js"></script>
+  <script type="text/javascript" src="../../../app/lib/html5shiv/dist/html5shiv.js"></script>
+  <script type="text/javascript" src="../../../app/lib/respond-minmax/dest/respond.min.js"></script>
+  <!-- /build -->
+
+  <!-- build:js /app/dist/js/configuration/configuration.lib.js -->
+  <script type="text/javascript" src="../../../app/lib/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="../../../app/components/ztree/js/jquery.ztree.all-3.5.js"></script>
+  <script type="text/javascript" src="../../../app/components/flexigrid/js/flexigrid.js"></script>
+  <script type="text/javascript" src="../../../app/components/jquery.ui.timepicker/js/jquery-ui.custom.js"></script>
+  <script type="text/javascript" src="../../../app/components/jquery.ui.timepicker/timepicker/js/jquery-ui-timepicker-addon.js"></script>
+  <script type="text/javascript" src="../../../app/components/jquery.ui.timepicker/development-bundle/ui/i18n/jquery.ui.datepicker-zh-CN.js"></script>
+  <script type="text/javascript" src="../../../app/components/jquery.validate/jquery.validate.js"></script>
+  <script type="text/javascript" src="../../../app/components/jquery.validate/messages_zh.js"></script>
+  <script type="text/javascript" src="../../../app/components/moment/moment.min.js"></script>
+  <script type="text/javascript" src="../../../app/components/ccms_pop/js/yunat_pop.js"></script>
+  <script type="text/javascript" src="../../../app/js/globalMethod.js"></script>
+  <script type="text/javascript" src="../../../app/lib/angular-1.2.19/angular.min.js"></script>
+  <script type="text/javascript" src="../../../app/lib/angular-1.2.19/angular-route.min.js"></script>
+  <script type="text/javascript" src="../../../app/lib/angular-1.2.19/angular-sanitize.min.js"></script>
+  <script type="text/javascript" src="../../../app/lib/angular-1.2.19/http-auth-interceptor.js"></script>
+  <!-- /build -->
+
+  <!-- build:js /app/dist/js/configuration/configuration.js -->
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/mainCtrl.js"></script>
+  <script type="text/javascript" src="../../../app/modules/header/service.js"></script>
+  <script type="text/javascript" src="../../../app/modules/header/notices.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/dataConfigureCtrl.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/edmQueryConfiguration.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/globalConfigCtrl.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/orderConfig.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/product.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/queryConfiguration.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/queryConfigurationGroupBy.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/queryConfigurationPop.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/smsQueryConfiguration.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/businessConfiguration/blackAndRedNodeConfig.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/businessConfiguration/blackRedDiscountMetaConfig.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/businessConfiguration/customerAttributesSettings.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/businessConfiguration/marketingondemandSettings.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/businessConfiguration/memberGradeSettings.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/businessConfiguration/rollmatchSettings.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/businessConfiguration/workbenchSettings.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/metaConfig/attributeCollection.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/metaConfig/field.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/metaConfig/filter.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/metaConfig/find.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/metaConfig/metaSegmentaion.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/metaConfig/function.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/metaConfig/segmentation.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/metaConfig/sourceData.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/metaConfig/subject.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/metaConfig/tables.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/metaConfig/node/condition.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/controller/metaConfig/node/find.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/service/configuration.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/service/metaConfigService.js"></script>
+  <script type="text/javascript" src="../../../app/js/directives.js"></script>
+  <script type="text/javascript" src="../../app/modules/configuration/directive/configuration.js"></script>
+  <script type="text/javascript" src="../../../app/modules/configuration/directive/mateConfig.js"></script>
+
+  <!-- /build -->
+
+</head>
+
+<body>
+	<div class="commHeader" ng-include src="headerUrl"></div>
+  <div class="commNav" ng-include src="navUrl"></div>
+	<div ng-show="!tmlLoaded" class="loading"><i></i>加载中...</div>
+  <div onload="afterLoadCont();" src="pageUrl" ng-visible="tmlLoaded" ng-include></div>
+</body>
+</html>

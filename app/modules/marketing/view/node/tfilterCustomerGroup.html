@@ -1,0 +1,34 @@
+<div  ng-controller="tfilterCustomerGroup">
+    <div>
+        <div class="commWrapFour commNodeMarkRelative">
+          <div class="bannerCommStyle areaHeight26" ng-show="tfilterFindObj.tip">
+            {{tfilterFindObj.tip}}
+            <a href="javascript:void(0)" toggle-banner title="展开" class="downSanjiao sanjiaoPosition"></a>
+          </div>
+            <div class="clearfix">
+                <table>
+                    <tr>
+                        <th class="tr" width="8%"><label class="node_name_label">节点名称：</label></th>
+                        <td><div class="pr"><input type="text" class="borderHighlight nameInput fl" ng-model="tfilterFindObj.name" maxlength="20" ng-noderequire /><span nodetip></span></div></td>
+                        <td><label class="fr code">节点代码：{{tfilterFindObj.id}}</label></td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div class="tfilterContent mt10 tfilterfindWrap">
+                <div class="radioTypeContent" ng-include src="tfilterFindObj.radioSrc"></div>
+            </div>
+        </div>
+        <div>
+            <div class="ling_di"></div>
+            <div class="commBottom">
+                <div class="mb">
+                    <button class="btn queryNodeGlobalButton" ng-class="{btnBlue:!tfilterFindObj.isEditorFlag}" ng-click="tfilterFindObj.postQueryData()">确定</button>
+                    <button class="btn" ng-close-window >取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script type="text/javascript" src="controller/node/tfilterCustomerGroup.js"></script> -->

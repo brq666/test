@@ -1,0 +1,181 @@
+<!--<script type="text/javascript" src="controller/customAttribute.js"></script>-->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_46173_p1sqvmpu723dte29.css">
+<section class="maincontainerB customer-attr-container" ng-controller="CustomAttribute" ng-click="customFunc.hideCustomAttrPage($event)">
+  <div class="maincontainer marketActivity-page">
+    <header class="hearder-box" style="box-shadow: none;">
+      <h2>客户标签</h2>
+    </header>
+
+    <section class="market-activity-box">
+      <new-tree-api
+        id="customer-attr-ztree-api"
+        api-id="customer-attr-ztree-api"
+        class="filter-box new-tree" 
+        search-placeholder="目录名称" 
+        no-record-text="没有查询到符合条件的数据" 
+        is-search="true"
+        is-type="tree">
+        <div id="customer-attr-ztree"
+          class="ztree tree-directory"
+          new-tree
+          children-key="childrenCatalogs"
+          is-operate="true"
+          is-expand="false"
+          load-tree-data="customFunc.loadTreeData()"
+          operation-menu="customObj.operationMenu"
+          operation-call-back="customFunc.treeNodeOperation(treeId, treeNode, type, name)">
+        </div>
+      </new-tree-api>
+      <div class="details-box">
+        <button class="add-btn" ng-click="customFunc.settingAttr()">
+          <i class="iconfont icon-add"></i>
+          新建标签
+        </button>
+        <div class="details-list-box" ng-include src="customObj.gridViewUrl"></div>
+      </div>
+    </section>
+  </div>
+  <!-- <div class="chooseAttributes">
+    <div class="configAttrBox" style="height:400px;">
+      <div style="height:34px;">
+        <div class="commSearch">
+           <label class="default_color" id="gridsearch" ng-grid-search>自定义属性名称</label>
+          <input class="commSearchVal" id="gridsearch" type="text" maxlength="20" ng-model="searchValue" placeholder="客户标签名称" name="couponName">
+          <button class="commSearchBtn" ng-click="customObj.searchClick(searchValue)"></button>
+        </div>
+      </div>
+      <div class="couponListssBox gridCommLayout" style="position: static;">
+        <div id="searchListsGrid"></div>
+      </div>
+    </div>
+    <div class="ling_di"></div>
+    <div class="commBottom">
+      <div class="mb">
+        <button class="btn btnBlue" ng-click="customObj.saveChooseData()" ng-disabled="submitDisF">确定</button>
+        <button class="btn" dm-close-window="customObj.setValuesWindow()">取消</button>
+      </div>
+    </div>
+  </div> -->
+  <div class="settingAttributes marketLayer">
+    <div id="createMaketLayer" style="margin-top: 20px">
+      <div class="mb16">
+          <label class="itemLabel">标签名称：</label><input class="borderHighlight" type="text" ng-model="setCustomObj.customAttrName" ng-click="customFunc.changeNewFlag()"
+            maxlength="20" dm-input-activity-name />
+          <label class="error" ng-show="hintAttr.customAttrNameFalg">{{hintAttr.customAttrNameRequiredError}}</label>
+      </div>
+      <div class="mb16" style="position: relative;">
+          <label class="itemLabel">标签目录：</label><new-tree-api
+                model="setCustomObj.catalogId"
+                mapping="{valueField: 'id', displayField: 'name'}"
+                id="tags-ztree-api"
+                api-id="tags-ztree-api"
+                ng-if="hintAttr.loadAttributes"
+                class="dropdown-select-tree" 
+                search-placeholder="--请选择标签目录--" 
+                no-record-text="--没有查询到符合条件的数据--" 
+                is-search="true" 
+                is-type="select">
+            <div id="tags-ztree"
+                  class="ztree tree-directory"
+                  new-tree
+                  children-key="childrenCatalogs"
+                  is-operate="false"
+                  is-expand="false"
+                  load-tree-data="customFunc.loadTreeData(1)">
+            </div>
+          </new-tree-api>
+          <label class="error" ng-show="hintAttr.curCatalogIdFlag">请选择标签目录</label>
+      </div>
+      <div class="mb16" style="position: relative">
+          <label class="itemLabel">标签类型：</label><cc-dropdown-select 
+                  ng-if="hintAttr.loadAttributes"
+                  placeholder="--请选择标签类型--"
+                  model="setCustomObj.curStoreType" 
+                  datalist="setCustomObj.storeTypeList"
+                  mapping="{valueField: 'value', displayField: 'viewname'}"
+                  ng-click="customFunc.changeNewFlag()"
+                  on-select-change="customFunc.changeStoreType(model, oldModel)">
+          </cc-dropdown-select>
+          <div ng-if="hintAttr.isEditorFlag" style="left: 140px;
+                    position: absolute;
+                    width: 209px;
+                    height: 30px;
+                    top: 0px;
+                    background-color: #d9d9d9;
+                    opacity: 0.4;"></div>
+          <label class="error" ng-show="hintAttr.curStoreTypeFlag">请选择标签类型</label>
+      </div>
+      <div class="mb16">
+        <label class="itemLabel">可选值：</label><input-multiple ng-if="hintAttr.loadAttributes" select-values="setCustomObj.selectValuesList" i-disabled="hintAttr.valueStatus" check-value="customFunc.checkValue(curEditorValue, selectValuesList)"></input-multiple>
+        <i class="iconfont icon-question-mark question-tips" ng-show="!hintAttr.valueStatus" cc-tooltip="hintAttr.notice"></i>
+        <label style="margin-left: 145px;display: block" class="error ml110 domBlock mt5 disblackError" ng-show="hintAttr.errorStatus && hintAttr.selectValuesFlag">请编辑可选值</label>
+        <label style="margin-left: 145px;display: block" class="error ml110 domBlock mt5 disblackError" ng-show="!hintAttr.errorStatus">{{hintAttr.errorFont}}</label>
+        <p style="margin-left: 145px;color: #666666;" ng-show="hintAttr.isEditorFlag">删除可选值不会影响已存在标签数据，但主动营销中将不可用</p>
+    </div>
+      <div class="mb16">
+          <label class="itemLabel">
+            状态：
+          </label>
+          <label class="mr25 ml10">
+            <input class="commRadio" type="radio" name="attrStatus" ng-model="setCustomObj.attrStatus" value="true"/>
+            启用
+          </label>
+          <label>
+            <input class="commRadio" type="radio" name="attrStatus" ng-model="setCustomObj.attrStatus" value="false"/>
+            禁用
+          </label>
+      </div>
+      <div class="mb16">
+          <label class="itemLabel">备注：</label><textarea ng-model="setCustomObj.attrConfigMark" maxlength="200"></textarea>
+      </div>
+    </div>
+    <div class="ling_di"></div>
+    <div class="commBottom">
+      <div class="mb16">
+        <button class="btn-ok" ng-click="customFunc.saveAttrData()" ng-disabled="hintAttr.submitDisF">确定</button>
+        <button class="btn-cancel" dm-close-window ng-click="hintAttr.loadAttributes = false">取消</button>
+      </div>
+    </div>
+  </div>
+  <div ng-show="hintAttr.customAttributeValueShow" ng-click="$event.stopPropagation()" ng-class="{true: 'customAttributeValueR', false: 'customAttributeValueL'}[hintAttr.customAttributeValueShow]"
+    style="background-color: #ffffff;
+    width: 478px;position: absolute;top: 0px;right: 0px;height: 100%;box-shadow: 0 1px 5px rgba(0,0,0,.6);z-index: 900;">
+    <div class="maincontainer marketActivity-page" style="left:0px;">
+      <header class="hearder-box" style="box-shadow: none;">
+        <h2 ng-bind="customObj.attrEntity.name" style="flex: 0 0 70%;
+                                                      overflow: hidden;
+                                                      text-overflow: ellipsis;
+                                                      white-space: nowrap;"></h2>
+        <i class="iconfont icon-close" style="line-height: 50px;font-size: 20px;margin-left: 70px;" ng-click="customFunc.hideCustomAttrPage($event)"></i>
+      </header>
+      <section class="market-activity-box" style="margin: 20px 0;border: none;border-top: 1px solid #e4e6eb;">
+        <div class="details-box" style="padding: 16px 10px;">
+          <div style="height: 30px"></div>
+          <div class="details-list-box">
+            <div class="market-list-box">
+              <div class="serch-box" style="right: 170px;">
+                <cc-dropdown-select 
+                  placeholder="标签值"
+                  ng-if="customObj.attrEntity.type === 0 || customObj.attrEntity.type === 2"
+                  model="customObj.labelVal"
+                  datalist="customObj.labelValList"
+                  on-select-change="customFunc.selectChange()">
+                </cc-dropdown-select>
+              </div>
+              <div class="serch-box">
+                <input type="text" ng-model="customObj.searchAttrVal" placeholder="客户ID" ng-keyup="customFunc.searchButtonClick($event,'othFlag')">
+                <i class="iconfont icon-search" ng-click="customFunc.searchButtonClick('','othFlag')"></i>
+              </div>
+              <div class="grid-box couponListssBox" style="height: 100%">
+                <cc-grid opts="configAttrGridOpts"></cc-grid>
+                <!-- <div class="loading-box" ng-if="!$ctrl.isRefeshGrid">
+                        <cc-loading type="layer">请耐心等待</cc-loading>
+                      </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>

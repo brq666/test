@@ -1,0 +1,12 @@
+<div class="market-list-box">
+  <div class="serch-box">
+    <input type="text" ng-model="customObj.hdValue" placeholder="标签名称" ng-keyup="customFunc.searchButtonClick($event)">
+    <i class="iconfont icon-search" ng-click="customFunc.searchButtonClick('')"></i>
+  </div>
+  <div class="grid-box couponListssBox" style="height: 100%">
+    <cc-grid opts="attrListsGridOpts"></cc-grid>
+    <!-- <div class="loading-box" ng-if="!$ctrl.isRefeshGrid">
+        <cc-loading type="layer">请耐心等待</cc-loading>
+      </div> -->
+  </div>
+</div>

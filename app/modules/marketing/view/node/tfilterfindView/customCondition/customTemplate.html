@@ -1,0 +1,56 @@
+<div class="commCustomConfigBox" ng-controller="customConditionCtrl">
+  <form></form><!--解决打包压缩过滤第一个form bug-->
+  <div>
+    <form id="customConfigForm" name="customConfigForm">
+      <div class="commWrapFive">
+        <div class="firstLayout">
+          <ul class="customHeadMark clearfix">
+            <li><span>满足订单条件</span></li>
+            <li class="lineSolid width90 mt10" ng-class="{width93:!isToggleConditionsAreaShow}"></li>
+            <li ng-show="isToggleConditionsAreaShow">
+              <a class="blueColor" href="javascript:void(0)" ng-click="toggleConditions()">{{toggleFontName()}}<i ng-class="{downSanjiao:!flag,upSanjiao:flag}"></i></a>
+            </li>
+          </ul>
+          <div class="conditionLayoutBox clearfix" custom-template-init>
+            <div class="conditionLayoutWidth45 fl">
+            </div>
+            <div class="conditionLayoutWidth30 fl">
+            </div>
+            <div class="conditionLayoutWidth25 fl">
+            </div>
+          </div>
+        </div>
+        <div class="secondLayout">
+          <ul class="customHeadMark clearfix">
+            <li><span>满足汇总指标</span></li>
+            <li class="lineSolid width93 mt10"></li>
+          </ul>
+          <div class="conditionLayoutBox">
+            <div class="labelListsBox">
+              <div class="singleTemplate mt10">
+                <label class="commLabelWidth108 ng-binding">多指标关系：</label>
+                <select class="commSelect w100 mr0" ng-model="customObj.curLabelRelationship" name="relationship">
+                  <option ng-repeat="labelRelationship in customObj.labelRelationships">{{labelRelationship}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="indicatorListBox"></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="ling_di"></div>
+        <div class="commBottom">
+          <div class="mb">
+            <button class="btn" ng-class="{btnBlue:!tfilterFindObj.isEditorFlag && !customerTemplateLoadingFlag}" type="submit" ng-click="customObj.submitCustomComfig()" >确定</button>
+            <button class="btn" type="button" ng-close-child-window >取消</button>
+          </div>
+        </div>
+      </div>
+      <div ng-show="customerTemplateLoadingFlag" class="loading">
+        <i></i>加载中...
+      </div>
+    </form>
+  </div>
+</div>
+<!--<script type="text/javascript" src="controller/node/tfilterfindJs/customConditions.js"></script>-->

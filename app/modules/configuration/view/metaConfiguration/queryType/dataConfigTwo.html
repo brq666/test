@@ -1,0 +1,22 @@
+<div class="attrConfigBox" ng-controller="AttrConfigCtrl">
+  <div class="configContentBox">
+    <div class="clearfix">
+      <p class="fl"><label><span class="red">*</span> 属性名称：</label><input class="borderHighlight" type="text" /></p>
+      <p class="fr"><label>属性类型：</label><select><option>1</option><option>2</option></select></p>
+    </div>
+    <div class="dataConfigModule" ng-include="" src="configuration.dataConifgSrc"></div>
+    <div class="paramsConfigModule" ng-include="" src="configuration.paramsConifgSrc"></div>
+  </div>
+  <div class="ling_di"></div>
+  <div class="commBottom">
+    <div class="mb">
+      <button ng-click="" class="btn btnBlue">确定</button>
+      <button ng-close-window="" class="btn">取消</button>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function AttrConfigCtrl($scope,$http){
+    $scope.configuration.showPopWindow();//弹框调用
+  }
+</script>

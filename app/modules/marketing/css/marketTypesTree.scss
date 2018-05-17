@@ -1,0 +1,82 @@
+@charset "utf-8";
+
+.hdZtreeType {
+  position: absolute;
+  left: 0;
+  top: 123px;
+  bottom: 0px;
+  z-index: 1;
+}
+
+.market_types_tree {
+  position: absolute;
+  top: -9px;
+  bottom: 0px;
+  display: inline-block;
+  width: 175px;
+  padding: 10px 8px 0px 7px;
+  background: #f8f8f8;
+}
+
+.market_tree_input_wrapper {
+  position: relative;
+}
+
+.market_tree_search_input {
+  width: 148px !important;
+  height: 20px !important;
+  border: 1px solid #d9d9d9 !important;
+  padding: 1px 1px 1px 1px !important;
+  margin-bottom: 10px !important;
+}
+
+.market_tree_input_wrapper label {
+  top: 5px;
+  left: 4px;
+}
+
+.market_tree_search_icon {
+  position: absolute;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  top: 8px;
+  right: 0px;
+  background: url(../../images/search.png) no-repeat;
+}
+
+.market_tree_wrapper {
+  position: absolute;
+  top: 38px;
+  bottom: 0px;
+  overflow: auto;
+  width: 178px;
+}
+
+.market_tree_menu {
+  position: absolute;
+  width: 110px;
+  padding: 3px 0;
+  display: none;
+  background: #ffffff;
+  z-index: 10;
+}
+
+.market_tree_menu_item {
+  height: 22px;
+  padding-left: 16px;
+  line-height: 22px;
+}
+
+.market_tree_menu_item:hover {
+  background-color: #e9e9e9;
+}
+
+#market_tree label {
+  left: 5px;
+  top: 4px;
+}
+
+.queryZtreeWrap {
+  top: 0px;
+}

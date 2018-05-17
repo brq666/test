@@ -1,0 +1,231 @@
+<div class="productBox" ng-controller="proList" ng-cloak="">
+<!--搜索条件 start-->
+<div class="proSearchCategory">
+  <div>
+    <div>
+      <label>店铺：</label>
+      <select ng-model="shop" class="commSelect width140" id="selShop" name="shopSelect" ng-options="shop.name for shop in Shops" ng-change="change_Standard()"> </select>
+      <label>商品ID：</label>
+      <input type="text" class="borderHighlight borderHighlight_auto" name="productIdName" ng-model="numiid" input_activity_name="" />
+      <label>关键字：</label>
+      <input type="text" name="productKeyWorld" id="productKeyWorld" class="borderHighlight borderHighlight_auto" readonly="readonly" title="{{productKeyWorld}}" ng-model="productKeyWorld" ng-click="goodsKeyWordPop.showGoodKeyWorldPop()" />
+      <a class="btn_modify" href="javascript:void(0)" ng-click="goodsKeyWordPop.showGoodKeyWorldPop()"></a>
+      <label><input type="checkbox" ng-model="saleStatus" class="isOnline" id="chbStatus" name="onsaleName" ng-true-value="'true'" ng-false-value="'all'"/>只显示在架</label>
+    </div>
+    <div>
+      <label>商品标准类目：</label>
+      <input type="text" name="categoryName" class="borderHighlight borderHighlight_auto" id="StandardCategoryValue" readonly="readonly" style="margin-left:5px" disabled="disabled" ng-click="StandardCategory.getStandardCategoryValue()" ng-model="StandardCategory.StandardCategoryValue" />
+      <a class="option location1" ng-click="StandardCategory.getStandardCategoryValue()" href="javascript:void(0);"></a>
+      <label>商品属性：</label>
+      <select id="selProperty" class="commSelect width140" name="shopAttrname" ng-model="selProperty" ng-change="change_property_by_cid_and_pid()" disabled="disabled" ng-options="property.name  for  property in PropertysList" style="width:137px"> <option value="">--选择商品属性--</option> </select>
+      <label>属性值：</label>
+      <select id="selPropertyValue" class="commSelect width140" name="shopAttrValname" ng-model="selPropertyValue" disabled="disabled" ng-options="propertyValue.name  for  propertyValue in PropertyValueList"> <option value="">--选择属性值--</option> </select>
+    </div>
+    <div>
+      <label>商品自定义类目：</label>
+      <input type="text" class="borderHighlight borderHighlight_auto" name="classificationcategoryName" id="Classification" readonly="readonly" style="margin-left:5px" disabled="disabled" ng-click="Classification.getClassificationValue()" ng-model="Classification.ClassificationValue" />
+      <a class="option location1" ng-click="Classification.getClassificationValue()" href="javascript:void(0);"></a>
+      <label style="display: none;">商品标签：</label>
+      <input style="display: none;" id="productTags" type="text" name="productTagsname" class="borderHighlight" ng-click="goodTags.showTagsPop()" readonly="readonly" ng-model="productTags" ng-disabled="goodTags.hasPower" />
+      <a style="display: none;" class="btn_search" href="javascript:void(0)" ng-click="goodTags.showTagsPop()"></a>
+    </div>
+    <div ng-show="isSupportSKU!=false">
+      <label>SKU名称：</label>
+      <input type="text" class="borderHighlight borderHighlight_auto" name="skuname" ng-model="productSkuVO.skuName" maxlength="100" />
+      <em class="ico_tips" title="仅支持淘宝默认SKU名称查询，可输入多个SKU，多个SKU之间为并且关系，用’,’分隔"></em>
+      <label>SKU外部ID：</label>
+      <input type="text" name="skuIdname" class="borderHighlight borderHighlight_auto" ng-model="productSkuVO.outerId" maxlength="100" />
+    </div>
+    <div>
+      <label>价格：</label>
+      <input type="text" ng-model="minPrice" name="pricename" class="borderHighlight w50" onafterpaste="value=value.replace(/[^\d.]/g,'')" onkeyup="value=value.replace(/[^\d.]/g,'')" /> &nbsp;-&nbsp;
+      <input type="text" ng-model="maxPrice" name="maxPricename" class="borderHighlight w50" onkeyup="value=value.replace(/[^\d.]/g,'')" onafterpaste="value=value.replace(/[^\d.]/g,'')" />
+      <label>商品外部编码：</label>
+      <select class="commSelect width65" name="productOuterVOselectname" ng-model="productOuterVO.outerCutFlag" ng-change="changeProductOutCodeCutFlag()"> <option value="false" ng-selected="productOuterVO.outerCutFlag=='false'">不截取</option> <option value="true" ng-selected="productOuterVO.outerCutFlag=='true'">截取</option> </select>
+      <span id="cutText" ng-show="productOuterVO.outerCutFlag=='true'"> <input class="borderHighlight w30" name="startCutBitname" id="startCutBit" ng-model="productOuterVO.startCutBit" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" /> 位- <input class="borderHighlight w30" id="maxBit" name="endCutBitname" ng-model="productOuterVO.endCutBit" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" /> 位 </span>
+      <input class="borderHighlight borderHighlight_auto" type="text" id="productOuterId" name="productOuterVOname" ng-model="productOuterVO.outerId" maxlength="1000" />
+      <label class="error" ng-show="outerShow">{{outerMessage}}</label>
+    </div>
+    <div>
+      <label></label>
+      <button class="btn commSmallBtn" ng-class="{btnBlue:!searchButtonStatus}" type="button" style="visibility: visible;" ng-click="pageEvent.searchPage()" ng-disabled="searchButtonStatus">{{searchButtonStatus ? &quot;加载中&quot;:&quot;搜索&quot;}} </button>
+      <a class="reset hand" ng-click="reset()" ng-hide="searchButtonStatus">重置</a>
+      <a class="searchGoods hand" style="float:right;margin-right: 10px;" ng-click="save()" ng-show="isSupportSave!=false"> <span class="btn_save"></span> 添加为搜索条件<em style="position:relative;top: -2px;" class="ico_tips" title="保存当前设置的条件，在执行时按条件查询符合条件的商品"></em> </a>
+    </div>
+  </div>
+  <div class="uneditorMark" ng-show="searchButtonStatus"></div>
+</div>
+<!--搜索条件 end-->
+<!-- 搜索结果 start-->
+<div class="productListArea">
+  <!--左边 查询结果 start-->
+  <div id="prevSelection" class="selectionBox">
+    <div class="mt">
+      <input type="checkbox" id="prevAllchecked" ng-model="prevCheckedAll" name="prevCheckedAll" />全选
+    </div>
+    <div class="productList">
+      <div class="loading queryLoading" style="display: none;top: 50%; left: 50%;">
+        <i></i>加载中...
+      </div>
+      <div class="items" ng-repeat="seachItem in seachGoods" var="{{seachItem.num_iid}}">
+        <label>
+          <div class="pic">
+            <input type="checkbox" class="checkbox" ng-checked="prevCheckedAll" ng-click="change_left($event)" name="change_leftAll" />
+            <img width="45" height="45" ng-src="{{seachItem.pic_url}}" />
+          </div>
+          <div class="info">
+            <a class="goodsName" ng-href="{{seachItem.detailUrl}}" ng-title="{{seachItem.title}}" target="_blank">{{seachItem.title}}</a>
+            <p> <span class="goodsId">商品ID： <span>{{seachItem.num_iid}}</span> </span> <span class="goodsPrice">{{seachItem.price}}</span> </p>
+            <p> <span class="goodsId">外部编码： <span>{{seachItem.outerId}}</span> </span> </p>
+          </div> </label>
+        <span class="tag hand" ng-show="isSupportSKU!=false&amp;&amp;seachItem.skuSize&gt;0" ng-click="showSkuList('Left',$index,$event,'')">SKU</span>
+        <span class="disTag hand" ng-show="isSupportSKU!=false&amp;&amp;seachItem.skuSize==0">SKU</span>
+        <span class="loading skuListLoading"> <i></i> </span>
+      </div>
+    </div>
+    <div class="skuItemsLeft skuItems" style="display: none">
+      <span class="slideUnfold"></span>
+      <span class="slideUnfold2"></span>
+      <ul class="creatHdTypeLists clearfix">
+        <li ng-repeat="item in leftlistsku" ng-click="changeThis($index)" var="{{item.skuId}}">
+          <span ng-repeat="skuProp in item.skuProps" class="linenone">{{skuProp.pidname}}：{{skuProp.vidname}} <em ng-show="$index&lt;item.skuProps.length-1">,</em> </span> <br /> 库存{{item.quantity}} 价格{{item.price}} <span class="trianger"></span> <span class="gg"></span> </li>
+      </ul>
+      <span class="slideUnfold3" style="display: none"></span>
+      <span class="slideUnfold4" style="display: none"></span>
+    </div>
+    <div class="mb">
+      <div class="pDiv2">
+        <div class="pGroup pagetotal">
+          <span class="currentPage">{{pageEvent.currentPage}}</span>/
+          <span class="totalPage">{{pageEvent.totalPage}}</span>
+        </div>
+        <div style="float:right">
+          <div class="pGroup">
+            <div class="pFirst pButton" ng-click="pageEvent.firstPage()">
+              <span></span>
+            </div>
+            <div class="pPrev pButton" ng-click="pageEvent.prevPage()">
+              <span></span>
+            </div>
+          </div>
+          <div class="pGroup">
+            <span class="pcontrol"> 跳至<input id="dataInput" type="text" value="1" size="4" ng-search-number="2" min="1" max="{{pageEvent.totalPage}}" ng-model="pageEvent.currentPage" name="enterValue" />页 </span>
+            <div class="pageTips"></div>
+          </div>
+          <div class="pGroup">
+            <div class="pNext pButton" ng-click="pageEvent.nextPage()">
+              <span></span>
+            </div>
+            <div class="pLast pButton" ng-click="pageEvent.lastPage()">
+              <span></span>
+            </div>
+          </div>
+        </div>
+        <div class="pGroup">
+          <select name="rp" ng-model="pageEvent.rp" ng-change="pageEvent.changeRp()"> <option>10</option> <option value="15">15</option> <option value="20">20</option> <option value="30">30</option> <option value="50">50</option> </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--左边 查询结果 end-->
+  <!--中间 添加按钮 start-->
+  <div class="selectionBtn" id="selectionBtn">
+    <div class="smalldarkerblue-btn " ng-click="selectGoods.addGoods()">
+      <a class="addGoods" href="javascript:void(0)"></a>
+    </div>
+  </div>
+  <!--中间 添加按钮 end-->
+  <!--右边 添加结果 start-->
+  <div id="nextSelection" class="selectionBox">
+    <div class="mt">
+      <input type="checkbox" id="nextAllchecked" ng-model="nextCheckedAll" name="allchecked" /> 全选
+      <a class="clearGoods" href="javascript:void(0);" title="清除" ng-click="selectGoods.clearGoods()">清除</a>
+    </div>
+    <div class="productList" style="overflow-x:hidden;">
+      <div class="items" ng-repeat="findItem in findGoods" var="{{findItem.num_iid}}">
+        <label>
+          <div class="pic">
+            <input type="checkbox" class="checkbox" ng-checked="nextCheckedAll" ng-click="change_right($event)" name="picChekced{{findItem.num_iid}}" />
+            <img width="45" height="45" ng-src="{{findItem.pic_url}}" />
+          </div>
+          <div class="info">
+            <p class="goodsName"> {{findItem.title}} </p>
+            <p> <span class="goodsId">商品ID： <span>{{findItem.num_iid}}</span> </span> <span class="goodsPrice">{{findItem.price}}</span> </p>
+            <p> <span class="goodsId">外部编码： <span>{{findItem.outerId}}</span> </span> </p>
+          </div> </label>
+        <span ng-switch="" on="findItem.byType"> <span ng-switch-when="numid"> <span class="tag hand" ng-show="findItem.skus.length&gt;0&amp;&amp;isSupportSKU!=false&amp;&amp;findItem.bySKU" ng-click="showSkuList('Right',$index,$event,findItem.skus)"> SKU </span> <span class="disTag hand" ng-show="findItem.skus.length==0&amp;&amp;isSupportSKU!=false&amp;&amp;findItem.bySKU"> SKU </span> </span> <span ng-switch-when="skuid"> <span class="tag hand" ng-show="findItem.skus.length&gt;0&amp;&amp;isSupportSKU!=false" ng-click="showSkuList('Right',$index,$event,findItem.skus)"> SKU </span> <span class="disTag hand" ng-show="findItem.skus.length==0&amp;&amp;isSupportSKU!=false"> SKU </span> </span> </span>
+        <span class="remove hand" ng-click="selectGoods.delGoods($index)"> X </span>
+      </div>
+    </div>
+    <div class="skuItemsRight skuItems" style="display: none">
+      <span class="slideUnfold"></span>
+      <span class="slideUnfold2"></span>
+      <ul class="creatHdTypeLists clearfix">
+        <li ng-repeat="item in rightlistsku" var="{{item.skuId}}"> <span ng-repeat="skuProp in item.skuProps" class="linenone">{{skuProp.pidname}}：{{skuProp.vidname}} <em ng-show="$index&lt;item.skuProps.length-1">,</em> </span> <br /> 库存{{item.quantity}} 价格{{item.price}} <span class="removeItem" ng-click="selectGoods.removeThis($index)"></span> </li>
+      </ul>
+      <span class="slideUnfold3"></span>
+      <span class="slideUnfold4"></span>
+    </div>
+    <div class="mbcondition" ng-show="conditionFlag&amp;&amp;isSupportSave!=false&amp;&amp;conditions.length&gt;0" title="{{conditions}}">
+      <em> {{conditions}} </em>
+      <span class="i hand" ng-click="deleteContions()">X</span>
+    </div>
+    <div class="mb">
+      已选商品：
+      <em> {{checkedGoodsLen}} </em>
+      <!--   已选数量：
+               <em>
+                   {{checkedConditionsLen}}
+               </em>-->
+    </div>
+  </div>
+  <!--右边 添加结果 end-->
+</div>
+<div class="footer">
+  <button class="btn btnBlue" id="marketSure" ng-close-child-window="" ng-click="selectGoods.saveSelectGoods()" type="button">确定 </button>
+  <button class="btn" id="marketCancel" ng-close-child-window="" type="button">取消</button>
+</div>
+<!-- 搜索结果 end-->
+<!--start 关键字输入-->
+<div class="goodsListKeyWorld">
+  <div class="goodsEditor selectFontsClass">
+    <p> <span>关键字关系：</span> <label> <input type="radio" name="keyWorldRadio" ng-model="goodsKeyWordPop.goodsEditorKeyWorldGX" value="true" />并且 </label> <label> <input type="radio" name="keyWorldRadio" ng-model="goodsKeyWordPop.goodsEditorKeyWorldGX" value="false" />或者 </label> <span class="ico_tips" title="请选择：当输入多个关键字的时候，关键字之间是并且还是或者关系"></span> </p>
+    <p> <span>关键字：</span> <input class="borderHighlight" type="text" ng-model="goodsKeyWordPop.goodsKeyWorld" name="keywords" /> <button class="commAddEventBtn" ng-click="goodsKeyWordPop.addGoodsKeyWorld()" type="button">添加</button> <em ng-show="goodsKeyWordPop.keyWorldError">{{goodsKeyWordPop.keyWorldErrorText}}</em> </p>
+    <ul class="keyWorldLists clearfix">
+      <li ng-repeat="keyWorldList in goodsKeyWordPop.keyWorldLists track by $index"> {{keyWorldList}} <a class="goodsDeleteKeyWorld" href="javascript:void(0)" title="删除" ng-click="goodsKeyWordPop.goodsKeyWorldDel($index)"> <img src="/ccms/images/deletex.png" width="10" height="10" /> </a> </li>
+    </ul>
+    <p> <button id="keyWorldSure" class="btn btnBlue commSmallBtn" type="button" style="visibility: visible;" ng-click="goodsKeyWordPop.goodsKeyWorldSure()">确定 </button> <button id="keyWorldCancel" class="btn commSmallBtn" type="button" ng-click="goodsKeyWordPop.goodsKeyWorldCancel()">取消 </button> </p>
+  </div>
+</div>
+<!--end 关键字输入-->
+<!--start 标签-->
+<div class="goodsListLabel">
+  <div class="listsBox">
+    <ul class="keyWorldLists clearfix">
+      <li ng-repeat="tag in tagLists track by $index" var="{{tag.tagId}}"> <a title="{{tag.tagName}}" href="javascript:void(0)">{{tag.tagName}}</a> <span class="trianger"></span> <span class="gg"></span> </li>
+    </ul>
+  </div>
+  <div class="listsButton">
+    <button class="btn btnBlue commSmallBtn" type="button" ng-click="goodTags.goodsTagsSure()">确定</button>
+    <button class="btn commSmallBtn" type="button" ng-click="goodTags.goodsTagsCancel()">取消</button>
+  </div>
+</div>
+<!--end 标签-->
+<!--start 自定义类目 -->
+<div class="ClassificationValue Classification ccmsPublicPop" style="display: none">
+  <ul class="zTreeBoxStyle ztree" id="ClassificationValue">
+  </ul>
+  <div class="listsButton">
+    <button class="btn btnBlue commSmallBtn" type="button" ng-click="Classification.sureClassificationValue()">确定 </button>
+  </div>
+</div>
+<!--end 自定义类目 -->
+<!--start 标准类目-->
+<div class="StandardCategory Classification ccmsPublicPop" style="display: none">
+  <ul class="zTreeBoxStyle ztree" id="StandardCategory"></ul>
+  <div class="listsButton">
+    <button class="btn  btnBlue commSmallBtn" type="button" ng-click="StandardCategory.sureStandardCategoryValue()"> 确定 </button>
+  </div>
+</div>
+<!--end 标准类目-->
+</div>

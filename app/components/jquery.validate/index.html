@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../lib/jquery-1.7.1.min.js"></script>
+    <script src="jquery.validate.js"></script>
+    <script src="messages_zh.js"></script>
+</head>
+
+<body>
+    <form id="invate">
+        <input type="text" class="required" range="8,89">
+        <input type="submit" id="button">
+    </form>
+    <script>
+    $('#button').click(function() {
+        $('#invate').validate({
+            debug: true,
+            rules: {
+            },
+            errorPlacement: function(error, element) {
+              if (element.is(":text")) {
+                element.after(error);
+                var top = element.position().top;
+                var left = element.position().left;
+                error.css({
+                  "position": "absolute",
+                  "left": left + 10,
+                  "top": top + 28,
+                  "z-index": 10
+                });
+                var color = element.css("borderColor");
+                element.css({
+                  "borderColor": "red"
+                });
+                error.click(function() {
+                  error.remove();
+                  element.css({
+                    "borderColor": color
+                  });
+                  element.focus();
+                });
+                element.click(function() {
+                  error.remove();
+                  element.css({
+                    "borderColor": color
+                  });
+                });
+              } else if (element.is(":checkbox")) {
+                //error.appendTo ( element.next() );
+              } else {
+                //error.appendTo( element.parent().next() );
+              }
+            },
+            submitHandler: function() {
+              console.log('通过')
+            }
+        });
+    })
+    </script>
+</body>
+
+</html>

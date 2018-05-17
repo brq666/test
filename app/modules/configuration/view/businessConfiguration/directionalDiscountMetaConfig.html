@@ -1,0 +1,21 @@
+
+<div class="maincontainerB">
+  <div class="maincontainer" ng-controller="directionalDiscountMetaConfigCtrl">
+    <div class="clearfix">
+      <h2 class="heading fl">
+        定向优惠券节点配置
+      </h2>
+    </div>
+    <div class="ml15">
+      <h3 class="bold mb10">选择定向优惠券节点支持的主题</h3>
+      <ul id="subjectList" class="attributesSettingsList ml5">
+        <li class="mb5" ng-repeat="cadidate in Cadidates">
+          <input class="commCheckbox" type="checkbox"/>{{cadidate.subjectName}}
+        </li>
+      </ul>
+      <p>
+        <button class="btn btnBlue commSmallBtn" type="button"   ng-click="save()">保存</button>
+      </p>
+    </div>
+  </div>
+</div>

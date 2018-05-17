@@ -1,0 +1,428 @@
+<!-- 首页的模板配置，请注意布局, ”要求符合页面宽度自适应“-->
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+<!-- 主页 begin -->
+<div class="homepagemaincontainer" ng-cloak="">
+  <div id="pagehome" class="homepagemaincontainerB" ng-controller="mainController" style="top: 55px;padding-top: 20px;">
+    <div ng-controller="systemMessageController">
+      <div class="sys-msg-out-wrapper" style="position: relative;margin: 0px 20px 20px 15px" ng-show="hidemesses">
+        <div class="sys-msg-wrapper">
+          <a class="Acomm fr smw-close" href="javascript:void(0);" messageMore ng-click="close()"></a>
+          <ul class="lineheigh28" message-slide style="position: absolute;top: 0px;margin: 0px;width: 60%;left: 1%">
+            <li  ng-repeat='mess in messes'  ng-click="readClick($index)" style="cursor:pointer">
+              <a ng-class="{bold:!mess.isRead}"  class="gray3d cutting_wordA" href="javascript:void(0);" >{{mess.title}}</a>
+              <span class="gray83" style="position: relative;left: 50px">{{mess.created | indexMessDate}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div ng-show="isShowMessContent" class="isShowMessContent ff">
+        <div id="mask2"></div>
+        <div id="popBack2">
+          <!--通知&消息&公告类弹层-->
+          <div class="absolute-center">
+            <div class="popbg">
+              <div class="noticePopComm absolute-center">
+                <!--title-->
+                <div class="noticeTitle">
+                  <span class="noticeType"> <img src="/ccms/images/dashboard/noticeTitle.png" width="55" height="58" /> </span>
+                  <div class="noticeTitleFont">
+                    <h3 class="elli-text f16 white">{{contitle}}</h3>
+                    <p class="blueA f11"> <span>来源：数据赢家</span> <span class="padl25">{{condate}}</span> </p>
+                  </div>
+                  <a class="noticeClose" href="javascript:void(0);" ng-click="hideContentDialog()"></a>
+                </div>
+                <!--content-->
+                <div class="noticeContent">
+                  <p parsecontent="">{{content}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">
+      <div class="layoutr" style="margin-top: 0px">
+        <div ng-repeat="module in rModules" class="module" ng-include="module.url"></div>
+      </div>
+      <div class="layoutl" style="margin-top: 0px">
+        <div ng-repeat="module in lModules" class="module" ng-include="module.url"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 主页  end  -->
+<!-- 各个模块  -->
+<script type="text/ng-template" id="templates/homepage/module/views/fastEnter.html">
+  <h4 class="fastEnterTitle">营销活动入口</h4>
+  <div class='content'>
+    <div class='activities-wrapper' ng-controller="fastEnterController">
+      <div class='activity activity-w4'>
+        <a class="activity_design" ng-click="goMarketing('myActivity=true&campState=A1')" href="javascript:;"></a>
+        <div class="ac-name">设计中</div>
+        <div class="ac-count" title="{{'您有设计中的活动'+counts.WAIT_ME_DESIGN+'个'}}">{{counts.WAIT_ME_DESIGN}}</div>
+      </div>
+      <div class='activity activity-w4'>
+        <a class="activity_pending" ng-click="goMarketing('myActivity=false&campState=A2&myApproval=true')" href="javascript:;"></a>
+        <div class="ac-name">待审批</div>
+        <div class="ac-count-error" title="{{'您有设计中的活动'+counts.WAIT_ME_APPROVE+'个'}}">{{counts.WAIT_ME_APPROVE}}</div>
+      </div>
+      <div class='activity activity-w4' style="display: none;">
+        <a class="activity_perform" ng-click="goMarketing('myActivity=false&campState=A3')" href="javascript:;"></a>
+        <div class="ac-name">待执行</div>
+        <div class="ac-count" title="{{'系统有执行完成的活动'+counts.VISABLE_WAIT_EXECUTE+'个'}}">{{counts.VISABLE_WAIT_EXECUTE}}</div>
+      </div>
+      <div class='activity activity-w4'>
+        <a class="activity_execution" ng-click="goMarketing('myActivity=false&campState=B3')" href="javascript:;"></a>
+        <div class="ac-name">执行中</div>
+        <div class="ac-count" title="{{'系统有正在执行的活动'+counts.VISABLE_EXECUTING+'个'}}">{{counts.VISABLE_EXECUTING}}</div>
+      </div>
+      <div class='activity activity-w4'>
+        <a class="activity_performError" ng-click="goMarketing('myActivity=false&campState=A6')" href="javascript:;"></a>
+        <div class="ac-name">出错</div>
+        <div class="ac-count-error" title="{{'近3天系统有执行出错的活动'+counts.VISABLE_ERROR+'个'}}">{{counts.VISABLE_ERROR}}</div>
+      </div>
+    </div>
+  </div>
+</script>
+<script type="text/ng-template" id="templates/homepage/module/views/channelMoniter.html">
+  <h3 class='title'>通道监控</h3>
+  <div class='' ng-controller="channelMoniterController">
+    <div chart-day class="radio-select">
+      <input type="radio" name="days" value="7" checked="checked"/>
+      7天
+      <input type="radio" name="days" value="30"/>
+      30天
+    </div>
+    <div id="chartContainer" style="position: relative; min-height: 40px;">
+      <div class="loading"><i></i>加载中...</div>
+    </div>
+  </div>
+</script>
+<script type="text/ng-template" id="templates/homepage/module/views/adsBanner.html">
+  <iframe frameborder="0" scrolling="no" width="380px" height="200px" src="https://shuyun-static.b0.upaiyun.com/adv/scroller.html"></iframe>
+</script>
+<script type="text/ng-template" id="templates/homepage/module/views/shopInfo.html">
+  <div  ng-controller="shopViewCtrl" style="background: white;position: relative;z-index: 100">
+    <div class="shuzai" ng-click="hideShuzai($event)" ></div>
+    <div class="shopView" style="background: white">
+      <div class="viewVersion" ng-hide="payAttenetion">
+        <p class="useVersion">
+          <span class="shopinfo-icon"></span>
+          当前版本<br />
+      <!--  <div class="lessGreen bold shopInfoVer">{{shopsInfo.version}}-->
+        <div class="lessGreen bold shopInfoVer">基础版
+          <p class="fl useEndTime">
+            合同到期时间&nbsp;:&nbsp;
+            <span>{{shopsInfo.expire}}</span>
+          </p>
+        </div>
+        </p>
+        <!--暂时不显示-->
+        <p class="fr Renew" style="display:none;">
+          <a class="renewal_upgrade" target="_blank" ng-href="{{shopsInfo.recharge}}" title="续费升级"></a>
+        </p>
+      </div>
+      <div class="viewVersion payAttention" ng-show="payAttenetion">
+        <div class="useVersion">
+          <span class="shopinfo-icon"></span>
+          <span ng-show="payAttenetion==1">店铺订购</span>
+          <span ng-show="payAttenetion==2">店铺授权</span><br />
+          <div class="shopInfoVer"><span style="color:#ff2323">到期</span>
+            <p class="fl useEndTime" style="width:155px;">
+              合同到期时间&nbsp;:&nbsp;
+              <span>{{shopsInfo.expire}}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <ul class="shopViewContext">
+        <li style="display: none;">
+          <span class="fl">店铺信息</span>
+            <span class="fr weibo" style="display:none;">
+              <wb:follow-button uid="2230485285" type="red_2" width="136" height="24" ></wb:follow-button>
+            </span>
+        </li>
+        <li class="shopinfo-detail"><div class="shopinfo-title">店铺信息</div>
+          <ul class="firstShopInfo">
+            <li style="height: 19px" class="firstShopInfoName {{shopsInfo.shop[0].pltType}}">
+              <label title="{{shopsInfo.shop[0].shopName}}">{{shopsInfo.shop[0].shopName}}</label>
+              <a ng-mouseenter="openList=1" ng-mouseleave="openList=0"  href="">更多<span></span></a>
+            </li>
+            <li>最新订单时间：{{shopsInfo.shop[0].lastUpdateTime}}</li>
+            <li>最早订单时间：{{shopsInfo.shop[0].earliestTime}}</li>
+            <li class="ShopInfosList" style="max-height: 290px" ng-show="openList ||  openListSecond" ng-mouseleave="openList=0;openListSecond=0" ng-mouseenter="openListSecond=1">
+              <div style="max-height: 200px;overflow: auto">
+                <ul id="shopInfo" ng-repeat="shopInfo in shopsInfo.shop">
+                  <li class="ShopInfosListName {{shopInfo.pltType}}">{{shopInfo.shopName}}</li>
+                  <li>
+                    <div>最新订单：{{shopInfo.lastUpdateTime}}</div>
+                    <div class="show_tt1" ng-show="shopInfo.shopExpiration==0">
+                      <span>订购已到期</span>
+                      <a href="http://fuwu.taobao.com/ser/detail.htm?service_code=ts-11631" target="_blank">立即订购</a>
+                    </div>
+                    <div class="show_tt1" ng-show="shopInfo.shopExpiration!=0">订购到期时间：{{shopInfo.shopExpiration}}</div>
+                  </li>
+                  <li>
+                    <div>最早订单：{{shopInfo.earliestTime}}</div>
+                    <div class="show_tt1" ng-show="shopInfo.sessionKeyExpiration==0">
+                      <span>授权已到期</span>
+                      <a href="https://oauth.taobao.com/authorize?response_type=code&client_id=12283535&redirect_uri=http%3A%2F%2Fapptest.fenxibao.com%2Fucenter-callback-handler%2Fcallback%2F0%2Ftaobao" target="_blank">立即授权</a>
+                    </div>
+                    <div class="show_tt1" ng-show="shopInfo.sessionKeyExpiration!=0">授权到期时间：{{shopInfo.sessionKeyExpiration}}</div>
+                  </li>
+                  <div style="clear:both"></div>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <!--暂时不显示，好像新需求上没有这块内容-->
+        <li class="contactInfo clearfix" style="display:none">
+          <p class="contactWay clearfix">
+            <a class="fl wwContact" ng-href="{{shopsInfo.wangwang}}" target="_blank"> <i class="iconWangWang"></i>
+              旺旺客服
+              <!--<img border="0" alt="点击这里给我发消息" src="http://amos.alicdn.com/realonline.aw?v=2&uid=%E6%95%B0%E6%8D%AE%E8%B5%A2%E5%AE%B6&site=cntaobao&s=1&charset=utf-8">--></a>
+            <a class="fl qqContact" ng-href="{{shopsInfo.qq}}" target="_blank">
+              <i class="iconQQ"></i>
+              QQ交谈
+              <!--<img border="0" alt="点击这里给我发消息" src="http://wpa.qq.com/pa?p=2:800016177:41">--></a>
+              <span class="fl wwGroup">
+                <i class="iconGroup"></i>
+                旺群：{{shopsInfo.wangwangqun}}
+              </span>
+          </p>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</script>
+<script type="text/ng-template" id="templates/homepage/module/views/newerHelp.html">
+  <div ng-controller="newerHelpController">
+    <h3 class='title'>
+      新手帮助
+      <a style="cursor: pointer" class="Acomm fr" ng-click="getHelpLink()" target="_blank">更多</a>
+    </h3>
+    <div class='content'>
+      <ul class="helpList">
+        <li ng-repeat='info in infos'> <i></i>
+          <a  target="_blank" class="gray3d cutting_wordA" href="{{info.href}}">{{info.title}}</a>
+          <span>[{{info.postTime | helpDate}}]</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</script>
+<script type="text/ng-template" id="templates/homepage/module/views/balance.html">
+  <div ng-controller="balanceCtrl">
+    <h4 class="fastEnterTitle ng-scope">
+      <span style="float: right;cursor: pointer;color:#3ba2ba;font-size: 12px;margin-right: 10px" ng-hide="showButton" ng-click="setMore()">
+        更多<span ng-class="{true: 'up', false: 'down'}[more]"></span>
+      </span>通道余额
+    </h4>
+    <div >
+      <div class="channelSlide" ng-class="{true: 'moreAuto', false: 'moreHeight'}[more]">
+        <p ng-repeat="channel in channels" class="padtb5lf15  lineheigh25" channelRecharge>
+          <span  class="cutting_wordB" title="{{channel.channelName}}" style="color:#838383;width: 67px">{{channel.channelName}}：</span>
+          <label class="sendItemsNum">可发送数量：</label><span class="padl1">{{channel.overAmount}}条</span>
+          <a target="_blank" href="{{channel.recharge}}"></a>
+        </p>
+      </div>
+    </div>
+  </div>
+</script>
+<script type="text/ng-template" id="templates/homepage/module/views/salesPerformance.html">
+  <div ng-controller="salePerformaceCtrl" class="salePerformace">
+    <div class="sp-title-wrapper">
+      <h4 class="fastEnterTitle">CRM 销售贡献</h4>
+      <div id="al_dropDown" class="al_dropDown">
+        <span class="{{viewModel.pltType}}"   ng-mouseover="hideSelect=false" >
+          <span  style="text-overflow: ellipsis;word-wrap: break-word;white-space: nowrap; padding-left: 0px;overflow: hidden;width: 100px;border: none">{{viewModel.shopName}}</span>
+          <a></a>
+        </span>
+        <ul ng-hide="hideSelect" >
+          <li class="{{i.pltType}}" title="{{i.shopName}}" ng-repeat=" i in viewModel.shops " ng-click="changeShopId($index)">{{i.shopName}}</li>
+        </ul>
+      </div>
+        <span class="sp-new-data" style=" position:relative;top: -6px;" >
+          <em class="ico_tips" ng-title-max="200" ng-title="每天凌晨统计当天0点以前的数据，第一次统计初始化30天的数据。"></em>最新统计：{{viewModel.salesKpi.created}}
+        </span>
+    </div>
+    <div class="sp-data-collection-wrapper">
+      <a ng-repeat=" i in viewModel.temp" ng-class="{active:$index==viewModel.temp.index}" ng-click="setInterval($index)" href="javascript:void(0);">{{i.name}}</a>
+
+    </div>
+    <div class="sp-detail-wrapper">
+      <div class="sp-detail sp-sales-amount">
+        <div class="sp-icon-left" style="cursor: pointer" ng-title="统计付款时间在选定时间范围内的订单的汇总金额。"></div>
+        <div class="sp-text-right" >
+          <span class="sp-text-num">{{viewModel.salesKpi.totalFee | formantNumber0}}</span><br />
+          <span class="sp-test-info">销售额（元）</span>
+        </div>
+      </div>
+      <div class="sp-detail sp-crm-sales-amount">
+        <div ng-title-max="300" class="sp-icon-left" style="cursor: pointer" ng-title="统计付款时间在选定时间范围内由CRM贡献的已付款订单的汇总金额。如果下单前7天内（包括下单当天）通过主动营销功能发送过SMS、EDM、优惠券、定向优惠则认为这笔订单为CRM贡献订单。 "></div>
+        <div class="sp-text-right">
+          <span class="sp-text-num">{{viewModel.salesKpi.crmFee  | formantNumber0 }}</span><br />
+          <span class="sp-test-info">CRM活动贡献销售额（元）</span>
+        </div>
+      </div>
+      <div class="sp-detail sp-crm-percent">
+        <div class="sp-icon-left" style="cursor: pointer" ng-title="CRM贡献销售额/销售额 "></div>
+        <div class="sp-text-right">
+          <span class="sp-text-num ">{{viewModel.Roi}}</span><br />
+          <span class="sp-test-info">CRM活动贡献占比</span>
+        </div>
+      </div>
+    </div>
+
+    <div  style="position: relative; top: -17px;min-height: 6px">
+      <div ng-hide="sucessDone"  class="loading"><i></i>加载中...</div>
+    </div>
+  </div>
+
+</script>
+<script type="text/ng-template" id="templates/homepage/module/views/marketingKpi.html">
+  <div >
+
+    <div ng-controller="marketingKpiCtrl" class="marketingKpi" style="padding-bottom: 20px;">
+      <div class="sp-title-wrapper" style="overflow: hidden">
+        <h4 class="fastEnterTitle">营销活动 KPI</h4>
+        <span class="sp-new-data" >
+          <em class="ico_tips" ng-title-max="200" ng-title="每天凌晨统计当天0点以前的数据，第一次统计初始化30天的数据。"></em>最新统计：{{viewModel.pie1Data.created}}
+        </span>
+      </div>
+      <div class="sp-data-collection-wrapper">
+        <a ng-click="setInterval($index)" ng-repeat=" i in viewModel.temp" ng-class="{active:$index==viewModel.temp.index}"  href="javascript:void(0);">{{i.name}}</a>
+      </div>
+      <div class="sp-detail-wrapper" style="overflow: hidden;margin:auto; width: 97%">
+        <div class="pie1-wrapper chart-wrapper" style="float: left; width: 26%;padding-left: 0px;padding-right: 0px" >
+          <div class="pie1-title">
+            <span style="color: #979797;font-size: 12px;margin-right: 10px;cursor: pointer" ng-title-max="174" ng-title="统计选定时间范围内通过主动营销功能发送过短信、EDM、优惠券、定向优惠的客户数量，如果单个客户在一天内发送多次，记为发送1人。">总营销 </span>
+            <span style="color: #606060;font-size: 14px">{{viewModel.pie1Data.investmentCustomerNum| formantNumber}}</span>
+          </div>
+          <div id="pie1" style="height: 172px"></div>
+        </div>
+
+        <div class="column2-wrapper chart-wrapper"  style=" float: left; margin: 0px 2%; width: 30%;padding-left: 0px;padding-right: 0px">
+          <div class="column-title">ROI {{viewModel.columnRoi}}</div>
+          <!--       <div style="position: absolute;left: 185px;z-index: 200;font-size: 14px"><span style="color:#606060;">ROI</span>  <span style="color:#141414">{{viewModel.pie1Data.roi}}</span></div>-->
+          <div id="column2" style="height: 172px;overflow: hidden"></div>
+        </div>
+        <div class="pie3-wrapper chart-wrapper" style="float: left;width: 37%;position: relative;padding-left: 0px;padding-right: 0px">
+          <div id="pie3" style="height: 200px;width: 60%"></div>
+          <div class="pieLabels" style="">
+            <ul>
+              <li>
+                <div style="color: #979797"><span class="bb1" style="background: #3BA2BA"></span>短信发送</div>
+                <div style="text-indent: 16px;font-size: 14px;color: #606060">{{viewModel.pileeLabels["短信"]| formantNumber}}</div>
+              </li>
+              <li>
+                <div  style="color: #979797"><span class="bb1" style="background: #73D4C5"></span>邮件发送</div>
+                <div style="text-indent: 16px;font-size: 14px;color: #606060">{{viewModel.pileeLabels["邮件"]| formantNumber}}</div>
+              </li>
+              <li>
+                <div  style="color: #979797"><span class="bb1" style="background: #F18202"></span>优惠券发送</div>
+                <div style="text-indent: 16px;font-size: 14px;color: #606060">{{viewModel.pileeLabels["优惠券"]| formantNumber}}</div>
+              </li>
+              <li>
+                <div  style="color: #979797"><span class="bb1" style="background: #FFCC63"></span>定向优惠发送</div>
+                <div style="text-indent: 16px;font-size: 14px; color: #606060">{{viewModel.pileeLabels["定向优惠"] | formantNumber }}</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sp-title-wrapper top5" ng-controller="topCtrl" >
+      <div style="overflow: hidden; min-height: 240px">
+        <h4 class="fastEnterTitle">TOP5 营销活动</h4>
+        <div my-select select-model="mm" select-change="changeSelect(mm)" no-change="!ajaxDone"  data='data' name="text" value="id"></div>
+        <table class="top-five-table">
+          <thead>
+          <tr>
+            <td class="text-left">活动ID</td>
+            <td class="text-left">活动名称</td>
+            <td>营销客人数</td><td>营销成功客人数</td>
+            <td>成功率</td><td>营销成本</td>
+            <td>营销收益</td>
+            <td>ROI</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="i in viewModel.topList">
+            <td class="text-left">{{i.campaignId}}</td>
+            <td class="text-left text-blue">
+              <a ng-click="toMarketing(i.campaignName,i.workflowId,i.campaignId)" href="javascript:;">{{i.campaignName}}</a>
+            </td>
+            <td>{{i.investmentNum}}</td>
+            <td>{{i.returnNum}}</td>
+            <td>{{i.convertSuccessRate}}</td>
+            <td>{{i.investmentPrice}}</td>
+            <td>{{i.returnPrice}}</td>
+            <td>{{i.convertRoi}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div ng-loading ng-hide="ajaxDone" style="height: 40px;"></div>
+      </div>
+    </div>
+  </div>
+</script>
+<script type="text/ng-template" id="templates/homepage/module/views/crmKpi.html">
+  <div class="main-contain" ng-controller="crmKpiCtrl" style="position:relative">
+    <section ng-mouseover="slideFlag = true" ng-mouseleave="slideFlag = false">
+      <header class="sp-title-wrapper" style="margin-bottom:2px;margin-top:15px">
+        <h4 class="fastEnterTitle" style="display:inline-block">CRM KPI</h4>
+        <div class="al_dropDown">
+            <span class="{{defaultPltType}}" ng-mouseover="hideSelect=false" >
+               <span  style="text-overflow: ellipsis;word-wrap: break-word;white-space: nowrap; padding-left: 0px;overflow: hidden;width: 100px;border: none">
+                   {{defaultShopName}}
+               </span>
+                <a></a>
+            </span>
+          <ul>
+            <li class="{{shop.pltType}}" title="{{shop.shopName}}" ng-repeat="shop in shops" ng-click="changeShopId($index)">{{shop.shopName}}</li>
+          </ul>
+        </div>
+        <div class="al_dropDown" style="margin-left:2px">
+            <span ng-mouseover="hideSelect=false" style="width:140px;padding-left:10px">
+               <span title="{{defaultCategorie.name}}"  style="text-overflow: ellipsis;word-wrap: break-word;white-space: nowrap; padding-left: 0px;overflow: hidden;width: 125px;border: none">
+                   {{defaultCategorie.name}}
+               </span>
+                <a></a>
+            </span>
+          <ul style="width:150px">
+            <li ng-repeat="cate in categories" title="{{cate.name}}" ng-click="changeCategorie($index)" style="padding-left:10px">{{cate.name}}</li>
+          </ul>
+        </div>
+        <span class="sp-new-data" style=" position:relative;top: -6px;" >
+          </em>最新统计：{{statisTime}}
+        </span>
+      </header>
+      <div class="sp-data-collection-wrapper" style="margin-left:24px">
+        <a ng-repeat="item in chartDisType" ng-class="{active:$index==index}" ng-click="changeChartDis($index, item)" href="javascript:void(0);" style="margin-right:4px">
+          {{item.name}}
+        </a>
+      </div>
+      <div class="main-content">
+        <div id="crmKpiChart" style="height: 200px;overflow: hidden;margin-right:15px;margin-left:15px"></div>
+        <div class="pieLabels" style="">
+          <ul>
+            <li style="display:inline;margin-right:10px">
+              <span style="margin-right:4px;display:inline-block;width:20px;height:3px;vertical-align:middle;background:#f07e80"></span>{{shopRateName}}
+            </li>
+            <li style="display:inline;margin-right:10px">
+              <span style="margin-right:4px;display:inline-block;width:20px;height:3px;vertical-align:middle;background:#39bbc4"></span>{{industryRateName}}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-page" ng-show="slideFlag">
+        <a ng-show="defaultChartType.name === '销售金额指标'" ng-click="changeChartDis(0)" class="slide-prev" href=""></a>
+        <a ng-show="defaultChartType.name === '复购率指标'" ng-click="changeChartDis(1)" class="slide-next" href=""></a>
+      </div>
+    </section>
+  </div>
+</script>

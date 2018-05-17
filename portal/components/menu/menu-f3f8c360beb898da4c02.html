@@ -1,0 +1,96 @@
+<div ng-cloak>
+  <div class="header clearfix">
+    <h1 class="fl"><a class="logo" href="#">数据赢家</a></h1>
+    <nav class="fl">
+      <ul class="nav fl">
+        <li ng-repeat="nav in $menuCtrl.user.nav" ui-sref-active="navCur" ng-switch="nav.id">
+          <span ng-switch-when="nav/callSystem">
+            <a href="{{nav.dataUrl}}" target="_blank" ng-bind="nav.name"></a>
+          </span>
+          <span ng-switch-default>
+            <a ui-sref="{{nav.url}}" ui-sref-opts="{reload:true}" ng-bind="nav.name"></a><i ng-if="nav.name === '联合营销' && unionMarketingNumberShow" class="icon-tipNumber" ng-bind="unionMarketingNumber"></i>
+          </span>
+        </li>
+      </ul>
+      <div class="more fl comboboxParent" style="display:none;">
+        <a href="javascript:void(0)">更多<i class="helloarrow"></i></a>
+        <ul class="combobox">
+          <li ng-repeat="nav in $menuCtrl.user.nav" ng-switch="nav.id" >
+            <a ng-switch-when="nav/callSystem" href="{{nav.dataUrl}}" target="_blank" ng-bind="nav.name"></a>
+            <a ng-switch-default ui-sref-active="navCur" ui-sref="{{nav.url}}" ui-sref-opts="{reload:true}" ng-bind="nav.name">{{nav.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="headerAside">
+      <span class="hello fr comboboxParent">
+          <b>
+              <a href="javascript:void(0)" ng-bind="$menuCtrl.user.name"><i class="helloarrow"></i></a>
+              <ul class="combobox">
+                  <!--<li><a href="{{userDoUrl}}" target="_blank">账户管理</a></li>-->
+                  <!--<li><a href="javascript:void(0)" ng-click="$menuCtrl.changePassword()">修改密码</a></li>-->
+                  <li><a href="javascript:void(0)" ng-click="$menuCtrl.logout()">退&nbsp;&nbsp;出</a></li>
+              </ul>
+          </b>
+      </span>
+      <span title="联系我们" class="contactus comboboxParent othSpan">
+          <b>
+              <a href="javascript:void(0)"></a>
+              <ul class="combobox" style="width:160px">
+                  <li><a target="_blank" href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&key=XzgwMDAxNjE3N18yNDMzNjRfODAwMDE2MTc3XzJf">QQ客服</a></li>
+                  <li><a target="_blank" href="http://www.taobao.com/webww/ww.php?ver=3&amp;touid=%E6%95%B0%E6%8D%AE%E8%B5%A2%E5%AE%B6&amp;siteid=cntaobao&amp;status=1&amp;charset=utf-8">旺旺客服</a></li>
+                  <li><a href="javascript:void(0)">客服电话：4000270163</a></li>
+                  <li><a href="javascript:void(0)">投诉专线：4000270163-3</a></li>
+              </ul>
+          </b>
+      </span>
+      <span title="账户管理" class="seeContact">
+          <b>
+              <a href="{{$menuCtrl.accountLink}}" target="_blank"></a>
+          </b>
+      </span>
+      <span title="系统消息" class="sysInfo">
+          <b>
+              <a  href="javascript:void(0)" ng-click="$menuCtrl.showMoreMessageDialog()"><div id="newsTrue" ng-show="$menuCtrl.newsTrue"></div></a>
+          </b>
+      </span>
+      <span title="帮助" class="help comboboxParent othSpan" ng-show="!$menuCtrl.SSOlinkyes">
+          <b>
+              <a href="javascript:void(0)"></a>
+              <ul class="combobox">
+                  <li title="帮助网站"><a style="cursor: pointer" href="http://help.datawinner.cn/help/category/sjyj-basis" target="_blank">帮助网站</a></li>
+                  <!--li><a href="http://elearning.shuyun.com" target="_blank">在线培训</a></li-->
+              </ul>
+          </b>
+      </span>
+      <span title="帮助" class="help comboboxParent  othSpan" ng-show="$menuCtrl.SSOlinkyes">
+          <b>
+              <a href="javascript:void(0)"></a>
+              <ul class="combobox">
+                  <li title="帮助网站"><a style="cursor: pointer" href="http://help.datawinner.cn/help/category/sjyj-basis" target="_blank">帮助网站</a></li>
+                  <!--li><a href="http://elearning.shuyun.com" target="_blank">在线培训</a></li>
+                  <!-- <li><a href="{{$menuCtrl.SSOlink}}" target="_blank">登陆老版本</a></li> -->
+              </ul>
+          </b>
+      </span>
+    </div>
+  </div>
+  <!-- begin 添加联系人信息-->
+  <div class="addPerInfoMark" ng-show="$menuCtrl.addPerInfoFlag">
+    <a class="cancleAddInfo" href="javascript:void(0)" title="关闭" ng-click="$menuCtrl.cancelAddInfo()">ⅹ</a>
+    <p>您还没有添加联系人信息，<a class="viewAddPerPop" href="javascript:void(0)" title="立即添加" ng-click="$menuCtrl.viewAddPerPop()">立即添加</a>
+    </p>
+  </div>
+  <!--end 添加联系人信息-->
+  <script type="text/javascript" src="http://g.tbcdn.cn/sj/securesdk/0.0.3/securesdk_v2.js" id="J_secure_sdk_v2" data-appkey="12283535"></script>
+</div>
+<div class="contractWarn" ng-if="$menuCtrl.isExpire">
+    <div class="contractWarnContainer">
+        <div class="warnContainerWrap">
+            <div>
+                <p>合同已到期</p>
+            </div>
+        </div>
+    </div>
+    <div class="mask"></div>
+</div>

@@ -1,0 +1,139 @@
+@charset "utf-8";
+/* CSS Document */
+.blacklistCon {
+  position: absolute;
+  top: 99px;
+  right: 15px;
+  bottom: 0;
+  left: 20px;
+  border-top: 1px solid #33B5E5;
+}
+
+#mobileContent {
+  position: absolute;
+  background: #fff;
+  top: 7px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  z-index: 2;
+}
+
+#mobileContent h2 {
+  margin: 16px 20px 20px;
+}
+
+#mobileContent .box {
+  margin: 0 20px;
+  border: 1px solid #EEE;
+  padding: 15px 100px 45px 65px;
+  background: #f9f9f9;
+}
+
+#mobileContent .box label {
+  display: inline-block;
+  vertical-align: middle;
+  width: 70px;
+  color: #999999;
+  font-size: 14px;
+}
+
+#mobileContent .box .error {
+  color: red;
+  margin-left: 5px;
+}
+
+#mobileContent .borderHighlight {
+  width: 210px;
+}
+
+#mobileContent .addBtn {
+  margin-left: 9px;
+}
+
+#mobileContent .mobileList {
+  margin-top: 6px;
+}
+
+#mobileContent .mobileList li {
+  margin-bottom: 6px;
+  overflow: hidden;
+  padding-left: 77px;
+}
+
+#mobileContent .mobileList .line {
+  background: #ebebeb;
+  padding: 2px 37px 2px  2px;
+  float: left;
+  position: relative;
+}
+
+#mobileContent .mobileList .line .borderHighlight {
+  margin-left: 0;
+}
+
+#mobileContent .mobileList .delline {
+  display: block;
+  width: 14px;
+  height: 25px;
+  background: url(../../images/close_1.png) no-repeat 0 0;
+  position: absolute;
+  right: 11px;
+  top: 2px;
+  cursor: pointer;
+}
+
+#mobileContent .box  .mobileList .tips {
+  position: absolute;
+  left: 260px;
+  top: 5px;
+  width: 400px;
+}
+
+#mobileContent .mb {
+  margin: 20px 0 0 160px;
+}
+
+#mobileContent .tips {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.blacklistCon .mt {
+  margin: 5px 0;
+  text-align: right;
+}
+
+.blacklistCon .mc {
+  position: absolute;
+  top: 33px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.blacklistCon .hdSearch {
+  padding: 2px;
+  background: none;
+  border: 1px solid #ccc;
+}
+
+.blacklistCon .inputTips {
+  font-family: "微软雅黑";
+  position: absolute;
+  right: 77px;
+  z-index: -1;
+  top: 7px;
+}
+
+input.error,select.error {
+  border-color: red !important;
+}
+
+label.error {
+  color: red;
+  margin-left: 6px;
+  line-height: 25px;
+}
+

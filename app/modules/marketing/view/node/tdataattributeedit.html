@@ -1,0 +1,148 @@
+<div ng-controller="attributeEditNodeCtrl">
+  <div class="commWrapFour commNodeMarkRelative">
+    <div class="bannerCommStyle areaHeight26" ng-show="attributeTips">
+      {{attributeTips}}
+      <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+    </div>
+    <div class="attributesNode clearfix">
+      <table>
+        <tbody>
+        <tr>
+          <th class="tr" width="18%"><label>节点名称：</label></th>
+          <td>
+            <div class="pr">
+              <input type="text" class="borderHighlight nameInput fl" maxlength="20" ng-model="attributeEditNode.name" ng-noderequire="" />
+              <span nodetip=""></span>
+            </div>
+          </td>
+          <td><label class="mr40 fr">节点代码：{{attributeEditNode.id}}</label></td>
+        </tr>
+        <tr>
+          <th class="tr"><label>客户标签目录：</label></th>
+          <td>
+            <div style="position: relative; margin-left: 9px;">
+                <new-tree-api
+                model="attributeEditNode.catalogId"
+                mapping="{valueField: 'id', displayField: 'name'}"
+                id="tags-ztree-api"
+                api-id="tags-ztree-api"
+                ng-if="loadAttributes"
+                class="dropdown-select-tree" 
+                search-placeholder="--请选择标签目录--" 
+                no-record-text="--没有查询到符合条件的数据--"
+                is-search="true" 
+                is-type="select">
+                <div id="tags-ztree"
+                      class="ztree tree-directory"
+                      new-tree
+                      operation-call-back="selectCatalogId(treeId, treeNode, type)"
+                      children-key="childrenCatalogs"
+                      is-operate="false"
+                      is-expand="false"
+                      load-tree-data="loadTreeData()">
+                </div>
+              </new-tree-api>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <th class="tr"><label>选择客户标签：</label></th>
+          <td class="customerLabel">
+            <cc-dropdown-select
+              ng-if="loadAttributes"
+              style="margin-left: 9px;"
+              placeholder="--请选择客户标签--"
+              model="attributeEditNode.propertyId"
+              searchable="true"
+              datalist="nodeAttributes"
+              mapping="{valueField: 'propertyId', displayField: 'name'}"
+              on-select-change="clearValue(model, oldModel)">
+            </cc-dropdown-select>
+            <!-- <select class="v2 borderHighlight" ng-class="{error:isEmptyValue}" ng-change="clearValue()" ng-model="CurAttributesData" ng-options="nodeAttribute.name for nodeAttribute in nodeAttributes"></select> -->
+            <label class="error ml5" ng-show="isEmptyValue">请选择客户标签</label>
+            <label class="error ml5" ng-show="attrIsEnabled">当前节点配置的标签已被删除</label>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <th class="tr"><label>标签类型：</label></th>
+          <td style="position: relative" class="tagType">
+            <cc-dropdown-select
+              ng-if="loadAttributes"
+              style="margin-left: 9px;"
+              model="CurAttributesData.type" 
+              datalist="nodeAttributesMaps"
+              mapping="{valueField: 'id', displayField: 'name'}">
+            </cc-dropdown-select>
+            <div style="left: 15px;
+                    position: absolute;
+                    width: 208px;
+                    height: 30px;
+                    top: 10px;
+                    background-color: #d9d9d9;
+                    opacity: 0.4;"></div>
+            <!-- <select class="v2 borderHighlight" ng-model="CurAttributesData.type" disabled="" ng-options="val.id as val.name for val in nodeAttributesMaps"> -->
+              <!-- <option value="number:0">字符单选</option>
+              <option value="number:1">字符输入</option>
+              <option value="number:2">数字选择</option>
+              <option value="number:3">数字输入</option>
+              <option value="number:4">日期选择</option> -->
+            <!-- </select> -->
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <th class="tr"><label>标签值修改方式：</label></th>
+          <td>
+            <input type="radio" value="0" ng-model="attributeEditNode.needDel" class="commRadio v1 ng-pristine ng-valid" />更新标签值
+            <input type="radio" value="1" ng-model="attributeEditNode.needDel" class="commRadio v1 ng-pristine ng-valid" />清空原有标签值
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <div ng-hide="attributeEditNode.needDel!=0">
+              <div ng-show="CurAttributesData.type!=3">
+                <span style="margin-left:9px;">设置新值:</span>
+                <!-- 字符单选 type为0 -->
+                <select ng-hide="CurAttributesData.type!=0" ng-model="CurAttributesDataCharSelsNewValue" class="borderHighlight node_waitdate_input" ng-options="b as b.charValue for b in CurAttributesDataCharSels"></select>
+                <!-- 字符输入 type为1 -->
+                <input type="text" ng-hide="CurAttributesData.type!=1" ng-model="attributeEditNode.newValue" input_normal_name="" class="borderHighlight node_waitdate_input" />
+                <!-- 日期选择/输入 type为4 -->
+                <input type="text" ng-model="attributeEditNode.newValue" ng-hide="CurAttributesData.type!=4" class="borderHighlight node_waitdate_input datetimepicker" date-picker="" readonly="true" />
+                <!-- 数字选择 type为2 -->
+                <select class="v2 borderHighlight" ng-hide="CurAttributesData.type!=2" ng-model="CurAttributesDataNumSelsNewValue" ng-options="a as a.numValue for a in CurAttributesDataNumSels"></select>
+              </div>
+              <!-- 数字输入 type为3 -->
+              <div ng-hide="CurAttributesData.type!=3">
+                <div class="m35">
+                  <input type="radio" value="1" ng-model="attributeEditNode.isNew" ng-click="attributeEditNode.targetValue=''" class="commRadio v1 ng-pristine ng-valid" />设置新值
+                  <input type="text" ng-model="attributeEditNode.newValue" class="borderHighlight node_waitdate_input" ng-disabled="attributeEditNode.isNew!=1" ng-number-point-second="2" min="0" max="999999999.99" />
+                </div>
+                <div class="m35">
+                  <input type="radio" value="0" ng-model="attributeEditNode.isNew" class="commRadio v1 ng-pristine ng-valid" />加减值
+                  <select class="v2 borderHighlight" ng-disabled="attributeEditNode.isNew!=0" ng-model="attributeEditNode.operator" disabled="attributeEditNode.isNew!=0">
+                    <option value="0">增加+</option>
+                    <option value="1">减少－</option>
+                  </select>
+                  <input type="text" ng-model="attributeEditNode.targetValue" ng-number-point-second="2" min="0" max="999999999.99" ng-disabled="attributeEditNode.isNew!=0" class="borderHighlight node_waitdate_input" />
+                </div>
+              </div>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="ling_di mt10 clearfix"></div>
+  <div class="commBottom clearfix">
+    <div class="mb">
+      <button class="btn btnBlue" id="marketSure" ng-click="checkNodeAttributes()">确定</button>
+      <button class="btn" id="marketCancel" ng-close-window="">取消</button>
+    </div>
+  </div>
+</div>

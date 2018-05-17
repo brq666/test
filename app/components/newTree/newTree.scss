@@ -1,0 +1,126 @@
+.new-tree {
+    display: flex;
+    flex-flow: column;
+    overflow-y: hidden;
+    .serch-box {
+        height: 28px;
+        margin: 16px 7px 16px 5px;
+        position: relative;
+        & > input {
+            width: 166px;
+            height: 100%;
+            padding: 0 25px 0 5px;
+        }
+        .icon-search {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            color: #d8d8d8;
+        }
+    }
+    .tree-box {
+        margin-left: 5px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        .tree-directory {
+            margin-bottom: 120px;
+            li[treenode] {
+                position: relative;
+                a[treenode_a] {
+                    position: relative;
+                    &:hover {
+                        background-color: transparent;
+                    }
+                    &.curSelectedNode{
+                        background-color: #f1f1f1;
+                        color: #333333;
+                    }
+                    span.button.center_close, span.button.bottom_close{
+                        background-position: 4px -50px!important;
+                    }
+                    span.button.center_open, span.button.bottom_open {
+                        background-position: 4px 10px!important;
+                    }
+                }
+                i {
+                    font-size: 12px;
+                    position: absolute;
+                    right: 0px;
+                    &.icon-ep-tree-more {
+                        transform: scale(0.7) rotate(0deg);
+                        margin-right: 35px;
+                    }
+                    &.icon-add {
+                        margin-right: 25px;
+                    }
+                }
+                ul.diyMenu {
+                    padding: 13px 0px;
+                    top: 20px;
+                    border:1px solid #ededed;
+                    box-shadow:0 2px 4px 0 rgba(0,0,0,0.13);
+                    border-radius:2px;
+                    background-color: #fff;
+                    position: absolute;
+                    right: 4px;
+                    z-index: 100;
+                    width: 90px;
+                    li {
+                        padding-left: 13px;
+                        &:hover {
+                            cursor: pointer;
+                            background-color: #00aaf1;
+                            color: #fff;
+                        }
+                    }
+                }
+                div.diyDialog {
+                    left: 14px;
+                    top: 26px;
+                    z-index: 100;
+                    position: absolute;
+                    width: 180px;
+                    background-color: #fff;
+                    border:1px solid #ededed;
+                    box-shadow:0 2px 4px 0 rgba(0,0,0,0.13);
+                    border-radius:2px;
+                    .dheader {
+                        span {
+                            line-height: 41px;
+                            margin-left: 13px;
+                        }
+                    }
+                    .dbody {
+                        input {
+                            height: 22px;
+                            width: 150px;
+                            margin: 0 13px;
+                        }
+                    }
+                    .dfooter {
+                        padding: 8px 13px;
+                        text-align: left;
+                        .btn-ok {
+                            background:#00aaf1;
+                            border-radius:2px;
+                            width:54px;
+                            height:24px;
+                            min-width: 54px;
+                        }
+                        .btn-cancel {
+                            margin-left: 13px;
+                            border-radius:2px;
+                            width:54px;
+                            height:24px;
+                            min-width: 54px;
+                        }
+                    }
+                }
+            }
+        }
+        .no-record {
+            color: #999999;
+            text-align: center;
+        }
+    }
+}

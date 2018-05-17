@@ -1,0 +1,45 @@
+<!-- <div  ng-controller="customAttributeValue">
+  <div class="gridCommCursom clearfix">
+    <div class="commSearch" style="margin-left:0px">
+      <label class="default_color" ng-data-grid-search>客户ID</label>
+      <input class="commSearchVal" type="text" ng-model="searchAttrVal" ng-data-grid-search="attr" name="couponName">
+      <button class="commSearchBtn" ng-click="customObj.searchButtonClick('','othFlag')"></button>
+    </div>
+    <div class="commSearch" style="margin-right:-10px">
+        <input class="borderHighlight width130" ng-model="typechoose" style="width: 200px;color:#C5C5C5;" type="text"  readonly="readonly"  ng-click="customObj.addButtonClick()" />
+        <a class="optionModule2 location2" ng-click="customObj.addButtonClick()" style="top: -2px;left: -23px;" href="javascript:void(0);"></a>
+    </div>
+  </div>
+ <div class="showConfigAttr gridCommLayout commOverflowXAuto">
+    <div class="hidde">
+      <p>您还没有选择客户标签</p>
+    </div>
+    <div id="configAttrGrid"></div>
+ </div>
+</div> -->
+
+<div class="maincontainer marketActivity-page" style="left:0px;">
+  <header class="hearder-box" style="box-shadow: none;">
+    <h2>双11</h2>
+    <i class="iconfont icon-close" style="line-height: 50px;font-size: 20px;margin-left: 300px;" ng-click="customAttributeValueShow = !customAttributeValueShow"></i>
+  </header>
+  <section class="market-activity-box" style="margin: 20px 0;border: none;border-top: 1px solid #e4e6eb;">
+    <div class="details-box" style="padding: 16px 10px;">
+      <div style="height: 30px"></div>
+      <div class="details-list-box">
+        <div class="market-list-box">
+          <div class="serch-box">
+            <input type="text" ng-model="searchAttrVal" placeholder="客户ID" ng-keyup="customObj.searchButtonClick($event,'othFlag')">
+            <i class="iconfont icon-search" ng-click="customObj.searchButtonClick('','othFlag')"></i>
+          </div>
+          <div class="grid-box couponListssBox" style="height: 100%">
+            <cc-grid opts="configAttrGridOpts"></cc-grid>
+            <!-- <div class="loading-box" ng-if="!$ctrl.isRefeshGrid">
+                  <cc-loading type="layer">请耐心等待</cc-loading>
+                </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

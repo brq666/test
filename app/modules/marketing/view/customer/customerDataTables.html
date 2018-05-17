@@ -1,0 +1,21 @@
+﻿
+<div ng-controller="customerDataTablesCtrl">
+  <div class="gridCommCursom clearfix">
+    <div class="smalldarkerblueBtn newbuildBtn"><a ng-click="marketList.backViewGroup()" href="javascript:void(0)">返回</a></div>
+    <div class="commSearch">
+      <label class="default_color" ng-searcheffect>客户ID/电话/email</label>
+      <input class="commSearchVal" type="text" ng-model="hdValue" ng-searcheffect name="couponName">
+      <button class="commSearchBtn" ng-click="customerDataTablesObj.searchButtonClick(hdValue)"></button>
+    </div>
+  </div>
+  <div class="commGridButtomLayout">
+    <span class="mr35">客人数：<em class="orange bold">{{customerDataTablesObj.sumNumber}}</em>人</span>
+      <span>最后刷新时间：{{customerDataTablesObj.updateTime}}</span>
+  </div>
+  <div class="customerDataTables gridCommLayout">
+    <div id="customerDataGrid"></div>
+  </div>
+  <div ng-include src="customerDataTablesObj.modelSrc"></div>
+</div>
+<!--
+<script type="text/javascript" src="controller/customer/customerDataTables.js"></script>-->

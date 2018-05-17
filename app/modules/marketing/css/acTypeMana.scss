@@ -1,0 +1,162 @@
+ .add_blue_btn {
+  background: url(../../images/addBtn.png) no-repeat;
+}
+
+ .ac_type_back_btn {
+  position: absolute;
+  top: 15px;
+  left: 160px;
+  color: #299fd4;
+}
+
+ .ac_type_back_btn:hover {
+  text-decoration: none
+}
+
+ .ac_type_wrap {
+  margin: 22px 0px 20px 0px;
+}
+
+.ac_type_input {
+  width: 225px;
+  height: 22px;
+}
+
+.ac-type-item {
+  height: 20px;
+  line-height: 20px;
+  padding: 8px 50px 8px 8px;
+  display: inline-block;
+  margin-right: 25px;
+  margin-bottom: 20px;
+  background: #FAFAFA;
+  position: relative;
+  &:hover {
+    background: #f7fbfe;
+    color: #299fd4;
+  }
+}
+
+.ac_type_span {
+  display: inline-block;
+  width: 120px;
+}
+
+.ac_type_select {
+  position: absolute;
+  right: 35px;
+  top: 60px;
+}
+
+ .ac_type_select .ac_type_selecor {
+  line-height: 20px;
+  height: 20px;
+  display: inline-block;
+  padding-right: 18px;
+  padding-left: 6px;
+  background-color: #FFF;
+  cursor: pointer;
+  left: 0;
+  z-index: 800;
+  border-bottom: 0;
+  border: 1px solid #D9D9D9;
+}
+
+ .ac_type_select .ac_type_selecor > a {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url("../../images/ac_status.png") no-repeat 2px -237px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+ .ac_type_select  .select_wrap {
+  left: 0px;
+  position: absolute;
+  z-index: 700;
+  background-color: #fff;
+  width: 48px;
+  margin-top: -1px;
+  border: 1px solid #D9D9D9;
+  border-top: 0;
+}
+
+ .ac_type_select .select_item {
+  padding-left: 6px;
+}
+
+ .ac_type_select select {
+  border: 0;
+}
+
+ .ac_type_item_icon {
+  background: url(../../images/market_type.png) no-repeat;
+}
+
+
+ .ac-type-item:hover .ac-type-icon {
+  display: inline-block;
+}
+
+ .ac_type_text {
+  padding-right: 80px;
+}
+
+ .ac-type-icon {
+  position: absolute;
+  top: 8px;
+  display: none;
+  width: 20px;
+  height: 20px;
+  background: url(../../images/market_type.png) no-repeat;
+}
+
+ .ac_type_enable {
+  background: #f7fbfe;
+  color: #0083ba;
+}
+
+ .ac_type_enable:hover {
+  background: #edf4fa;
+}
+
+ .ac_type_disable {
+  background: #fafafa;
+  color: #8b8b8b;
+}
+
+ .ac_type_disable:hover {
+  background: #edf4fa;
+  color: #8b8b8b;
+}
+
+ .error {
+  margin-left: 20px;
+  color: red;
+}
+
+ .ac-type-enable .change-type {
+  right: 26px;
+  background-position: 3px -167px;
+  &:hover {
+    background-position: 3px -134px;
+  }
+}
+
+.ac_type_disable .change_type {
+  right: 26px;
+  background-position: 3px -38px;
+  &:hover {
+    background-position: 3px 2px;
+  }
+}
+
+.ac-type-remove {
+  right: 7px;
+  background-position: 5px -67px;
+  &:hover {
+    background-position: 5px -98px;
+  }
+}

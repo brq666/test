@@ -1,0 +1,90 @@
+﻿<!--<script type="text/javascript" src="controller/node/tfiltersplit.js"></script>-->
+<div ng-controller="splitNodeCtrl">
+  <div id="nodesplit" class="commNodeMarkRelative" ng-class="node_class">
+    <div class="bannerCommStyle areaHeight26" ng-show="splitRemark">
+      {{splitRemark}}
+      <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+    </div>
+    <div class="m30 clearfix">
+      <table>
+        <tbody>
+        <tr>
+          <th class="tr" width="8%"><label class="node_name_label">节点名称：</label></th>
+          <td>
+            <div class="pr">
+              <input type="text" class="borderHighlight nameInput fl" ng-model="splitName" maxlength="20" ng-noderequire="" />
+              <span nodetip=""></span>
+            </div></td>
+          <td><label class="fr code">节点代码：{{splitNodeId}}</label></td>
+        </tr>
+        </tbody>
+      </table>
+      <!--div class="fl">
+        <label class="node_name_label">节点名称：</label>
+        <input type="text" class="borderHighlight nameInput" ng-model="splitName" maxlength="20" ng-noderequire>
+      </div-->
+      <!--span nodetip></span>
+      <label class="fr code">节点代码：{{splitNodeId}}</label-->
+    </div>
+    <div class="splitContent">
+      <div class="tabType">
+        拆分方式：
+        <a href="javascript:void(0);" ng-class="getCurrentClass('RANDOM')">随机拆分</a>
+        <!--a href="javascript:void(0);" ng-class="getCurrentClass('order')">排序拆分</a>
+        <a href="javascript:void(0);" ng-class="getCurrentClass('feature')">属性拆分</a-->
+      </div>
+      <form id="splitForm">
+        <div class="tabContent" ng-switch="" on="splitType">
+          <div class="item randomSplit" ng-switch-when="RANDOM">
+            <table class="combination_table">
+              <thead>
+              <tr>
+                <th>编号</th>
+                <th>拆分组名称</th>
+                <th>占比<span class="equalSignBtn ml5 verticalAlign3" ng-click="randomSplit.equalSplit()" title="等人数拆分"></span></th>
+                <th width="134px">操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td colspan="4">
+                  <div class="overflowStyle">
+                    <table>
+                      <tbody>
+                      <tr ng-repeat="group in randomSplit.partPercentage">
+                        <td style="width:94px;">{{$index+1}}</td>
+                        <td style="width:232px;"><input type="text" class="borderHighlight w80 required" ng-model="group.name" name="name{{$index+1}}" maxlength="12"/></td>
+                        <td style="width:317px;"><input type="text" class="borderHighlight w50 required" ng-num="2" min="1" max="100" ng-model="group.percentage" name="percentage{{$index+1}}" />&nbsp;%</td>
+                        <td style="width:135px;">
+                          <a style="margin-left:24px" ng-click="randomSplit.del($index)" class="del" title="删除" href="javascript:void(0);"></a>
+                          <a ng-click="randomSplit.add($index)" class="add" ng-class="randomSplit.toggleKey($index)" title="添加" href="javascript:void(0);"></a>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div> </td>
+              </tr>
+              <tr class="total">
+                <td>合计</td>
+                <td>&nbsp;</td>
+                <td><input type="text" class="borderHighlight w50" count-total="" ng-model="percentageTotal" readonly="readonly" id="randomTotal" />&nbsp;%</td>
+                <td>&nbsp;</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="item orderSplit" ng-switch-when="order"></div>
+          <div class="item featureSplit" ng-switch-when="feature"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="ling_di mt10 clearfix"></div>
+  <div class="commBottom clearfix">
+    <div class="mb">
+      <label class="error ml5 ng-binding" style="" ng-show="splitGroupNameMatchFalg">拆分组名称不能相同</label>
+      <button ng-click="splitSmt()" class="btn btnBlue splitSmtButton" type="button">确定</button>
+      <button ng-close-window="" class="btn">取消</button>
+    </div>
+  </div>
+</div>

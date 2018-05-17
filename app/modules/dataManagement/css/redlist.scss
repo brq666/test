@@ -1,0 +1,299 @@
+@charset "utf-8";
+/*分组滚动栏*/
+.sign_flow {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 250px
+}
+
+.selectFontsClass li span {
+  text-overflow: ellipsis;
+  /*让截断的文字显示为点点。还有一个值是clip意思是截断不显示点点*/
+  white-space: nowrap;
+  /*让文字不换行*/
+  overflow: hidden;
+}
+
+.select_wrap {
+  position: absolute;
+  z-index: 700;
+  background-color: #fff;
+  width: 130px;
+  margin-top: -2px;
+  border: 1px solid #D9D9D9;
+  text-overflow: ellipsis;
+}
+
+.grid .gridCommCursom {
+  float: left;
+}
+
+.grid .gridCommCursom a {
+  color: #999999;
+  display: inline-block;
+  width: 60px;
+  text-align: center;
+}
+
+.grid .gridCommCursom a:hover {
+  text-decoration: no-underline
+}
+
+.commSelectPlatAndGroup {
+  display: inline-block;
+  position: absolute;
+  right: 230px;
+  margin-top: 5px
+}
+
+.commSelectPlatAndGroup .commSelect {
+  border: 1px solid #d9d9d9;
+  height: 24px;
+  padding: 0px;
+  background-color: transparent;
+  margin-left: 0px
+}
+
+.divrest {
+  display: inline-block;
+}
+
+.divrest  a {
+  color: #00AAF1;
+}
+
+.cloneCheckbox {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.commSelect {
+  margin-left: 9px
+}
+
+.couponListssBox  .commSelect {
+  border: none;
+  background-color: transparent;
+  margin-left: 0px
+}
+
+.type_selector .select_item {
+  padding-left: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
+.commSearch {
+  float: right;
+  margin-right: 4px;
+  /* margin-left: 36px; */
+}
+
+/*t*/
+/* CSS Document */
+/*自定义属性 start*/
+.commTextarea {
+  width: 200px
+}
+
+.settingAttributes {
+  display: none;
+}
+
+.settingAttributes .ccmsPublicPopMain {
+  padding: 0;
+}
+
+.configAttrBox {
+  padding: 15px;
+}
+
+.configAttrBox ul {
+  margin: 10px 0 0 0;
+}
+
+.configAttrBox li {
+  margin-bottom: 10px;
+}
+
+.configAttrBox .relativeLi {
+  position: relative;
+}
+
+.selectValuesPop {
+  position: absolute;
+  right: -71px;
+  background: #F8F8F8;
+  border: 1px solid #D4D4D4;
+  padding: 8px;
+  width: 300px;
+  z-index: 100;
+}
+
+/*自定义属性 end*/
+.selectFontsClass ul {
+  margin: 10px
+}
+
+.error {
+  margin-left: 10px
+}
+
+.grid .commSearch .commSearchVal {
+  width: 180px;
+  padding: 2px;
+}
+
+.grid .gridCommLayout {
+  top: 30px
+}
+
+input.red_border {
+  border-color: red
+}
+
+.commLabelWidth80 {
+  width: 80px;
+  text-align: left;
+  display: inline-block;
+}
+
+.queryShopsPop .configAttrBox input[type="radio"] {
+  margin-left: 7px
+}
+
+/*活动类型的选择框*/
+.type_selector_checkBox {
+  position: relative;
+  display: inline-block;
+  line-height: 21px;
+}
+
+.type_selector_checkBox span {
+  display: inline-block
+}
+
+.type_selector_checkBox .select_item_checkBox {
+  height: 20px;
+  text-align: left;
+  line-height: 20px;
+  padding-left: 0px;
+  width: 60px;
+}
+
+.select_wrap_checkBox li:hover {
+  background-color: #808080;
+  color: #000;
+}
+
+.select_wrap_checkBox {
+  position: absolute;
+  z-index: 700;
+  background-color: #fff;
+  width: 60px;
+  margin-top: -50px;
+  border: 1px solid #D9D9D9;
+  margin-left: 20px
+}
+
+.ac_status_selector_checkbox {
+  display: inline-block;
+}
+
+/*.ac_status.ac_status_selector{line-height:20px;height: 20px;display: inline-block;padding-right: 18px;border: 1px solid #FFF;padding-left: 26px;background-color: transparent;cursor: pointer;}*/
+.ac_status_selector_checkbox a {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url("../../images/ac_status.png") no-repeat 2px -237px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+/*鼠標移動到選擇框上面*/
+.ac_status_selector_checkbox_hover {
+}
+
+.addred_li {
+  margin-top: 4px;
+}
+
+.addred_input_width {
+  width: 195px;
+}
+
+.redListadd_show {
+  position: absolute;
+  background: #FCF8F8;
+  margin-top: 3px;
+  width: 292px;
+  margin-left: 76px;
+  border: 1px solid #E9E9E9;
+  z-index: 1000;
+}
+
+label.ml110 {
+  margin-left: 110px;
+}
+
+.fenzu {
+  background: url(../../images/edit_delete.png) no-repeat 1px -1px rgb(250, 250, 253);
+  height: 13px;
+  width: 15px;
+  position: relative;
+  left: -21px;
+  top: 3px;
+  display: inline-block;
+}
+
+/*文件上传*/
+.uploadify-queue {
+  display: inline-block;
+  background-color: transparent;
+}
+
+.uploadify-queue-item {
+  border-radius: 3px;
+  font: 11px Verdana, Geneva, sans-serif;
+  margin-top: 0px;
+  max-width: 350px;
+  padding: 0px;
+  display: inline-block;
+  width: 200px
+}
+
+.uploadify-error {
+  background-color: #FDE5DD !important;
+}
+
+.uploadify-queue-item .cancel a {
+  float: right;
+  height: 16px;
+  text-indent: -9999px;
+  width: 16px;
+}
+
+.uploadify-queue-item a {
+  color: #00AAF1
+}
+
+.uploadify-queue-item.completed {
+  background-color: transparent;
+}
+
+.uploadify-queue {
+  margin-bottom: 0px;
+}
+
+.grid .commSearch .commSearchBtn {
+  /* background:url("../../images/search.png") no-repeat scroll center center; */ /* border: medium none; */
+  cursor: pointer;
+  height: 24px;
+  position: absolute;
+  right: 25px;
+  top: 1px;
+  width: 28px;
+  z-index: 100;
+}

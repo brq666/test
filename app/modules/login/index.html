@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wb="https://open.weibo.com/wb" ng-app="loginApp" ng-cloak>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script type="text/javascript">
+  /*
+  * create method addTag为生成css和js增加root变量,root变量目的是解决后端与前端文件夹结构不一样
+  */
+
+  var root = "",rootStatic="/";
+  var rootModule = (location.pathname.indexOf('app/modules') != -1) ? '/app' : '/ccms';
+  </script>
+
+  <!-- build:css ../../css/shuyun.lib.css -->
+  <link class="usemin" type="text/css" rel="stylesheet" href="../../../ccms/css/shuyun.lib.css" />
+  <!-- endbuild -->
+
+  <!-- build:css ../../css/login/login.css -->
+  <link class="usemin" type="text/css" rel="stylesheet" href="../../../ccms/css/login/login.css" />
+  <!-- endbuild -->
+
+  <title>登录数据赢家</title>
+</head>
+
+<body ng-controller="loginCtrl">
+  <div class="header">
+    <div class="w1000 header-container">
+      <h1 id="logo"><a href="javascript:void(0)" title="数据赢家 您的营销管理专家"><img src="../../images/logo.png" width="194" height="54" /></a></h1>
+        <div class="weiboFollow"><!--<wb:follow-button uid="2230485285" type="red_2" width="136" height="24" ></wb:follow-button>--></div>
+        <div class="headerMenu">
+          <a class="contactUs" href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&key=XzgwMDAxNjE3N18yNDMzNjRfODAwMDE2MTc3XzJf" target="_blank" title="联系我们">联系我们</a>
+            <!--<em><img src="images/fontLine.jpg" width="30" height="13" /></em>-->
+        </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="w1000 clearfix login-wrapper">
+      <!-- <div class="loginBox">
+        <form id="shuyunLogin">
+            <div class="userName loginInputWrapper">
+              <input class="borderHighlight" type="text" ng-disabled="!defaultClassVal || isTopBar" name="name" placeholder="账号" ng-model="userName" ng-input-focus />
+                <i></i>
+            </div>
+            <div class="userPassWord loginInputWrapper">
+              <input class="borderHighlight" type="password" name="password" placeholder="密码" ng-model="userPassWord" ng-input-focus />
+                <i></i>
+            </div>
+            <div class="record">label><input type="checkbox" />记住我</label</div>
+            <div class="errorMark" ng-hide="!errorMarkFlag"><div></div><span ng-bind="errorContent"></span></div>
+            <div class="subBtn"><a href="javascript:void(0)" ng-click="loginMethod()" ng-bind="loginPlatName"></a></div>
+          </form>
+          <ul class="platChose clearfix">
+            <li ng-show="canLoginSys" ng-class={topBar:defaultClassVal,bottomBar:!defaultClassVal} title="登录管理平台" ng-click="chosePlatVal($event)">登录管理平台</li>
+            <li class="bottomBar" ng-class={topBar:!defaultClassVal,bottomBar:defaultClassVal,mt60:isTopBar,mt20:!isTopBar} title="{{bottomPlatName}}"  ng-click="chosePlatVal($event)" ng-bind="bottomPlatName"></li>
+          </ul>
+      </div> -->
+      <p id="maskone" ng-click="chosePlatVal($event)">登录管理平台</p>
+      <p id="masktwo" ng-click="chosePlatVal($event)">登录营销系统</p>
+      <div class="loginBoxBg3 boxfront">
+        <p class="mar">登录营销系统</p>
+        <div class="loginBox">
+          <form id="shuyunLogin">
+            <div class="userName loginInputWrapper">
+              <input class="borderHighlight" type="text" ng-disabled="!defaultClassVal || isTopBar" name="name" placeholder="账号" ng-model="userName" ng-input-focus />
+                <i></i>
+            </div>
+            <div class="userPassWord loginInputWrapper">
+              <input class="borderHighlight" type="password" name="password" placeholder="密码" ng-model="userPassWord" ng-input-focus />
+                <i></i>
+            </div>
+            <div class="record"><!--label><input type="checkbox" />记住我</label--></div>
+            <div class="errorMark" ng-hide="!errorMarkFlag"><div></div><span ng-bind="errorContent"></span></div>
+            <div class="subBtn"><a href="javascript:void(0)" ng-click="loginMethod()" ng-bind="loginPlatName"></a></div>
+          </form>
+        </div>
+      </div>
+
+      <div class="loginBoxBg2 boxbehind">
+        <p class="clear" >登录管理平台</p>
+        <div class="loginBox">
+          <form id="shuyunLogin">
+            <div class="userName loginInputWrapper">
+              <input class="borderHighlight" type="text" ng-disabled="!defaultClassVal || isTopBar" name="name" placeholder="账号" ng-model="userName" ng-input-focus />
+                <i></i>
+            </div>
+            <div class="userPassWord loginInputWrapper">
+              <input class="borderHighlight" type="password" name="password" placeholder="密码" ng-model="userPassWord" ng-input-focus />
+                <i></i>
+            </div>
+            <div class="record"><!--label><input type="checkbox" />记住我</label--></div>
+            <div class="errorMark" ng-hide="!errorMarkFlag"><div></div><span ng-bind="errorContent"></span></div>
+            <div class="subBtn"><a href="javascript:void(0)" ng-click="loginMethod()" ng-bind="loginPlatName"></a></div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="bg" id="bg">
+    <!-- <img width="100%" src="/app/images/loginBanner.jpg" /> -->
+    <div id="output"></div>
+  </div>
+  <div class="footer">
+    <div class="">
+      <p class="contactNum">联系电话：400-027-0163</p>
+      <p class="markInfo">Copyright © 2011-2014 shuyun Co.,Ltd All Rights Reserved.</p>
+    </div>
+  </div>
+  <div class="loading" ng-show="!tmlLoaded">
+    <div class="loading-content">
+      <i></i>
+      加载中...
+    </div>
+    <div class="loading-bg"></div>
+  </div>
+
+  <!-- build:js ../../js/login/login.lib.js -->
+  <script type="text/javascript" src="../../../app/modules/login/bg.js"></script>
+  <script type="text/javascript" src="../../../app/lib/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="../../../app/lib/angular-1.2.19/angular.min.js"></script>
+  <script type="text/javascript" src="../../../app/lib/snabbt.js"></script>
+  <script type="text/javascript" src="../../../app/components/ccms_pop/js/yunat_pop.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js ../../js/login/login.js -->
+  <script type="text/javascript" src="../../../app/modules/login/login.js"></script>
+  <!-- endbuild -->
+
+  <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+</body>
+<!-- taobao 孔明锁js -->
+<script type="text/javascript" src="http://g.tbcdn.cn/sj/securesdk/0.0.3/securesdk_v2.js" id="J_secure_sdk_v2" data-appkey="12283535"></script>
+<!-- end -->
+</html>

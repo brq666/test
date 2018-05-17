@@ -1,0 +1,321 @@
+.clearfix {
+  zoom: 1;
+}
+
+.fl {
+  float: left;
+}
+
+.heading {
+  background: url(../../images/all.png) no-repeat -485px -143px;
+  padding-left: 15px;
+  margin-bottom: 20px;
+  color: #2d2d2d;
+  font-weight: normal;
+}
+
+.shopinfo {
+  background: #f4f4f4;
+  border: 1px solid #E1E1E1;
+  float: left;
+  height: 22px;
+  position: relative;
+  font: 12px microsoft yahei;
+  margin: 3px 0 0 20px;
+}
+
+.shopinfo b {
+  font-size: 13px;
+  float: left;
+  font-weight: normal;
+  line-height: 22px;
+  padding-left: 8px;
+}
+
+.deploymentmain {
+  /*width:100%;padding-right:240px;*/
+  min-width: 780px;
+}
+
+.clear {
+  clear: both;
+}
+
+.gray_66 {
+  color: #666;
+}
+
+.padtop60 {
+  padding-top: 60px;
+}
+
+.middle {
+  vertical-align: middle;
+}
+
+.icon_editgray {
+  background-position: -222px -122px;
+}/*编辑灰*/
+.icon_editgray,.icon_editblue {
+  width: 15px;
+  height: 23px;
+}
+
+.icon_editgray,.icon_editblue {
+  width: 15px;
+  height: 23px;
+}
+
+.de_title,.add_deploy,.add_deploy:hover,.add_deployblue,.de_solutiontitle,.buttonon,.buttonoff,.icon_editgray,.icon_editblue,.buttonpreviewgray,.buttonpreviewgray:hover,.buttoncurpreview,.buttonpreviewblue,.buttonrehearsalgray,.buttonrehearsalblue,.buttonrehearsalblue:hover,.buttoncurrehearsal,.closeicon,.closeicon:hover,.smallsolutiontitle,.successgreen,.buttoncommblue,.buttoncommblue:hover,.curbuttoncommblue,.disbuttoncommgray,.disbuttoncommblue,.buttoncommgray,.buttoncommgray:hover,.curbuttoncommgray,.ordericon,.arrowleftgray,.arrowrightgray,.arrowleftbluea,.arrowrightbluea,.arrowleftblueb,.arrowrightblueb,.iconarrowbottom,.messgetip,.edges,.bluenote,.yellownote {
+  background: url(../../images/button_bg_icon.png) no-repeat;
+  display: inline-block;
+  font-family: "微软雅黑";
+}
+
+.bluenote {
+  height: 18px;
+  background-position: -221px -197px;
+  cursor: pointer;
+}/*方案部署备注签名蓝色提示问号*/
+.solution_off:hover,.cursolution {
+  width: 235px;
+  height: 217px;
+  border: 1px solid #6bb7ec;
+  box-shadow: 1px 1px 1px #ebebeb;
+  background: none;
+  background-color: #fcfcfc;
+  cursor: pointer
+}/*方案部署中方案框高亮*/
+.bluenote, {
+  width: 15px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.marlef20 {
+  margin-left: 20px;
+}
+
+.marginrig5 {
+  margin-right: 5px;
+}
+
+.buttonpreviewgray {
+  background-position: -107px -95px;
+  cursor: pointer;
+}/*预览灰 常规*/
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.poptipAbg {
+  background: url(../../images/arrowbottom.png) no-repeat 30px bottom;
+  bottom: 80px;
+  left: 0px;
+  padding-bottom: 10px;
+}/*弹层背景箭头*/
+.poptipA {
+  border: 1px solid #d8d8d8;
+  background-color: #f7f7f7;
+  box-shadow: 1px 1px 7px #d3d3d3;
+  opacity: 0.9;
+  padding: 10px;
+  min-width: 480px;
+}/*弹层边框*/
+.font14 {
+  font-size: 14px;
+}
+
+.gray_53 {
+  color: #535353;
+}
+
+.marginrig24 {
+  margin-right: 24px;
+}
+
+.solution_off,.solution_not {
+  width: 235px;
+  height: 217px;
+  border: 1px solid #e3e3e3;
+  background: linear-gradient(#f5f5f5, #ffffff) repeat scroll 0 0 transparent;
+  cursor: pointer;
+}
+
+.pad15 {
+  padding: 15px;
+}
+
+.solutiondetail li {
+  padding-bottom: 15px;
+}
+
+.blue_pa {
+  color: #17618f;
+}
+
+.font12 {
+  font-size: 12px;
+}
+
+.blue_pb,.time b {
+  color: #0083ba;
+}
+
+.padlef10 {
+  padding-left: 10px;
+}
+
+.de_title {
+  background-position: 0px 0px;
+}/*无方案灰色条*/
+.de_solutiontitle {
+  background-position: 0px -35px;
+}/*有方案蓝色条*/
+.buttonon,.buttonoff {
+  width: 68px;
+  height: 19px;
+  right: 10px;
+  top: 10px;
+  position: absolute;
+  float: right;
+}
+
+.buttonon {
+  background-position: -68px -74px;
+}/*开*/
+.buttonoff {
+  background-position: 0px -74px;
+}/*关*/
+.right {
+  text-align: right;
+}
+
+.font11 {
+  font-size: 11px;
+}
+
+.deploymentlist {
+  display: block;
+  text-align: center;
+  padding-top: 65px/*75px*/;
+  height: 97px/*87px*/;
+}
+
+.add_deployblue,.add_deploy:hover {
+  background-position: -206px -245px;
+}
+
+.deploymenttip {
+  padding: 25px 17px;
+  width: 203px;
+}
+
+.deploymenttip,.deploymenttipA {
+  background-color: #f7f7f7;
+  border-left: 1px solid #e7e7e7;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.de_title,.de_solutiontitle {
+  bottom: 24px;
+  left: 0px;
+  width: 230px;
+  height: 35px;
+  line-height: 39px;
+  color: #fff;
+}
+
+.lasttime {
+  bottom: 3px;
+  left: 0px;
+  padding: 0px 10px;
+  width: 215px;
+}/*最后开启时间*/
+.buttonpreviewgray,.buttonpreviewgray:hover,.buttonpreviewblue,.buttoncurpreview {
+  width: 66px;
+  height: 25px;
+  line-height: 25px;
+  border: none;
+}
+
+.add_deploy,.add_deploy:hover,.add_deployblue {
+  width: 32px;
+  height: 32px;
+}/*添加方案*/
+.add_deploy {
+  background-position: -206px -72px;
+}
+
+.add_deployblue,.add_deploy:hover {
+  background-position: -206px -245px;
+}
+
+.icon_editgray {
+  background-position: -222px -122px;
+}/*编辑灰*/
+.buttonpreviewgray:hover {
+  background-position: -107px -120px;
+}/*预览灰 划过效果*/
+.deploymenttip p {
+  letter-spacing: 0.5px;
+}
+
+.padtop5 {
+  padding-top: 5px;
+}
+
+.lineheight20 {
+  line-height: 20px;
+}
+
+.gray_78 {
+  color: #787878;
+}
+
+.right35 {
+  right: 25px;
+}
+
+.icon_editblue {
+  background-position: -222px -142px;
+  cursor: pointer;
+}/*编辑蓝*/
+.bluenote,.yellownote {
+  width: 15px;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  font-size: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+address, cite, dfn, em, var {
+  font-style: normal;
+}
+
+.lineheight27{
+  line-height: 27px;
+}
+
+.tipbg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+}

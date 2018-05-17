@@ -1,0 +1,112 @@
+<!--<script type="text/javascript" src="controller/node/tfilterHeatCtrl.js"></script>-->
+<div ng-controller="tfilterHeatCtrl">
+  <div class="waitnode clearfix " waitnode="">
+    <div class="commWrapTwo commWrapFour">
+      <div ng-form="" name="waitnodeForm">
+        <div class="bannerCommStyle areaHeight26" ng-show="waitnode.tips">
+          {{waitnode.tips}}
+          <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+        </div>
+        <div class="contentNodeWrap" style="margin: 0px">
+          <table class="padding0" style="width: 505px;margin: auto">
+            <tbody>
+            <tr>
+              <th class="tl" width="13%"><label class="node_name_label">节点名称：</label></th>
+              <td>
+                <div class="pr">
+                  <input type="text" class="borderHighlight nameInput fl ml0" ng-model="model.name" maxlength="20" ng-noderequire="" />
+                  <span nodetip=""></span>
+                </div>
+              </td>
+              <td><label class="fr mr40">节点代码：{{model.id}}</label></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 0px">选择店铺：</td>
+              <td>
+                <span class="relativeBox">
+                  <input class="borderHighlight nameInput  ml0" type="text" value="{{shopSelect.shopName}}" title="{{shopSelect.shopName}}" ids="{{shopSelect.shopId}}" ng-click="openShopList()" name="investigator" readonly="readonly" ng-class="{error:shopSelectErr}" />
+                  <a class="optionModule2 location4" href="javascript:void(0);" ng-click="openShopList()"></a>
+                </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <!--店铺选择框 start-->
+          <div class="queryShopsPop shopsChecked analysisShopPop">
+            <div class="shopMenu clearfix">
+              <p class="fr" ng-show="unusedShops.length&gt;0">
+                <a href="javascript:void(0)" title="可选店铺" ng-click="toggleStatusShop=false">可选店铺</a>
+                <span class="fontLine">|</span>
+                <a class="shixiao" href="javascript:void(0)" title="已失效店铺" ng-click="toggleStatusShop=true">已失效店铺</a>
+              </p>
+            </div>
+            <div class="shopUsed" ng-show="!toggleStatusShop">
+              <div class="listsBox topNormal">
+                <ul class="unitLists editorShops clearfix">
+                  <li ng-repeat="list in shopLists" ng-chose-unit="Radio">
+                    <a id="{{list.idInPlat}}" title="{{list.name}}" href="javascript:void(0)">{{list.name}}</a>
+                    <span class="trianger"></span>
+                    <span class="gg"></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="shopUnused" ng-show="toggleStatusShop">
+              <div class="listsBox topNormal">
+                <ul class="unitLists clearfix">
+                  <li ng-repeat="list in unusedShops" class="uneditor">
+                    <a id="{{list.idInPlat}}" title="{{list.name}}" href="javascript:void(0)">{{list.name}}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div class="ling_di"></div>
+              <div class="listsButton fr mr15 mt5">
+                <button type="button" class="btn btnBlue" ng-click="sureAddShop()" ng-close-child-window>确定</button>
+                <button type="button" class="btn" ng-close-child-window>取消</button>
+              </div>
+            </div>
+          </div>
+          <!--店铺选择框 end-->
+          <table style="width: 505px; margin: 10px auto 53px auto;">
+            <tbody>
+            <tr>
+              <td>
+                <div class="heagbg heagbg1"></div>
+              </td>
+              <td>
+                <div class="heagbg heagbg2"></div>
+              </td>
+              <td>
+                <div class="heagbg heagbg3"></div>
+              </td>
+              <td>
+                <div class="heagbg heagbg4"></div>
+              </td>
+              <td width="45px">
+                <div class="heagbg heagbg5"></div>
+              </td>
+            </tr>
+            <tr>
+              <td ng-repeat="k in gradeList">
+                <input ng-change="changeReg1(k.name)" ng-class-odd="styleclass" ng-model="k.name" type="checkbox" />
+                <span class="ml5 verticalAlign-2" ng-bind="k.label"></span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <label class="domBlock error-style" ng-show="reg1">至少选择一个营销热度分组!</label>
+        </div>
+      </div>
+    </div>
+    <!--<div class="ling_di clearfix mt10"></div>-->
+    <div class="commBottom clearfix">
+      <div class="mb">
+        <button class="btn " ng-class="{btnBlue:!isEditorFlag}" id="marketSure" ng-click="save($event)">确定</button>
+        <button class="btn" id="marketCancel" ng-close-window="">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<link type="text/css" rel="stylesheet" href="css/waitNode.css"/>-->

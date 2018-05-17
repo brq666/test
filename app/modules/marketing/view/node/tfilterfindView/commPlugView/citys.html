@@ -1,0 +1,57 @@
+<div class="citysSelect" ng-controller="cityCtrl as vm">
+  <div class="top">
+    <div class="clearfix">
+      <p class="fl commFontMark mr10 darkBlueColor" ng-repeat="city in vm.selectedCitys track by $index">
+        {{city.path}}
+        <a href="javascript:void(0)" ng-click="vm.delete(city)">
+          <img width="10" height="10" ng-src="/ccms/images/deletex.png" src="/ccms/images/deletex.png" />
+        </a>
+      </p>
+    </div>
+    <label>当前选择：</label>
+    <a href="javascript:void(0);" ng-click="vm.empty()" class="empty">清空</a>
+  </div>
+  <div class="operationAreas clearfix">
+    <div class="iteam" city-ctrl-init>
+      <h3>区域选择</h3>
+      <ul data-level="0" ccms-city-cur>
+        <li ng-repeat="c in vm.cityDatas track by $index">
+          <span class="button_chk  {{c.style}}" ng-class="c.checkStatus" id="{{c.id}}" data-parentid="{{c.parentId}}" ng-click="vm.selectToggleAllChild(c, 1)" value="{{c.name}}"></span>
+          <label ng-click="vm.showData(c, 1)">{{c.name}} <span class="levelDown" ng-show="c.hasChild">&gt;</span></label>
+        </li>
+      </ul>
+    </div>
+    <div class="iteam">
+      <h3>省选择</h3>
+      <ul data-level="1" ccms-city-cur>
+        <li ng-repeat="c in vm.cityDatas1 track by $index">
+          <span class="button_chk {{c.style}}" id="{{c.id}}" ng-class="c.checkStatus" data-parentid="{{c.parentId}}" ng-click="vm.selectToggleAllChild(c, 2)" value="{{c.name}}"></span>
+          <label ng-click="vm.showData(c, 2)">{{c.name}} <span class="levelDown" ng-show="support==undefined &amp;&amp; c.hasChild">&gt;</span></label>
+        </li>
+      </ul>
+    </div>
+    <div class="iteam" ng-hide="support!=undefined">
+      <h3>市选择</h3>
+      <ul data-level="2" ccms-city-cur>
+        <li ng-repeat="c in vm.cityDatas2 track by $index">
+          <span class="button_chk  {{c.style}}" id="{{c.id}}" ng-class="c.checkStatus" data-parentid="{{c.parentId}}" ng-click="vm.selectToggleAllChild(c, 3)" value="{{c.name}}"></span>
+          <label ng-click="vm.showData(c, 3)">{{c.name}} <span class="levelDown" ng-show="c.hasChild">&gt;</span></label>
+        </li>
+      </ul>
+    </div>
+    <div class="iteam" ng-hide="support!=undefined">
+      <h3>区县选择</h3>
+      <ul data-level="3" ccms-city-cur>
+        <li ng-repeat="c in vm.cityDatas3 track by $index">
+          <span class="button_chk  {{c.style}}" id="{{c.id}}" ng-class="c.checkStatus" data-parentid="{{c.parentId}}" ng-click="vm.selectToggleAllChild(c, 4)" value="{{c.name}}"></span>
+          <label>{{c.name}}</label></li>
+      </ul>
+    </div>
+  </div>
+  <div class="editorContent" style="text-align: right">
+    <p>
+      <button class="btn btnBlue selectFontsSureBtn" type="button" data="vm.selectedCitys" max-length="100" ng-click="vm.save($event)" >确定</button>
+      <button class="btn" type="button" ng-close-child-window>取消</button>
+    </p>
+  </div>
+</div>

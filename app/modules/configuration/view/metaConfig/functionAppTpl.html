@@ -1,0 +1,48 @@
+<div class="content pTB10">
+  <div class="mb10">
+    <label class="label_style">函数名称：</label>
+    <input type="text" class="borderHighlight" ng-model="tpl.name" />
+  </div>
+  <div class="mb10">
+    <label class="label_style">数据源：</label>
+    <select class="commSelect width130" style="width:153px;" ng-model="sourseModel" ng-options="c.dataSourceName for c in dataSource"></select>
+    <label class="label_style" style="width:90px;">返回值类型：</label>
+    <select class="commSelect width130" ng-model="dataTypeModel" ng-options="c.displayName for c in dataType"></select>
+  </div>
+  <div class="mb10 clearfix">
+    <label class="fl label_style">入参配置：</label>
+    <div class="tables_style1 fl ml9">
+      <table>
+        <thead>
+        <tr>
+          <th>参数名称</th>
+          <th>参数类型</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="type in typeList">
+          <td align="center">
+            <input type="text" class="borderHighlight" ng-model="type.name" />
+          </td>
+          <td align="center">
+            <select class="commSelect width130" ng-model="type.parame" ng-options="c.displayName for c in dataType"></select>
+          </td>
+          <td align="center">
+            <a href="javascript:void(0);" title="删除" class="del" ng-click="parameList.del($index)"></a>
+            <a ng-show="$last" href="javascript:void(0);" title="添加" class="add" ng-click="parameList.add($index)"></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="mb10">
+    <label class="label_style">表达式：</label>
+    <textarea class="ccms_textarea" ng-model="tpl.functionBody"></textarea>
+  </div>
+  <div class="mb mt30">
+    <button class="btn btnBlue" type="submit" ng-click="tpl.save();">确定</button>
+    <span class="btn" ng-click="tpl.close()">取消</span>
+  </div>
+</div>

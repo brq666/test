@@ -1,0 +1,86 @@
+@charset "utf-8";
+
+.node_mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#4C000000', endColorstr='#4C000000');
+  background: rgba(0,0,0,0.3);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.node_dialog {
+  position: relative;
+  width: 650px;
+}
+
+.node_title {
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  padding: 0 13px;
+  border-bottom: 1px solid #E1E1E1;
+  background: linear-gradient(#FCFCFC, #F1F1F1) repeat 0 0;
+}
+
+.node_close {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 14px;
+  right: 10px;
+  background: url("../../images/all.png") no-repeat scroll -487px -26px transparent;
+  display: block;
+}
+
+.node_close:hover {
+  background: url("../../images/all.png") no-repeat scroll 0 -26px transparent;
+}
+
+.node_full {
+  background: url(../../images/all.png) no-repeat -419px -26px;
+  top: 14px;
+  right: 40px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  display: block;
+}
+
+.node_full:hover {
+  background: url(../../images/all.png) no-repeat -453px -26px;
+}
+
+.node_full.node_min {
+  background-position: -350px -26px;
+}
+
+.node_full.node_min:hover {
+  background-position: -386px -26px;
+}
+
+.node_banner {
+  height: 26px;
+  border: 1px solid #D6EFFE;
+  background: #ECF8FC;
+  font-size: 12px;
+  line-height: 26px;
+}
+
+input.node_name_input {
+  width: 200px;
+}
+
+input.node_waitdate_input {
+  width: 162px;
+  background-position: 148px 5px;
+}
+
+input.node_waitday_input,input.node_waitminute_input {
+  width: 72px;
+  margin-right: 3px;
+  background-position: 58px 6px;
+}

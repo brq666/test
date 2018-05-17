@@ -1,0 +1,97 @@
+﻿<div class="commCustomerOrderWrap" ng-controller="CustomerOrderCtrl">
+  <div class="commCustomerOrder">
+    <table class="mb10" cellpadding="0">
+      <tbody>
+      <tr>
+        <th width="30%"><span class="tdHeight20">宝贝</span></th>
+        <th width="10%"><span class="tdHeight20">单价</span></th>
+        <th width="10%"><span class="tdHeight20">数量</span></th>
+        <th width="10%"><span class="tdHeight20">店铺</span></th>
+        <th width="15%"><span class="tdHeight20">成交金额</span></th>
+        <th width="15%"><span class="tdHeight20">订单状态</span></th>
+        <th width="10%"><span class="tdHeight20">收货信息</span></th>
+      </tr>
+      </tbody>
+    </table>
+    <table class="customerProducts mb10" cellpadding="0">
+      <tbody>
+      <tr>
+        <th><span class="tdHeight20">订单编号：132356546546</span></th>
+        <th colspan="2"><span class="tdHeight20">下单时间：2014-02-02 10:20</span></th>
+        <th colspan="2"><span class="tdHeight20">付款时间：2014-02-02 10:20</span></th>
+        <th colspan="2"><span class="tdHeight20">成交：2014-02-02 10:20</span></th>
+      </tr>
+      <tr class="borderTop">
+        <td class="alignLeft" width="30%">
+          <div class="clearfix ml10">
+            <a class="fl mr10 borderColorEa" target="_blank" href="http://detail.taobao.com/item.htm?id=323456789">
+              <img class="refund_pic" ng-src="http://img01.taobaocdn.com/bao/uploaded/i1/T1vA6zXlBaXXbMNj3Z_033128.jpg_60x60.jpg" src="http://img01.taobaocdn.com/bao/uploaded/i1/T1vA6zXlBaXXbMNj3Z_033128.jpg_60x60.jpg" />
+            </a>
+            <p class="fl tdHeight62 width190">
+              <a class="mb5" target="_blank" href="http://detail.taobao.com/item.htm?id=323456789">favority测试商品3</a>
+              <span class="domBlock">颜色分类：黄格；尺码：41</span>
+            </p>
+          </div>
+        </td>
+        <td width="10%">
+          <div class="tdHeight62 width90">
+            16.0
+          </div>
+        </td>
+        <td width="10%">
+          <div class="tdHeight62 width90">
+            1
+          </div>
+        </td>
+        <td width="10%">
+          <div class="tdHeight62 width90">
+            数云食堂
+          </div>
+        </td>
+        <td class="borderLeft" width="15%">
+          <div class="tdHeight62 width90">
+            16.00
+          </div>
+        </td>
+        <td class="borderLeft" width="15%">
+          <div class="tdHeight62 width90 success">
+            交易成功
+          </div>
+        </td>
+        <td class="borderLeft" width="10%">
+          <div class="width90 commPenEditor">
+            <a class="homeImage mt15" href="javascript:void(0)" ng-title-address="customerOrderObj.getDetailInfo($index)"></a>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <div class="ling_di"></div>
+    <div class="commBottom">
+      <div class="mb">
+        <button class="btn btnBlue" ng-close-window="">确定</button>
+        <button class="btn" ng-close-window="">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  angular.module("campaign.controllers").controller('CustomerOrderCtrl', ['$scope', '$http', function($scope,$http){
+    $(".commCustomerOrderWrap").addInteractivePop({magTitle:"客户订单查看",mark:true,drag:true,position:"fixed",width:1000});
+    $scope.customerOrderObj={
+      "getDetailInfo":function(i){
+        return {
+          "receiverName":"PEACH",
+          "receiverPhone":13987876565,
+          "receiverState":"安徽",
+          "receiverCity": "",
+          "receiverDistrict": "",
+          "receiverAddress": "",
+          "receiverZip":"21212"
+        }
+      }
+    }
+  }]);
+</script>

@@ -1,0 +1,19 @@
+<div class="maincontainerB dataConfigureTable" ng-controller="functionCtrl">
+  <div class="maincontainer functionBox">
+    <div class="clearfix">
+      <h2 class="heading fl">函数配置</h2>
+    </div>
+      <div class="clearfix">
+        <div class="smalldarkerblueBtn newbuildBtn"><a href="javascript:void(0)" ng-click="tpl.add()">新建函数配置</a></div>
+        <!--<div class="commSearch">
+             <label searcheffect class="default_color" style="display: block;">活动名称</label>
+             <input searcheffect type="text" ng-model="hdValue" name="couponName" class="commSearchVal">
+             <button ng-click="" class="commSearchBtn"></button>
+        </div>-->
+      </div>
+      <div class="configContent functionGridWrap"></div>
+      <!--函数配置弹框-->
+      <div class="function_AddTpl" ng-include src="tpl.src" style="display:none;" onload="tpl.showAddTpl()"></div>
+    </div>
+  </div>
+</div>

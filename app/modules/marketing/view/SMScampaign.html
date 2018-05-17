@@ -1,0 +1,96 @@
+<script type="text/javascript">
+		mxBasePath = 'mxGraph';
+</script>
+
+<!--<script type="text/javascript" src="mxGraph/js/mxClient.js"></script>
+<script type="text/javascript" src="controller/workFlow/toolbar.js"></script>-->
+<div class="maincontainerB ">
+  <div class="maincontainer" ng-controller="workflow" id="workflow">
+    <!--标题-->
+    <h2 class="heading">营销活动</h2>
+    <!--TAB title-->
+    <ul class="clearfix Tab_title">
+     <li>活动列表<a class="TabClose" href="javascript:void(0);"></a></li>
+     <li class="hover">短信活动<a class="TabClose" href="javascript:void(0);"></a></li>
+    </ul>
+       <!--TAB content-->
+    <div class="mt10">
+      <!--活动列表-->
+      <div></div>
+      <!--短信活动-->
+      <div>
+        <!--title-->
+        <!--操作审批-->
+        <div class="action_buttons">
+          <span class="canvas_about fl">
+            <a class="icon_amplification" href="javascript:void(0);"></a>
+            <a class="icon_narrow" href="javascript:void(0);"></a>
+            <a class="icon_reduction" href="javascript:void(0);"></a>
+            <a class="icon_full_screen" href="javascript:void(0);"></a>
+          </span>
+          <span class="fl mt2 ml25">
+            <a class="but_test_execution" href="javascript:void(0);"><i></i>测试执行</a>
+            <a class="but_agreed ml25" href="javascript:void(0);"><i></i>审批通过</a>
+            <a class="but_refuse ml5" href="javascript:void(0);"><i></i>审批拒绝</a>
+          </span>
+          <span class="fr mt5">
+            <a class="icon_information" href="javascript:void(0);"></a>
+            <a class="icon_drag_window ml25" href="javascript:void(0);"></a>
+          </span>
+        </div>
+        <!--操作设计-->
+        <div class="action_buttons">
+          <span class="fl">
+            <a class="but_save" href="javascript:void(0);"><i></i></a>
+            <a class="but_copy ml5" href="javascript:void(0);"><i></i></a>
+          </span>
+          <span class="canvas_about_short fl ml25">
+            <a class="icon_back" href="javascript:void(0);"></a>
+            <a class="icon_into" href="javascript:void(0);"></a>
+          </span>
+          <span class="fl ml5">
+            <a class="but_del" href="javascript:void(0);"><i></i></a>
+          </span>
+          <span class="canvas_about fl ml25">
+            <a class="icon_amplification" href="javascript:void(0);"></a>
+            <a class="icon_narrow" href="javascript:void(0);"></a>
+            <a class="icon_reduction" href="javascript:void(0);"></a>
+            <a class="icon_full_screen" href="javascript:void(0);"></a>
+          </span>
+          <span class="fl mt2 ml25">
+            <a class="but_test_execution" href="javascript:void(0);"><i></i>测试执行</a>
+            <a class="ml5 but_approval" href="javascript:void(0);">提交审批</a>
+            <a class="ml5 but_being_performed" href="javascript:void(0);"><i></i>正在执行</a>
+          </span>
+          <span class="fl mt2 ml25">
+            <a class="but_check_report" href="javascript:void(0);">查看周期<i></i></a>
+            <a class="but_check_report ml5" href="javascript:void(0);">查看报告<i></i></a>
+          </span>
+          <span class="fr mt5">
+            <a class="icon_information" href="javascript:void(0);"></a>
+            <a class="icon_drag_window ml25" href="javascript:void(0);"></a>
+          </span>
+        </div>
+        <!--content-->
+        <div class="operating_area" id="operating_area"></div>
+      </div>
+    </div>
+    <div class="node_flow_area" id="node_flow_area"></div>
+    <!--工具栏-->
+    <div class="toolbar" style="top:130px;left:50px;position:fixed;z-index:999;">
+      <!--title-->
+      <div class="toolbar_title">工具栏</div>
+      <!--常用-->
+      <!--<dl ng-repeat="s in toolbarList">
+       <dt class="show_this_tool">{{s.text}}<a class="arrow_show fr" href="javascript:void(0);"></a></dt>
+       <dd class="padlr"  id="{{s.name}}_bar">
+         <a class="tool_icon" href="javascript:void(0);" ng-repeat="n in s.node" id="{{n.id}}">
+               <span class="{{n.name}}"></span></br> {{n.title}}
+         </a>
+       </dd>
+      </dl>-->
+    </div>
+    <div id="nodeContent" ng-include src='nodeSrc' onload="aa()"></div>
+  </div>
+</div>
+<!--<script type="text/javascript" src="controller/workFlow/flowCtr.js"></script>-->

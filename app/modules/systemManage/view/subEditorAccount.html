@@ -1,0 +1,133 @@
+<div ng-cloak>
+  <form id="accountForm" name="accountForm" novalidate>
+    <h2 class="heading">{{subAccountObj.accountTitle}}</h2>
+    <div class="bg">
+      <ul class="ticketsInfoBox">
+        <li>
+          <label>&nbsp;账号：</label>
+          <input class="borderHighlight" maxlength="50" disabled="disabled" type="text" required name="accounNumber" ng-model="subAccountObj.nameInPlat" />
+        </li>
+        <li>
+          <label><font color="red">*</font>&nbsp;绑定系统账号：</label>
+          <span class="relativeBox">
+            <input type="text" class="borderHighlight" required readonly="readonly" name="loginName" ng-click="subAccountObj.getSysAccountList()" ng-model="subAccountObj.loginName">
+            <a class="optionModule2 location1" ng-click="subAccountObj.getSysAccountList()" href="javascript:void(0);"></a>
+           </span>
+           <label for="loginName" class="error" ng-show="accountForm.loginName.$error.required" style="display: inline;">请选择系统账号</label>
+        </li>
+        <li>
+          <label>&nbsp;姓名：</label>
+          <input class="borderHighlight" maxlength="50" type="text" name="accounName" ng-model="subAccountObj.realName" ng-disabled="subAccountObj.sameAccountFlag">
+        </li>
+        <li>
+          <label>&nbsp;账号角色：</label>
+          <span class="relativeBox">
+            <input type="text" class="borderHighlight" readonly="readonly" name="investigator" ng-click="subAccountObj.getRoles()"  ids="{{subAccountObj.RoleIds}}" title="{{subAccountObj.RoleValsView}}" value="{{subAccountObj.RoleValsView}}" ng-disabled="subAccountObj.sameAccountFlag">
+            <a class="optionModule2 location1" ng-click="subAccountObj.getRoles()" href="javascript:void(0);"></a>
+           </span>
+        </li>
+        <li ng-show="departmentItemIsShow">
+          <label>&nbsp;所属部门：</label>
+          <input class="borderHighlight ng-pristine ng-valid" type="text" ng-disabled="subAccountObj.isAdmin || subAccountObj.sameAccountFlag" valueid={{subAccountObj.departmentId}} ng-clone-select="subAccountObj.getSection()" value="{{subAccountObj.departmentName}}" readonly="readonly"
+          name="accountSection">
+        </li>
+        <li ng-show="dataPermissionItemIsShow">
+          <label>&nbsp;查看权限：</label>
+          <label style="width: 57px;">
+            <input type="radio" name="role" value="0" ng-disabled="subAccountObj.isAdmin || subAccountObj.sameAccountFlag" ng-model="subAccountObj.dataRight" ng-sub-radio class="radio ng-valid ng-dirty">本部门</label>
+          <label style="width: 77px;">
+            <input type="radio" name="role" value="1" ng-disabled="subAccountObj.isAdmin || subAccountObj.sameAccountFlag" ng-model="subAccountObj.dataRight" ng-sub-radio class="radio ng-valid ng-dirty">全部</label>
+          <label style="width: 87px;">
+            <input type="radio" name="role" value="2" ng-disabled="subAccountObj.isAdmin || subAccountObj.sameAccountFlag" ng-model="subAccountObj.dataRight" ng-sub-radio class="radio ng-valid ng-dirty">仅本人</label>
+          <label style="width: 87px;">
+            <input type="radio" name="role" value="3" ng-disabled="subAccountObj.isAdmin || subAccountObj.sameAccountFlag" ng-model="subAccountObj.dataRight" ng-sub-radio class="radio ng-valid ng-dirty">自定义</label>
+          <span class="relativeBox">
+            <input type="text" class="borderHighlight required" readonly="readonly" ng-disabled="subAccountObj.disabledFalg || subAccountObj.isAdmin || subAccountObj.sameAccountFlag" name="configRight" ng-click="subAccountObj.getConfigDataRight()"  ids="{{subAccountObj.configDataRightIds}}" title="{{subAccountObj.configDataRight}}" value="{{subAccountObj.configDataRight}}">
+            <a class="optionModule2 location1" ng-click="subAccountObj.getConfigDataRight()" href="javascript:void(0);"></a>
+           </span>
+        </li>
+        <li>
+          <label>&nbsp;手机号码：</label>
+          <input class="borderHighlight" name="contactPhone" maxlength="11" type="text" phone="true" ng-model="subAccountObj.contactPhone" ng-disabled="subAccountObj.sameAccountFlag">
+          <label class="error initError">请正确填写您的手机号码</label>
+        </li>
+
+        <li>
+          <label>&nbsp;Email：</label>
+          <input class="borderHighlight email" maxlength="50" type="text" ng-model="subAccountObj.contactEmail" ng-disabled="subAccountObj.sameAccountFlag">
+          <label class="error initError">请输入正确格式电子邮件</label>
+        </li>
+        <li>
+          <label>登录密码：</label>
+          <input id="createSystemPassword" class="borderHighlight" ng-disabled="subAccountObj.sameAccountFlag" maxlength="40" type="password" name="loginPassword" ng-model="subAccountObj.loginPassword" />
+        </li>
+        <li>
+          <label>确认密码：</label>
+          <input class="borderHighlight" maxlength="40" type="password" ng-disabled="subAccountObj.sameAccountFlag" equalTo='#createSystemPassword' name="confirmPassword" ng-model="subAccountObj.confirmPassword" />
+        </li>
+        <li>
+          <label>备注：</label>
+          <textarea class="markMessage borderHighlight" name="remark" maxlength="200" ng-model="subAccountObj.remark" ng-disabled="subAccountObj.sameAccountFlag">{{subAccountObj.remark}}</textarea>
+        </li>
+      </ul>
+    </div>
+    <div class="mb" style="padding:15px 0 0 130px;">
+      <button class="btn btnBlue" type="submit" ng-disabled="accountForm.$invalid" style="background-color: #2ba4da !important;">确定</button>
+      <span class="btn" ng-click="subAccountObj.cancelBtnMethod()">取消</span>
+    </div>
+  </form>
+</div>
+
+<div id="sysAccountList" style="display:none">
+  <div id="sysFlexlist" class="couponListssBox"></div>
+  <div class="commBottom" style="text-align:right;width:100%">
+    <button ng-close-child-window="" ng-click="subAccountObj.changeBindAccount()" type="button" class="btn btnBlue">确定</button>
+    <button ng-close-child-window="" class="btn" type="button">取消</button>
+  </div>
+</div>
+<div class="accountRolePop">
+  <div class="listsBox">
+    <ul class="unitLists clearfix">
+      <li ng-repeat="list in subAccountObj.accountRoleLists" class={{list.classVal}} ng-chose-unit>
+        <a id={{list.id}} title={{list.name}} href="javascript:void(0)">{{list.name}}</a>
+        <span class="trianger"></span>
+        <span class="gg"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="listsButton">
+    <button class="btn btnBlue" ng-click="subAccountObj.sureAddRole()">确定</button>
+    <button class="btn" ng-close-window>取消</button>
+  </div>
+</div>
+<div class="configDataRight">
+  <div class="zTreeBoxStyle ztree zTreeBoxStyleAuto"></div>
+  <div class="listsButton">
+    <button class="btn btnBlue btnSmall" ng-click="subAccountObj.sureconfigDataRight()">确定</button>
+    <button class="btn btnSmall" ng-close-window>取消</button>
+  </div>
+</div>
+<script type="text/javascript">
+  /*验证提交 start*/
+  angular.element("#accountForm").validate({
+    rules:{
+      loginPassword:{
+        checkpasswd:true
+      }
+    },
+    messages: {
+      loginPassword: {
+        checkpasswd:"密码至少8位，并包括大小写字母及数字"
+      },
+      confirmPassword: {
+        required: "请输入确认密码",
+        equalTo: "两次输入密码的不一致"
+      }
+    },
+    submitHandler: function() {
+        var submitScope = angular.element(".maincontainerB").scope();
+        submitScope.subAccountObj.sure_btn();
+    }
+  });
+  /*验证提交 end*/
+</script>

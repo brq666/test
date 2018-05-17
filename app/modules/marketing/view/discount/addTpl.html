@@ -1,0 +1,89 @@
+<div class="addTpl">
+  <h2 class="heading ng-binding">{{tpl.title}}</h2>
+  <form id="ump_form">
+    <div class="bg">
+      <div class="mb10">
+        <label class="label">优惠名称：</label>
+        <input type="text" class="borderHighlight width200 " ng-model="tpl.name" name="name" maxlength="20" input_activity_name="" />
+      </div>
+      <div class="mb10">
+        <label class="label">所属店铺：</label>
+        <input type="text" class="borderHighlight ml9 required width200" readonly="readonly" ng-disabled="!tpl.isSelectEdit" name="discountShop" valueid="{{shopForCounpon.id}}" ng-model="shopForCounpon.name" comm-select-config="tpl.getShops()" />
+        <span ng-show="(tpl.userScopeType != undefined) && (shopForCounpon.id != undefined)">每个店铺只能创建{{totalCount}}个优惠，当前店铺还可以创建{{applyCount}}个</span>
+      </div>
+      <div class="mb10">
+        <label class="label">优惠范围：</label>
+        <input type="text" class="borderHighlight ml9 required width200" readonly="readonly" ng-disabled="!tpl.isSelectEdit" name="userScopeType" valueid="{{tpl.userScopeType}}" ng-model="tpl.userScopeTypeName" comm-select-config="tpl.getUserScopeType()" />
+        <span ng-switch="" on="tpl.userScopeType">
+          <span ng-switch-when="1">
+            <input type="radio" class="radio" name="menber" value="1" ng-model="tpl.userLevel" />普通会员
+            <input type="radio" class="radio" name="menber" value="2" ng-model="tpl.userLevel" />高级会员
+            <input type="radio" class="radio" name="menber" value="3" ng-model="tpl.userLevel" />VIP会员
+            <input type="radio" class="radio" name="menber" value="4" ng-model="tpl.userLevel" />至尊会员
+          </span>
+          <span ng-switch-when="2">指定客户优惠在新增完成后，需要通过营销活动中的定向优惠节点发送至指定客户</span>
+          <em ng-switch-when="0" class="ico_tips" ng-title="全体客户优惠生效后，所有客户（包括新客和老客）都会享受优惠"></em>
+        </span>
+      </div>
+      <div class="mb10">
+        <label class="label">活动开始时间：</label>
+        <input ng-hide="tpl.status=!0 &amp;&amp; tpl.status" alt="{{tpl.status}}" starttime="{{tpl.startTime}}" type="text" picker2="" class=" width180 datetimepicker  borderHighlight text" ng-model="tpl.startTime" name="startTime" readonly="readonly" />
+        <input ng-show="tpl.status=!0 &amp;&amp; tpl.status" alt="{{tpl.status}}" starttime1="{{tpl.startTime1}}" type="text" picker5="" class=" width180 datetimepicker  borderHighlight text" ng-model="tpl.startTime1" name="startTime1" readonly="readonly" />
+        <em class="ico_tips" ng-title="活动开始时间提交后只可以向后延迟，不可以提前"></em>
+      </div>
+      <div class="mb10">
+        <label class="label">活动结束时间：</label>
+        <input ng-hide="tpl.status=!0 &amp;&amp; tpl.status" alt="{{tpl.status}}" endtime="{{tpl.endTime}}" type="text" picker2="" class="width180 datetimepicker  borderHighlight text" ng-model="tpl.endTime" name="endTime" readonly="readonly" />
+        <input ng-show="tpl.status=!0 &amp;&amp; tpl.status" alt="{{tpl.status}}" endtime1="{{tpl.endTime1}}" type="text" picker5="" class="width180 datetimepicker  borderHighlight text" ng-model="tpl.endTime1" name="endTime1" readonly="readonly" />
+        <em class="ico_tips" ng-title="活动结束时间提交后只可以向前提前，不可以延后"></em>
+      </div>
+      <div class="mb10">
+        <label class="label">优惠商品范围：</label>
+        <input type="text" class="borderHighlight ml9 required width200" readonly="readonly" name="goodsScopeType" valueid="{{tpl.goodsScopeType}}" ng-model="tpl.goodsScopeTypeName" comm-select-config="tpl.getGoodsScopeType()" />
+      </div>
+      <div class="mb10" ng-show="tpl.goodsScopeType!=undefined&amp;&amp;shopForCounpon.id!=undefined">
+        <label class="label"></label>
+      <span ng-switch="" on="tpl.goodsScopeType">
+        <span ng-switch-when="0"> </span>
+        <span ng-switch-when="3"> </span>
+        <span ng-switch-default="">
+          <input type="text" class="borderHighlight ng-pristine ng-valid width200" readonly="readonly" name="campType" ng-click="goodsSelector()" ng-model="msgcount" />
+          <a class="optionModule2" href="javascript:void(0)" ng-click="goodsSelector()" style="margin-left: -5px;"></a>
+          <label class="error" ng-show="nggoodstip">请选择商品</label>
+        <div class="filterProductSelected productSelected" ng-include="" src="productSelect" onload="popupProSel()"></div> </span> </span>
+      </div>
+      <div class="mb10">
+        <label class="label">是否限购：</label>
+        <input type="radio" value="1" class="radio  ml9" ng-model="tpl.operateWayConditionType" />限购
+        <input type="radio" value="0" class="radio" ng-model="tpl.operateWayConditionType" />不限购
+      </div>
+      <div class="mb10">
+        <label class="label"></label>
+        <span ng-switch="" on="tpl.operateWayConditionType">
+          <span class="ml9" ng-switch-when="1">限<input type="text" class="borderHighlight width180" ng-model="tpl.operateWayConditionDetail" name="operateWayConditionType" maxlength="10" />件</span>
+          <span class="ml9" ng-switch-when="0">限<input type="text" class="borderHighlight width180" ng-disabled="tpl.operateWayConditionType==0" maxlength="10" />件</span>
+        </span>
+      </div>
+      <div class="mb10">
+        <label class="label">优惠方式：</label>
+        <input type="radio" value="0" class="radio  ml9" ng-model="tpl.operateWay" />打折
+        <input type="radio" value="1" class="radio" ng-model="tpl.operateWay" />减价
+      </div>
+      <div class="mb10">
+        <label class="label"></label>
+        <span class="ml9" ng-switch="" on="tpl.operateWay">
+          <span ng-switch-when="0">打<input type="text" class="borderHighlight width180" ng-model="tpl.discount" name="discount" num-precision="2" />折<em class="ico_tips" ng-title="不能低于店铺最低折扣，输入范围0~9.99"></em></span>
+          <span ng-switch-when="1">减<input type="text" class="borderHighlight width180 " ng-model="tpl.onSale" name="onSale" num-precision="2" />元<em class="ico_tips" ng-title="减价后的价格，不能低于店铺最低折扣,输入范围0～999999999.99"></em></span>
+        </span>
+      </div>
+      <div class="mb10">
+        <label class="label">备注：</label>
+        <textarea ng-model="tpl.description" name="description" ng-maxlength="200" maxlength="200" onkeydown="if (this.value.length&gt;=200){return false;}" input_remark=""></textarea>
+      </div>
+    </div>
+    <div class="mb">
+      <button type="submit" class="btn" ng-class="{btnBlue: !tpl.isEditor}" ng-click="tpl.submit()">确定</button>
+      <span class="btn" ng-click="tpl.closeTpl()">取消</span>
+    </div>
+  </form>
+</div>

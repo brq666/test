@@ -1,0 +1,53 @@
+{
+  "name": "ccms",
+  "version": "7.01.0",
+  "private": true,
+  "bin": {
+    "deploy": "bin/deploy.js"
+  },
+  "scripts": {
+    "csslint": "csslint ccms",
+    "start": "gulp dev && node server.js",
+    "watch": "gulp watch",
+    "dist": "gulp dist",
+    "dist:develop": "gulp dist --env dev",
+    "dist:qa": "gulp dist --env qa",
+    "dist:stage": "gulp dist --env stage",
+    "dist:stress": "gulp dist --env stress",
+    "dist:production": "gulp dist --env production"
+  },
+  "dependencies": {
+    "ejs": "*",
+    "express": "3.3.7",
+    "express-http-proxy": "0.3.0",
+    "js-cookie": "^2.1.3",
+    "moment": "2.10.3",
+    "request": "2.57.0"
+  },
+  "devDependencies": {
+    "async": "^1.3.0",
+    "autoprefixer": "6.3.1",
+
+    "csslint": "0.10.0",
+    "del": "1.2.1",
+    "gulp": "*",
+    "gulp-concat": "2.5.2",
+    "gulp-minify-css": "0.3.10",
+    "gulp-minify-html": "0.1.6",
+    "gulp-postcss": "6.0.1",
+    "gulp-rename": "1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-rev": "3.0.1",
+    "gulp-sourcemaps": "1.6.0",
+    "gulp-uglify": "1.5.1",
+    "gulp-usemin": "0.3.21",
+    "gulp-usemin-extend": "^0.3.24",
+    "gulp-util": "3.0.6",
+    "nodemon": "1.8.1",
+    "postcss-import": "7.1.3",
+    "precss": "1.4.0",
+    "q": "^1.4.1",
+    "run-sequence": "1.1.5",
+    "yargs": "^6.3.0"
+  }
+}

@@ -1,0 +1,28 @@
+<!--<link get-root type="text/css" rel="stylesheet" _href="components/ztree/css/zTreeStyle/zTree.css" />
+<nscript get-root _src="modules/marketing/controller/customer/customerGroupCtrl.js"></nscript>-->
+
+<div class="maincontainerB" ng-controller="CustomerCtrl">
+  <div class="maincontainer">
+    <div class="hdZtreeType" ng-include src="hdZtreeType"></div>
+    <div>
+      <div class="clearfix">
+        <h2 class="heading fl">客户分组</h2><div class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360" ng-click="groupObj.add()"><a href="javascript:void(0)">新建分组</a></div>
+      </div>
+      <ul class="clearfix Tab_title" id="tabpenel_list" ng-show="groupTable.titleFlag">
+         <li ng-click="groupTable.backList()" class="hover">客户分组</li>
+         <li ng-repeat="tab in groupTable.tabList" id="{{tab.id}}"  ng-click="groupTable.click_tabTitle($index+1)">
+           {{tab.name}}<a class="TabClose" href="javascript:void(0);" ng-click="groupTable.click_tabClose($index+1)"></a>
+         </li>
+      </ul>
+      <div class="tabContentArea">
+        <div class="activeList configMarketingList" ng-include src="marketList.tpl_src" ng-show="groupTable.flag"></div>
+        <div class="activityFlow" ng-include src="flowTpl_src" ng-hide="groupTable.flag"></div>
+      </div>
+      <div id="marketLayer"  ng-include src="groupObj.tpl_src" ng-show="groupObj.show_flog" ></div>
+       <!-- <div  ng-include="'view/acTypeMana.html'" ></div> -->
+    </div>
+  </div>
+</div>
+
+
+

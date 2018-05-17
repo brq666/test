@@ -1,0 +1,44 @@
+<div class="maincontainerB" ng-controller="memberGradeSettings">
+  <div class="addTheme">
+    <ul class="addSubject">
+      <li>
+        <label>选择主题：</label>
+        <select class="commSelect" ng-model="a.subjectId" ng-options="subject.subjectId as subject.subjectName for subject in subjects"></select>
+      </li>
+      <li>
+        <label>选择店铺纬度：</label>
+        <select class="commSelect" ng-model="a.shopDicKey" ng-options="dic.dicId as dic.dicName for dic in dics"></select>
+      </li>
+      <li>
+        <label>选择VIP等级纬度：</label>
+        <select class="commSelect" ng-model="a.gradeDicKey" ng-options="dic.dicId as dic.dicName for dic in dics"></select>
+      </li>
+    </ul>
+    <div class="ling_di"></div>
+    <div class="commBottom">
+      <div class="mb">
+        <button class="btn btnBlue" ng-click="saveMemberGradeSetting()">确定</button>
+        <button class="btn" ng-close-window>取消</button>
+      </div>
+    </div>
+  </div>
+  <div class="maincontainer">
+    <div class="clearfix">
+      <h2 class="heading fl">会员等级设置配置</h2>
+      <div class="smalldarkerblueBtn newbuildBtn">
+        <a href="javascript:void(0)" ng-click="addOrModify()">新增主题</a>
+      </div>
+    </div>
+    <ul class="subjectArray" ng-repeat="memberGradeSetting in memberGradeSettings">
+      <li>主题：{{memberGradeSetting.subjectName}}</li>
+      <li>关联店铺纬度：{{memberGradeSetting.shopDicKeyName}}</li>
+      <li>关联会员等级纬度：{{memberGradeSetting.gradeDicKeyName}}</li>
+      <li>
+        <a href="javascript:void(0)" ng-click="addOrModify(memberGradeSetting)">修改</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)" ng-click="dele(memberGradeSetting.id)">删除</a>
+      </li>
+    </ul>
+  </div>
+</div>

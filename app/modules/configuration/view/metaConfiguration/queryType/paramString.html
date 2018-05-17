@@ -1,0 +1,41 @@
+<div class="dataConfigStyle height220" ng-controller="bbb">
+  <dl>
+    <dt class="mb10">
+      <label class="commLabelWidth75">参数配置：</label>
+      <span class="commLabelWidth80">操作符：</span>
+      <span class="ml5">等于,不等于,包含,不包含,以字符开头,以字符结尾</span>
+    </dt>
+    <ul class="commPaddingLeft75">
+      <li>
+        <p class="mb10">
+          <span class="commLabelWidth80">长度限制：</span>
+          <input class="borderHighlight" type="text" />
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="commLabelWidth80">特殊校验：</span>
+          <label class="mr20 ml5">
+            <input class="commRadio" type="radio" name="validate" />手机
+          </label>
+          <label class="mr20">
+            <input class="commRadio" type="radio" name="validate" />eamil
+          </label>
+          <label>
+            <input class="commRadio" type="radio" name="validate" />身份证
+          </label>
+        </p>
+      </li>
+    </ul>
+  </dl>
+</div>
+<script type="text/javascript">
+  function bbb($scope,$http){
+    $scope.init=function(){
+      alert("bbb");
+    };
+    $scope.ccc="ccc"
+    $scope.init();
+  }
+
+</script>

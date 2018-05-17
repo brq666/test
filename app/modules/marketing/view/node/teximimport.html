@@ -1,0 +1,134 @@
+<div ng-controller="teximimportCtrl" class="mesg_node portNode">
+  <div class="discountEc">
+    <div class="commWrapFour clearfix commNodeMarkRelative">
+      <div class="bannerCommStyle areaHeight26" ng-show="matchScopeObj.tips">
+        {{matchScopeObj.tips}}
+        <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+      </div>
+      <div class="commPenEditor">
+        <div class="contentNodeWrap">
+          <table>
+            <tbody>
+            <tr>
+              <th class="tr" width="18%"><label>节点名称：</label></th>
+              <td>
+                <div class="pr">
+                  <input type="text" class="borderHighlight nameInput ml5 fl" ng-model="matchScopeObj.name" maxlength="20" ng-noderequire="" />
+                </div><span nodetip=""></span>
+              </td>
+              <td><label class="code mr40 fr">节点代码：{{matchScopeObj.id}}</label></td>
+            </tr>
+            <tr>
+              <th class="tr"><label>主题选择：</label></th>
+              <td>
+                <select class="commSelect width210" ng-model="matchScopeObj.curPlatformName" ng-options="platform.subjectId as platform.subjectId for platform in matchScopeObj.platformList">
+                  <option value="">--请选择主题--</option>
+                </select>
+                <label class="error ml5" ng-show="discountEcShopFlag">请选择主题</label>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="tr" valign="top"><label>选择本地文件：</label></th>
+              <td>
+                <span class="relativeBox">
+                  <input id="portUpLoadFile" name="portUpLoadFile" class="teximportupload" readonly="readonly" multiple="true" />
+                  <!-- <span class="ml10 mr10 gifLoading loadingPosition domNone"></span> -->
+                </span>
+                <span style="position: relative;left: 1px;" ng-show="matchScopeObj.loadStatus">（单个文件最多支持250万条记录）</span>
+                <p class="mb10">
+                  <label class="error" for="campName" ng-show="matchScopeObj.matchFileUploadFlag">{{matchScopeObj.uploadErrorInfo}}</label>
+                </p>
+                <p class="ml5">
+                  <a class="blueColor" href="{{appOrigin}}{{appRoot}}/modules/marketing/importexample.zip" title="导入文件样例" target="_blank">导入文件样例</a>
+                </p>
+                <div id="texiLoading">
+                  <span id="teximiLoading"></span>
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="tr"><label>字段分隔符：</label></th>
+              <td>
+                <select class="commSelect width130" ng-model="matchScopeObj.splitSign" ng-options="val.id as val.name for val in splitSignArrs" ng-change="matchScopeObj.viewSplitSign()" ng-selected="val.id==matchScopeObj.splitSign">
+                <!--    <option value="number:0" selected="selected">,(逗号)</option>
+                  <option value="number:1">;(分号)</option>
+                  <option value="number:2">&nbsp;(空格)</option> -->
+                </select>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="tr"></th>
+              <td colspan="2">
+                <p class="mb10 ml5">
+                  <label>
+                    <input class="commCheckbox" type="checkbox" ng-model="matchScopeObj.hasColumnValue" ng-change="matchScopeObj.viewSplitSign()" ng-="" ng-true-value="'true'" ng-false-value="'false'" />第一行包含字段名
+                  </label>
+                </p>
+                <p class="ml5">
+                  <button class="btn margin0 commSmallBtn borderRadiusNone" ng-click="matchScopeObj.startMatchData()" type="button">开始匹配</button>
+                  <span class="ml10 mr10 gifLoading" ng-show="matchScopeObj.matchFileFlag"></span>
+                  <!-- <span id="progress" ng-show="matchScopeObj.matchFileFlag">0%</span> -->
+                  <!-- <a class="blueColor ico_tips" href="javascript:void(0)" ng-title="文件行数超过一万条时,匹配需要较长时间.如果不想等待,请关闭节点窗口.继续其他操作" ng-show="matchScopeObj.matchFileFlag"></a> -->
+                  <label class="error ml10" ng-show="matchScopeObj.matchButtonMark">{{matchScopeObj.matchStatusMark}}</label>
+                </p>
+                <span ng-if="matchScopeObj.matchFileFlag" style="position: relative;top: -21px;left: 110px;">匹配速度：50万条记录大约需要60秒</span>
+                <span ng-if="!matchScopeObj.matchFileFlag" ng-class="{marginLeft180: matchScopeObj.matchButtonMark}" style="position: relative;top: -20px;left: 75px;">匹配速度：50万条记录大约需要60秒</span>
+                <span style="position: relative;top: 0px;left: -96px;" ng-show="matchScopeObj.matchFileFlag">如果不想等待，请点击『确定』按钮关闭窗口，继续其它操作。</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="uploadInfo" ng-show="matchScopeObj.matchImportNumber">
+          <p>导入记录数{{matchScopeObj.matchImportNumber}}，排重后记录数{{matchScopeObj.matchDistinctNumber}}，与系统客户匹配数{{matchScopeObj.matchNumber}}（占比{{matchScopeObj.matchPoint}}%）</p>
+          <a class="blueColor" href="javascript:void(0)" title="查看导入数据" ng-click="matchScopeObj.showResponseData()">查看导入数据</a>
+        </div>
+        <div class="commPositionData importResponseDataStyle" ng-show="matchScopeObj.isRollListShow">
+          <dl>
+            <dt>
+              名单预览
+            </dt>
+            <dd>
+              <ul class="previewBox">
+                <li ng-repeat="roll in matchScopeObj.rollList track by $index">{{roll}}</li>
+              </ul>
+            </dd>
+          </dl>
+          <span class="sanjiaoMark"></span>
+        </div>
+      </div>
+    </div>
+    <div class="ling_di mt10 clearfix"></div>
+    <div class="commBottom clearfix">
+      <div class="mb">
+        <a class="watchData" href="javascript:void(0)" title="客户数据查看" ng-click="matchScopeObj.showEcDataPop()" ng-show="matchScopeObj.viewEcDataFlag">
+          <img src="../../images/watchDataBtn.jpg" width="109" height="30" />
+        </a>
+        <button class="btn btnBlue" ng-click="matchScopeObj.postDiscountEcData($event)">确定</button>
+        <button class="btn" ng-close-window="">取消</button>
+      </div>
+    </div>
+  </div>
+  <div class="matchDataListView domNone">
+    <div class="commWrapThree">
+      <div class="dataInfoList">
+        <table>
+          <thead>
+          <tr>
+            <th width="{{autoWidth}}" ng-repeat="title in targetDataListsTitle track by $index"><span>{{title}}</span></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat=" vals in targetDataListsVal track by $index">
+            <td>{{vals}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<script type="text/javascript" src="controller/node/teximimport.js"></script>-->

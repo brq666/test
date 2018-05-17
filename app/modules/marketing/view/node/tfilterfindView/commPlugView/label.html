@@ -1,0 +1,15 @@
+<div class="labelPlug" ng-controller="labelCtrl">
+	<div class="listsBox">
+    <ul class="unitLists clearfix">
+      <li ng-repeat="valuesList in labelObj.valuesLists" class={{valuesList.classVal}} ng-chose-unit>
+        <a id={{valuesList.id}} title={{valuesList.name}} href="javascript:void(0)" >{{valuesList.name}}</a>
+        <span class="trianger"></span>
+        <span class="gg"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="listsButton fr mr15">
+    <button class="btn btnBlue" type="button" ng-close-child-window ng-click="labelObj.sureAddLabel($event)">确定</button>
+    <button class="btn" type="button" ng-close-child-window>取消</button>
+  </div>
+</div>

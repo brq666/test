@@ -1,0 +1,26 @@
+.addSubject{
+	width:90%;
+	margin: 20px auto;
+}
+.addSubject label{
+	width: 110px;
+	display: inline-block;
+	text-align: right;;
+}
+.addSubject li{
+	width: 100%;
+	margin-bottom: 10px;
+}
+.subjectArray{
+	width: auto;
+	border: 1px solid #ccc;
+	clear: both;
+	height: 30px;
+	margin-bottom: 10px;
+}
+.subjectArray li{
+	float: left;
+	display: inline-block;
+	line-height: 30px;
+	padding: 0 10px;
+}

@@ -1,0 +1,45 @@
+﻿<style>
+  .li_de {
+    width: 250px;
+    float: left;
+    height: 80px;
+  }
+  .otherPageList li img {
+    border: 1px solid #e8eae9;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  .otherPageList {
+    padding-left: 13px;
+    padding-top: 10px;
+  }
+</style>
+<div class="maincontainerB" ng-controller="roleManagementCtrl">
+  <div class="maincontainer">
+    <div class="clearfix" ng-click="test()">
+      <h2 class="heading fl">权限管理</h2>
+    </div>
+    <div class="market_types_tree grey_border" style="margin-top: 70px;">
+      <div roleztreemenu></div>
+      <div class="market_tree_input_wrapper">
+        <input type="text" class="market_tree_search_input system_search" ng-placeholder="角色搜索" ng-model="searchValue" tree-node-search-input>
+        <a class="addRootfile" ng-click="addNode(true)" href="javascript:void(0)" title="新增角色"></a>
+      </div>
+      <div class="market_tree_wrapper">
+        <div class="ztree roleZtreeStyle" ztree role-tree id="aaa" style="min-height: 200px"></div>
+      </div>
+    </div>
+    <div style="margin-left: 220px; width:800px; position: absolute; top: 0; bottom: 20px; right: 0; left: 0; margin-top: 70px;" ng-controller="roleManagementCtrl2">
+      <div style="border: 1px solid #e3e7ea; width: 90%; height: 490px; overflow:auto;">
+        <div roleztreemenu></div>
+        <div class="market_tree_wrapper1" style="position:absolute;left:20px;top: 38px;width: 670px;">
+          <div class="ztree" ztree check-tip-tree id="Div1" style="min-height: 200px; height:400px; overflow:auto;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="mb" style="position: absolute; top: 515px; left: 800px;">
+      <button class="btn btnBlue" id="Button1" ng-click="saveShops.saveShops()">确定</button>
+    </div>
+  </div>
+</div>

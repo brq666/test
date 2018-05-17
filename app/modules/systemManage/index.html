@@ -1,0 +1,48 @@
+<link rel="stylesheet" type="text/css" href="https://shuyun-static.b0.upaiyun.com/components/jquery.ui.timepicker/1.1.1/development-bundle/themes/base/jquery.ui.all.css">
+<link rel="stylesheet" type="text/css" href="https://shuyun-static.b0.upaiyun.com/components/jquery.ui.timepicker/1.1.1/timepicker/css/jquery-ui-timepicker-addon.css">
+<!-- build:css ../../css/systemManage/systemManage.css -->
+<link class="usemin" type="text/css" rel="stylesheet" href="../../../ccms/css/shuyun.lib.css" />
+<link class="usemin" type="text/css" rel="stylesheet" href="../../../ccms/css/systemManage/systemManage.css" />
+<!-- endbuild -->
+<!-- build:remove  -->
+<script src="../../../app/lib/angular-1.2.19/angular.min.js"></script>
+<script type="text/javascript" src="../../../app/lib/angular-1.2.19/angular-route.min.js"></script>
+<!-- endbuild -->
+<!-- build:js ../../js/systemManage/systemManage.js -->
+<script type="text/javascript" src="../../../app/lib/js-cookie.js"></script>
+<script type="text/javascript" src="../../../ccms/js/config.js"></script>
+<script type="text/javascript" src="../../../app/components/ztree/js/jquery.ztree.all-3.5.js"></script>
+<script type="text/javascript" src="../../../app/components/flexigrid/js/flexigrid.js"></script>
+<script type="text/javascript" src="../../../app/components/jquery.ui.timepicker/js/jquery-ui.custom.js"></script>
+<script type="text/javascript" src="../../../app/components/jquery.ui.timepicker/timepicker/js/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="../../../app/components/jquery.ui.timepicker/development-bundle/ui/i18n/jquery.ui.datepicker-zh-CN.js"></script>
+<script type="text/javascript" src="../../../app/components/jquery.validate/jquery.validate.js"></script>
+<script type="text/javascript" src="../../../app/components/jquery.validate/messages_zh.js"></script>
+<script type="text/javascript" src="../../../app/components/ccms_pop/js/yunat_pop.js"></script>
+<script type="text/javascript" src="../../../app/js/globalMethod.js"></script>
+<script type="text/javascript" src="../../../app/components/moment/moment.min.js"></script>
+<script type="text/javascript" src="../../../app/modules/systemManage/controller/mainCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/systemManage/controller/departmentManagementCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/systemManage/controller/roleManagementCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/systemManage/controller/subAccountCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/systemManage/controller/subAccountList.js"></script>
+<script type="text/javascript" src="../../../app/modules/systemManage/controller/systemAccountCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/systemManage/controller/iframeCtrl.js"></script>
+<script type="text/javascript" src="../../../app/modules/systemManage/service/systemManageService.js"></script>
+<script type="text/javascript" src="../../../app/modules/systemManage/controller/accountList.js"></script>
+<!-- <script type="text/javascript" src="../../../app/js/directives.js"></script> -->
+<script type="text/javascript" src="../../../app/modules/systemManage/directive/smDirective.js"></script>
+<script type="text/javascript" src="../../../app/modules/systemManage/directive/systemManageDirective.js"></script>
+<!-- endbuild -->
+
+<div class="_campagin" ng-controller="systemManageMainCtrl">
+  <div class="ccmsc-main-container content-sidebar-layout" ng-class="{'contract-left':!menusOptions.unfold}">
+    <div class="left-container">
+      <cc-menu-bar unfold="menusOptions.unfold"
+                   menu-source="menusOptions.menusResource"
+                   shop-source="menusOptions.shopsResource"
+                   class="menu-wrap"></cc-menu-bar>
+    </div>
+    <ui-view></ui-view>
+  </div>
+</div>

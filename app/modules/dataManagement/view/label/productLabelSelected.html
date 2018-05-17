@@ -1,0 +1,208 @@
+<div class="labelPlug" ng-controller="labelCtrl">
+  <div class="clearfix commLabelPlugSearch">
+    <div class="commSearch">
+      <label ng-data-searcheffect="" class="default_color">标签名称</label>
+      <input type="text" ng-data-searcheffect="" ng-model="labelObj.searchVal.tagName" name="couponName" class="commSearchVal" />
+      <button ng-click="searchObj.searchHdButton(hdValue)" class="commSearchBtn"></button>
+    </div>
+  </div>
+  <div class="listsBox">
+    <ul class="unitLists clearfix">
+      <li ng-repeat="valuesList in labelObj.valuesLists | filter:labelObj.searchVal" ng-class="{cur:valuesList.hasClass}" ng-click="labelObj.toggleLabelStatus(valuesList)">
+        <a id="{{valuesList.tagId}}" title="{{valuesList.tagDescribe}}" href="javascript:void(0)">{{valuesList.tagName}}</a>
+        <span class="trianger"></span>
+        <span class="gg"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="listsButton fr mr15">
+    <button class="btn" type="button" ng-class="labelObj.addBtnClass" ng-disabled="labelObj.sureAddLabelFlag" ng-click="labelObj.sureAddLabel($event)">确定</button>
+    <button class="btn" type="button" ng-close-data-child-window="">取消</button>
+  </div>
+</div>
+<script type="text/javascript">
+  function labelCtrl($scope,getListService,productLabelService){
+    var labelUseedTo=$scope.$parent.disponseLabelObj.whichAction,useedDefaultEditorDate; // whichAction：searchAction—商品选择，singleAction—单个标签添加， batchAddAction—批量增加标签，batchDeleteAction—批量删除标签，
+    $scope.disponseLabelObj.openPlugPop(2);
+    $scope.labelObj={
+      "sureAddLabelFlag":false,
+      "addBtnClass":['btnBlue'],
+      "setLabelDefaultStatus":function(selectedDate){
+        if(labelUseedTo == "searchAction"){
+          angular.forEach(selectedDate,function(val,key){
+            var curLabelId=val.id;
+            angular.forEach($scope.labelObj.valuesLists,function(sv,sk){
+              if(sv.tagId == curLabelId){
+                sv.hasClass=true;
+                return "stop each"
+              }
+            })
+          })
+        }else{
+          angular.forEach(selectedDate,function(val,key){
+            var curLabelId=val.tagId;
+            angular.forEach($scope.labelObj.valuesLists,function(sv,sk){
+              if(sv.tagId == curLabelId){
+                sv.hasClass=true;
+                return "stop each"
+              }
+            })
+          })
+        }
+      },
+      "getCurrentLabelData":function(e){
+        var dataArrary=[];
+        angular.forEach($scope.labelObj.valuesLists,function(sv,sk){
+          if(sv.hasClass){
+            if(labelUseedTo == "searchAction"){
+              dataArrary.push({
+                "id":Number(sv.tagId),
+                "value":sv.tagName
+              })
+            }else if(labelUseedTo == "singleAction" || labelUseedTo == "batchAddAction"){
+              dataArrary.push({
+                "tagId":Number(sv.tagId),
+                "tagName":sv.tagName,
+                "tagDescribe":sv.tagDescribe
+              })
+            }
+          }else{
+            if(labelUseedTo == "batchDeleteAction"){
+              dataArrary.push({
+                "tagId":Number(sv.tagId),
+                "tagName":sv.tagName,
+                "tagDescribe":sv.tagDescribe
+              })
+            }
+          }
+        })
+        return dataArrary;
+      },
+      "sureClosePop":function(e){
+        var element=angular.element(e.target);
+        $scope.labelObj.sureAddLabelFlag = false;
+        $scope.labelObj.addBtnClass = ['btnBlue'];
+        element.closest(".ccmsPublicPop").hide();
+        if (element.parents(".ccmsPublicPop").find(".childElementMark").length > 0) {
+          if (angular.element(".ccmsPublicPop").find(".childElementMark").length > 1) {
+            if (angular.element(".ccmsPublicPop").find(".childElementMark").length == 2) { // 3个弹框
+              element.closest(".commCustomConfigBox").find(".childElementMark").remove();	//class commCustomConfigBox 自定义属性 专属class
+            }
+          } else {
+            angular.element(".ccmsPublicPop").find(".childElementMark").remove();
+          }
+        } else {
+          angular.element(".yunat_maskLayer:last").remove();
+        }
+      },
+      "toggleLabelStatus":function(valuesList){
+        valuesList.hasClass=!valuesList.hasClass;
+      },
+      "getDefaultLabelListDatas":function(callback){
+        productLabelService.getProductLabel(function(data){
+          callback(data);
+        });
+      },
+      "getDefaultUsedLabelListDatas":function(callback,reqdata){
+        productLabelService.getProductLabelUsed(function(data){
+          if(data && data.length==0){
+            $(this).Alert({"title":"提示","str":"当前选中的商品没有标签，请重新选择！","mark":true,"width":"260px","eleZindex":1010,"markZindex":1005},function(){
+              angular.element(".productEditorLabelPlug").hide();
+              angular.element(".yunat_maskLayer:last").remove();
+            });
+            return false;
+          }
+          callback(data);
+        },reqdata);
+      }
+    };
+
+    if(labelUseedTo=="searchAction"){ // 商品标签搜索查询
+      useedDefaultEditorDate=$scope.$parent.disponseLabelObj.queryLabelLists ? $scope.$parent.disponseLabelObj.queryLabelLists.slice() : [];
+
+      $scope.labelObj.sureAddLabel=function(e){
+        $scope.$parent.disponseLabelObj.queryLabelLists=$scope.labelObj.getCurrentLabelData(e);
+        $scope.labelObj.sureClosePop(e);
+      };
+    }else  if(labelUseedTo=="singleAction") { // 单个商品标签添加操作
+      useedDefaultEditorDate=($scope.$parent.disponseLabelObj.curSingleProLabelLists && $scope.$parent.disponseLabelObj.curSingleProLabelLists.tags) ? $scope.$parent.disponseLabelObj.curSingleProLabelLists.tags.slice() : [];
+
+      $scope.labelObj.sureAddLabel=function(e){
+        var labelSelectIds=[],labelSelectNames=[];
+        var selectedData=$scope.labelObj.getCurrentLabelData(e);
+        angular.forEach(selectedData,function(val,key){
+          labelSelectIds.push(val.tagId);
+          labelSelectNames.push(val.tagName);
+          labelSelectNames.push(val.tagDescribe);
+        });
+        $scope.labelObj.sureClosePop(e);
+        $scope.$parent.disponseLabelObj.sureAddSingleLabelcallback(selectedData,labelSelectIds);
+      };
+    }else if(labelUseedTo=="batchAddAction"){ // 商品标签批量增加
+      useedDefaultEditorDate=$scope.$parent.disponseLabelObj.queryLabelLists ? $scope.$parent.disponseLabelObj.queryLabelLists.slice() : [];
+
+      $scope.labelObj.sureAddLabel=function(e){
+        var selectedData=$scope.labelObj.getCurrentLabelData(e);
+        if(selectedData.length==0){
+          $(this).Alert({"title":"提示","str":"请选择标签","mark":true,"width":"160px","eleZindex":1010,"markZindex":1005});
+          return false;
+        };
+        var batchAddlabelSelectIds=[];
+        angular.forEach(selectedData,function(val,key){
+          batchAddlabelSelectIds.push(val.tagId);
+        });
+        $(this).Confirm({"title":"增加提示","str":"确定为商品批量增加标签？","mark":true,"eleZindex":1010,"markZindex":1005},function(){
+          $scope.$apply(function(){
+            $scope.labelObj.sureAddLabelFlag = true;
+            $scope.labelObj.addBtnClass = [];
+            $scope.$parent.disponseLabelObj.sureAddbatchLabelcallback(function(){$scope.labelObj.sureClosePop(e)},batchAddlabelSelectIds);
+          });
+        });
+      };
+    }else if(labelUseedTo=="batchDeleteAction"){ // 商品标签批量删除
+      $scope.labelObj.sureAddLabel=function(e){
+        var selectedData=$scope.labelObj.getCurrentLabelData(e);
+        if(selectedData.length==0){
+          $(this).Alert({"title":"提示","str":"请选择标签","mark":true,"width":"160px","eleZindex":1010,"markZindex":1005});
+          return false;
+        };
+        var batchDeletelabelSelectIds=[];
+        angular.forEach(selectedData,function(val,key){
+          batchDeletelabelSelectIds.push(val.tagId);
+        });
+        $(this).Confirm({"title":"删除提示","str":"确定批量删除商品的标签？","mark":true,"eleZindex":1010,"markZindex":1005},function(){
+          $scope.$apply(function(){
+            $scope.labelObj.sureAddLabelFlag = true;
+            $scope.labelObj.addBtnClass = [];
+            $scope.$parent.disponseLabelObj.sureDeletebatchLabelcallback(function(){$scope.labelObj.sureClosePop(e)},batchDeletelabelSelectIds);
+          });
+        });
+      };
+    };
+
+    //初始化标签列表
+    if(labelUseedTo != "batchDeleteAction"){
+      $scope.labelObj.getDefaultLabelListDatas(function(data){
+        $scope.labelObj.valuesLists=data;
+        $scope.labelObj.setLabelDefaultStatus(useedDefaultEditorDate);
+      });
+    }else{
+      var getBatchUsedData={
+        "productIds":$scope.$parent.disponseLabelObj.isThisPage=="0" ? $scope.$parent.disponseLabelObj.getSelectedProListIds().slice():[],
+        "allSelect":$scope.$parent.disponseLabelObj.isThisPage=="0" ? false :true
+      };
+
+      if(getBatchUsedData.allSelect){
+        getBatchUsedData.searchConditions=$scope.$parent.disponseLabelObj.isSearchOutData;
+      }else{
+        delete  getBatchUsedData.searchConditions;
+      };
+
+      $scope.labelObj.getDefaultUsedLabelListDatas(function(data){
+        $scope.labelObj.valuesLists=data;
+        useedDefaultEditorDate=$scope.labelObj.valuesLists ? $scope.labelObj.valuesLists.slice() : [];
+        $scope.labelObj.setLabelDefaultStatus(useedDefaultEditorDate);
+      },getBatchUsedData)
+    }
+  }
+</script>

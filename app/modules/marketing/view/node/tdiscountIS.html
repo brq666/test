@@ -1,0 +1,96 @@
+<div ng-controller="discountISCtrl" class="mesg_node">
+  <div class="discountIs">
+    <div class="commWrapFour clearfix commNodeMarkRelative">
+      <div class="bannerCommStyle areaHeight26" ng-show="isScopeObj.tips">
+        {{isScopeObj.tips}}
+        <a href="javascript:void(0)" toggle-banner title="展开" class="downSanjiao sanjiaoPosition"></a>
+      </div>
+      <div class="contentNodeWrap">
+        <table>
+          <tr>
+            <th class="tr" width="18%">
+              <label>节点名称：</label>
+            </th>
+            <td>
+              <div class="pr">
+                <input type="text" class="borderHighlight nameInput ml5 fl" ng-model="isScopeObj.name" maxlength="20" ng-noderequire/><span nodetip></span>
+              </div>
+            </td>
+            <td>
+              <label class="mr40 fr">节点代码：{{isScopeObj.id}}</label>
+            </td>
+          </tr>
+          <tr>
+            <th class="tr">
+              <label><span class="red">*</span>卡类型选择：</label>
+            </th>
+            <td>
+              <input type="text" class="borderHighlight required width200 ml5" readonly="readonly" name="discountCard" valueId="{{isScopeObj.ctyId}}" ng-model="isScopeObj.ctyName" comm-select-config="isScopeObj.getCardTypeList()" />
+              <label class="error ml5" ng-show="discountIsShopFlag">请选择卡类型</label>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="tr" valign="top">
+              <label>发放积分类型：</label>
+            </th>
+            <td colspan="2">
+              <span class="shopDiscountView ml5" ng-class={red:isScopeObj.integralTypeId==null}>{{isScopeObj.discountTypeView}}</span>
+            </td>
+          </tr>
+          <tr>
+            <th class="tr" valign="top">
+              <label><span class="red">*</span>发放积分数量：</label>
+            </th>
+            <td colspan="2">
+              <input type="text" class="nameInput borderHighlight ml5" ng-model="isScopeObj.testNumber" />
+              <em class="ico_tips" ng-title="积分发放的范围为1~99999"></em>
+              <label class="error disblackError" ng-show="testAccountFormatError">请正确填写积分发放数量</label>
+            </td>
+          </tr>
+          <tr>
+            <th class="tr" valign="top">
+              <label><span class="red">*</span>备注：</label>
+            </th>
+            <td colspan="2">
+              <input type="text" class="nameInput borderHighlight ml5" ng-class="{error:beizhuError}" maxlength="30" ng-model="isScopeObj.description"  ng-focus="isScopeObj.beizhuFocus()" ng-blur="isScopeObj.blurMethod()" />
+              <em class="ico_tips" ng-title="输入内容最大长度为30"></em>
+              <label class="error disblackError" ng-show="beizhuError">{{isScopeObj.beizhuDesc}}</label>
+            </td>
+          </tr>
+          <tr>
+            <th class="tr">
+              <label>输出控制：</label>
+            </th>
+            <td>
+              <label class="ml5 mr10">
+                <input class="commRadio" type="radio" name="exportRadio" ng-model="isScopeObj.targetClient" value="ONLY_SUCCESS" />仅发送成功客户</label>
+              <label>
+                <input class="commRadio" type="radio" name="exportRadio" ng-model="isScopeObj.targetClient" value="ALL" />全体客户<em class="ico_tips" ng-title="选择全体客户会将发送失败客户也向后方节点输出"></em>
+              </label>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="ling_di mt10 clearfix"></div>
+    <div class="commBottom clearfix">
+      <a class="reportButton" href="javascript:void(0);" ng-click="isScopeObj.showIsDataPop()" ng-show="isScopeObj.viewIsDataFlag"><span
+                    class="reportIcon"></span>发送报告</a>
+
+      <div class="mb">
+        <button class="btn btnBlue" ng-click="isScopeObj.postDiscountIs($event)">确定</button>
+        <button class="btn" ng-close-window>取消</button>
+      </div>
+    </div>
+    <div class="discountIsDataView">
+      <div class="commWrapThree">
+        <div class="bannerCommStyle">明细数据保留15天，15天后将不再提供下载，如需保留数据，请及时下载。</div>
+        <div class="clearfix mb10"></div>
+        <div class="dataInfoList">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

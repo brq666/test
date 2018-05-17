@@ -1,0 +1,35 @@
+<!--<script type="text/javascript" src="script/controller/accountList.js"></script>-->
+<div>
+  <div class="clearfix">
+    <h2 class="heading fl">客户红名单</h2>
+    <div class="smalldarkerblueBtn newbuildBtn"><a href="javascript:void(0)" ng-click="accountObj.accountMethod('add')" >新建红名单</a></div>
+  <!-- <span class="ccms_tips"><span class="ccms_tipsContent"><b></b>需要店铺订购淘宝官方的"店铺优惠券"应用，点击 <a target="_blank" href="http://fuwu.taobao.com/ser/detail.htm?spm=0.0.0.118.ZjwjUl&amp;service_code=SERV_DPYHQ" title="立即订购">立即订购</a></span></span>-->
+  </div>
+  <div class="list" >
+    <div class="listHeader">
+      <ul class="listTab clearfix">
+        <li class="listSelected"><a href="javascript:;" title="系统账号列表">名单列表</a></li>
+      </ul>
+    </div>
+    <div class="couponListssBox listContainer">
+      <div style="position:absolute;top:5px;bottom:0;right:0;left:0">
+        <div id="couponListsGrid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="queryShopsPop  ">
+    <!--<div class="title1">短信预览 <span class="sms_close" ng-click="smsClose()"></span></div>-->
+  <div class="content" style="" ng-repeat="smsShowContent in smsShowContents">
+    <div class="sms_content" >
+      {{smsShowContent}}
+    </div>
+  </div>
+  <div ng-show="sShow" style="
+width: 351px;
+margin-left: 26px;
+
+">{{sign}}</div>
+  <span ng-hide="sShow" style="padding: 0px 25px;">本短信正式发送时共{{countShow}} 字，按{{smsCount}}条短信计费！</span>
+  <div style="width: 20px; height: 20px"></div>
+</div>

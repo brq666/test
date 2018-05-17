@@ -1,0 +1,63 @@
+<div ng-controller="tfilterFindCtrl">
+  <div>
+    <div class="commWrapFour commNodeMarkRelative">
+      <div class="bannerCommStyle areaHeight26" ng-show="tfilterFindObj.tips">
+        {{tfilterFindObj.tips}}
+        <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+      </div>
+      <div class="clearfix">
+        <table>
+          <tbody>
+          <tr>
+            <th class="tr" width="6%"><label class="node_name_label">节点名称：</label></th>
+            <td>
+              <div class="pr">
+                <input type="text" class="borderHighlight nameInput fl" ng-model="tfilterFindObj.name" maxlength="20" ng-noderequire="" />
+                <span nodetip=""></span>
+              </div>
+            </td>
+            <td><label class="fr code">节点代码：{{tfilterFindObj.id}}</label></td>
+          </tr>
+          </tbody>
+        </table>
+        <!--div class="fl"><label class="node_name_label">节点名称：</label> <input type="text" class="borderHighlight nameInput" ng-model="tfilterFindObj.name" maxlength="20" ng-noderequire></div>
+        <span nodetip></span>
+        <label class="fr code">节点代码：{{tfilterFindObj.id}}</label-->
+      </div>
+      <div class="tfilterContent mt10 tfilterfindWrap">
+        <div class="radioTitleWrap">
+          <label class="mr20">
+            <input class="commRadio" type="radio" name="queryType" value="custom" ng-model="tfilterFindObj.queryType" />自定义查询条件
+          </label>
+          <label class="mr20">
+            <input class="commRadio" type="radio" name="queryType" value="existingGroup" ng-model="tfilterFindObj.queryType" />选择已有客户分组
+          </label>
+          <!--平台选择 start-->
+          <div class="fl mr20" ng-show="tfilterFindObj.queryType=='custom' &amp;&amp; tfilterFindObj.subjectList.length&gt;0">
+            <label class="commLabelWidth75">平台选择：</label>
+            <select name="subjects" class="commSelect width130 ng-pristine" ng-model="tfilterFindObj.defaultSubjectId" ng-change="tfilterFindObj.changeSubject()" ng-options="subjectListItem.subjectId as subjectListItem.subjectId for subjectListItem in tfilterFindObj.subjectList"></select>
+          </div>
+          <!--平台选择 end-->
+          <span class="blueColor cursorPointer" href="javascript:void(0)" title="把如下条件保存为分群" ng-show="(tfilterFindObj.queryType=='custom') &amp;&amp; (!tfilterFindObj.isEditorFlag)" ng-click="tfilterFindObj.choiceWhichGoupSave()">
+            <span class="ccmsSaveBtn verticalAlign3"></span>把如下条件保存为分群
+          </span>
+        </div>
+        <div class="radioTypeContent" ng-include="" src="tfilterFindObj.radioSrc"></div>
+      </div>
+    </div>
+    <div>
+      <div class="ling_di"></div>
+      <div class="commBottom">
+        <div class="mb">
+          <label class="error ml5" ng-show="tfilterFindObj.isnotCondition">请至少配置一种条件</label>
+          <button class="btn queryNodeGlobalButton" ng-class="{btnBlue:!tfilterFindObj.isEditorFlag}" ng-click="tfilterFindObj.postQueryData()">确定</button>
+          <button class="btn" ng-close-window="">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--保存分组选择框 start-->
+  <div class="groupSaveByQueryWrap" ng-include="" src="tfilterFindObj.includeSelectedGroupSrc" onload="tfilterFindObj.choiceWhichGoupPop()"></div>
+  <!--保存分组选择框 end-->
+</div>
+<!--<script type="text/javascript" src="controller/node/tfilterFindCtrl.js"></script>-->

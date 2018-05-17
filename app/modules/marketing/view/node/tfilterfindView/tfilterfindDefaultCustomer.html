@@ -1,0 +1,46 @@
+<!--<script type="text/javascript" src="controller/node/tfilterfindJs/queryCustomerGroupCtrl.js"></script>-->
+<div class="commDataTableStyle customerGroupSelected queryCustomerGroupClass" ng-controller="QueryCustomerGroupCtrl" ng-cloak>
+  <div>
+    <div class="clearfix commPenEditor height30">
+      <p class="fl mt5 ml5">
+        <label>已选择分组：</label>
+        <span class="commFontMark mr10 blueColor verticalAlignTop" ng-show="queryCustomerGroupObj.curSelectedGroupName" id="{{queryCustomerGroupObj.curSelectedGroupId}}">{{queryCustomerGroupObj.curSelectedGroupName}}<a ng-click="queryCustomerGroupObj.delTitle($index)" href="javascript:void(0)"><img width="10" height="10" src="/ccms/images/deletex.png" ng-src="/ccms/images/deletex.png"></a>
+        </span>
+      </p>
+      <input class="tableSearch borderHighlight" type="text" ng-commdtable-search ng-model="queryCustomerGroupObj.selectTable"><label ng-commdtable-search class="default_color">请输入分组名称</label>
+    </div>
+    <div class="customerGroupZtreeWrap">
+      <div class="market_types_tree grey_border customerGroupNodeZTree" ng-cloak>
+        <div ztreemenu></div>
+        <div class="market_tree_input_wrapper"><input type="text" class="market_tree_search_input system_search" ng-placeholder="分组类型" ng-model="searchValue" tree-node-search-input></div>
+        <div class="market_tree_wrapper">
+          <div class="ztree defaultWrapztree" customer-node-ztree out-root-tree id="aaa" style="min-height:200px;"></div>
+        </div>
+      </div>
+      <div class="dataTableGird ml200">
+        <div class="grey">
+          <span class="center w5 mt5"></span>
+            <span class="center w10 mt5">分组ID</span>
+            <span class="center w14 mt5">所属平台</span>
+            <span class="center w14 mt5">分组名称</span>
+            <span class="center w14 mt5">创建人</span>
+            <span class="center w14 mt5">创建时间</span>
+            <span class="center w14 mt5">分组类型</span>
+            <span class="center w14 mt5">分组人数</span>
+        </div>
+        <div class="dataTableList inQueryDataList">
+          <div class="dataConfigureTableListStyle clearfix" ng-repeat="unselectedTable in queryCustomerGroupObj.customerGroupLists">
+            <div class="w5 center"><input class="mt4" type="radio" ng-model="queryCustomerGroupObj.defaultRadioSelect" ng-click="queryCustomerGroupObj.changeCurGroupTitleView(unselectedTable.groupName,unselectedTable.id,unselectedTable.subjectId)" name="customerGroupList" value="{{unselectedTable.id}}" groupName="{{unselectedTable.groupName}}" /></div>
+            <div  class="tableName center w10">{{unselectedTable.id}}</div>
+            <div  class="tableName center w14">{{unselectedTable.subjectName}}</div>
+            <div  class="tableName center w14">{{unselectedTable.groupName}}</div>
+            <div  class="tableState center w14">{{unselectedTable.creator}}</div>
+            <div  class="tableState center w14">{{queryCustomerGroupObj.disponseTime(unselectedTable.created)}}</div>
+            <div  class="tableState center w14">{{unselectedTable.groupType}}</div>
+            <div  class="tableState center w14">{{unselectedTable.customerCount}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

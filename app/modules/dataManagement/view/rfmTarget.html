@@ -1,0 +1,48 @@
+<!--<script type="text/javascript" src="controller/rfmTargetCtrl.js"></script>-->
+<div class="maincontainerB" ng-controller="rfmTarget">
+  <div class="maincontainer" >
+    <div class="market_types_tree grey_border" style="margin-top: 68px;bottom: 0px;">
+      <div dm-ztreemenu=""></div>
+      <!--暂时屏蔽搜索功能-->
+      <div class="market_tree_input_wrapper" style="display:none">
+        <input type="text" class="market_tree_search_input  system_search" ng-model="searchValue" dm-placeholder="RFM分组搜索" dm-tree-node-search-input="" />
+        <!-- <a class="market_tree_search_icon" ng-click="searchTreeNode()"></a> -->
+      </div>
+      <div class="market_tree_wrapper" style="top:8px;">
+        <div class="ztree" dm-query-ztree="rightFalse" id="bbb" style="min-height: 200px"></div>
+      </div>
+    </div>
+    <div class="clearfix">
+      <h2 class="heading fl">RFM指标</h2>
+    </div>
+    <div class="list" style="left:220px;">
+      <ul class="clearfix Tab_title" id="tabpenel_list">
+        <li style="max-width:100px;" ng-click="RFMTableSwitch=1;updataone()" ng-class="{'hover':RFMTableSwitch!=2}">RFM指标列表</li>
+        <li style="max-width:100px;" ng-click="RFMTableSwitch=2;updatatwo()" ng-class="{'hover':RFMTableSwitch!=1}">客户RFM数据</li>
+      </ul>
+      <div class="table1" id="table1" ng-hide="RFMTableSwitch!=1">
+        <div class="gridCommCursom clearfix ">
+          <div class="commSearch">
+            <input class="commSearchVal" type="text" ng-model="hdValue" placeholder="指标名称" style="padding-right:26px;width:218px" />
+            <button class="commSearchBtn" ng-click="searchObj.searchHdButton()"></button>
+          </div>
+        </div>
+        <div class="couponListssBox gridCommLayout">
+          <div id="RFMResults"></div>
+        </div>
+      </div>
+      <div class="table2" id="table2" ng-hide="RFMTableSwitch!=2">
+        <div class="gridCommCursom clearfix">
+          <div class="commSearch">
+            <input class="commSearchVal commSearchVal2" type="text" ng-model="hdValue2" placeholder="客户ID" style="padding-right:26px;width:218px" />
+            <button class="commSearchBtn" ng-click="searchObj.searchHdButton2()"></button>
+          </div>
+        </div>
+        <div class="couponListssBox gridCommLayout commOverflowXAuto">
+          <div id="customerRFMResults"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="viewMarkInfoBox" id="couponTip"></div>

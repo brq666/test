@@ -1,0 +1,30 @@
+<div class="selectFontsClass" ng-controller="selectFontsCtrl">
+  <div class="editorContent">
+    <p>
+      <span class="commLabelWidth80 mr10">关键字关系 ：</span>
+      <label class="commRadio mr5"><input type="radio" name="filterRadio" ng-model="selectFontObj.filterGX" value="AND"  /> 并且</label>
+      <label class="commRadio">
+        <input type="radio" name="filterRadio" ng-model="selectFontObj.filterGX" value="OR" /> 或者
+      </label>
+      <em class="ico_tips" ng-title="请选择：当输入多个关键字的时候，关键字之间是并且还是或者关系"></em>
+    </p>
+    <p>
+      <span class="commLabelWidth80 mr10">关键字 ：</span>
+      <input class="borderHighlight mr5" type="text" ng-model="selectFontObj.filterInputVal" />
+      <button class="commAddEventBtn" ng-click="selectFontObj.addFilterList()" type="button">添加</button>
+      <em class="emPOpError" ng-show="filterKeyWorldError">{{filterKeyWorldErrorText}}</em>
+    </p>
+    <ul class="keyWorldLists clearfix">
+      <li ng-repeat="filterList in selectFontObj.filterLists" title="{{filterList}}">
+        <span>{{filterList}}</span>
+        <a class="deleteImg" href="javascript:void(0)" title="删除" ng-click="selectFontObj.delFilterFont($index)">
+          <img ng-src="/ccms/images/deletex.png" width="10" height="10" />
+        </a>
+      </li>
+    </ul>
+    <p>
+      <button class="btn btnBlue selectFontsSureBtn" type="button" ng-close-child-window ng-click="selectFontObj.filterSure()">确定</button>
+      <button class="btn"  type="button" ng-close-child-window>取消</button>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,224 @@
+<!--<script type="text/javascript" src="controller/customDataImport.js"></script>-->
+<div class="maincontainerB dataConfigureTable customDataImport" ng-controller="customDataImport">
+  <div class="maincontainer" style="overflow-y:auto">
+    <div>
+      <div class="clearfix">
+        <h2 class="heading-second fl">{{titleName}}</h2>
+        <a href="javascript:void(0)" class="ac_type_back_btn" style="top:5px" ng-click="backToList()" ng-show="backToListF">&lt;返回</a>
+      </div>
+      <div class="dataImportList">
+        <ul class="dataImportListul">
+          <li class="active" ng-click="showDataImport()">客户数据导入</li>
+          <li ng-click="showImportList()">导入批次</li>
+        </ul>
+      </div>
+      <ccTabset justified="true" active="activeIndex" >
+        <ccTab heading="客户数据导入" index="0" title="dataImport" select="showDataImport()">
+          <div id="dataImport">
+            <div class="data-import" style="margin-top:10px;height:60px">
+              <div class="di-diagram-wrapper">
+                <div class="di-diagram-step" ng-class="stepOneClass.noCompleted">
+                  <div class="did-text">
+                    导入设置和预览
+                  </div>
+                  <div class="did-inner-bar"></div>
+                  <div class="did-icon did-icon-num1" ng-class="stepOneClass.completed"></div>
+                  <div class="did-icon-bg"></div>
+                </div>
+                <div class="di-diagram-step" ng-class="stepTwoClass.noCompleted">
+                  <div class="did-text">
+                    文件字段匹配
+                  </div>
+                  <div class="did-inner-bar"></div>
+                  <div class="did-icon did-icon-num2" ng-class="stepTwoClass.completed"></div>
+                  <div class="did-icon-bg"></div>
+                </div>
+                <div class="di-diagram-step" ng-class="stepThreeClass.noCompleted">
+                  <div class="did-text">
+                    导入和校验
+                  </div>
+                  <div class="did-inner-bar"></div>
+                  <div class="did-icon did-icon-num3" ng-class="stepThreeClass.completed"></div>
+                  <div class="did-icon-bg"></div>
+                </div>
+                <div class="did-outer-bar"></div>
+              </div>
+            </div>
+            <div id="stepOne" class="data-import-main contentNodeWrap" ng-show="stepOneF">
+              <div style="width:1024px;margin-left:auto;margin-right:auto">
+                <div class="center-main" style="margin-left:27%">
+                  <table>
+                    <tbody>
+                    <tr>
+                      <th class="tr ">
+                        <label>客户平台:</label>
+                      </th>
+                      <td>
+                        <select class="commSelect width209" ng-model="stepOne.curPlatformId" ng-options="platform.id as platform.name for platform in stepOne.platformList" ng-change="stepOne.platformChange(stepOne.curPlatformId)"> </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="tr ">
+                        <em class="red">*</em>
+                        <label>导入批次名称:</label>
+                      </th>
+                      <td>
+                        <div class="pr" style="width:475px">
+                          <input class="borderHighlight nameInput ml5" type="text" input_activity_name="" maxlength="20" style="width:243px;margin-left:9px;" ng-model="stepOne.sequence" ng-blur="stepOne.checkName()" />
+                          <div style="display:inline-block" ng-show="stepOne.warningFlag" class="icon-caution icon-medium-size red">
+                            {{stepOne.warningText}}
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="tr ">
+                        <em class="red">*</em>
+                        <label>导入文件:</label>
+                      </th>
+                      <td>
+                        <span class="relativeBox" style="margin-left: 9px;">
+                          <input id="portUpLoadFile" value="上传文件" ng-data-upload-file="" readonly class="importupload" name="portUpLoadFile" style="width:246px;padding-left:4px;" />
+                          <span class="ml10 mr10 gifLoading loadingPosition domNone"></span>
+                        </span>
+                        <span style="margin-left:2px;color:#b6d9f9;" class="icon-question-mark icon-help-color" dm-title="仅支持不大于8MB的txt和csv文件导入"></span>
+                        <span style="display:inline-block" ng-show="stepOne.upFileWarningFlag" class="icon-caution icon-medium-size red">{{stepOne.upFileWarningText}}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th style="padding: 0px 5px;"></th>
+                      <td style="padding:0px 11px;">&nbsp;<a class="blueColor" href="https://shuyun-static.b0.upaiyun.com/sample/datamanage/dataImport.zip">导入文件样例</a></td>
+                    </tr>
+                    <tr>
+                      <th class="tr ">
+                        <label>分隔符</label>
+                      </th>
+                      <td>
+                        <select class="commSelect width209" ng-model="stepOne.splitSign" ng-change="stepOne.splitSignChange(stepOne.splitSign)">
+                          <option value="number:0">,(逗号)</option>
+                         <option value="number:1">;(分号)</option>
+                         <option value="number:2">&nbsp;(空格)</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th></th>
+                      <td>
+                        <p class="mb10 ml9">
+                          <label>
+                            <input class="commCheckbox" type="checkbox" ng-model="stepOne.headFlag" />第一行包含字段名
+                          </label>
+                        </p>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div id="stepTwo" style="height:507px" ng-show="stepTwoF">
+              <p style="margin:5px 0px">文件预览</p>
+              <div style="height:292px">
+                <div class="preview-main" id="configMain">
+                  <div></div>
+                </div>
+              </div>
+              <div class="columnMain">
+                <div class="data-import-main contentNodeWrap" style="padding-top:15px">
+                  <div style="padding-left:25px;height:139px;overflow-y:auto">
+                    <div style="display:inline-block;width:32%;vertical-align:top;" ng-repeat="col in stepTwo.header track by $index">
+                      <div class="tr maskinline">
+                        第{{$index + 1}}列:
+                      </div>
+                      <div class="maskinline">
+                        <select class="commSelect width209" name="{{col}}" ng-model="columns[col + $index]" ng-change="stepTwo.columnChange($index, col)" ng-options="item.id as item.name for item in stepTwo.columns[{{$index}}]">
+                          <option value=""></option>
+                        </select>
+                      </div>
+                      <div style="padding-left:39px;margin:2px 0;">
+                        <span style="display:inline-block;">&nbsp;{{tips[col + $index]}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="stepThree" class="step-three" ng-show="stepThreeF">
+              <div class="verify-main" ng-show="stepThree.verifyBtnF">
+                <h4>需要对导入的客户ID进行校验，请选择校验方式</h4>
+                <div style="margin-top:15px;text-align:left">
+                  <p class="verify-item" ng-repeat="verify in stepThree.verifyList">
+                    <input class="v1 commRadio" type="radio" value="{{verify.id}}" ng-model="stepThree.verifyType" />{{verify.name}}
+                  </p>
+                </div>
+              </div>
+              <div class="progress-main" ng-show="stepThree.progressFlag">
+                <h4>正在校验</h4>
+                <progressbar value="stepThree.percent"></progressbar>
+                <div>
+                  {{stepThree.percent}}%
+                </div>
+              </div>
+              <div class="verify-main contentNodeWrap" ng-show="stepThree.importFlag">
+                <table style="margin-left:108px">
+                  <tbody>
+                  <tr>
+                    <th class="tr">
+                      <label>上传文件记录数:</label>
+                    </th>
+                    <td>
+                      <span>{{stepThree.upload}}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="tr">
+                      <label>排重后数量:</label>
+                    </th>
+                    <td>
+                      <span>{{stepThree.distinct}}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="tr">
+                      <label>校验后可导入的数量:</label>
+                    </th>
+                    <td>
+                      <span>{{stepThree.verify}}</span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="clearfix">
+              <div class="center-main" style="text-align:center">
+                <button class="btn" id="prevBtn" ng-style="prevBtnF" ng-click="prevStep()">上一步</button>
+                <button class="btn btnBlue" id="verifyBtn" ng-show="stepThree.verifyBtnF" ng-click="stepThree.startVerify()">开始校验</button>
+                <button class="btn btnBlue" id="cancelBtn" ng-show="stepThree.progressFlag" ng-click="stepThree.stopVerify()">停止校验</button>
+                <button class="btn btnBlue" id="importBtn" ng-show="stepThree.importFlag" ng-click="stepThree.startImport()">开始导入</button>
+                <button class="btn btnBlue" id="nextBtn" ng-show="nextBtnF" ng-click="nextStep()">下一步</button>
+                <span class="blueColor" id="prevSpa" ng-show="prevSpaF"><a href="javascript: void(0)" ng-click="stepOne.preView()">预览</a></span>
+              </div>
+            </div>
+          </div>
+          <div id="dataPreview" style="display:none">
+            <div id="previewMain" class="commOverflowXAuto" style="position:absolute;top:38px;left:0;right:0;bottom:0">
+              <div></div>
+            </div>
+          </div>
+        </ccTab>
+        <ccTab heading="导入批次" index="1" title="importList" select="showImportList()">
+          <div id="importList">
+            <div class="import-list-main" id="importListMain" style="width:100%;height:800px;overflow-y:scroll" ng-show="importListParentF">
+              <div></div>
+            </div>
+            <div id="importDetailP" style="position:absolute;top:95px;left:0;right:0;bottom:0" ng-show="importDetailF">
+              <div></div>
+            </div>
+          </div>
+        </ccTab>
+      </ccTabset>
+    </div>
+  </div>
+</div>
+<div class="viewMarkInfoBox" id="couponTip"></div>

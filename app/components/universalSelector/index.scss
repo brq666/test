@@ -1,0 +1,129 @@
+.universal-selector {
+
+	position: relative;
+	padding-bottom: 20px;
+	height: 100%;
+	.instant-search {
+		&,
+		input {
+			width: 100%;
+		}
+
+		input {
+      padding: 0 22px 0  8px;
+      box-sizing: border-box;
+		}
+	}
+
+	.instant-search-icon {
+		right: 0;
+		width: 22px;
+		cursor: pointer;
+		text-align: center;
+	}
+
+	.menu-tree {
+		position: relative;
+		height: 100%;
+
+		.menu {
+			position: absolute;
+			top: 40px;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			color: #6b6b6b;
+			font-size: 12px;
+			overflow: auto;
+		}
+
+		h4,ul,li {
+			margin: 0;
+			padding: 0;
+		}
+
+		.menu > ul > li {
+			padding-left: 0;
+		}
+
+		h4 {
+			position: relative;
+			padding: 0 4px;
+			line-height: 24px;
+			height: 24px;
+			cursor: pointer;
+			user-select: none;
+
+			&.open {
+				~ ul {
+					display: block;
+				}
+
+				i {
+					transform: rotate(0deg);
+				}
+			}
+
+			i,
+			label {
+				position: relative;
+				z-index: 2;
+			}
+
+			i {
+				position: relative;
+				top: -1px;
+				display: inline-block;
+				margin-right: 2px;
+				font-family: iconfont;
+				font-style: normal;
+				transform: rotate(-90deg);
+				color: #bebebe;
+				cursor: default;
+
+				&:hover {
+					color: #aba7a7;
+				}
+			}
+
+			label {
+    			display: inline-block;
+				width: calc(100% - 30px);
+			}
+
+			&::after {
+				position: absolute;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				left: -200px;
+				content: "";
+			}
+
+			&:hover::after {
+				background-color: #f1f5f7;
+			}
+
+			&.selected::after {
+				background-color: #e6f4fb;
+			}
+		}
+
+		ul li,
+		.basement {
+			padding-left: 12px;
+		}
+
+		ul {
+			.not-found,
+			ul {
+				display: none;
+			}
+		}
+	}
+}
+
+.bm-selector-done.disabled {
+	pointer-events: none;
+	background-color: #ddd;
+}

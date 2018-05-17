@@ -1,0 +1,15 @@
+<!--<script type="text/javascript" src="controller/workFlow/report.js"></script>-->
+<div id="viewReportContent" ng-controller="viewReportCtr">
+  <div class="clearfix">
+    <h2 class="heading fl">查看报告</h2>
+    <a href="javascript:void(0);" class="aGreen" ng-click="reportViewBack()">< 返回</a>
+  </div>
+  <div class="list">
+    <ul class="clearfix Tab_title" id="tabpenel_list">
+      <li ng-click="reportObj.showCurrentReportPage(0)" class="showFont" ng-class="{'hover':reportSwitch==0}" title="发送报告">发送报告</li>
+      <!--<li class="showFont" title="响应报告" ng-click="reportObj.showCurrentReportPage(1)" ng-class="{'hover':reportSwitch==1}">响应报告</li>-->
+      <li class="showFont" title="效果跟踪" ng-click="reportObj.showCurrentReportPage(2)" ng-class="{'hover':reportSwitch==2}">效果跟踪</li>
+    </ul>
+    <div ng-include src="serviceReportUrl"></div>
+  </div>
+</div>

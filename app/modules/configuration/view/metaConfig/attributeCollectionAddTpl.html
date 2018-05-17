@@ -1,0 +1,39 @@
+<div class="content">
+  <div class="mb10">
+    <label>属性集名称：</label>
+    <input type="text" class="borderHighlight" ng-model="tpl.attributeCollectionName" />
+  </div>
+  <div class="mb10">
+    <label>选择对应表：</label>
+    <select class="commSelect width130" ng-model="tablesModel" ng-options="c.registerTableName for c in tablesData" ng-change="changeTables(tablesModel)"></select>
+  </div>
+  <div class="mb10">编辑属性集中的属性</div>
+  <div class="mb10">
+    <label class="label">配置普通属性：</label> 已配置数量{{attributeList.length}}&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="javascript:void(0)" ng-click="edit.open()">进入编辑</a>
+  </div>
+  <div class="mb10">
+    <label class="label">指定主属性：</label>
+    <select class="commSelect width130" ng-model="majorAttribute" ng-options="c.name for c in attributeList" ng-change="selectedAttribute(majorAttribute)"></select>
+  </div>
+  <div class="mb">
+    <button class="btn btnBlue" type="submit" ng-click="tpl.save()">确定</button>
+    <span class="btn" ng-click="tpl.cancel()">取消</span>
+  </div>
+</div>
+<!--编辑区域-->
+<div class="selectField" style="display:none;">
+  <div class="content">
+    <div ng-repeat="edititem in editList" class="item mb10">
+      属性名称：
+      <input type="text" class="borderHighlight" ng-model="edititem.name" /> 选择对应字段：
+      <select class="commSelect width130" ng-model="edititem.item" ng-options="  field for   field in fieldNameData"></select>
+      <a href="javascript:void(0);" title="删除" class="del" ng-click="edit.del($index)"></a>
+      <a ng-show="$last" href="javascript:void(0);" title="添加" class="add" ng-click="edit.add($index)"></a>
+    </div>
+    <div class="mb">
+      <button class="btn btnBlue" type="submit" ng-click="edit.sure()">确定</button>
+      <span class="btn" ng-click="edit.cancel()">取消</span>
+    </div>
+  </div>
+</div>

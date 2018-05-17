@@ -1,0 +1,16 @@
+<div>
+  <div class="gridCommCursom clearfix" ng-controller="workbenchListCtrl">
+    <div class="fl mt5">
+      <label>店铺:</label>
+      <select class="commSelect width130" ng-model="curWorkbenchShop" ng-options="workbenchShop.name for workbenchShop in workbenchShopsLists" ng-change="upDateWorkbenchList()"></select>
+    </div>
+    <div class="commSearch">
+      <label class="default_color" ng-data-grid-search>搜索客户ID或标签</label>
+      <input class="commSearchVal" type="text" ng-model="hdValue" ng-data-grid-search name="queryName">
+      <button class="commSearchBtn" ng-click="customObj.searchButtonClick(hdValue)"></button>
+    </div>
+  </div>
+  <div class="couponListssBox gridCommLayout">
+    <div id="labelListsGrid"></div>
+  </div>
+</div>

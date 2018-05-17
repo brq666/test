@@ -1,0 +1,10 @@
+<div class="market_types_tree grey_border" ng-controller="marketTypeTreeCtrl" id="market_tree" ng-cloak>
+  <div ztreemenu></div>
+  <div class="market_tree_input_wrapper">
+    <input type="text" class="market_tree_search_input system_search" ng-placeholder="活动分类" ng-model="searchValue" tree-node-search-input />
+    <a class="addRootfile" ng-click="addNode(true)" href="javascript:void(0)" title="新增目录"></a>
+  </div>
+  <div class="market_tree_wrapper">
+    <div class="ztree defaultWrapztree" ztree out-root-tree id="aaa" style="min-height:200px;"></div>
+  </div>
+</div>

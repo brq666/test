@@ -1,0 +1,13 @@
+<div class="sidebar" ng-controller="navCtrl">
+  <ul class="sideNav"  ng-cloak>
+    <li ng-repeat="subNav in subNavs">
+      <a ng-addsubcurrent onClick="toggleSubSidebarFn(this);" class="firstSidebar" href="{{subNav.url}}">{{subNav.name}}<i ng-show="subNav.children.length > 0" class="sideNavArrow"></i></a>
+      <dl style="display:none;">
+        <dd ng-repeat="tn in subNav.children">
+          <a class="sbSmall" href="{{tn.url}}" ng-addsubcur>{{tn.name}}</a>
+        </dd>
+      </dl>
+    </li>
+  </ul>
+  <div class="sidebarFt">Copyright © Shuyun All Rights Reserved.</div>
+</div>

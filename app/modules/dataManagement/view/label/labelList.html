@@ -1,0 +1,63 @@
+
+<script type="text/javascript">
+  $('#attrListsGrid').flexigrid({//属性列表grid
+    url: GLOBAL_STATIC.datamanageRoot + 'producttag/page/',
+    method : 'GET',
+    dataType: 'json',
+    colModel : [
+      {display: '标签ID',name:'tagId', width : 2, sortable : false ,dataindex:'tagId'},
+      {display: '标签名称', name:'tagName', width : 2, sortable : false,dataindex:'tagName'},
+      {display: '使用该标签商品数量', name:'productCount', width : 2, sortable : false, dataindex:'productCount',renderer:function(v){
+        return  v ? v :0;
+      }},
+      {display: '创建时间', name:'createrAt', width : 2, sortable : false,align:'center' ,dataindex:'createrAt',renderer:function(v){
+        return  v ? "<span class='ac_status_grid ac_status_" +v+"'>" + setISO(v,"all")+ "</span>" : "";
+      }},
+      {display: '创建人', name:'createrName', width : 2, sortable : false,dataindex:'createrName',renderer:function(v){
+        return  v ? v : "";
+      }},
+      {display: '标签说明', name:'tagDescribe', width : 1, sortable : false,dataindex:'tagDescribe',renderer:function(v){
+        return  v ? v : "";
+      }},
+      {display: '操作', name: 'operation', width: 2, align: 'center', dataindex: 'campId', mapping: ['tagId','tagName','tagDescribe'], convert: function (v, mappVal) {
+        return '<a href="javascript:void(0);" class="edit_delete edit_icon" title="修改" ng-click="productLabelObj.settingLabel(\''+mappVal[0]+'\',\''+mappVal[1]+'\',\''+mappVal[2]+'\')"></a><a href="javascript:void(0);" class="edit_delete delete_icon" title="删除" ng-data-delete-label></a>'		    }
+      }
+    ],
+    params: [],
+    updateDefaultParam: true,
+    sortname: "id",
+    sortorder: "desc",
+    rp: 20,
+    usepager: true,
+    useRp: true,
+    showTableToggleBtn: true,
+    colAutoWidth: true,
+    onSuccess:function(){
+      var scope=angular.element(angular.element(".gridCommLayout")).scope();
+      scope.productLabelObj.compileTpl(scope);
+    },
+    onError:function(response){
+      if (response.status == 401) {
+        location.pathname = "/portal/login.html";
+        return;
+      }
+    }
+  });
+</script>
+<div>
+  <div class="gridCommCursom clearfix">
+    <div class="commSearch">
+      <label class="default_color" ng-data-grid-search="">标签名称</label>
+      <input class="commSearchVal" type="text" ng-model="hdValue" ng-data-grid-search="" name="couponName" />
+      <button class="commSearchBtn" ng-click="productLabelObj.searchButtonClick(hdValue)"></button>
+    </div>
+    <div class="fr mt5">
+      <label>
+        <input name="mylabel" class="commCheckbox" type="checkbox" ng-model="isShowMylabel" ng-click="productLabelObj.showMylabel(isShowMylabel)" />只显示我的标签
+      </label>
+    </div>
+  </div>
+  <div class="couponListssBox gridCommLayout">
+    <div id="attrListsGrid"></div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="clearfix">
+  <h2 class="heading fl">查询节点配置</h2><a href="javascript:void(0)" class="back" ng-click="subject.toBack()">返回</a>
+</div>
+<div class="smalldarkerblueBtn newbuildBtn">
+  <a href="javascript:void(0)" ng-click="subject.add()" >新增主题</a>
+</div>
+<div class="configContent publicList1">
+  <div class="item" ng-repeat="item in subject.listData" ng-dblclick="subject.dbclick()">
+  <p>
+    <span>主题：{{item.configSubjectName}}</span>
+    <span> 已经配置过滤器数量：2</span>
+  </p>
+  <div class="operationBtn">
+    <a title="修改" class="edit_delete edit_icon" href="javascript:void(0);" ng-click="subject.modify(item.configSubjectId)"></a>
+    <a title="删除" class="edit_delete delete_icon" ng-click="subject.del(item.configSubjectId)"></a>
+  </div>
+  </div>
+</div>
+
+<!--新增主题弹框-->
+<div class="subject_AddTpl" ng-include src="subject.tpl.src" style="display:none;" onload="subject.tpl.show()"></div>

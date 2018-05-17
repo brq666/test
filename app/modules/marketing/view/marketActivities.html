@@ -1,0 +1,124 @@
+<link rel="stylesheet" href="//at.alicdn.com/t/font_46173_52bvy2pkm83bx1or.css">
+<section class="maincontainerB">
+  <!-- marketActivity-page 不可以修改classname -->
+  <div class="maincontainer marketActivity-page" ng-controller="marketActivityCtrl as $ctrl">
+    <header class="hearder-box">
+      <h2>营销活动</h2>
+      <!-- 日历视图/列表视图 -->
+      <div class="list-menu">
+        <span ui-sref=".calendar" ui-sref-active="active">
+          <i class="iconfont icon-calendar"></i>
+        </span>
+        <span ui-sref-active="active" ui-sref='.list' ng-click="$ctrl.onGridReload()">
+          <i class="iconfont icon-view-list"></i>
+        </span>
+      </div>
+      <!-- 日历视图/列表视图 end -->
+
+      <!-- tab title -->
+      <div class="tab-title-box">
+        <div class="tab-nav-scroll">
+          <ul class="title-list" ng-class="{'show-scroll':$ctrl.isScrollCtrl}">
+            <li ng-class="{'active':$ctrl.currentTab * 1 === title.campId}" ng-repeat="title in $ctrl.tabTitles track by title.campId"
+              ng-click="$ctrl.onSwitchTab(title)">
+              <div class="tab-header">
+                <span ng-bind="title.campName"></span>
+                <i class="iconfont icon-close" ng-click="$ctrl.onCloseTab(title,$event)"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-ctrl" ng-if="$ctrl.isScrollCtrl">
+          <i class="iconfont icon-rightarrow tab-pre" ng-click="$ctrl.onPreTab($event)"></i>
+          <i class="iconfont icon-rightarrow tab-next" ng-click="$ctrl.onNextTab($event)"></i>
+        </div>
+      </div>
+      <!-- tab title end -->
+    </header>
+
+    <section ng-if="$ctrl.isView" class="market-activity-box">
+      <!-- 过滤框 -->
+      <div class="filter-box">
+
+        <!-- 快速筛选 -->
+        <div class="filtrate">
+          <div class="title-header" ng-class="{'open':!isOpen}" ng-click="isOpen=!isOpen">
+            <i class="iconfont icon-rightarrow"></i>
+            <span>快速筛选</span>
+          </div>
+          <ul class="list-body" ng-if="!isOpen">
+            <li>
+              <cc-checkbox ng-model="$ctrl.queryParams.myActivity" ng-change="$ctrl.onChangeSearch()">
+                <span>我设计的</span>
+              </cc-checkbox>
+            </li>
+            <li>
+              <cc-checkbox ng-model="$ctrl.queryParams.myApproval" ng-change="$ctrl.onChangeSearch()">
+                <span>我审批的</span>
+              </cc-checkbox>
+            </li>
+            <li>
+              <cc-checkbox ng-model="$ctrl.queryParams.isCycle" ng-change="$ctrl.onChangeSearch()">
+                <span>周期性活动</span>
+              </cc-checkbox>
+            </li>
+          </ul>
+        </div>
+        <!-- 快速筛选 end -->
+
+        <!-- 活动状态 -->
+        <div class="filtrate active-state">
+          <div class="title-header" ng-class="{'open':!isActiveOpen}" ng-click="isActiveOpen=!isActiveOpen">
+            <i class="iconfont icon-rightarrow"></i>
+            <span>活动状态</span>
+            <i class="iconfont icon-bangzhu" tooltip-placement="top" tooltip-append-to-body="true" cc-tooltip="'周期性活动的活动状态，是根据整个活动的开始结束时间显示的。'"></i>
+            <!-- icon-bangzhu -->
+          </div>
+          <ul class="list-body" ng-if="!isActiveOpen">
+            <li ng-repeat="(key,value) in $ctrl.statusMap track by $index">
+              <cc-checkbox ng-model="value.isChecked" ng-change="$ctrl.onChangeSearch()" ng-class="value.className">
+                <span ng-bind="value.name"></span>
+              </cc-checkbox>
+            </li>
+          </ul>
+        </div>
+        <!-- 活动状态 end -->
+
+        <!-- 活动目录 -->
+        <div class="filtrate z-tree">
+          <div class="title-header" ng-click="$ctrl.isTreeOpen=!$ctrl.isTreeOpen" ng-class="{'open':$ctrl.isTreeOpen}">
+            <i class="iconfont icon-rightarrow"></i>
+            <span>活动目录</span>
+            <!--  ng-click="$ctrl.onTreeSearchInput()" -->
+            <i class="iconfont icon-search"></i>
+          </div>
+          <div ng-show="$ctrl.isTreeOpen" class="z-tree-list-box market_tree_wrapper">
+            <div class="search-box">
+              <input type="text" autofocus="autofocus" class="search-title-header-input" ng-model="searchValue" tree-node-search-input
+                placeholder="活动目录">
+              <i class="iconfont icon-search"></i>
+            </div>
+            <div ztreemenu></div>
+            <div class="ztree defaultWrapztree" isname="partition" ztree out-root-tree id="aaa" style="min-height:200px;"></div>
+          </div>
+        </div>
+        <!-- 活动目录 end -->
+
+      </div>
+      <!-- 过滤框 end -->
+
+      <!-- 展示框 -->
+      <div class="details-box">
+        <button class="add-btn" ng-click="$ctrl.activityEvent()">
+          <i class="iconfont icon-add"></i>
+          新建活动
+        </button>
+        <div class="details-list-box" ui-view></div>
+      </div>
+      <!-- 展示框 end -->
+    </section>
+
+    <section ng-if="!$ctrl.isView" class="market-details-box" ui-view="details">
+    </section>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+<div class="maincontainerB dataConfigureSubject" ng-controller="dataConfigureSubject">
+  <div class="maincontainer">
+    <div class="clearfix">
+      <h2 class="heading fl">定义主题</h2>
+    </div>
+    <div>
+      <input type="text" class="input_border add_subject_input" ng-model="subjectName" maxlength="10" ng-class="{red_border:isInputEmpty}" />
+      <a class="addBtn grey_border2" ng-click="addSubject()">
+        <span></span>
+        添加
+      </a>
+      <span class="error" ng-show="isExisted" style="display: none;">活动已存在</span>
+    </div>
+    <div class="ac_type_wrap">
+      <div class="ac_type_item grey_border ac_type_enable" ng-repeat="subject in subjects"  ng-class="{'true':'ac_type_disable','false':'ac_type_enable'}[item.disabled]">
+        <span class="ac_type_span ng-binding">{{subject.subjectName}}</span>
+        <span class="ac_type_remove ac_type_icon" title="点击删除" ng-click="deleteItem(subject)"></span>
+      </div>
+    </div>
+  </div>
+</div>

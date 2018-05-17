@@ -1,0 +1,10 @@
+<div class="node_tip">
+  <div ng-class="{'true':'node_tip_flag_empty','false':'node_tip_flag_full'}[(!nodecomment)]" ng-click="isShowNodeTip = !isShowNodeTip" title="{{nodecomment}}"></div>
+  <div>
+    <div class="node_tip_dialog" ng-show="isShowNodeTip">
+      <div class="node_tip_arrow"></div>
+      <textarea class="node_tip_content" ng-model="nodecomment" maxlength="200" ng-placeholder="输入备注"></textarea>
+      <div class="node_tip_btn btnBlue" id="Button1" ng-click="isShowNodeTip = !isShowNodeTip">确定</div>
+    </div>
+  </div>
+</div>

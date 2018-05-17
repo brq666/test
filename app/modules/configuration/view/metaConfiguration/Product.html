@@ -1,0 +1,50 @@
+
+<script>
+  //是否支持SKU查询(不支持时SKU条件和SKU按钮都不显示) isSupportSKU
+  //是否支持添加为条件 isSupportSaveCondition
+  //最大可选中商品数量(包括条件数量) maxCount
+  //是否支持反选 isSupportReverseSelection
+
+  function ProductCtrl($scope) {
+    $scope.$on("Ctr1NameChange",function (event, msg) {
+      $scope.msg=msg;
+      if($scope.msg!=undefined){
+        alert( $scope.msg.snapshootId);
+        alert( $scope.msg.serviceType);
+      }
+    });
+    $scope.goodsSelector = function () {
+      $scope.serviceType="node_query";
+      $scope.snapshootId=1;
+      $scope.productSelect="../Selector/goodsList.html?_="+new Date().getTime()+"&isSupportSKU=true";
+    }
+    var productSelected =$(".productSelected").css("display");
+    $scope.$watch("productSelected",$scope.showSelected);
+    $scope.showSelected=function(){
+      if($scope.msg!=undefined){
+        alert( $scope.msg.snapshootId);
+        alert( $scope.msg.serviceType);
+      }
+    }
+    $scope.popupProSel = function () {
+      $(".productSelected").addInteractivePop({
+        position: "fixed",
+        magTitle: "商品选择",
+        mark: true
+      }
+      );
+    }
+  }
+</script>
+<div class="maincontainerB">
+  <div class="maincontainer" ng-controller="ProductCtrl">
+    <div>
+      <div class="clearfix">
+        <h2 class="heading fl"> 商品选择器 </h2>
+        <input class="productArea borderHighlight valid" type="text" ng-click="goodsSelector(this)" value="" title="" />
+        <a class="btn_modify" href="javascript:void(0)" ng-click="goodsSelector(this)"></a>
+      </div>
+    </div>
+    <div class="filterProductSelected productSelected" ng-include="" src="productSelect" onload="popupProSel()"></div>
+  </div>
+</div>

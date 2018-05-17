@@ -1,0 +1,17 @@
+<!--<script type="text/javascript" src="controller/customerServiceWorkbenchCtrl.js"></script>-->
+<div class="maincontainerB dataConfigureTable" ng-controller="customerServiceWorkbench">
+  <div class="maincontainer">
+    <div>
+      <div class="clearfix">
+        <h2 class="heading fl">千牛数据</h2>
+      </div>
+      <div class="list">
+        <ul class="clearfix Tab_title" id="tabpenel_list">
+          <li ng-click="customObj.showCustomAttrPage()" class="showFont" ng-class="customObj.customList" title="标签">标签</li>
+          <li class="showFont" title="属性" ng-click="customObj.hideCustomAttrPage()" ng-class="customObj.customVal">属性</li>
+        </ul>
+        <div ng-include src="serviceWorkbenchUrl"></div>
+      </div>
+    </div>
+  </div>
+</div>

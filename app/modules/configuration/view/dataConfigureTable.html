@@ -1,0 +1,67 @@
+<div class="maincontainerB dataConfigureTable" ng-controller="dataConfigureTable">
+  <div class="maincontainer">
+    <div class="clearfix">
+      <h2 class="heading fl">数据配置</h2>
+    </div>
+    <div class="smalldarkerblueBtn newbuildBtn">
+      <a href="javascript:void(0)" ng-click="isShowAddTable = !isShowAddTable">新增表</a>
+    </div>
+    <div class="commSearch">
+      <label class="default_color" table-data-search="">搜索表名</label>
+      <input class="commSearchVal" type="text" name="couponName" ng-model="hdValue" table-data-search="" />
+      <button class="commSearchBtn" ng-click="searchButtonClick()"></button>
+    </div>
+    <div class="wrapConfigGrid">
+      <div commondata-configure-table=""></div>
+    </div>
+  </div>
+  <div class="dataConfigure_mask unselectedTableMark" ng-show="isShowAddTable" commonconfigure_table_dialog="">
+    <div class="dataConfigure_table">
+      <div class="clearfix">
+        <input class="tableSearch borderHighlight" type="text" ng-model="selectTable" />
+      </div>
+      <div class="dataConfigure_table_gird">
+        <div class="grey">
+          <span class="center w20"><input class="selectAllClass" type="checkbox" ng-model="selectAll" /></span>
+          <span class="center w40">表名</span>
+          <span class="center w40">表说明</span>
+        </div>
+        <div class="dataConfigure_table_list">
+          <div class="dataConfigure_table_list_style" ng-repeat="unselectedTable in unselectedTables">
+            <div class="w20 center">
+              <input type="checkbox" ng-checked="selectAll" name="{{unselectedTable.tableName}}" comment="{{unselectedTable.tableComment}}" scheam="{{unselectedTable.tableSchema}}" />
+            </div>
+            <div class="tableName center w40">
+              {{unselectedTable.tableName}}
+            </div>
+            <div class="tableState center w40">
+              {{unselectedTable.tableComment}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <button class="btn btnBlue SBox width65" ng-click="submitSelectTable()" ng-disabled="submitStatus">确认</button>
+        <button class="btn btnBlue SBox width65" ng-click="cancelSelectTable()">取消</button>
+      </div>
+    </div>
+  </div>
+  <div class="dataConfigure_mask editorTableDataPop" ng-show="showFalg">
+    <div class="dataConfigure_table">
+      <p class="mb10 ml">指定主题对应列：</p>
+      <div class="dataConfigure_maskList">
+        <p class="mb10" ng-repeat="stateList in sumStateLists">
+          <label class="commLabelWidth75" id="{{stateList.subjectId}}">{{stateList.subjectName}}：</label>
+          <select class="commSelect width200" ng-model="stateList.defaultColumnName">
+            <option value="">--请选择对应列--</option>
+            <option ng-repeat="selectCoumn in stateList.columnMetaDTO">{{selectCoumn.columnName}}</option>
+          </select>
+        </p>
+      </div>
+      <p class="bottom">
+        <button class="btn btnBlue SBox width65" ng-click="submitSetState()">确认</button>
+        <button class="btn btnBlue SBox width65" ng-click="cancelSetState()">取消</button>
+      </p>
+    </div>
+  </div>
+</div>

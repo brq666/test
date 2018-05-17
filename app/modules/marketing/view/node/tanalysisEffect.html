@@ -1,0 +1,164 @@
+<!-- <script type="text/javascript" src="controller/node/tfilterHeatCtrl.js"></script> -->
+<div ng-controller="tfilterTrack">
+    <div class="commWrapTwo commWrapFour">
+        <div class="bannerCommStyle areaHeight26" ng-show="effectTrack.tips">
+          {{effectTrack.tips}}
+          <a href="javascript:void(0)" toggle-banner title="展开" class="downSanjiao sanjiaoPosition"></a>
+        </div>
+        <div class="contentNodeWrap" style="margin: 0px">
+          <div class="effectfinish"></div>
+          <table>
+            <tr>
+              <th class="tl" style="padding-left: 15px;width:8%;"><label class="node_name_label">节点名称：</label></th>
+              <td style="width:28%;">
+                <div class="pr"><input type="text" class="borderHighlight nameInput fl ml0" ng-model="effectTrack.name" maxlength="20" ng-noderequire/>
+                <span nodetip></span>
+                </div>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td style="width: 12.1%;"><label class="code fr" style="width: initial;margin-left:0px;">节点代码：{{effectTrack.id}}</label></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 15px;">选择店铺：</td>
+              <td>
+                <span class="relativeBox">
+                  <input class="borderHighlight nameInput  ml0" type="text" value="{{effectTrack.shopName}}"  title="{{effectTrack.shopName}}" ids="{{effectTrack.shopId}}" ng-click="effectTrack.openShopList()" name="investigator" readonly="readonly" ng-class={error:effectTrack.shopSelectErr}>
+                  <a class="optionModule2 location4" href="javascript:void(0);" ng-click="openShopList()"></a>
+                </span>
+              </td>
+              <td style="width:9.5%;">跟踪开始时间：</td>
+              <td style="width:22%;position:relative;">
+                <input startTime="{{effectTrack.startTime}}" type="text" picker7 class=" width170 datetimepicker  borderHighlight text left2 trackstartime" ng-model="effectTrack.startTime" name="startTime" readonly="readonly">
+                <div class="warning_text" id="warningtext" style="position: absolute; left: 10px; top: 40px; display: block;display:none">不能早于当前时间</div>
+              </td>
+              <td style="width:6.9%">跟踪时长：</td>
+              <td style="width:6%;padding-right: 0px;position:relative;">
+                <input class="trackkeep" type="text" readonly="readonly" ng-model="effectTrack.day" />
+                <a class="trackarrowup" ng-click="effectTrack.addNum($event)"></a>
+                <a class="trackarrowdown" ng-click="effectTrack.minNum()"></a>
+              </td>
+              <td>
+                天
+              </td>
+            </tr>
+          </table>
+          <!--店铺选择框 start-->
+          <div class="queryShopsPop shopsChecked analysisShopPop">
+            <div class="shopUsed">
+              <div class="listsBox topNormal">
+                <ul class="unitLists editorShops clearfix">
+                  <li ng-repeat="list in effectTrack.shopList"  ng-chose-unit="Radio"><a id={{list.idInPlat}} title={{list.name}} href="javascript:void(0)" >{{list.name}}</a><span class="trianger"></span><span class="gg"></span></li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div class="ling_di"></div>
+              <div class="listsButton fr mr15 mt5">
+                <button type="button" class="btn btnBlue" ng-click="effectTrack.sureAddShop()" ng-close-child-window>确定</button>
+                <button type="button" class="btn" ng-close-child-window>取消</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dataEmpty">
+          <div class="dataEmptystepone">
+            <p>执行后，可看到追踪结果</p>
+            <span>在跟踪时间内，跟踪结果每半小时更新一次</span>
+          </div>
+        </div>
+        <!-- 当有数据时显示这个 -->
+        <div class="dataSummary">
+          <div class="dataSummarystepone">
+            <span>总分析人数: {{effectTrack.totalNumber}}人</span>
+            <span>数据统计截止至：{{effectTrack.deadline}}</span>
+          </div>
+          <ul class="dataSummarysteptwo">
+            <!-- <li>
+              <p>{{effectTrack.orderNumber}}</p>
+              <span>下单人数</span>
+            </li> -->
+            <li>
+              <p>￥{{effectTrack.orderAmount}}</p>
+              <span>下单金额(元)</span>
+            </li>
+            <li>
+              <p>{{effectTrack.placeOrder}}</p>
+              <span>下单订单数</span>
+            </li>
+            <li style="margin-right:12px;">
+              <p>{{effectTrack.orderCommodity}}</p>
+              <span>下单商品数</span>
+            </li>
+            <!-- <li>
+              <p>{{effectTrack.PaymentNumber}}</p>
+              <span>付款人数</span>
+            </li> -->
+            <li>
+              <p>￥{{effectTrack.PaymentAmount}}</p>
+              <span>付款金额(元)</span>
+            </li>
+            <li>
+              <p>{{effectTrack.PaymentOrder}}</p>
+              <span>付款订单数</span>
+            </li>
+            <li style="margin-right:12px;">
+              <p>{{effectTrack.PaymentCommodity}}</p>
+              <span>付款商品数</span>
+            </li>
+          </ul>
+        </div>
+        <div class="trackselect">
+          <div class="trackselectstepone">
+            <a ng-click="effectTrack.timetrack($event)" class="active">按时段跟踪</a>
+            <a ng-click="effectTrack.listtrack($event)">按商品跟踪</a>
+          </div>
+          <div class="trackselectsteptwo">
+            <!-- <label>
+              <input type="radio" name="timeselect" ng-model="effectTrack.timeselects" value="人数" ><span>人数</span>
+            </label> -->
+            <label>
+              <input type="radio" name="timeselect" ng-model="effectTrack.timeselects" value="订单金额" ><span>订单金额</span>
+            </label>
+            <label>
+              <input type="radio" name="timeselect" ng-model="effectTrack.timeselects" value="订单笔数" ><span>订单笔数</span>
+            </label>
+            <label>
+              <input type="radio" name="timeselect" ng-model="effectTrack.timeselects" value="商品数" ><span>商品数</span>
+            </label>
+          </div>
+          <div class="commSearch" style="margin: 8px 0px 0 0px;display:none">
+            <input class="commSearchVal" type="text" ng-model="hdValue" name="couponName" placeholder="商品名称/商品ID">
+            <button class="commSearchBtn" ng-click="effectTrack.searchButtonClick(hdValue)"></button>
+          </div>
+        </div>
+        <div class="trackselecttimegird">
+          <div id="mainselecttimegird" style="height:300px;width:970px;"></div>
+          <ul>
+            <li>
+              <div></div>
+              <p>{{effectTrack.legendleft}}</p>
+            </li>
+            <li>
+              <div style="border-bottom:4px solid #2f4554;"></div>
+              <p>{{effectTrack.legendright}}</p>
+            </li>
+          </ul>
+        </div>
+        <!-- 按商品跟踪 -->
+        <div class="trackselectgrid">
+          <div class="couponListssBox gridCommLayout canelgridCommLayout">
+            <div id="listTrackGrid"></div>
+          </div>
+        </div>
+    </div>
+    <!--<div class="ling_di clearfix mt10"></div>-->
+    <div class="commBottom clearfix">
+      <div class="mb">
+        <button class="btn btnBlue"  id="marketSure" ng-click="effectTrack.save($event)">确定</button>
+        <button class="btn" id="marketCancel" ng-click="effectTrack.cleartimer($event)" ng-close-window>取消</button>
+      </div>
+    </div>
+</div>

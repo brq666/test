@@ -1,0 +1,53 @@
+<div ng-controller="featureController">
+  <div class="featureNode">
+    <div class="commWrapFour clearfix commNodeMarkRelative">
+      <div class="bannerCommStyle areaHeight26" ng-show="featureObj.tips">
+         {{featureObj.tips}}
+        <a href="javascript:void(0)" toggle-banner title="展开" class="downSanjiao sanjiaoPosition"></a>
+      </div>
+      <div class="contentNodeWrap">
+        <table>
+          <tr>
+            <th class="tr paddingright0" width="10%"><label>节点名称：</label></th>
+            <td><div class="pr"><input type="text" class="borderHighlight nameInput ml4 fl" ng-model="featureObj.name" maxlength="20" ng-noderequire><span nodetip></span></div></td>
+            <td><label class="code mr40 fr">节点代码：{{featureObj.id}}</label></td>
+          </tr>
+        </table>
+        <!--筛选条件-->
+        <div class="radioTypeContent featureBox">
+          <div class="configCondition  clearfix">
+            <div class="ztreeMenuWrap">
+              <div class="market_tree_wrapper queryZtreeWrap">
+                <div class="loading queryLoading" ng-show="queryZtreeLoadingFlag">
+                  <i></i>加载中...
+                </div>
+                <div class="ztree defaultWrapztree dot checkoutZtree" id="featureChecked" style="min-height:200px;"></div>
+              </div>
+            </div>
+            <div class="targetWrap mt5">
+              <h6>已选中分析项</h6>
+              <ul class="clearfix">
+                <li ng-repeat="item in featureObj.analysisList track by $index" title="{{item.name}}">
+                  <span ng-bind="item.name"></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--end-->
+      </div>
+     </div>
+     <!--查看报告 start-->
+    <div class="analysisReport" ng-include src="featureObj.reportTemplate"></div>
+     <!--查看报告 end-->
+    <div class="ling_di mt10 clearfix"></div>
+    <div class="commBottom clearfix">
+      <a href="javascript:void(0);" ng-click="featureObj.openResult()" class="reportButton mt5" ng-show="featureObj.viewAnalysisDataFlag"><span class="reportIcon"></span>分析报告</a>
+      <div class="mb">
+        <button class="btn btnBlue" ng-click="featureObj.postFeatureData($event)">确定</button>
+        <button class="btn" ng-close-window>取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+

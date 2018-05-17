@@ -1,0 +1,27 @@
+<script type="text/javascript" src="controller/queryConfigurationGroupBy.js"></script>
+<div class="attrConfigBox" ng-controller="categoryGroupBy">
+  <div class="mb10 mt10">
+    <label class="commLabelWidth100">数据表：</label>
+    <select class="commSelect width302" ng-model="categoryGroupData.tableName" ng-change="configData.getTableColumn(categoryGroupData.tableName, categoryGroupData.schemaName)">
+      <option ng-repeat="table in configData.tables">{{table.registerTableName}}</option>
+    </select>
+  </div>
+  <div class="mb10" ng-repeat="groupByColumn in categoryGroupData.groupByColumns">
+    <label class="commLabelWidth100">选择分组字段：</label>
+    <select class="commSelect width130" ng-model="groupByColumn.columnName">
+      <option ng-repeat="cloumn in configData.tableColumns">{{cloumn.columnName}}</option>
+    </select>
+    <label class="commLabelWidth100">选择字典表：</label>
+    <select class="commSelect width130" ng-model="groupByColumn.dicKey">
+      <option ng-repeat="metadic in configData.metaDics">{{metadic.dicName}}</option>
+    </select>
+    <a class="addButtonImg verticalAlign3 ml5" href="javascript:void(0)" value="增加" ng-click="configuration.addGroupByColumn()"></a>
+    <a class="deleteButtonImg verticalAlign3" href="javascript:void(0)" value="删除" ng-click="configuration.deleteGroupByColumn($index)"></a>
+  </div>
+  <div class="commBottom">
+    <div class="mb">
+      <button ng-click="configuration.saveCategoryGroupBy()" class="btn btnBlue">确定</button>
+      <button ng-close-window="" class="btn">取消</button>
+    </div>
+  </div>
+</div>

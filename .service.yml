@@ -1,0 +1,24 @@
+kind: Service
+specVersion: v4
+metadata:
+ name: ccms
+ apiVersion: v1
+ accessPoint:
+  container: basecrm/campagin-fe
+containers:
+ - name: basecrm/campagin-fe
+   imagePullPolicy: PullIfNotPresent
+   ports:
+    - name: campagin-fe
+      protocol: tcp
+      targetPort: 0
+      containerPort: 8080
+profiles:
+ - name: default
+   cpu: 0.1
+   mem: 128
+   replicas: 1
+   containers:
+    - name: basecrm/campagin-fe
+      cpu: 0.1
+      mem: 128

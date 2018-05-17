@@ -1,0 +1,11 @@
+<div class="im-calendar-body">
+  <div class="calendar-row">
+    <im-calendar-row-wallpaper columns="$imCalBody.columns"></im-calendar-row-wallpaper>
+    <div class="event-bar-box" ng-class="{'laoding1':$imCalBody.loading}">
+      <im-event-bar index="$index" event="event" ng-repeat="event in $imCalBody.events track by event.campId"></im-event-bar>
+    </div>
+    <div class="loading-box" ng-if="$imCalBody.loading">
+      <cc-loading></cc-loading>
+    </div>
+  </div>
+</div>

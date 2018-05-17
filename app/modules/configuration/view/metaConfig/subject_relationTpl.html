@@ -1,0 +1,32 @@
+<div class="relation_appTpl">
+  <div class="mb10">
+    <label class="label_style">选择主题：</label>
+    <select class="commSelect width130" ng-model="subjectDataModel" ng-options="c.subjectName for c in subjectData" refresh-options-model=""></select>
+    <label class="label_style">主属性：</label>{{subjectDataModel.primaryAttributeName}}
+  </div>
+  <div class="item_action" ng-repeat="item in relationSubject.operate">
+    <div class="clearfix">
+      <h5>行为主题</h5>
+      <div class="fr">
+        <a ng-show="$last" href="javascript:void(0);" title="添加" class="add" ng-click="relationSubject.addAction()"></a>
+        <a href="javascript:void(0);" title="删除" class="del" ng-click="relationSubject.delAction($index)"></a>
+      </div>
+    </div>
+    <div class="con">
+      <div class="mb10">
+        <label class="label_style">选择行为主题：</label>
+        <select class="commSelect width130" ng-model="item.a" ng-options="c.subjectName for c in subjectData" refresh-options-model="" ng-change="relationSubject.changeSubjectAction(item.a,$index)"></select>
+      </div>
+      <div class="mb10">
+        <label class="label_style">选择关联属性集：</label>
+        <select class="commSelect width130" ng-model="item.b1" ng-options="c.attributeCollectionName for c in item.b" ng-change="relationSubject.changeAttributeCollection(item.b1,$index)"></select>
+        <label class="label_style">选择关联属性：</label>
+        <select class="commSelect width130" ng-model="item.c1" ng-options="c.attributeName for c in item.c"></select>
+      </div>
+    </div>
+  </div>
+  <div class="mb mt30">
+    <button class="btn btnBlue" type="submit" ng-click="relationSubject.save();">确定</button>
+    <span class="btn" ng-click="relationSubject.close()">取消</span>
+  </div>
+</div>

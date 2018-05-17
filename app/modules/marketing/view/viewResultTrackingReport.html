@@ -1,0 +1,98 @@
+<div ng-controller="trackingReport">
+  <div class="bannerCommStyle areaHeight26 m10 mt10 mr10 mb10 ng-binding" style="width:100%;text-indent: 25px; margin: 10px 0px; padding:0;">
+    每天凌晨计算当天0点以前的营销活动效果跟踪，效果跟踪目标：营销后7天内成功下单。
+    <a class="downSanjiao sanjiaoPosition" title="展开" toggle-banner="" href="javascript:void(0)"></a>
+  </div>
+  <div style="max-height:400px; overflow:auto">
+    <table class="form-table">
+      <tbody>
+      <tr>
+        <td class="ft-title">选择筛选条件：</td>
+        <td colspan="5"></td>
+      </tr>
+      <tr>
+        <td class="ft-title">选择周期：</td>
+        <td>
+          <select class="commSelect" ng-model="selectPeriodSelectedJobId" ng-options="selectPeriod.jobId as selectPeriod.plantime for selectPeriod in selectPeriods"></select>
+        </td>
+        <td class="ft-title">目标转化店铺：</td>
+        <td>
+          <select class="commSelect" ng-model="shop" ng-options="shop.name for shop in shops"></select>
+        </td>
+        <td class="ft-title"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="ft-title">目标组节点：</td>
+        <td>
+          <select class="commSelect" ng-model="customerGroup.customerGropNodeId" ng-options="customerGroup.customerGropNodeId as customerGroup.customerGropNodeName for customerGroup in customerGroups"></select>
+        </td>
+        <td class="ft-title">渠道节点：</td>
+        <td>
+          <select class="commSelect" ng-model="channelNode.channelNodeId" ng-options="channelNode.channelNodeId as channelNode.channelNodeName for channelNode in channelNodes"></select>
+        </td>
+        <td class="ft-title">发送类型：</td>
+        <td>
+          <select class="commSelect" ng-model="typeOfSend.key" ng-options="typeOfSend.key as typeOfSend.name for typeOfSend in typeOfSends"></select>
+        </td>
+      </tr>
+      <tr>
+        <td class="ft-title"></td>
+        <td colspan="5">
+          <button class="btn btnBlue" ng-click="getEvaluateTotal()">查看报表</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--h4>跟踪目标：营销后7天内成功下单</h4>
+<ul>
+ <li>选择周期：<select ng-model="selectPeriod.jobId" ng-options="selectPeriod.jobId as selectPeriod.starttime for selectPeriod in selectPeriods"></select></li>
+ <li>目标转化店铺：<select ng-model="shop.id" ng-options="shop.id as shop.name for shop in shops"></select></li>
+ <li>目标组节点：<select ng-model="customerGroup.customerGropNodeId" ng-options="customerGroup.customerGropNodeId as customerGroup.customerGropNodeName for customerGroup in customerGroups"></select></li>
+ <li>渠道节点：<select ng-model="channelNode.channelNodeId" ng-options="channelNode.channelNodeId as channelNode.channelNodeName for channelNode in channelNodes"></select></li>
+ <li>发送类型：<select ng-model="typeOfSend.key" ng-options="typeOfSend.key as typeOfSend.name for typeOfSend in typeOfSends"></select></li>
+</ul-->
+  <br />
+  <ul class="ulLeftFloat clearfix">
+    <li>
+      <label class="commonRadioWrap"><input class="commonRadio" type="radio" ng-click="getEvaluateTotal('0')" ng-model="resultsType" value="0" />汇总报表</label>
+    </li>
+    <li>
+      <label class="commonRadioWrap"><input class="commonRadio" ng-click="getEvaluateTotal('1')" type="radio" ng-model="resultsType" value="1" />按天统计</label>
+    </li>
+  </ul>
+  <div style="max-height:400px; overflow:auto;position: relative">
+    <div class="loading" ng-show="!hideDateLoading">
+      <i></i>加载中...
+    </div>
+    <table class="multiTitleTable shortTitle">
+      <thead>
+      <tr>
+        <th class="singleTitleTh textCenter" ng-hide="resultsType!=1">日期</th>
+        <th class="singleTitleTh textCenter">目标客户节点</th>
+        <th class="singleTitleTh textCenter">渠道节点</th>
+        <th class="singleTitleTh textCenter">发送类型</th>
+        <th class="singleTitleTh textCenter">发送人数</th>
+        <th class="singleTitleTh textCenter">渠道费用</th>
+        <th class="singleTitleTh textCenter">成功购买客户数</th>
+        <th class="singleTitleTh textCenter">成功购买总金额</th>
+        <th class="singleTitleTh textCenter">ROI<span ng-title="投资回报比，计算公式：1：(成功购买总金额/渠道费用)" class="ico_tips"></span></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="resultsData in resultsDatas">
+        <td class="textCenter" ng-hide="resultsType!=1">{{resultsData.created}}</td>
+        <td class="textCenter">{{resultsData.customerGroupNodeName}}-{{resultsData.customerGroupNodeId}}</td>
+        <td class="textCenter">{{resultsData.channelNodeName}}-{{resultsData.channelNodeId}}</td>
+        <td class="textCenter">{{resultsData.controlGroupType}}</td>
+        <td class="textRight">{{resultsData.investmentNum}}</td>
+        <td class="textRight">{{resultsData.investmentPrice}}</td>
+        <td class="textRight">{{resultsData.returnNum}}</td>
+        <td class="textRight">{{resultsData.returnPrice}}</td>
+        <td class="textCenter">{{resultsData.roi}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

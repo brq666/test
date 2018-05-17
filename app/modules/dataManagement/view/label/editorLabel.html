@@ -1,0 +1,21 @@
+<div class="settingCommPageStyle">
+  <h2 class="heading ng-binding">{{productLabelObj.header}}</h2>
+  <div class="editorBg">
+    <ul class="conditionsBox">
+      <li>
+        <label><font color="red">*</font>&nbsp;标签名称：</label>
+        <input type="text" ng-model="productLabelObj.labelName" ng-disabled="productLabelObj.labelStatus" name="accounNumber" maxlength="20" input_activity_name class="borderHighlight">
+        <em class="ico_tips" dm-title="标签名称只可输入英文、汉字和数字，最大长度为20"></em>
+        <label class="error" ng-show="isLabelNameError">请填写标签名称</label>
+      </li>
+      <li>
+        <label>标签说明：</label>
+        <textarea ng-model="productLabelObj.remark" maxlength="50" name="remark" class="markMessage borderHighlight"></textarea>
+      </li>
+    </ul>
+  </div>
+  <div class="mb">
+    <button class="btn btnBlue" ng-click="productLabelObj.saveLabelData()">确定</button>
+    <span ng-click="productLabelObj.cancelBtnMethod()" class="btn">取消</span>
+  </div>
+</div>

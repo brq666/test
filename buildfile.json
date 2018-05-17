@@ -1,0 +1,12 @@
+{
+  "name": "需要打包的modules",
+  "list": [
+    "activitySelector",
+    "commSelector",
+    "dashboard",
+    "dataManagement",
+    "marketing",
+    "Selector",
+    "systemManage"
+  ]
+}

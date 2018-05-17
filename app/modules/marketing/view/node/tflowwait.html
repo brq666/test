@@ -1,0 +1,55 @@
+<div ng-controller="waitNodeCtrl">
+  <div class="waitnode clearfix commNodeMarkRelative" waitnode="">
+    <div class="commWrapTwo commWrapFour">
+      <div ng-form="" name="waitnodeForm">
+        <div class="bannerCommStyle areaHeight26" ng-show="waitnode.tips">
+          {{waitnode.tips}}
+          <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+        </div>
+        <div class="contentNodeWrap">
+          <table>
+            <tbody>
+            <tr>
+              <th class="tl" width="12%"><label class="node_name_label">节点名称：</label></th>
+              <td>
+                <div class="pr">
+                  <input type="text" class="borderHighlight nameInput fl" ng-model="waitnode.name" maxlength="20" ng-noderequire="" />
+                  <span nodetip=""></span>
+                </div></td>
+              <td><label class="code fr mr40">节点代码：{{waitnode.id}}</label></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <input class="mr5 vm" type="radio" name="time" value="0" ng-model="waitnode.waitType" />等待至指定时间
+                <input type="text" ng-model="waitnode.waitDateTime" ng-disabled="waitnode.waitType!=0" name="waitDateTime" ng-pattern="" ng-required="" datepicker="" class="borderHighlight node_waitdate_input datetimepicker" />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <input class="mr5 vm" type="radio" name="time" value="1" ng-model="waitnode.waitType" />等待至
+                <input type="text" ng-model="waitnode.waitDay" num-type="整数" num-precision="0" num-between="0,99" name="waitDay" ng-disabled="waitnode.waitType!=1" class="borderHighlight node_waitday_input" /> 天后的
+                <input type="text" ng-model="waitnode.waitTime" name="waitTime" ng-disabled="waitnode.waitType!=1" class="borderHighlight node_waitminute_input datepicker" timepicker="" maxlength="5" readonly="" />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <input class="mr5 vm" type="radio" name="time" value="2" ng-model="waitnode.waitType" />等待
+                <input type="text" ng-model="waitnode.waitHour" num-type="整数" num-precision="0" num-between="0,23" ng-disabled="waitnode.waitType!=2" name="waitHour" class="borderHighlight node_waitday_input" /> 小时
+                <input type="text" ng-model="waitnode.waitMinute" num-type="整数" num-precision="0" num-between="0,59" ng-disabled="waitnode.waitType!=2" name="waitMinute" class="borderHighlight node_waitminute_input" /> 分钟
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ling_di clearfix mt10"></div>
+  <div class="commBottom clearfix">
+    <div class="mb">
+      <button class="btn btnBlue" id="marketSure" ng-click="waitnode.savewaitnode()">确定</button>
+      <button class="btn" id="marketCancel" ng-close-window="">取消</button>
+    </div>
+  </div>
+</div>
+<!--<link type="text/css" rel="stylesheet" href="css/waitNode.css" />-->

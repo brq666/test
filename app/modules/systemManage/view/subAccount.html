@@ -1,0 +1,90 @@
+<div class="coupon">
+  <div class="maincontainerB" ng-controller="SubAccountCtrl">
+    <div class="maincontainer">
+      <div ui-view></div>
+    </div>
+
+    <div id="subAccountSelector" class="activityContentWrap" style="display:none">
+      <div class="clearfix" style="width:858px">
+        <div class="activityBox selectionBox" style="border:none">
+          <div class="mt clearfix" style="border:none">
+            <div class="commSearch" style="width:100%">
+              <label class="defult_color" for=""></label>
+              <input class="commSearchVal" style="width:223px" ng-model="activityQuery" placeholder="搜索旺旺账号" type="text">
+              <button class="commSearchBtn" style="right:150px" ng-click="searchActiAccount()"></button>
+            </div>
+          </div>
+          <div class="activitySelectList" style="bottom:0;top:40px;border:1px solid #e8e8e8">
+            <div class="items" style="min-height:15px;background:#ededed;margin:0">
+              <div class="pic ml10 max-width10" style="top:6px">
+                <input type="checkbox" style="position:relative;top:-1px;margin:0" ng-model="selectAll" ng-change="resetAllStatus()">
+                <div class="ldragitem max-width200" style="width:240px">旺旺账号</div>
+                <div class="max-width100" style="width:100px;">所属店铺</div>
+              </div>
+              <div class="info">
+              </div>
+            </div>
+            <div class="loading activityLoadClass" ng-show="subAccountLoadFlag">
+              <i></i>账号加载中...
+            </div>
+            <div ng-repeat="subAccount in subAccountList">
+              <div class="items" style="min-height:30px;margin:0">
+                <div class="pic ml10">
+                  <input type="checkbox" style="margin:0" ng-model="subAccount.checkState" ng-change="checkAllStatus()">
+                  <span class="ldragitem max-width200" title="{{subAccount.nick}}" style="width:240px">{{subAccount.nick}}</span>
+                  <span class="max-width100" title="{{subAccount.sellernick}}" style="width:100px">{{subAccount.sellernick}}</span>
+                </div>
+                <div class="info">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="selectionBtn" style="top:200px">
+          <div class="smalldarkerblueBtn">
+            <a class="addGoods" href="javascript:;" ng-click="selectSubAccount()"></a>
+          </div>
+        </div>
+        <div class="selectionBox" style="margin-left:8px;border:none">
+          <div class="mt clearfix" style="border:none">
+            <div class="commSearch" style="width:100%">
+              <label class="defult_color" for=""></label>
+              <input class="commSearchVal" style="width:223px" ng-model="selectQuery" placeholder="搜索旺旺账号" type="text">
+              <button class="commSearchBtn" style="right:150px" ng-click="searchSeleAccount()"></button>
+            </div>
+          </div>
+          <div class="activitySelectList" style="bottom:29px;top:40px;border:1px solid #e8e8e8">
+            <div class="items" style="min-height:15px;background:#ededed;margin:0">
+              <div class="pic ml10 max-width10" style="top:6px">
+                <span class="rdragitem max-width200" style="width:240px">旺旺账号</span>
+                <span class="max-width100" style="width:100px">所属店铺</span>
+              </div>
+              <div class="info">
+              </div>
+            </div>
+            <div ng-repeat="subAccount in selectAccounts">
+              <div class="items" style="min-height:30px;margin:0">
+                <div class="pic ml10">
+                  <span class="rdragitem max-width200" title="{{subAccount.nick}}" style="width:240px">{{subAccount.nick}}</span>
+                  <span class="max-width100" title="{{subAccount.sellernick}}" style="width:100px">{{subAccount.sellernick}}</span>
+                </div>
+                <div class="info">
+                  <span class="remove hand" ng-click="removeOne(subAccount, $index)"> X </span>
+                </div>
+                </div>
+            </div>
+          </div>
+          <div class="comm-bottom">
+            <span class="seleall-dec">已选：{{selectAccounts.length}}</span>
+            <span class="remove-dec" ng-click="clearAll()">全部清除</span>
+          </div>
+        </div>
+      </div>
+      <div class="commBottom" style="text-align:center">
+        <button ng-click="sureAddSubAccounts()" type="button" class="btn btnBlue">确定</button>
+        <button ng-close-child-window="" class="btn" type="button">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="viewMarkInfoBox" id="couponTip" style="white-space: normal; word-wrap: break-word;"></div>

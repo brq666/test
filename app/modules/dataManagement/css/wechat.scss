@@ -1,0 +1,62 @@
+.searchbox{width:100%;line-height: 30px;padding:0px 10px;}
+.searchbox .mainDivBox{background: none repeat scroll 0 0 #F9F9F9;}
+.searchbox .targetDivBox{background-color: white;margin-top:5px}
+.searchbox .targetDivBox div{display: inline-block;vertical-align: middle;}
+.searchbox .targetDivBox label{position:relative;z-index: 100;display:inline-block;height:24px;max-width: 120px;width: 120px;overflow:hidden;border: 1px solid #cecece;line-height: 24px;margin-left: 5px;padding: 0px 5px;margin-right: 15px;background-color: white;}
+.searchbox .targetDivBox label.down em{width: 0;height:0;border: 4px solid transparent;display:inline-block;border-top-color: #000;right: 10px;position: absolute;float: right;top: 10px;}
+.searchbox .targetDivBox label.up em{width: 0;height:0;border: 4px solid transparent;display:inline-block;border-bottom-color: #000;right: 10px;position: absolute;float: right;top: 6px;}
+.searchbox .targetDivBox section{background-color: white;display: inline-block;display:none;border: 1px solid #cecece;position: absolute;top: 104px;left: 80px;z-index: 10;width: 162px;padding: 8px 10px;}
+.searchbox .targetDivBox section span{display: block}
+.searchbox .targetDivBox section input,.searchbox section button{margin-left: 0px;margin-top: 10px;}
+.searchbox .targetDivBox section h3{font: 12px/1.5 "microsoft yahei",tahoma, helvetica, arial, "\5b8b\4f53", sans-serif;outline:none;}
+
+.searchbox .targetDivBox .edit{background-color: #d7ebff;display: inline-block;border: 1px solid #a9caeb;height: 24px;line-height: 24px;position:relative;padding: 0px 8px;margin-right:10px;    }
+.searchbox .targetDivBox .edit span{display: inline-block;width: 90px;}
+.searchbox .targetDivBox .edit span em:last-child{width:15px;height: 15px;color: white;background-color: #a9caeb;display: inline-block;position: absolute;text-align: center;font-weight: bold;line-height: 15px;right: 1px;top: 4px;}
+.searchbox .targetDivBox .edit span em:first-child{width: 0;height:0;border: 4px solid transparent;display:inline-block;border-top-color: #000;position: absolute;top: 10px;right: 23px;}
+.searchbox .targetDivBox .edit span.up em:first-child{width: 0;height:0;border: 4px solid transparent;display:inline-block;border-bottom-color: #000;position: relative;margin: 0px 10px 0px 10px;top: -1px;}
+.searchbox .targetDivBox .edit span{display: inline-block;width: 100%;position: relative;box-sizing: border-box;}
+.searchbox .targetDivBox .ico_tips{margin:0 0 0 3px;}
+
+.list{margin-top: -60px; position: relative;  left: 0px;top: 0px;right: 0px;}
+.Pop input[type="radio"]:first-child{margin-left: 7px;vertical-align: middle;margin-top: -4px;}
+.Pop input[type='radio']:not(:first-child){margin-left: 20px;vertical-align: middle;margin-top: -4px;}
+.Pop .customerno{margin-left: 9px}
+.Pop .day_start { margin-left: 200px; position: absolute; background: #FAF8F8; border: 1px solid #dcdcdc; padding: 7px 5px;  z-index:10; right: 5px;}
+.pop .smallbut{width: 60px; height: 20px; line-height: 0; border-radius: 0px;  font-size: 11px;}
+.Pop .day_start .dl { line-height: 23px;}
+.Pop .day_start .dl dd div { float: left; width: 25px; text-align: center;  margin-left: 10px; border: 1px solid #F8F8F8;}
+.Pop .day_start .dl dd div.cur {background: #DFF9FA;border: 1px solid #93E4DA}
+.error{margin-left: 0px}
+.hand{cursor: pointer}
+.searchbox .targetDivBox .edit span  a{
+    display: inherit;
+    max-width: 90px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    position: relative;
+}
+.width145{width: 145px;}
+#cycleDay {
+  width: 67.5px;
+}
+#empower_form .spanClass .num_down{position:absolute;left:64px;top:13px;}
+#empower_form .spanClass .num_up{position:absolute;left:63px;top:4px;}
+.PopBatch .label {
+  display: block;
+  padding: 10px 5px;
+  text-align: right;
+}
+.tureOrFalse{background: inherit;border-top: 0px;}
+.PreviewWeChat{ top: 60px; left: 390px; width: 280px;}
+.previewBoxLe , .previewBoxRi{width: 50%;float: left;}
+.previewBoxRi{float: right;}
+.previewBox li{ margin-bottom: 0px; width: 120px; text-overflow: ellipsis; white-space: nowrap;}
+.wechatViewPort{ width: 50%; float: left;}
+.weChatbundling{color: #333333; border-radius: 2px;display: inline-block;width: 70px;border: 1px solid #e3e3e3;line-height: 24px;height: 24px}
+.PopBatch label.error{position: relative; z-index: 1;}
+.wechatcommSelect{
+  margin-left:5px;
+}

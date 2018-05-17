@@ -1,0 +1,80 @@
+<!--<link type="text/css" rel="stylesheet" href="css/ump.css" />-->
+<div class="maincontainerB">
+  <div class="maincontainer">
+    <div class="ccms-ump" ng-controller="ccmsUmpOrder">
+      <div class="clearfix">
+        <h2 class="heading fl">订单优惠</h2>
+        <div ng-click="tpl.add()" class="smalldarkerblueBtn newbuildBtn smalldarkerblueBtn_fix360">
+          <a href="javascript:void(0)">新建订单优惠</a>
+        </div>
+      </div>
+      <div class="ump_content">
+        <div class="mt">
+          <div class="commSearch">
+            <input type="text" ng-model="hdValue" name="couponName" class="commSearchVal" placeholder="优惠名称" />
+            <button ng-click="list.searchButtonClick(hdValue)" class="commSearchBtn"></button>
+          </div>
+          <select class="commSelect ml9 fr" ng-change="list.screeningOfState(statusModel)" ng-model="statusModel">
+            <option value="7">全部</option>
+            <option value="0">新建未提交</option>
+            <option value="1">未开始</option>
+            <option value="2">进行中</option>
+            <option value="3">修改未提交</option>
+            <option value="4">已结束</option>
+          </select>
+          <span style="float:right;padding-top:4px;">状态：</span>
+        </div>
+        <div>
+          <div class="discountCommGridstyle">
+            <div class="ump_order_flexgrid"></div>
+          </div>
+        </div>
+      </div>
+      <div ng-include="" src="tpl.src" id="addUmp"></div>
+      <div class="submitEmpower" style="display:none;">
+        <div class="content">
+          <p ng-model="blockOrHiddenTxt" ng-show="blockOrHiddenTxt" class="blockOrHiddenTxt">您尚未授权成功！</p>
+          <p>提交保存需要店铺账号的授权。</p>
+          <div class="commBottom">
+            <div class="mb">
+              <button class="btn btnBlue" ng-model="blockOrHidden" ng-show="!blockOrHidden">立即授权</button>
+              <button class="btn btnBlue" ng-model="blockOrHidden" ng-show="blockOrHidden">提交</button>
+            </div>
+            <p class="">授权后30分钟内可以免授权创券，超出30分钟后需要重新授权。</p>
+          </div>
+          <p class="text" ng-show="status==true"><a href="javascript:void(0);">授权申请</a><em class="ico_tips" ng-title="如果没有授权权限，请点击授权申请发送申请信息。"></em></p>
+        </div>
+      </div>
+      <div class="empowerApply" style="display:none;">
+        <div class="content">
+          <form id="empower_form">
+            <p class="mb10">向有授权权限的人发送短信或者邮件申请授权</p>
+            <div class="mb10">
+              <label class="label">手机号码：</label>
+              <input type="text" class="borderHighlight" ng-model="empower.telphone" name="phone" />
+            </div>
+            <div class="mb10">
+              <label class="label">邮箱：</label>
+              <input type="text" class="borderHighlight" ng-model="empower.email" name="eamil" />
+            </div>
+            <div class="mb10">
+              <label class="label">申请内容：</label>
+              <input type="text" class="borderHighlight" ng-model="empower.applyContent" name="content" />
+            </div>
+            <div class="mb10">
+              <label class="label">备注：</label>
+              <textarea ng-model="empower.exec" name="exec" class="borderHighlight" ng-maxlength="200" maxlength="200"></textarea>
+            </div>
+            <div class="commBottom">
+              <div class="mb">
+                <button class="btn btnBlue">提交</button>
+                <button class="btn" type="button" ng-click="empower.closeApplyPop()">取消</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<script type="text/javascript" src="controller/discount/umpOrder.js"></script>-->

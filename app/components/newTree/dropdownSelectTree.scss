@@ -1,0 +1,58 @@
+.dropdown-select-tree {
+    overflow-y: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    .serch-box {
+        height: 30px;
+        position: relative;
+        & > input {
+            width: 200px;
+            height: 26px;
+            padding: 1px 1px 1px 6px;
+        }
+        .icon-arrow {
+            top: 2px;
+            right: 2px;
+            font-size: 12px;
+            color: #c9c9c9;
+            line-height: 28px;
+            padding: 0 6px;
+            display: inline-block;
+            position: absolute;
+        }
+    }
+    .tree-box {
+        overflow: auto;
+        position: absolute;
+        z-index: 1;
+        box-sizing: border-box;
+        max-height: 200px;
+        min-height: 70px;
+        padding: 0;
+        border: 1px solid #d9d9d9;
+        background-color: #fff;
+        width: 209px;
+        top: calc(100% - 1px);
+        .tree-directory {
+            li[treenode] {
+                position: relative;
+                a[treenode_a] {
+                    &.curSelectedNode{
+                        background-color: #f1f1f1;
+                        color: #333333;
+                    }
+                    span.button.center_close, span.button.bottom_close{
+                        background-position: 4px -50px!important;
+                    }
+                    span.button.center_open, span.button.bottom_open {
+                        background-position: 4px 10px!important;
+                    }
+                }
+            }
+        }
+        .no-record {
+            color: #999999;
+            text-align: center;
+        }
+    }
+}

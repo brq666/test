@@ -1,0 +1,26 @@
+<!--带checkbox的表格头部-->
+<th class="checkbox"
+	ng-click="_$pctrl.switchSelectAll(!_$pctrl.$allSelected, $ctrl.opts.data)"
+	ng-init="_$pctrl = $ctrl.$scope.$parent.$ctrl;"
+	cc-dynamic-attr="{'ng-click': !_$pctrl.opts.disable}"
+>
+	<input type="checkbox"
+			ng-checked="_$pctrl.selectedAll || _$pctrl.$allSelected"
+			ng-disabled="_$pctrl.disable || _$pctrl.selectedAll"
+	>
+</th>
+
+<!--默认表格头部模板-->
+<th ng-repeat="column in $ctrl.opts.columnsDef track by $index"
+	ng-if="!column.isHidden"
+	ng-class="{'column-sort':column.sortProp}"
+	ng-click="$ctrl.toggleSort(column)"
+	ng-style="{width:column.width, 'text-align':column.align}">
+
+	<span ng-bind="column.displayName"></span>
+
+	<span class="iconfont icon-sort"
+	   ng-class="{'column-sort-none':column.sortOrder===undefined,'column-sort-asc':column.sortOrder==='asc','column-sort-desc':column.sortOrder==='desc'}"
+	   ng-if="column.sortProp"
+	></span>
+</th>

@@ -1,0 +1,16 @@
+<!--<script type="text/javascript" src="controller/subAccountList.js"></script>-->
+<div>
+  <div class="list accountListStyle" ng-controller="SubAccountListCtrl">
+    <div class="clearfix">
+      <h2 class="heading fl">旺旺账号</h2>
+      <div class="smalldarkerblueBtn newbuildBtn" ng-show="userModeFlag">
+        <a href="javascript:void(0)" ng-click="addSubAccount()">添加旺旺账号</a>
+      </div>
+    </div>
+    <div class="couponListssBox listContainer noTopBorder">
+      <div class="set-cursor" style="position:absolute;top:5px;bottom:0;right:0;left:0">
+        <div id="subAccountListGrid"></div>
+      </div>
+    </div>
+  </div>
+</div>

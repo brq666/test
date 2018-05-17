@@ -1,0 +1,137 @@
+<style>
+  .ccmsPublicPopMain {
+    overflow: visible !important;
+  }
+</style>
+<div ng-controller="CustomerGroupNode" class="mesg_node customerGroupNodePage">
+  <div class="customerGroup">
+    <div class="commWrapFour clearfix commNodeMarkRelative">
+      <div class="bannerCommStyle areaHeight26" ng-show="customgroupScopeObj.tips">
+        {{customgroupScopeObj.tips}}
+        <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+      </div>
+      <div class="contentNodeWrap">
+        <form id="customerGroupNodeForm">
+          <table>
+            <tbody>
+            <tr>
+              <th style="width: 10%;" class="tl"><label class="ml5">节点名称：</label></th>
+              <td>
+                <div class="pr">
+                  <input type="text" class="borderHighlight nameInput ml5 fl" name="nameInput" ng-model="customgroupScopeObj.name" maxlength="20" ng-noderequire="" />
+                  <span nodetip=""></span>
+                </div></td>
+              <td><label class="code mr40 fr">节点代码：{{customgroupScopeObj.id}}</label></td>
+            </tr>
+            </tbody>
+          </table>
+          <dl class="fl mt10">
+            <!--dt class="clearfix mb15">
+              <div class="fl">
+                <label class="commLabelWidth84">节点名称：</label>
+                <input type="text" class="borderHighlight nameInput ml5" name="nameInput" ng-model="customgroupScopeObj.name" maxlength="20" ng-noderequire /></div>
+              <span nodetip></span>
+              <label class="code mr40 fr">节点代码：{{customgroupScopeObj.id}}</label>
+            </dt-->
+            <dd class="mb15 commPenEditor">
+              <label class="ml25 commLabelWidth125 textInherit">
+                <input class="commRadio" type="radio" name="customerGroupRadio" ng-model="customgroupScopeObj.type" value="NEW" ng-change="customgroupScopeObj.changeCustomerGroupRadio()" />保存为新的客户分组
+              </label>
+              <input type="text" class="borderHighlight width200 ml5 mr5" name="newValueInput" maxlength="20" ng-model="customgroupScopeObj.newValue" ng-click="customgroupScopeObj.creatNewGroupInput()" newvalueid="{{customgroupScopeObj.newValueId}}" ng-disabled="customgroupScopeObj.type!='NEW'" />
+              <span class="ml5">
+                <label>分组所属分类：</label>
+                <input type="text" class="borderHighlight width200" name="categoryNodeInput" readonly ng-disabled="customgroupScopeObj.type!='NEW'" ng-custom-select="customgroupScopeObj.selectCategory()" ng-model="customgroupScopeObj.categoryName" valueid="{{customgroupScopeObj.categoryId}}" />
+              </span>
+              <span class="newGroupNameMark" ng-show="newGroupNameMarkFlag" ng-click="customgroupScopeObj.creatNewGroupInput()">输入分组名称</span>
+            </dd>
+            <dd class="mb15 commPenEditor">
+              <label class="ml25 commLabelWidth125 textInherit">
+                <input class="commRadio" type="radio" name="customerGroupRadio" ng-model="customgroupScopeObj.type" value="MERGE" ng-change="customgroupScopeObj.changeCustomerGroupRadio()" />添加至已有分组
+              </label>
+              <span class="commPenEditor">
+                <input type="text" class="borderHighlight required width200 ml5 mr5" name="mergeValueInput" readonly ng-model="customgroupScopeObj.mergeValue" mergevalueid="{{customgroupScopeObj.mergeValueId}}" ng-disabled="customgroupScopeObj.type!='MERGE'" ng-click="customgroupScopeObj.selectCustomerGroupList('megre')" />
+                <a class="optionModule2 customerLeft" ng-click="customgroupScopeObj.selectCustomerGroupList('megre')" href="javascript:void(0);"></a>
+              </span>
+              <label class="error mr10" ng-show="customgroupScopeObj.mergeValueInputFlag">请选择已有分组</label>
+            </dd>
+            <dd class="mb15">
+              <label class="ml25 commLabelWidth125 textInherit">
+                <input class="commRadio" type="radio" name="customerGroupRadio" ng-model="customgroupScopeObj.type" value="EXCLUDE" ng-change="customgroupScopeObj.changeCustomerGroupRadio()" />从已有分组中移出
+              </label>
+              <span class="commPenEditor">
+                <input type="text" class="borderHighlight required width200 ml5 mr5" name="excludeValueInput" readonly ng-model="customgroupScopeObj.excludeValue" excludevalueid="{{customgroupScopeObj.excludeValueId}}" ng-disabled="customgroupScopeObj.type!='EXCLUDE'" ng-click="customgroupScopeObj.selectCustomerGroupList('exclude')" />
+                <a class="optionModule2 customerLeft" ng-click="customgroupScopeObj.selectCustomerGroupList('exclude')" href="javascript:void(0);"></a>
+              </span>
+              <label class="error mr10" ng-show="customgroupScopeObj.excludeValueInputFlag">请选择已有分组</label>
+            </dd>
+          </dl>
+        </form>
+      </div>
+    </div>
+    <div class="ling_di mt10 clearfix"></div>
+    <div class="commBottom clearfix">
+      <div class="mb">
+        <label class="error mr10" ng-show="customgroupScopeObj.newGroupFlag">{{customgroupScopeObj.newGroupErrorMark}}</label>
+        <button class="btn btnBlue" ng-click="customgroupScopeObj.postCustomerGroupDataMethod($event)">确定</button>
+        <button class="btn" type="button" ng-close-window="">取消</button>
+      </div>
+    </div>
+  </div>
+  <!--客户分组筛选 start-->
+  <div class="commDataTableStyle TabClose customerGroupSelected">
+    <div>
+      <div class="clearfix commPenEditor height30">
+        <p class="fl mt5 ml5">
+          <label>已选择分组：</label>
+          <span class="commFontMark mr10 blueColor verticalAlignTop" ng-show="customgroupScopeObj.curSelectedGroupName">{{customgroupScopeObj.curSelectedGroupName}}
+            <a ng-click="customgroupScopeObj.delTitle($index)" href="javascript:void(0)"><img width="10" height="10" src="/ccms/images/deletex.png" ng-src="/ccms/images/deletex.png" /></a>
+          </span>
+        </p>
+        <input class="tableSearch borderHighlight" type="text" ng-commdtable-search="" ng-model="customgroupScopeObj.selectTable" />
+        <label ng-commdtable-search="" class="default_color">请输入分组名称</label>
+      </div>
+      <div class="customerGroupZtreeWrap">
+        <div class="market_types_tree grey_border customerGroupNodeZTree" ng-cloak="">
+          <div ztreemenu=""></div>
+          <div class="market_tree_input_wrapper">
+            <input type="text" class="market_tree_search_input system_search" ng-placeholder="分组类型" ng-model="searchValue" tree-node-search-input="" />
+          </div>
+          <div class="market_tree_wrapper">
+            <div class="ztree defaultWrapztree" customer-node-ztree="" out-root-tree="" id="aaa" style="min-height:200px;"></div>
+          </div>
+        </div>
+        <div class="dataTableGird ml200">
+          <div class="grey">
+            <span class="center w20 mt5"></span>
+            <span class="center w40 mt5" style="text-align:left">分组名称</span>
+            <span class="center w40 mt5" style="text-align:left">创建人</span>
+          </div>
+          <div class="dataTableList">
+            <div class="dataConfigureTableListStyle clearfix" ng-repeat="unselectedTable in customgroupScopeObj.customerGroupLists">
+              <div class="w20 center">
+                <input class="mt4" type="radio" ng-model="customgroupScopeObj.defaultRadioSelect" ng-click="customgroupScopeObj.changeCurGroupTitleView(unselectedTable.groupName)" name="customerGroupList" value="{{unselectedTable.id}}" groupname="{{unselectedTable.groupName}}" />
+              </div>
+              <div class="tableName center w40" style="text-align:left">
+                {{unselectedTable.groupName}}
+              </div>
+              <div class="tableState center w38" style="text-align:left">
+                {{unselectedTable.creator}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="ling_di"></div>
+        <div class="commBottom">
+          <div class="mb">
+            <button class="btn btnBlue" type="button" ng-click="customgroupScopeObj.fillSelectedData()">确定</button>
+            <button class="btn" type="button" ng-close-child-window>取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--客户分组筛选 end-->
+</div>
+<!--<script type="text/javascript" src="controller/node/tdatacustomgroup.js"></script>-->

@@ -1,0 +1,24 @@
+<div class="market-list-box">
+  <div class="serch-box">
+    <input type="text" ng-model="$ctrl.queryParams.query" placeholder="活动ID/活动名称" ng-keyup="$ctrl.onKeyupSearch($event)">
+    <i class="iconfont icon-search" ng-click="$ctrl.onKeyupSearch()"></i>
+  </div>
+  <div class="grid-box">
+    <cc-grid ng-if="$ctrl.isRefeshGrid" opts="$ctrl.gridMarketOptions"></cc-grid>
+    <div class="loading-box" ng-if="!$ctrl.isRefeshGrid">
+      <cc-loading type="layer">请耐心等待</cc-loading>
+    </div>
+  </div>
+  <div class="pagination-box">
+    <div class="reload-total-box">
+      <span>共
+        <span ng-bind="$ctrl.gridMarketOptions.pager.totals"></span>
+        条</span>
+      <span class="reload" ng-click="$ctrl.onGridReload()">
+        <i class="icon-refresh"></i> 刷新
+      </span>
+    </div>
+    <cc-pagination type="normal" page-num="$ctrl.gridMarketOptions.pager.pageNum" page-size="$ctrl.gridMarketOptions.pager.pageSize"
+      totals="$ctrl.gridMarketOptions.pager.totals" total-pages="$ctrl.gridMarketOptions.pager.totalPages" on-change="$ctrl.onPageChange(pageNum, pageSize)"></cc-pagination>
+  </div>
+</div>

@@ -1,0 +1,209 @@
+<div ng-controller="workflow" id="workflow">
+  <div class="mt10">
+    <!--活动列表-->
+    <div></div>
+    <!--短信活动-->
+    <div>
+      <!--title-->
+      <!--操作审批-->
+      <div class="action_buttons" style="display:none;">
+        <span class="canvas_about fl">
+          <a class="icon_amplification" href="javascript:void(0);"></a>
+          <a class="icon_narrow" href="javascript:void(0);"></a>
+          <a class="icon_reduction" href="javascript:void(0);"></a>
+          <a class="icon_full_screen" href="javascript:void(0);"></a>
+        </span>
+        <span class="fl mt2 ml25">
+          <a class="start_test_execution" href="javascript:void(0);"><i></i>测试执行</a>
+          <a class="but_agreed ml25" href="javascript:void(0);"><i></i>审批通过</a>
+          <a class="but_refuse ml5" href="javascript:void(0);"><i></i>审批拒绝</a>
+        </span>
+        <span class="fr mt5">
+          <a class="icon_information" href="javascript:void(0);"></a>
+          <a class="icon_drag_window ml25" href="javascript:void(0);"></a>
+        </span>
+      </div>
+      <!--操作设计-->
+      <div class="action_buttons">
+        <span class="fl">
+          <!--<a class="but_save" href="javascript:void(0);" title="保存流程" onclick="mxGraphCells.save()"><i></i></a>-->
+          <a class="but_copy ml5" href="javascript:void(0);" title="保存为模板" ng-click="saveAsTemplate()"><i></i></a>
+        </span>
+        <!-- <span class="canvas_about_short fl ml25"><a class="icon_back" href="javascript:void(0);" title="撤销" onclick="mxGraphCells.editor('undo')"></a><a class="icon_into" href="javascript:void(0);" title="恢复" onclick="mxGraphCells.editor('redo')"></a></span>-->
+        <span class="fl ml5"><a class="but_del" href="javascript:void(0);" title="删除" onclick="mxGraphCells.editor('delete')"><i></i></a></span>
+        <span class="canvas_about fl ml25">
+          <a class="icon_amplification" href="javascript:void(0);" title="放大" onclick="mxGraphCells.editor('zoomIn')"></a>
+          <a class="icon_narrow" href="javascript:void(0);" title="缩小" onclick="mxGraphCells.editor('zoomOut')"></a>
+          <a class="icon_reduction" href="javascript:void(0);" title="实际大小" onclick="mxGraphCells.editor('actualSize')"></a>
+        </span>
+        <span class="excute_button_list">
+          <span class="fl mt2 ml25 " id="exeute">
+            <a class="start_test_execution disalbe_execute" id="test_execute" href="javascript:void(0);"><i></i><span>测试执行</span></a>
+            <a class="submit_approval disalbe_execute" href="javascript:void(0);"><span>提交审批</span></a>
+            <a class="approve_approval disalbe_execute" href="javascript:void(0);"><span>通过审批</span></a>
+            <a class="reject_approval disalbe_execute" id="" href="javascript:void(0);"><span>拒绝审批</span></a>
+            <a class="start_official_execution disalbe_execute" id="official_execute" href="javascript:void(0);"><i></i><span>正式执行</span></a>
+            <a class="cancel_approval disalbe_execute" href="javascript:void(0);" id="official_cancel">返回设计</a>
+          </span>
+          <span class="fl mt2 ml25" id="exeute2">
+            <a href="javascript:void(0);" ng-click="viewReport()" class="viewReport disalbe_execute" id="viewReport" disabled="disabled">查看报告</a>
+          </span>
+          <span class="fl mt2 ml30" >
+            <a class="reset_Runnode disalbe_reset" title="选中需要重试的节点后点击重新执行，当前只支持因为余额不足而执行出错的节点" href="javascript:void(0);">重试节点</a>
+          </span>
+        </span>
+        <span class="fl mt2 ml25" id="periodicExecution">
+          <!--<select class="commSelect" style="background-color: #fff;">
+          </select>-->
+          <div id="al_dropDown"></div>
+          <!--<div id="al_dropDown1">
+           <span class="executedStatusIcon_23">2014-09-21 15:56:00<a></a></span>
+           <ul>
+               <li class="executedStatusIcon_23">2014-09-21 15:56:00</li>
+               <li class="executedStatusIcon_23">2014-09-22 15:56:00</li>
+           </ul>
+          </div>-->
+        </span>
+
+
+        <span class="fr mt5 commPenEditor">
+          <a class="icon_information" title="查看活动信息" href="javascript:void(0);" ng-click="screen.showFlowInfos()"></a>
+          <a id="screen" class="icon_drag_window ml10 fullScree" title="全屏编辑" href="javascript:void(0);" ng-click="screen.init()"></a>
+          <div class="flowInfosContent" style="display:none">
+            <div class="wrapbg">
+              <div class="bg">
+                <div class="node_tip_arrow"></div>
+                <h1 class="ccmsPublicPop">
+                  活动基本信息
+                  <a class="close fr" href="javascript:void(0);" ng-click="screen.closeFlowInfo()"></a>
+                </h1>
+                <div class="hdHeader">
+                  <div class="clearfix">
+                    <h4 class="hdName fl" ng-bind="screen.campNewsObj.curCampName" title="{{screen.campNewsObj.curCampName}}"></h4>
+                    <span ng-class="{'true':'node_tip_flag_empty','false':'node_tip_flag_full'}[(!screen.campNewsObj.getRemarkFlag)]" title="{{screen.campNewsObj.curRemark}}"></span>
+                    <span class="hdId fr">活动ID:<em ng-bind="screen.campNewsObj.curCampId"></em></span>
+                  </div>
+                  <div>
+                    <span class="mr25">创建时间：<em ng-bind="screen.campNewsObj.curCreatedTime"></em></span>
+                    <span>创建人：<em ng-bind="screen.campNewsObj.curCreater"></em></span>
+                  </div>
+                </div>
+                <div class="hdMessages">
+                  <div class="mb10">
+                    <!--span class="mr40">活动类型：<em class="ml5" ng-bind="screen.campNewsObj.curCampType"></em></span-->
+                    <span>活动状态：<em class="ml5" ng-bind="screen.campNewsObj.curStatus"></em></span>
+                  </div>
+                  <div class="clearfix" ng-show="screen.campNewsObj.curListflow.length>0">
+                    <h6 class="fl">审批历史：</h6>
+                    <ul class="hdHandlelog fl ml5">
+                      <li ng-repeat="listFlow in screen.campNewsObj.curListflow">
+                        <p class="logUser">
+                          <span class="mr10" ng-bind="listFlow.operator"></span>
+                          <span class="doingTime" ng-bind="listFlow.operate_time"></span>
+                        </p>
+                        <p><span>{{screen.disposeValue(listFlow.operation,listFlow.remark)}}</span></p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </span>
+        <span class="fr ac_status_selector ac_flow_status ac_status"  title="当前活动状态" style="display:none;"></span>
+      </div>
+      <!--content-->
+      <div class="operating_area" id="operating_area"></div>
+    </div>
+  </div>
+  <div class="node_flow_area" id="node_flow_area"></div>
+  <!--工具栏-->
+  <div class="toolbar" style="top:130px;left:20px;position:fixed;z-index:999;overflow:hidden;display:none;">
+    <!--title-->
+    <div class="toolbar_title ">工具栏 <span class="draw_down" id="draw"></span><span class="draw_small" id="draw_big"></span></div>
+    <div class="toolbar_content"></div>
+    <!--常用-->
+    <!--<dl ng-repeat="s in toolbarList">
+      <dt class="show_this_tool">{{s.text}}<a class="arrow_show fr" href="javascript:void(0);"></a></dt>
+      <dd class="padlr"  id="{{s.name}}_bar">
+        <a class="tool_icon" href="javascript:void(0);" ng-repeat="n in s.node" id="{{n.id}}">
+              <span class="{{n.name}}"></span></br> {{n.title}}
+        </a>
+      </dd>
+    </dl>-->
+  </div>
+  <div id="nodeContent" ng-include src='nodeSrc' onload="hideNodeTips()"></div>
+  <!--查看报告-->
+  <div ng-include src="viewReportSrc" id="reportMask"></div>
+  <!--活动保存为模板-->
+  <div id="saveAsTemplate" ng-include src='templateSrc'></div>
+</div>
+<div id="rejectApproval_remarks" style="display: none">
+  <div class="main">
+    <div class="mb20">
+      <label>拒绝理由：</label>
+      <textarea placeholder="最多输入100个字符" onKeyDown='if (this.value.length>=100){this.value = this.value.slice(0, 100);}'></textarea>
+    </div>
+    <div class="commBottom">
+      <div class="mb">
+        <button class="btn btnBlue">确定</button>
+        <button class="btn">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<script type="text/javascript" src="controller/workFlow/addCells.js"></script>
+<script type="text/javascript" src="controller/workFlow/nodeConfiguration.js"></script>
+<script type="text/javascript" src="controller/workFlow/operatePalette.js"></script>
+<script type="text/javascript" src="controller/workFlow/toolbar.js"></script>
+<script type="text/javascript" src="controller/workFlow/execute.js"></script>
+<script type="text/javascript" src="controller/workFlow/flowCtr.js"></script>-->
+<script>
+  /**
+   * ---CustomDropDownList---
+   * Created by Ambriel Li on 2014/10/11.
+   * HTML structure
+   */
+  (function(){
+    return al_dropDown = {
+      elemID:"al_dropDown",
+      allLi: {},
+      wrapper:{},
+      init: function(id){
+        // set ID for wrapper element
+        this.elemID = id ? id : this.elemID;
+        // add className for style
+        this.wrapper = document.getElementById(this.elemID);
+        this.wrapper.className = "al_dropDown";
+        // get all li tags
+        this.ul = this.wrapper.getElementsByTagName("ul");
+        // add click event
+        this.addClickEvt();
+        // set hover effect
+        this.setDropDownHover();
+      },
+      setDropDownHover: function(){
+        // show dropDown when hover
+        this.wrapper.onmouseover = function(){
+            this.getElementsByTagName("ul")[0].style.display = "block";
+        };
+        // hide dropDown when hover
+        this.wrapper.onmouseout = function(){
+            this.getElementsByTagName("ul")[0].style.display = "none";
+        };
+      },
+      addClickEvt: function(){
+        var al = this.ul,
+          selectedItem = this.wrapper.getElementsByTagName("span")[0],
+          innerDropDown = this.wrapper.getElementsByTagName("ul")[0];
+        al.onclick = function(e){
+            selectedItem.innerHTML = e.currentTarget.innerHTML+'<a></a>';
+            innerDropDown.style.display = "none";
+        };
+      }
+    };
+  }())
+
+ al_dropDown.init("al_dropDown");
+
+</script>

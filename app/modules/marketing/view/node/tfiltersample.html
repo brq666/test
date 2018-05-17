@@ -1,0 +1,58 @@
+﻿<div ng-controller="filterSampleCtrl" class="mesg_node">
+  <div class="discountEc">
+    <div class="commWrapFour clearfix commNodeMarkRelative">
+      <div class="bannerCommStyle areaHeight26" ng-show="sampleScopeObj.tips">
+        {{sampleScopeObj.tips}}
+        <a href="javascript:void(0)" toggle-banner title="展开" class="downSanjiao sanjiaoPosition"></a>
+      </div>
+      <div class="contentNodeWrap">
+        <table>
+        <tr>
+          <th class="tr" width="18%">
+            <label>节点名称：</label>
+          </th>
+          <td>
+            <div class="pr">
+              <input type="text" class="borderHighlight nameInput ml5 fl" ng-model="sampleScopeObj.name" maxlength="20" ng-noderequire />
+            </div>
+            <span nodetip></span>
+          </td>
+          <td>
+            <label class="code mr40 fr">节点代码：{{sampleScopeObj.id}}</label>
+          </td>
+        </tr>
+        <tr>
+          <th class="tr"><label>抽样设置：</label></th>
+          <td>
+            <input class="commRadio ml5" type="radio" name="sampleNode" ng-model="sampleScopeObj.exportValue" value="1" />
+            <span>
+              固定人数<input class="borderHighlight width75 ml5 mr5" type="text" ng-model="sampleScopeObj.personNum" ng-disabled="sampleScopeObj.exportValue==2" max="99999999" min="0" ng-pattern="/\d+/" ng-num="2" />人
+            </span>
+            <label class="error ml5" ng-show="sampleScopeObj.personNumFlag" style="display: inline-block">{{sampleScopeObj.personErrorMessage}}</label>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <input class="commRadio ml5" type="radio" name="sampleNode" ng-model="sampleScopeObj.exportValue" value="2" />
+            <span>
+              百分比<input class="borderHighlight width75 ml5 mr5" type="text" ng-model="sampleScopeObj.percentNum" ng-number-point="2" min="0" max="100" ng-disabled="sampleScopeObj.exportValue==1" />%
+            </span>
+            <label class="error ml5" ng-show="sampleScopeObj.percentNumFlag" style="display: inline-block">{{sampleScopeObj.percentErrorMessage}}</label>
+          </td>
+          <td></td>
+        </tr>
+      </table>
+      </div>
+    </div>
+    <div class="ling_di clearfix mt10"></div>
+    <div class="commBottom clearfix">
+      <div class="mb">
+        <button class="btn btnBlue" ng-click="sampleScopeObj.postDiscountEcData($event)">确定</button>
+        <button class="btn" ng-close-window>取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<script type="text/javascript" src="controller/node/tfiltersample.js"></script>-->

@@ -1,0 +1,50 @@
+﻿#nodesplit {
+  padding: 15px 10px;
+}
+
+.w80 {
+  width: 80px;
+}
+
+.w50 {
+  width: 50px;
+}
+
+.tabType a {
+  display: inline-block;
+  padding: 3px 7px;
+  color: #0f8abd;
+  background: #eeeeee;
+  text-decoration: none;
+  margin-right: 5px;
+}
+
+.tabType a.cur {
+  color: #FFFFFF;
+  background: #33b5e5;
+}
+
+.tabType {
+  margin-bottom: 10px;
+}
+
+.splitContent .add {
+  width: 10px;
+  height: 22px;
+  display: inline-block;
+  background: url(../../images/addBtn.png) no-repeat 0 12px;
+  vertical-align: middle;
+  margin: 0 3px;
+}
+
+.splitContent .del {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background: url(../../images/edit_delete.png) no-repeat 0 -54px;
+  vertical-align: middle;
+}
+
+.splitContent .error {
+  border-color: red;
+}

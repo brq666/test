@@ -1,0 +1,10 @@
+<script type="text/javascript">
+  function IframeCtrl($rootScope){
+    angular.element("#iframePage").attr("src",$rootScope.iframeSrc);
+  }
+</script>
+<div class="maincontainerB" ng-controller="IframeCtrl" ng-class={commModuleMaincontainer:iFrameLayoutClass}>
+  <div class="maincontainer">
+    <iframe id="iframePage" frameborder="0"></iframe>
+  </div>
+</div>

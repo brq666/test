@@ -1,0 +1,48 @@
+<div ng-controller="eximmarketingondemandCtrl" class="mesg_node">
+  <div class="discountEc">
+    <div class="commWrapFour clearfix commNodeMarkRelative">
+      <div class="bannerCommStyle areaHeight26" ng-show="immediatelyScopeObj.tips">
+        {{immediatelyScopeObj.tips}}
+        <a href="javascript:void(0)" toggle-banner="" title="展开" class="downSanjiao sanjiaoPosition"></a>
+      </div>
+      <div class="contentNodeWrap">
+        <table>
+          <tbody>
+          <tr>
+            <th class="tr" width="18%"><label>节点名称：</label></th>
+            <td>
+              <div class="pr">
+                <input type="text" class="borderHighlight nameInput ml5 fl" ng-model="immediatelyScopeObj.name" maxlength="20" ng-noderequire="" />
+                <span nodetip=""></span>
+              </div></td>
+            <td><label class="code mr40 fr">节点代码：{{immediatelyScopeObj.id}}</label></td>
+          </tr>
+          <tr>
+            <th class="tr"><label>所属店铺：</label></th>
+            <td><input type="text" class="borderHighlight required width200 ml5" disabled="readonly" name="shopName" ng-model="immediatelyScopeObj.shopName" /></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="tr"><label>生成时间：</label></th>
+            <td><input type="text" class="borderHighlight required width200 ml5" disabled="readonly" name="generatorTime" ng-model="immediatelyScopeObj.generatorTime" /></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="tr"><label>导入状态：</label></th>
+            <td><input type="text" class="borderHighlight required width200 ml5" disabled="readonly" name="dataSynchronizedStatus" ng-model="immediatelyScopeObj.dataSynchronizedStatus" /></td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="ling_di clearfix mt10"></div>
+    <div class="commBottom clearfix">
+      <div class="mb">
+        <button class="btn btnBlue" ng-click="immediatelyScopeObj.postImmediatelyData($event)">确定</button>
+        <button class="btn" ng-close-window="">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<script type="text/javascript" src="controller/node/teximmarketingondemand.js"></script>-->

@@ -1,0 +1,117 @@
+<div ng-controller="tfilterCampQueryCtrl">
+    <!-- commNodeMarkRelative 会在执行时增加遮罩 请不要删除 有样式冲突请覆盖样式 -->
+    <div class="commWrapFour tfilterCampQuery commNodeMarkRelative">
+        <div class="bannerCommStyle areaHeight26" ng-show="tfilterFindObj.tips && !isGroupApp">
+            {{tfilterFindObj.tips}}
+            <a href="javascript:void(0)" toggle-banner title="展开" class="downSanjiao sanjiaoPosition"></a>
+        </div>
+        <div class="clearfix"  ng-show="!isGroupApp">
+            <table>
+                <tr>
+                    <th class="tr" width="6%">
+                        <label class="node_name_label">节点名称：</label>
+                    </th>
+                    <td>
+                        <div class="pr">
+                            <input type="text" class="borderHighlight nameInput fl" ng-model="tfilterFindObj.nodeName" maxlength="20" ng-noderequire /><span nodetip></span></div>
+                    </td>
+                    <td>
+                        <label class="fr mr10">节点代码：{{tfilterFindObj.id}}</label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="tfilterContent mt15" ng-class="{'campTopNew':isNew}">
+            <div class="queryRadioTitleWrap" ng-class="{'customLayout2':isGroupApp}">
+                <!--平台选择 start-->
+              <div ng-hide="customerGroupStatus" class="editRuleS1">
+                <div class="fl mr20 topTemp49" ng-show="tfilterFindObj.subjectList.length>0">
+                    <label>平台选择：</label>
+                    <select name="subjects" style="margin-left: 4px;" class="commSelect width130 ng-pristine" ng-model="tfilterFindObj.defaultSubjectId" ng-change="tfilterFindObj.changeSubject()" ng-options="subjectListItem.subjectId as subjectListItem.subjectId for subjectListItem in tfilterFindObj.subjectList"></select>
+                </div>
+              </div>
+                <!--平台选择 end-->
+                <!-- 店铺选择 -->
+              <!--div ng-hide="customerGroupStatus" class="editRuleS">
+                <div class="fl mr20 top48" ng-show="tfilterFindObj.subjectList.length>0">
+                    <label class="commLabelWidth75">店铺选择：</label>
+                    <span class="relativeBox">
+                            <input class="borderHighlight width243" type="text" value="{{tfilterFindObj.selectShopsVal}}" ng-disabled="!tfilterFindObj.defaultSubjectId || tfilterFindObj.isEditorFlag" title="{{tfilterFindObj.selectShopsVal}}" ids="{{tfilterFindObj.selectShopsId}}" ng-click="tfilterFindObj.getShops()" name="investigator" readonly ng-class={error:tfilterFindObj.isUnShops}>
+                            <a class="optionModule2 location5" href="javascript:void(0);" ng-click="tfilterFindObj.getShops()" style="top: 5px;"></a>
+                        </span>
+                    <label class="error ml5" ng-show="tfilterFindObj.isnotShop">请选择店铺</label>
+                </div>
+              </div-->
+                <!-- 店铺选择 end -->
+                <span class="blueColor cursorPointer" ng-show="!isGroupApp" href="javascript:void(0)" title="把如下条件保存为分组" ng-show="!tfilterFindObj.isEditorFlag" ng-click="tfilterFindObj.choiceWhichGoupSave()"><span class="ccmsSaveBtn verticalAlign3"></span>把如下条件保存为分组</span>
+            </div>
+            <div style="padding: 0 0 10px 222px" ng-show="!isGroupApp">
+                <label>多条件关系：</label>
+                <label class="mr20">
+                    <input class="commRadio" type="radio" name="relation" value="AND" ng-model="tfilterFindObj.relation" />并且
+                </label>
+                <label class="mr20">
+                    <input class="commRadio" type="radio" name="relation" value="OR" ng-model="tfilterFindObj.relation" />或者
+                </label>
+            </div>
+            <div>
+                <div class="queryConditionormWrap">
+                    <div ng-include src="tfilterFindObj.radioSrc"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-show="!isGroupApp">
+        <div class="ling_di"></div>
+        <div class="commBottom">
+            <!-- 通用节点统计样式 -->
+            <!-- <bottom-count get-number="tfilterFindObj.getNumber" stop-number="tfilterFindObj.stopNumber">
+            </bottom-count> -->
+            <!-- 通用节点统计样式 end -->
+            <div class="mb">
+                <label class="error ml5" ng-show="tfilterFindObj.isnotCondition">请至少配置一种条件</label>
+                <button class="btn queryNodeGlobalButton" ng-class="{btnBlue:!tfilterFindObj.isEditorFlag}" ng-click="tfilterFindObj.postQueryData()">确定</button>
+                <button class="btn" ng-close-window>取消</button>
+            </div>
+        </div>
+    </div>
+    <!--保存分组选择框 start-->
+    <div class="groupSaveByQueryWrap" ng-include src="tfilterFindObj.includeSelectedGroupSrc" onload="tfilterFindObj.choiceWhichGoupPop()"></div>
+    <!--保存分组选择框 end-->
+    <!--店铺选择框 start-->
+    <div class="queryShopsPop shopsChecked analysisShopPop">
+        <div class="shopMenu clearfix">
+            <p class="fl" ng-show="!tfilterFindObj.toggleStatusShop">
+                <label>
+                    <input class="mr5 verticalAlign2" type="checkbox" name="shopAllChecked" ng-model="toggleStatuVal" ng-click="tfilterFindObj.toggleAllShops(toggleStatuVal)" />全选</label>
+            </p>
+            <p class="fr" ng-show="tfilterFindObj.ShopUnusedAry.length>0">
+                <a href="javascript:void(0)" title="可选店铺" ng-click="tfilterFindObj.toggleStatusShop=false">可选店铺</a>
+                <span class="fontLine">|</span>
+                <a class="shixiao" href="javascript:void(0)" title="已失效店铺" ng-click="tfilterFindObj.toggleStatusShop=true">已失效店铺</a>
+            </p>
+        </div>
+        <div class="shopUnused" ng-show="tfilterFindObj.toggleStatusShop">
+            <div class="listsBox topNormal">
+                <ul class="unitLists clearfix">
+                    <li ng-repeat="list in tfilterFindObj.ShopUnusedAry" class="uneditor"><a id={{list.shopId}} title={{list.shopName}} href="javascript:void(0)">{{list.shopName}}</a><span class="trianger"></span><span class="gg"></span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="shopUsed" ng-show="!tfilterFindObj.toggleStatusShop">
+            <div class="listsBox topNormal">
+                <ul class="unitLists editorShops clearfix">
+                    <li ng-repeat="list in tfilterFindObj.shopLists" class={{list.classVal}} ng-click="tfilterFindObj.getCheckState()" ng-chose-unit><a id={{list.idInPlat}} title={{list.name}} href="javascript:void(0)">{{list.name}}</a><span class="trianger"></span><span class="gg"></span></li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <div class="ling_di"></div>
+            <div class="listsButton fr mr15 mt5">
+                <button type="button" class="btn btnBlue" ng-click="tfilterFindObj.sureAddShop()" ng-close-child-window>确定</button>
+                <button type="button" class="btn" ng-click="tfilterFindObj.sureCancelShop()" ng-close-child-window>取消</button>
+            </div>
+        </div>
+    </div>
+    <!--店铺选择框 end-->
+</div>

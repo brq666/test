@@ -1,0 +1,203 @@
+<div ng-controller="dclonwechatCtrl" class="mesg_node">
+    <div class="wechat">
+      <div class="commWrapFour clearfix commNodeMarkRelative">
+        <div class="bannerCommStyle areaHeight26" ng-show="wechatScope.tips">
+          {{wechatScope.tips}}
+          <a href="javascript:void(0)" toggle-banner title="展开" class="downSanjiao sanjiaoPosition"></a>
+        </div>
+        <div class="contentNodeWrap">
+          <table>
+            <tr>
+              <th class="tr" width="18%">
+                <label>节点名称：</label>
+              </th>
+              <td>
+                <div class="pr">
+                  <input type="text" class="borderHighlight nameInput ml5 fl" ng-model="wechatScope.name" maxlength="20" ng-noderequire/><span nodetip></span>
+                </div>
+              </td>
+              <td>
+                <label class="code mr40 fr">节点代码：{{wechatScope.id}}</label>
+              </td>
+            </tr>
+            <tr>
+              <th class="tr">
+                <label>公众号：</label>
+              </th>
+              <td>
+                <input type="text" class="borderHighlight required width200 ml5 wucha" readonly name="publicNumber" valueId="{{wechatScope.publicNumberId}}" ng-model="wechatScope.publicNumberCur" comm-select-config="wechatScope.getPublicNumbers()">
+                <label class="error ml5" ng-show="publicNumberFlag">请选择公众号</label>
+                <a class="ml10 blueColor" href="javascript:void(0)" ng-click="wechatScope.getPublicNumbers()" style="display:none">刷新</a>
+                <a class="ml10 blueColor" href="javascript:void(0)" ng-click="" style="display:none">去授权</a>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="tr">
+                <label>素材：</label>
+              </th>
+              <td>
+                <span class="relativeBox">
+                    <input type="text" class="borderHighlight required width200 ml5 wucha" readonly ng-disabled="wechatScope.discountStatus" name="shopWechat" valueId="{{wechatScope.materialId}}" ng-model="wechatScope.materialName">
+                    <label class="error ml5" ng-show="materialFlag">请选择素材</label>
+                    <a class="optionModule2 location3" ng-click="wechatScope.showMaterialsPop()" href="javascript:void(0);"></a>
+                  </span>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+                <th class="tr">
+                    <label>名单控制：</label>
+                </th>
+                <td colspan="2">
+                    <input type="checkbox" class="v2" ng-model="wechatScope.redlistTip" ng-checked="wechatScope.redlistTip==true" />添加Seed List名单
+                    <input type="checkbox" class="v2" ng-model="wechatScope.blacklistTip" ng-checked="wechatScope.blacklistTip==true" ng-disabled="!optoutDis"/>排除Opt Out名单
+                </td>
+            </tr>
+            <!-- <tr>
+                <th class="tr">
+                    <label>发送时间：</label>
+                </th>
+                <td colspan="2">
+                        <input type="radio" class="commRadio v1 ng-pristine ng-valid" value="0" ng-model="wechatScope.deliveryTimeSelection" />执行时发送
+                        <span ng-if="wechatScope.deliveryTimeSelection == '1'" ng-cloak="">
+                            <input type="radio" class="commRadio v1 ng-pristine ng-valid" value="1" ng-model="wechatScope.deliveryTimeSelection" ng-disabled="true"
+                            />延时发送
+                            <input type="text" ng-model="wechatScope.deliveryDate" date-time-picker="" class="borderHighlight node_waitdate_input datetimepicker"
+                                ng-disabled="true" />
+                            <input type="checkbox" ng-model="wechatScope.overAssignDelivery " ng-checked="wechatScope.overAssignDelivery " ng-disabled="true"
+                            />超过预设时间实时发送
+                            <em class="ico_tips" ng-title="选择了延时发送，如果活动已经执行完成，那么即使中止活动，短信或者邮件还是会按设置时间发送。"></em>
+                        </span>
+                </td>
+            </tr> -->
+            <tr>
+                <th class="tr">输出控制：</th>
+                <td colspan="2">
+                    <input type="radio" class="v2" ng-model="wechatScope.outputControl" value="0" />仅发送成功客户
+                    <input type="radio" ng-model="wechatScope.outputControl" value="1" class="v2" />全体客户
+                    <em class="ico_tips" ng-title="选择全体客户会将发送失败客户也向后方节点输出"></em>
+                </td>
+            </tr>
+            <!--tr>
+              <th class="tr" valign="top">
+                <label>测试执行账号：</label>
+              </th>
+              <td colspan="2">
+                <input type="text" class="borderHighlight w580 ml5" ng-model="wechatScope.testAccount" /><em class="ico_tips" ng-title="多个openid之间用逗号‘，’分隔，测试微信必须关注公众号才可发送成功。至少填写两个测试帐号。"></em>
+                <label class="error domBlock disblackError" ng-show="testAccountError" ng-bind="testAccountMsg"></label>
+              </td>
+            </tr>
+            <!--tr>
+              <th class="tr">
+                <label>发送范围：</label>
+              </th>
+              <td>
+                <label class="ml5">
+                  <input class="commRadio" type="radio" name="exportRadio" ng-model="wechatScope.targetClient" value="0" />仅发送成功客户</label>
+                <label>
+                  <input class="commRadio" type="radio" name="exportRadio" ng-model="wechatScope.targetClient" value="1" />全体客户<em class="ico_tips" ng-title="选择全体客户会将发送失败客户也向后方节点输出"></em>
+                </label>
+              </td>
+              <td></td>
+            </tr -->
+          </table>
+        </div>
+      </div>
+      <div class="ling_di mt10 clearfix"></div>
+      <div class="commBottom clearfix">
+        <a class="reportButton" href="javascript:void(0);" ng-click="wechatScope.showWechatDataPop()" ng-show="wechatScope.viewWechatDataFlag"><span class="reportIcon"></span>发送报告</a>
+        <div class="mb">
+          <button class="btn btnBlue" ng-click="wechatScope.postDiscountWechatData($event)">确定</button>
+          <button class="btn" ng-close-window>取消</button>
+        </div>
+      </div>
+      <div class="choiceMaterialsPop">
+        <div class="commWrapFour">
+          <div class="clearfix mb10"></div>
+          <div>
+              <label class="commLabelWidth75">素材类型：</label>
+              <span class="relativeBox">
+                  <input type="text" class="borderHighlight required width200" style="margin-left:9px;position:relative;left:-9px;" readonly  name="materialsType" valueId="{{wechatScope.materialsType}}" ng-model="wechatScope.materialsTypeName" comm-select-config="">
+              </span>
+          </div>
+          <div>
+          </div>
+          <div class="dataInfoList commOverflowXAuto mt10 weChatGrid" style="position:relative;height:414px;">
+              <div class="commDataTableStyle materialsInfoGrid">
+                  <div class="dataTableGird" style="padding: 0 0;height:365px;">
+                      <div class="thead">
+                        <span class="center mt10" style="width:10%"></span>
+                        <span class="left mt10" style="width:35%">标题</span>
+                        <span class="left mt10" style="width:20%">作者</span>
+                        <span class="center mt10" style="width:25%">最后更新时间</span>
+                        <span class="center mt10" style="width:10%">操作</span>
+                      </div>
+                      <div class="dataTableList inQueryDataList" style="height: 325px;border:none">
+                         <div class="tr clearfix" ng-repeat="materialsItem in wechatScope.materialsList">
+                          <div ng-repeat="materials in materialsItem.newsItem as itemList">
+                            <div ng-class="{'materialsMore materials_{{$parent.$index}}': $index>0}" style="display:{{$index>0?'none':'block'}}">
+                                <div  class="td center" style="width:10%"><input class="mt4" type="radio" ng-model="wechatScope.materialsRadioSelect" value="{{materialsItem.mediaId}}" name="materialsRadioSelect" ng-if="$index==0"/></div>
+                                <div  class="td left" style="width:35%">
+                                  <a href="javascript:void(0)" title="展开" class="icon_left" ng-show="itemList.length>1 && $index==0" ng-click="wechatScope.toggleAllMaterials($event,$parent.$index)"></a>
+                                  <span class="m_title">{{materials.title}}</span>
+                                </div>
+                                <div  class="td left" style="width:20%;" title="{{materials.author}}">{{materials.author}}</div>
+                                <div  class="td center" style="width:25%">{{materialsItem.updateTime}}</div>
+                                <div  class="td center" style="width:10%"><a class="blueColor" href="{{materials.url}}" target="_blank">预览</a></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="commpageMb" style="height: 49px;">
+                    <div class="pDiv2">
+                      <div class="pGroup">
+                        <div ng-click="materialsPage.setPage('first')" class="pFirst pButton"><span></span></div>
+                        <div ng-click="materialsPage.noPrevious() ? angular.noop : materialsPage.setPage('prev')" class="pPrev pButton"><span></span></div>
+                      </div>
+                      <div class="pGroup"><span class="pcontrol">跳至 <input class="width40 ac" type="text" ng-model="materialsPage.pager.currentPage" ng-keyup="materialsPage.enterPage($event)" /> 页</span><div class="pageTips"></div></div>
+                      <div class="pGroup">
+                        <div ng-click="materialsPage.noNext() ? angular.noop : materialsPage.setPage('next')" class="pNext pButton"><span></span></div>
+                        <div ng-click="materialsPage.setPage('last')" class="pLast pButton"><span></span></div>
+                      </div>
+                      <div class="pGroup pagetotal"><span class="currentPage" ng-bind="materialsPage.pager.currentPage1"></span>/<span class="totalPage" ng-bind="materialsPage.pager.totalPages"></span></div>
+                      <div class="pGroup">
+                        <select name="rp" ng-model="materialsPage.pager.pagesize" ng-options="number for number in materialsPage.sizeList"></select>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+        </div>
+        <div class="commBottom clearfix">
+            <div class="mb">
+              <button class="btn " ng-class="{btnBlue:!isEditorFlag}" id="marketSure" ng-click="wechatScope.selectMaterials($event)">确定</button>
+              <button class="btn"  ng-close-child-window>取消</button>
+            </div>
+        </div>
+      </div>
+      <div class="discountBenefitDataView">
+        <div class="commWrapThree">
+          <div class="clearfix mb10"></div>
+          <div class="dataSummaryBenefit">
+            <table style="margin: 5px auto;height: 50px; border: 0px;cellspacing: 14px">
+              <tr>
+                <td class="dataSummaryBenefit_td1 dataSummary_border_fir">{{submitNumTotal}}</td>
+                <td class="dataSummaryBenefit_td1 dataSummary_border_fir">{{successNumTotal}}</td>
+                <td style="font-size:16px;color: orange;text-align: center">{{failNumTotal}}</td>
+              </tr>
+              <tr>
+                <td class="dataSummaryBenefit_td2 dataSummary_border_sec">提交数</td>
+                <td class="dataSummaryBenefit_td2 dataSummary_border_sec">成功人数</td>
+                <td style="font-size:12px;color: #8E8E8E;;text-align: center">失败人数</td>
+              </tr>
+            </table>
+          </div>
+          <div class="dataInfoList commOverflowXAuto">
+            <div class="dataInfoGrid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

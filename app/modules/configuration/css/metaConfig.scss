@@ -1,0 +1,463 @@
+﻿@charset "utf-8";
+/*公用*/
+._campaign {
+  .ml9 {
+    margin-left: 9px;
+  }
+
+  .mb15 {
+    margin-bottom: 15px;
+  }
+
+  .ml50 {
+    margin-left: 50px;
+  }
+
+  .mt30 {
+    margin-top: 30px;
+  }
+
+  .mt15 {
+    margin-top: 15px;
+  }
+
+  .w150 {
+    width: 150px;
+  }
+}
+
+.pTB10 {
+  padding: 10px 0;
+}
+
+.textRight {
+  text-align: right;
+}
+
+a.back {
+  margin-left: 20px;
+}
+
+.configContent {
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  bottom: 0;
+  left: 20px;
+  overflow-y: auto;
+}
+
+.addTpl {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  padding: 20px;
+}
+
+.addTpl .bg {
+  margin-right: 20px;
+  border: 1px solid #efefef;
+  background: #f9f9f9;
+  padding: 22px;
+}
+
+.addTpl label {
+  width: 100px;
+  display: inline-block;
+  text-align: right;
+}
+
+.label_style {
+  width: 100px;
+  display: inline-block;
+  text-align: right;
+}
+
+.addTpl .commSelect {
+  width: 137px;
+}
+
+.addTpl .mb {
+  margin-top: 30px;
+}
+
+.dataConfigureTable .add {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  background: url(../../images/addBtn.png) no-repeat 0 0;
+  vertical-align: middle;
+  margin: 0 3px;
+}
+
+.dataConfigureTable .del {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background: url(../../images/edit_delete.png) no-repeat 0 -54px;
+  vertical-align: middle;
+}
+
+.dataConfigureTable .modify {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background: url(../../images/edit_delete.png) no-repeat 0 2px;
+  vertical-align: middle;
+}
+
+.tables_style1 {
+  padding: 5px 15px 15px 20px;
+  border: 1px solid #ccc;
+  width: 350px;
+}
+
+.tables_style1 table {
+  width: 100%;
+}
+
+.publicList1 .item {
+  border: 1px solid #ccc;
+  padding: 10px 100px 10px 20px;
+  margin: 0 15px 15px 0;
+  position: relative;
+  min-height: 40px;
+}
+
+.publicList1 .item span {
+  margin-right: 30px;
+}
+
+.publicList1 .operationBtn {
+  width: 100px;
+  position: absolute;
+  top: 15px;
+  right: 0;
+}
+
+.publicList1 .edit_delete {
+  display: inline-block;
+}
+
+.ccms_textarea {
+  margin-left: 9px;
+  border: 1px solid #D9D9D9;
+  padding: 5px;
+  vertical-align: top;
+  width: 370px;
+  resize: none;
+}
+/*源数据配置*/
+.sourceDataBox .configContent {
+  margin-top: 20px;
+}
+
+.sourceData_addTpl .addTpl label {
+  width: 70px
+}
+/*表配置*/
+.tables_registerTpl {
+  width: 380px;
+  display: none;
+}
+
+.tables_registerTpl label {
+  width: 100px;
+  display: inline-block;
+  text-align: right;
+}
+
+.tables_registerTpl .mb {
+  text-align: right;
+}
+/*字段配置*/
+.fieldBox .configContent {
+  top: 70px;
+}
+
+.fieldBox .sideBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 190px;
+  overflow-y: auto;
+}
+
+.fieldBox .borderHighlight {
+  width: 176px;
+  margin-left: 0;
+  margin-bottom: 7px;
+}
+
+.fieldBox .sideBox a {
+  font-size: 14px;
+  color: #333333;
+  display: block;
+}
+
+.fieldBox p {
+  margin-bottom: 5px;
+}
+
+.fieldBox .contect {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  bottom: 10px;
+  left: 220px;
+}
+
+.dataConfigure_table_gird .w10 {
+  width: 10%
+}
+
+.dataConfigure_table_gird .w30 {
+  width: 30%
+}
+
+.dataConfigure_table_gird .w60 {
+  width: 60%
+}
+
+.dataConfigure_table_gird .center {
+  float: left;
+}
+/*分组元模型*/
+.segmentationBox .combination_table {
+  width: 80%;
+}
+
+.avaliableTrue,.avaliableFalse {
+  background: url(../../images/state.png) no-repeat 0 0;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.avaliableFalse {
+  background-position: 0 -30px;
+}
+
+.segmentationTpl {
+  display: none;
+}
+
+.segmentationTpl .con {
+  padding: 20px 10px;
+}
+/*属性集配置*/
+.attributeCollection_AddTpl .content,.selectField .content {
+  padding: 15px 10px;
+}
+/*主题配置*/
+
+.subjectBox .smalldarkerblueBtn {
+  margin: 15px 0;
+}
+
+.relationSubject .con {
+  overflow: hidden;
+}
+
+.relationSubject .con .item {
+  width: 550px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  margin-right: 50px;
+}
+
+.relationSubject .con .item span.fl {
+  width: 30%;
+  margin-right: 3%;
+}
+
+.relation_appTpl {
+  padding: 15px 0;
+}
+
+.relation_appTpl .item_action {
+  border: 1px solid #ccc;
+  padding: 5px 0;
+  margin: 5px 0;
+}
+
+.relation_appTpl .item_action h5 {
+  width: 88px;
+  float: left;
+  font-size: 14px;
+  font-weight: 900;
+  text-align: right;
+}
+
+.item_action .fr {
+  padding-right: 20px;
+}
+/*查询节点配置*/
+.findBox .publicList1 .item {
+  min-height: 22px;
+}
+
+.findBox .publicList1 .operationBtn {
+  top: 10px;
+}
+
+.findBox .subject_page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #fff;
+  padding: 23px 20px;
+}
+
+.findBox a.back {
+  margin-top: 10px;
+  float: left;
+}
+
+.findBox .operation {
+  overflow: hidden;
+}
+
+.findBox .con {
+  padding: 15px 0 20px;
+}
+
+.findBox .operation .box {
+}
+
+.findBox .globalFilterLists {
+  margin: 0 0 10px 13px;
+  overflow: hidden;
+}
+
+.findBox .globalFilterLists span {
+  display: inline-block;
+  width: 110px;
+  vertical-align: middle;
+}
+
+.findBox .condition_page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #fff;
+  padding: 23px 20px;
+}
+
+/*弹出框*/
+.configAttrBox {
+  padding: 8px;
+}
+
+.configAttrBox ul {
+  margin: 10px 0 0 0;
+}
+
+.configAttrBox li {
+  margin-bottom: 10px;
+}
+/*属性框*/
+.attrPop {
+  position: absolute;
+  background: #F8F8F8;
+  border: 1px solid #D4D4D4;
+  padding: 8px;
+  width: 385px;
+  height: 200px;
+  z-index: 1001;
+}
+
+.edit_delete {
+  margin: 0px;
+  display: inline-block;
+  position: relative;
+  top: 4px
+}
+
+.edit_add_icon {
+  margin: 0px;
+  display: inline-block;
+  position: relative;
+  top: 4px;
+  width: 16px;
+  height: 16px
+}
+
+.subjectBox .smalldarkerblueBtn {
+  margin: 15px 0;
+}
+
+.meta_appTpl {
+  padding: 15px 0;
+}
+/*函数模板配置*/
+.filter_addTpl .con {
+  padding: 15px 0;
+}
+
+.function_AddTpl .label_style {
+  width: 70px;
+}
+/*过滤器*/
+.filter_addTpl .box {
+  border: 1px solid #ccc;
+  padding: 5px 0;
+  margin: 10px 0;
+}
+
+.filter_addTpl .box td {
+  text-align: center;
+  padding: 6px 0;
+}
+
+
+/**/
+.conditionLayoutBox .singleTemplate {
+  padding-bottom: 2px;
+  overflow: hidden;
+}
+
+.conditionLayoutBox {
+  max-height: 100px;
+}
+
+.indicatorListBox {
+  height: 100px;
+  overflow-y: scroll
+}
+
+.CmsConfigQueryitem {
+  border: 1px solid #e3e3e3;
+  background: linear-gradient(#f5f5f5, #ffffff) repeat scroll 0 0 transparent;
+  cursor: pointer;
+  list-style: none;
+  overflow: hidden
+}
+
+.CmsConfigQueryitem li {
+  float: left;
+  width: 200px;
+  height: 30px;
+  line-height: 30px
+}
+
+.CmsConfigQueryitem li:last-child {
+  float: right;
+  text-align: right
+}
+
+label.error {
+  margin-left: 0px
+}

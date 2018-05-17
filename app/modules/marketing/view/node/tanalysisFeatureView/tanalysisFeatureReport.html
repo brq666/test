@@ -1,0 +1,84 @@
+<div class="report-wrap">
+  <div class="featureNode" ng-controller="featureReportController">
+    <div class="commWrapFour clearfix commNodeMarkRelative">
+      <div class="bannerCommStyle areaHeight26" ng-show="featureObj.tips">
+         {{featureObj.tips}}
+        <a href="javascript:void(0)" toggle-banner title="展开" class="downSanjiao sanjiaoPosition"></a>
+      </div>
+      <div class="contentNodeWrap">
+        <!--筛选条件-->
+        <div class="radioTypeContent featureBox">
+          <div class="configCondition  clearfix">
+            <div class="ztreeMenuWrap">
+              <div class="market_tree_wrapper queryZtreeWrap">
+                <div class="loading queryLoading" ng-show="queryZtreeLoadingFlag">
+                  <i></i>加载中...
+                </div>
+                <div class="ztree defaultWrapztree dot reportItemZtree" id="featureReportItems" style="min-height:200px;"></div>
+              </div>
+            </div>
+            <div class="targetWrap mt5" ng-show="analysisReportObj.currentSelectNode.dataType === 'I'">
+              <div class="charts-box">
+                <div class="charts-box" ng-show="analysisReportObj.currentAnalysisItemData.data">
+                  <div class="clearfix charts-header">
+                    <h3 class="fl" ng-bind="analysisReportObj.currentAnalysisItemData.title"></h3>
+                    <p class="fr">
+                      <a class="charts-icon mr10" ng-class="{iconbgeee: analysisReportObj.isChartsSvg}" ng-click="analysisReportObj.isChartsSvg = true" href="javascript:;" title="查看图形"></a>
+                      <a class="grid-icon mr10" ng-class="{iconbgeee: !analysisReportObj.isChartsSvg}" ng-click="analysisReportObj.isChartsSvg = false" href="javascript:;" title="查看表格"></a>
+                    </p>
+                  </div>
+                  <div class="charts-content">
+                    <div class="charts-element" ng-show="analysisReportObj.isChartsSvg"></div>
+                    <div class="gird-element dataInfoList" ng-show="!analysisReportObj.isChartsSvg">
+                      <table class="priorityNodes">
+                        <thead>
+                        <tr>
+                          <th ng-class={al:$first,ar:$middle,arLast:$last} ng-repeat="title in analysisReportObj.currentAnalysisItemData.feature"><span ng-bind="title"></span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-class-odd="'whiteBg'" ng-repeat="item in analysisReportObj.currentAnalysisItemData.data.conditions">
+                            <td class="al"><span ng-bind="item"></span></psn></td>
+                            <td class="ar"><span ng-bind="analysisReportObj.currentAnalysisItemData.data.counts[$index]"></span></td>
+                            <td class="ar"><span ng-bind="analysisReportObj.currentAnalysisItemData.data.percents[$index]"></span></td>
+                          </tr>
+                          <tr>
+                            <th class="al"><span>汇总</span></th>
+                            <th class="ar"><span ng-bind="analysisReportObj.currentAnalysisItemData.totle"></span></th>
+                            <th class="ar"><span></span></th>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="pie-labels clearfix" ng-if="analysisReportObj.currentAnalysisItemData.showType == '01' && analysisReportObj.isChartsSvg">
+                      <dl class="clearfix fl mr10">
+                        <dd ng-repeat="item in analysisReportObj.pieSidebarItemOne track by $index">
+                          <div style="color: #979797"><span class="bb1" ng-style="{background: analysisReportObj.pieClolors[$index]}"></span><p class="text-content"  title="{{item}}">{{item}}</p></div>
+                          <div style="text-indent: 16px;font-size: 14px;color: #606060"><p class="text-content" ng-bind="analysisReportObj.currentAnalysisItemData.data.counts[$index] " title="{{analysisReportObj.currentAnalysisItemData.data.counts[$index]}}"></p></div>
+                        </dd>
+                      </dl>
+                      <dl class="clearfix fl">
+                        <dd ng-repeat="item in analysisReportObj.pieSidebarItemTwo track by $index">
+                          <div style="color: #979797" title="{{item}}"><span class="bb1" ng-style="{background: analysisReportObj.pieClolors[11+$index]}"></span><p class="text-content"  title="{{item}}">{{item}}</p></div>
+                          <div style="text-indent: 16px;font-size: 14px;color: #606060"><p class="text-content" ng-bind="analysisReportObj.currentAnalysisItemData.data.counts[11+$index]" title="{{analysisReportObj.currentAnalysisItemData.data.counts[11+$index]}}"></p></div>
+                        </dd>
+                      </dl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="page-button">
+                <button class="btnDisabled" ng-class={btnBlue:analysisReportObj.selectedNodeIndex} ng-disabled="!analysisReportObj.selectedNodeIndex" title="上一个分析项" ng-click="analysisReportObj.selectedAnalysisItem('prev')">< 上一个</button>
+                <button class="btnDisabled"  ng-class={btnBlue:analysisReportObj.selectedNodeIndex!==(analysisReportObj.selecteNodeList.length-1)} ng-disabled="analysisReportObj.selectedNodeIndex==(analysisReportObj.selecteNodeList.length-1)" title="下一个分析项" ng-click="analysisReportObj.selectedAnalysisItem('next')">下一个 ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end-->
+      </div>
+     </div>
+    <div class="ling_di mt10 clearfix"></div>
+    <div class="commBottom clearfix"></div>
+  </div>
+</div>
+
